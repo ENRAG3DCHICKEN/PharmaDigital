@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:TemplateApp.xcodeproj">
+      location = "self:/Users/xniper/Dropbox/XCODE/InstantCredit/InstantCredit.xcodeproj">
    </FileRef>
 </Workspace>
