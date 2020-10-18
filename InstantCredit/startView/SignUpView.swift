@@ -16,8 +16,8 @@ struct SignUpView: View {
     
     @State var fieldSelection: Int? = nil
     
-    @State private var email: String = ""
-    @State private var password: String = ""
+    @State var email: String = ""
+    @State var password: String = ""
     
     @State var displayErrorMessage: String = ""
 
@@ -39,7 +39,7 @@ struct SignUpView: View {
                 
                 NavigationLink(destination: PrivacyPolicyView(), tag: 1, selection: $selection) { Text("") }
                 NavigationLink(destination: TermsView(), tag: 2, selection: $selection) { Text("") }
-                NavigationLink(destination: HomeView(), tag: 3, selection: $selection) { Text("") }
+                NavigationLink(destination: UserHomeView(), tag: 3, selection: $selection) { Text("") }
                     
                 VStack {
                     Text("By signing up for InstantCredit, you are agreeing to our").font(.caption)
@@ -65,7 +65,8 @@ struct SignUpView: View {
                                 self.displayErrorMessage = err!.localizedDescription
                                 print(self.displayErrorMessage)
                             } else if err == nil && result != nil {
-                                print("OK")
+                                UserDefaults.standard.set(self.email, forKey: "email")
+                                UserDefaults.standard.set(self.password, forKey: "password")                                
                                 self.selection = 3
                             }
                         }
@@ -83,9 +84,8 @@ struct SignUpView: View {
                     .padding()
                 Text(displayErrorMessage)
             }
-        }
     }
-
+}
 
 
                                     //User was created successfully, now store the first name and last name in Firestore

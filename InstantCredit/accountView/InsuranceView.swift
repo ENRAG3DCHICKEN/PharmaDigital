@@ -9,13 +9,42 @@
 import SwiftUI
 
 struct InsuranceView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+        @State var selection: Int?
+    
+        @State var OHIP: String = ""
+        @State var billToInsuranceFlag: Bool = false
+    
+        @State var selectedPlanName: String = ""
+        
+        
+        var body: some View {
+                VStack {
+                    
+                    
+                    TextField("OHIP Number", text: $OHIP)
+                    Toggle(isOn: self.$billToInsuranceFlag) { Text("Would you like us to bill a prescription insurance provider?") }
+                    
+                    Picker(selection: $selectedPlanName, label: Text("Plan")) {
+                        ForEach(0..<planNameSelections.count) { index in
+                            Text(planNameSelections[index])
+                        }
+                    }.pickerStyle(WheelPickerStyle())
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    NavigationLink(destination: InsuranceView2(), tag: 1, selection: $selection) { Text("") }
+                        
+                    Button(action: { self.selection = 1 }) { Text("Next").font(.caption) }
+                    
+                }
+            }
+        }
 
-struct InsuranceView_Previews: PreviewProvider {
-    static var previews: some View {
-        InsuranceView()
-    }
-}

@@ -9,11 +9,19 @@
 import SwiftUI
 
 struct PrivacyView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        @State var selection: Int?
+        
+        var body: some View {
+            NavigationView {
+                VStack {
+                    NavigationLink(destination: InsuranceView(), tag: 1, selection: $selection) { Text("") }
+                        
+                    Button(action: { self.selection = 1 }) { Text("Next").font(.caption) }
+                    
+                }
+            }
+        }
     }
-}
-
 struct PrivacyView_Previews: PreviewProvider {
     static var previews: some View {
         PrivacyView()
