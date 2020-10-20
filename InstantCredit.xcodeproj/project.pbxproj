@@ -22,6 +22,7 @@
 		732C387C253537DF000CF5F0 /* HealthProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C387B253537DF000CF5F0 /* HealthProfileModel.swift */; };
 		732C387E2535685C000CF5F0 /* HealthProfileView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C387D2535685C000CF5F0 /* HealthProfileView1.swift */; };
 		732C38802535686E000CF5F0 /* HealthProfileView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C387F2535686E000CF5F0 /* HealthProfileView3.swift */; };
+		736A83FF253DF4D300910E66 /* Extension_Pharmacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736A83FE253DF4D300910E66 /* Extension_Pharmacy.swift */; };
 		737572D3253394E700ADFD75 /* StartViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737572D2253394E700ADFD75 /* StartViewHelpers.swift */; };
 		73D5101A2536537A00502AC8 /* InsuranceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D510192536537A00502AC8 /* InsuranceViewModel.swift */; };
 		73D5101C253676B200502AC8 /* InsuranceView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D5101B253676B200502AC8 /* InsuranceView2.swift */; };
@@ -62,6 +63,7 @@
 		732C387B253537DF000CF5F0 /* HealthProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthProfileModel.swift; sourceTree = "<group>"; };
 		732C387D2535685C000CF5F0 /* HealthProfileView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthProfileView1.swift; sourceTree = "<group>"; };
 		732C387F2535686E000CF5F0 /* HealthProfileView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthProfileView3.swift; sourceTree = "<group>"; };
+		736A83FE253DF4D300910E66 /* Extension_Pharmacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_Pharmacy.swift; sourceTree = "<group>"; };
 		737572D2253394E700ADFD75 /* StartViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewHelpers.swift; sourceTree = "<group>"; };
 		73D510192536537A00502AC8 /* InsuranceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceViewModel.swift; sourceTree = "<group>"; };
 		73D5101B253676B200502AC8 /* InsuranceView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceView2.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				73F6C85525373C1B0007545B /* Firebase_Users+Pharmacy.swift */,
 				73FACE2C2537F92F00A17817 /* Firebase_Admin+Orders.swift */,
 				73FACE2E2537F93F00A17817 /* Firebase_Admin+Users.swift */,
+				736A83FE253DF4D300910E66 /* Extension_Pharmacy.swift */,
 				73E6CCDE25239EC000287255 /* Assets.xcassets */,
 				73E0481C2523B24300340628 /* Extensions */,
 				73E6CCE325239EC000287255 /* LaunchScreen.storyboard */,
@@ -372,6 +375,7 @@
 				73E6CCD825239EBD00287255 /* SceneDelegate.swift in Sources */,
 				73FACE2D2537F92F00A17817 /* Firebase_Admin+Orders.swift in Sources */,
 				73D5101F2536B6B600502AC8 /* NewPrescription.swift in Sources */,
+				736A83FF253DF4D300910E66 /* Extension_Pharmacy.swift in Sources */,
 				73FACE2B2537D61E00A17817 /* PharmacySearchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

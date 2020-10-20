@@ -43,7 +43,7 @@ struct LogoView: View {
                         print("Saved Credentials via UserDefaults were not able to allow the user to sign-in")
                         self.selection = 1
                     } else {
-                        
+                        let db = Firestore.firestore()
                         db.collection("admin").getDocuments() { (querySnapshot, err) in
                             if let err = err {
                                 print("Error getting documents: \(err)")

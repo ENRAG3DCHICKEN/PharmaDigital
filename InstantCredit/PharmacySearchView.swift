@@ -12,11 +12,14 @@ import CoreData
 struct PharmacySearchView: View {
     
 
+    
     @Environment(\.managedObjectContext) var context
-
+    //
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "longitude",ascending: true)]) var pharmacies: FetchedResults<Pharmacy>
+
     
     var body: some View {
+        
         List {
             ForEach(pharmacies, id: \.pharmacyUUID) { pharmacy in
                 Text(pharmacy.pharmacyName!)
@@ -25,19 +28,20 @@ struct PharmacySearchView: View {
             .onAppear(perform: {
                 populateCoreData_Pharmacy(context: self.context)
             })
-
-        }
-
-    
-
+    }
 }
 
 
+//
 
 
 
 
-//    @Environment(\.managedObjectContext) var context
+
+
+
+
+
 //    @ObservedObject var pharmacies: Pharmacy_User
 //        .onAppear(perform: {
 //            let request = NSFetchRequest<Pharmacy_User>(entityName: "Pharmacy")

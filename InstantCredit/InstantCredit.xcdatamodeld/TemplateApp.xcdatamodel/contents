@@ -84,7 +84,7 @@
         <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="pharmacyName" optional="YES" attributeType="String"/>
         <attribute name="pharmacyUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="phoneNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="postalCode" optional="YES" attributeType="String"/>
         <attribute name="province" optional="YES" attributeType="String"/>
         <relationship name="orderHistory" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Orders" inverseName="orderFilledBy" inverseEntity="Orders"/>

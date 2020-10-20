@@ -10,6 +10,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import Firebase
 
 struct LoginView: View {
     
@@ -37,7 +38,7 @@ struct LoginView: View {
                         } else {
                             
                             //User authenticated - checking if user is admin account
-                            
+                            let db = Firestore.firestore()
                             db.collection("admin").getDocuments() { (querySnapshot, err) in
                                 if let err = err {
                                     print("Error getting documents: \(err)")
