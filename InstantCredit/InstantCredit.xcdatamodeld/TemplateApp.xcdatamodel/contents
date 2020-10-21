@@ -8,7 +8,7 @@
         <attribute name="orderUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="pharmacyName" optional="YES" attributeType="String"/>
         <attribute name="prescription" optional="YES" attributeType="Transformable"/>
-        <relationship name="orderFilledBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pharmacy" inverseName="orderHistory" inverseEntity="Pharmacy"/>
+        <relationship name="orderFilledBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pharmacy" inverseName="orderHistory_" inverseEntity="Pharmacy"/>
         <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="orderHistory" inverseEntity="Patient"/>
     </entity>
     <entity name="Patient" representedClassName="Patient" syncable="YES" codeGenerationType="class">
@@ -87,7 +87,7 @@
         <attribute name="phoneNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="postalCode" optional="YES" attributeType="String"/>
         <attribute name="province" optional="YES" attributeType="String"/>
-        <relationship name="orderHistory" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Orders" inverseName="orderFilledBy" inverseEntity="Orders"/>
+        <relationship name="orderHistory_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Orders" inverseName="orderFilledBy" inverseEntity="Orders"/>
     </entity>
     <elements>
         <element name="Orders" positionX="-71.890625" positionY="164.27734375" width="128" height="178"/>
@@ -96,6 +96,6 @@
         <element name="Patient_InsuranceDetails" positionX="573.07421875" positionY="18.75" width="199.984375" height="238"/>
         <element name="Patient_PaymentDetails" positionX="111.93359375" positionY="389.453125" width="161.90625" height="163"/>
         <element name="Patient_ShippingDetails" positionX="590.54296875" positionY="381.8671875" width="182.3828125" height="163"/>
-        <element name="Pharmacy" positionX="-298.2578125" positionY="332.48828125" width="128" height="28"/>
+        <element name="Pharmacy" positionX="-298.2578125" positionY="332.48828125" width="128" height="223"/>
     </elements>
 </model>

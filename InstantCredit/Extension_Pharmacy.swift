@@ -40,7 +40,6 @@ extension Pharmacy { // should probably be Identifiable & Comparable
         
         pharmacy.orderHistory.forEach { $0.objectWillChange.send() }
         
-        
         //Add relationships will change!
         
         print(pharmacy)
@@ -60,6 +59,8 @@ extension Pharmacy { // should probably be Identifiable & Comparable
             print("couldn't save flight update to CoreData: \(error.localizedDescription)")
         }
     }
+        
+    
 
     //Standard query request to Core Data
     static func fetchRequest(_ predicate: NSPredicate) -> NSFetchRequest<Pharmacy> {
@@ -68,17 +69,14 @@ extension Pharmacy { // should probably be Identifiable & Comparable
         request.predicate = predicate
         return request
     }
-    
 
     // Downcast from NSSet to Set<Orders> and checks if nil, and returns empty array if nil
     var orderHistory: Set<Orders> {
         get { (orderHistory_ as? Set<Orders>) ?? [] }
         set { orderHistory_ = newValue as NSSet }
     }
-    
+
     
 }
-
-
 
 
