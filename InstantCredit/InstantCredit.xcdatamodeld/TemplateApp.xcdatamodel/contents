@@ -96,6 +96,6 @@
         <element name="Patient_InsuranceDetails" positionX="573.07421875" positionY="18.75" width="199.984375" height="238"/>
         <element name="Patient_PaymentDetails" positionX="111.93359375" positionY="389.453125" width="161.90625" height="163"/>
         <element name="Patient_ShippingDetails" positionX="590.54296875" positionY="381.8671875" width="182.3828125" height="163"/>
-        <element name="Pharmacy" positionX="-298.2578125" positionY="332.48828125" width="128" height="223"/>
+        <element name="Pharmacy" positionX="-298.2578125" positionY="332.48828125" width="128" height="28"/>
     </elements>
 </model>
