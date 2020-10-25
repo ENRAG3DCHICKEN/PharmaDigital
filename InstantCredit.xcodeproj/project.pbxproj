@@ -38,6 +38,8 @@
 		73E6CCE225239EC000287255 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73E6CCE125239EC000287255 /* Preview Assets.xcassets */; };
 		73E6CCE525239EC000287255 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E6CCE325239EC000287255 /* LaunchScreen.storyboard */; };
 		73F6C85625373C1B0007545B /* Firebase_Users+Pharmacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F6C85525373C1B0007545B /* Firebase_Users+Pharmacy.swift */; };
+		73F8CABD2541009900E86887 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F8CABC2541009900E86887 /* MapKit.framework */; };
+		73F8CAC0254106CC00E86887 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F8CABF254106CC00E86887 /* CloudKit.framework */; };
 		73FACE2B2537D61E00A17817 /* PharmacySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FACE2A2537D61E00A17817 /* PharmacySearchView.swift */; };
 		73FACE2D2537F92F00A17817 /* Firebase_Admin+Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FACE2C2537F92F00A17817 /* Firebase_Admin+Orders.swift */; };
 		73FACE2F2537F93F00A17817 /* Firebase_Admin+Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FACE2E2537F93F00A17817 /* Firebase_Admin+Users.swift */; };
@@ -81,6 +83,9 @@
 		73E6CCE425239EC000287255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		73E6CCE625239EC000287255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73F6C85525373C1B0007545B /* Firebase_Users+Pharmacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase_Users+Pharmacy.swift"; sourceTree = "<group>"; };
+		73F8CABC2541009900E86887 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		73F8CABE254100ED00E86887 /* InstantCredit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InstantCredit.entitlements; sourceTree = "<group>"; };
+		73F8CABF254106CC00E86887 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		73FACE2A2537D61E00A17817 /* PharmacySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacySearchView.swift; sourceTree = "<group>"; };
 		73FACE2C2537F92F00A17817 /* Firebase_Admin+Orders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase_Admin+Orders.swift"; sourceTree = "<group>"; };
 		73FACE2E2537F93F00A17817 /* Firebase_Admin+Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase_Admin+Users.swift"; sourceTree = "<group>"; };
@@ -95,6 +100,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73F8CAC0254106CC00E86887 /* CloudKit.framework in Frameworks */,
+				73F8CABD2541009900E86887 /* MapKit.framework in Frameworks */,
 				74B8745F7400DE46BF6C7883 /* Pods_InstantCredit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,6 +112,8 @@
 		67B2875623528291E7E9E99F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73F8CABF254106CC00E86887 /* CloudKit.framework */,
+				73F8CABC2541009900E86887 /* MapKit.framework */,
 				5866A16349CE6DBA579F2D3A /* Pods_InstantCredit.framework */,
 			);
 			name = Frameworks;
@@ -198,6 +207,7 @@
 		73E6CCD425239EBD00287255 /* InstantCredit */ = {
 			isa = PBXGroup;
 			children = (
+				73F8CABE254100ED00E86887 /* InstantCredit.entitlements */,
 				73E6CCD525239EBD00287255 /* AppDelegate.swift */,
 				73E6CCD725239EBD00287255 /* SceneDelegate.swift */,
 				73E0481B2523B22A00340628 /* startView */,
@@ -513,8 +523,10 @@
 			baseConfigurationReference = 7A472B690DB2F3D41B2EA674 /* Pods-InstantCredit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = InstantCredit/InstantCredit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"InstantCredit/Preview Content\"";
+				DEVELOPMENT_TEAM = 79W68ZHT57;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = InstantCredit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -533,8 +545,10 @@
 			baseConfigurationReference = 8C124A00CFF3582272114011 /* Pods-InstantCredit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = InstantCredit/InstantCredit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"InstantCredit/Preview Content\"";
+				DEVELOPMENT_TEAM = 79W68ZHT57;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = InstantCredit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
