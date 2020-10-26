@@ -18,19 +18,19 @@ struct InsuranceView: View {
         
         
         var body: some View {
-                VStack {
-                    
+            VStack {
+                Form {
                     
                     TextField("OHIP Number", text: $OHIP)
                     Toggle(isOn: self.$billToInsuranceFlag) { Text("Would you like us to bill a prescription insurance provider?") }
                     
                     Picker(selection: $selectedPlanName, label: Text("Plan")) {
                         ForEach(0..<planNameSelections.count) { index in
-                            Text(planNameSelections[index])
+                            Text(planNameSelections[index]).tag(planNameSelections[index])
                         }
-                    }.pickerStyle(WheelPickerStyle())
-                    
-                    
+                    }
+                
+                }
                     
                     
                     
@@ -43,8 +43,14 @@ struct InsuranceView: View {
                     NavigationLink(destination: InsuranceView2(), tag: 1, selection: $selection) { Text("") }
                         
                     Button(action: { self.selection = 1 }) { Text("Next").font(.caption) }
+                
                     
                 }
             }
         }
 
+struct Insurance_Previews: PreviewProvider {
+    static var previews: some View {
+        InsuranceView()
+    }
+}

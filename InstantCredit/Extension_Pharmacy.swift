@@ -9,8 +9,25 @@
 import CoreData
 import Combine
 import UIKit
+import MapKit
 
-extension Pharmacy { // should probably be Identifiable & Comparable
+
+
+extension Pharmacy: MKAnnotation {
+    public var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+//    public var title: String? { name ?? icao }
+//    public var subtitle: String? { location }
+}
+
+
+
+
+
+
+extension Pharmacy: Identifiable {
+    // should probably be Identifiable & Comparable
    
     static func update(firebasePharmacy: Dictionary<String,Any>, in context: NSManagedObjectContext) {
         
@@ -28,8 +45,8 @@ extension Pharmacy { // should probably be Identifiable & Comparable
         pharmacy.address1 = firebasePharmacy["Address1"] as? String
         pharmacy.address2 = firebasePharmacy["Address2"] as? String
         pharmacy.city = firebasePharmacy["City"] as? String
-        pharmacy.longitude = Float(truncating: firebasePharmacy["Longitude"] as! NSNumber)
-        pharmacy.latitude = Float(truncating: firebasePharmacy["Latitude"] as! NSNumber)
+        pharmacy.longitude = Double(truncating: firebasePharmacy["Longitude"] as! NSNumber)
+        pharmacy.latitude = Double(truncating: firebasePharmacy["Latitude"] as! NSNumber)
         pharmacy.pharmacyName = firebasePharmacy["PharmacyName"] as? String
         pharmacy.pharmacyUUID = UUID(uuidString: firebasePharmacy["PharmacyUUID"] as! String)
         pharmacy.phoneNumber = firebasePharmacy["PhoneNumber"] as! Int64
