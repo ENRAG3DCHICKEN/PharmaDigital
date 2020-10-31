@@ -15,7 +15,7 @@ struct LandingView: View {
     var body: some View {
                 VStack(alignment: .center) {
                     
-                    Spacer()
+//                    Spacer()
                     HStack {
                         Image("yoga").resizable()
                                 .frame(width: 100, height: 50)
@@ -24,23 +24,34 @@ struct LandingView: View {
                             .foregroundColor(Color(.gray))
                             .font(.largeTitle)
                     }
-                    Spacer()
-                    CarouselView()
-                    Spacer()
-//                    HStack {
-//                        Circle().size(width: 10, height: 10)
-//                        Circle().size(width: 10, height: 10)
-//                        Circle().size(width: 10, height: 10)
-//                        Circle().size(width: 10, height: 10)
-//                    }
+                        .padding()
+//                    Spacer()
+                    GeometryReader { geometry in
+                        CarouselView()
+                    
+                    
+                        HStack {
+                            Spacer(minLength: geometry.size.width/2.5)
+                            HStack {
+                                Circle().frame(width: 10, height: 10)
+                                Circle().frame(width: 10, height: 10)
+                                Circle().frame(width: 10, height: 10)
+                                Circle().frame(width: 10, height: 10)
+                            }
+                            Spacer(minLength: geometry.size.width/2.5)
+                        }
+                            .frame(maxHeight: 20)
+                    }
+                        
                     VStack(alignment: .leading) {
-                        Text("Discover the wonders of the world today!").font(.headline)
+                        Text("Discover the wonders of the world today!").font(.headline).padding()
                         Text("""
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce condimentum risus dolor, id vehicula nibh.
                             """)
                             .font(.subheadline)
+                            .padding()
                     }
-                    Spacer()
+//                    Spacer()
                     HStack {
                         NavigationLink(destination: SignUpView(), tag: 1, selection: $selection) {
                             Button(action: {
@@ -50,6 +61,7 @@ struct LandingView: View {
                                 .background(RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2))
                                 .foregroundColor(Color(UIColor.mainColor))
                                 .background(Color(.white))
+                                .padding()
                         
 
 
@@ -64,8 +76,10 @@ struct LandingView: View {
                                 .foregroundColor(Color(UIColor.white))
                                 .background(Color(UIColor.mainColor))
                                 .cornerRadius(10)
+                                .padding()
                         }
                     }
+                    Spacer()
             }
                 .navigationBarHidden(true)
                 .navigationBarTitle(Text("Home"))
@@ -91,11 +105,13 @@ struct CardView: View {
                 ForEach(cardList, id: \.id) { cards in
                     Image(cards.fileName)
                         .resizable()
-                        .frame(width: geometry.size.width, height: geometry.size.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(width: geometry.size.width, height: geometry.size.width)
+                        .padding()
                 }
             }
 
         }
+        .padding()
             
     }
 }
