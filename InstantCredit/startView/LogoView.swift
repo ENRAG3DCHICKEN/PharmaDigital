@@ -24,17 +24,20 @@ struct LogoView: View {
         //Init with Userdefaults to see if logged in at app startup
         //Query DB and decide on the User vs Admin View
         //Navigate
+                
+                Image("yoga").resizable()
+                        .frame(width: 200, height: 120)
         
-            NavigationLink(destination: StartView(), tag: 1, selection: $selection) { Text("") }
-            NavigationLink(destination: UserHomeView(), tag: 2, selection: $selection) { Text("") }
-            NavigationLink(destination: AdminHomeView(), tag: 3, selection: $selection) { Text("") }
+                NavigationLink(destination: LandingView(), tag: 1, selection: $selection) { Text("") }
+                NavigationLink(destination: UserHomeView(), tag: 2, selection: $selection) { Text("") }
+                NavigationLink(destination: AdminHomeView(), tag: 3, selection: $selection) { Text("") }
         }
         .navigationBarHidden(true)
         .navigationBarTitle(Text("Home"))
         .onAppear(perform: {
             if UserDefaults.standard.string(forKey: "email") != nil, UserDefaults.standard.string(forKey: "password") != nil {
                 
-                print("signining in")
+                print("signing in")
 
                 Auth.auth().signIn(withEmail: UserDefaults.standard.string(forKey: "email")!.trimmingCharacters(in: .whitespacesAndNewlines), password: UserDefaults.standard.string(forKey: "password")!.trimmingCharacters(in: .whitespacesAndNewlines)) { (result, err) in
                     
@@ -76,6 +79,7 @@ struct LogoView: View {
                 }
             }
         )}
+            .background(Color(UIColor.mainColor))
     }
 }
 

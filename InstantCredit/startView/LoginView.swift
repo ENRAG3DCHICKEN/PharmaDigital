@@ -21,7 +21,6 @@ struct LoginView: View {
     @State var selection: Int?
     
     var body: some View {
-        NavigationView {
             VStack {
                 TextField("Email", text: $email)
                 TextField("Password", text: $password)
@@ -67,4 +66,3 @@ struct LoginView: View {
             }
         }
     }
-}

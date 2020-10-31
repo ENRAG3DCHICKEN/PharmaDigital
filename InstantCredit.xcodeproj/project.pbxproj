@@ -11,6 +11,7 @@
 		730484B12532B7BF004B73FB /* UserHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730484B02532B7BF004B73FB /* UserHomeView.swift */; };
 		730484B32532C3E0004B73FB /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730484B22532C3E0004B73FB /* PrivacyPolicyView.swift */; };
 		730484B52532C3E9004B73FB /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730484B42532C3E9004B73FB /* TermsView.swift */; };
+		7317D2E0254921E400EDD6FA /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7317D2DF254921E400EDD6FA /* ImagePicker.swift */; };
 		7320BF40252423FF009CAA58 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320BF3F252423FF009CAA58 /* SignUpView.swift */; };
 		7320BF4225242415009CAA58 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320BF4125242415009CAA58 /* LoginView.swift */; };
 		732C38702534F5A3000CF5F0 /* PatientInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C386F2534F5A3000CF5F0 /* PatientInfoView.swift */; };
@@ -23,10 +24,10 @@
 		732C387E2535685C000CF5F0 /* HealthProfileView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C387D2535685C000CF5F0 /* HealthProfileView1.swift */; };
 		732C38802535686E000CF5F0 /* HealthProfileView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C387F2535686E000CF5F0 /* HealthProfileView3.swift */; };
 		736A83FF253DF4D300910E66 /* Extension_Pharmacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736A83FE253DF4D300910E66 /* Extension_Pharmacy.swift */; };
-		737572D3253394E700ADFD75 /* StartViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737572D2253394E700ADFD75 /* StartViewHelpers.swift */; };
-		738C75A225462449000B5A11 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C75A125462449000B5A11 /* SwiftUIView.swift */; };
+		737572D3253394E700ADFD75 /* LandingViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737572D2253394E700ADFD75 /* LandingViewHelpers.swift */; };
 		738C75A42546290F000B5A11 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C75A32546290F000B5A11 /* MapView.swift */; };
 		738C75A625467CEB000B5A11 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C75A525467CEB000B5A11 /* FoundationExtensions.swift */; };
+		73D4C5F0254C902400F9137B /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D4C5EF254C902400F9137B /* LandingView.swift */; };
 		73D5101A2536537A00502AC8 /* InsuranceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D510192536537A00502AC8 /* InsuranceViewModel.swift */; };
 		73D5101C253676B200502AC8 /* InsuranceView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D5101B253676B200502AC8 /* InsuranceView2.swift */; };
 		73D5101F2536B6B600502AC8 /* NewPrescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D5101E2536B6B600502AC8 /* NewPrescription.swift */; };
@@ -36,7 +37,7 @@
 		73E6CCD625239EBD00287255 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6CCD525239EBD00287255 /* AppDelegate.swift */; };
 		73E6CCD825239EBD00287255 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6CCD725239EBD00287255 /* SceneDelegate.swift */; };
 		73E6CCDB25239EBD00287255 /* InstantCredit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73E6CCD925239EBD00287255 /* InstantCredit.xcdatamodeld */; };
-		73E6CCDD25239EBD00287255 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6CCDC25239EBD00287255 /* StartView.swift */; };
+		73E6CCDD25239EBD00287255 /* Commented_StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6CCDC25239EBD00287255 /* Commented_StartView.swift */; };
 		73E6CCDF25239EC000287255 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73E6CCDE25239EC000287255 /* Assets.xcassets */; };
 		73E6CCE225239EC000287255 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73E6CCE125239EC000287255 /* Preview Assets.xcassets */; };
 		73E6CCE525239EC000287255 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E6CCE325239EC000287255 /* LaunchScreen.storyboard */; };
@@ -48,15 +49,17 @@
 		73FACE2F2537F93F00A17817 /* Firebase_Admin+Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FACE2E2537F93F00A17817 /* Firebase_Admin+Users.swift */; };
 		73FACE312537FF5000A17817 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FACE302537FF5000A17817 /* LogoView.swift */; };
 		73FACE3325380FC500A17817 /* AdminHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FACE3225380FC500A17817 /* AdminHomeView.swift */; };
-		74B8745F7400DE46BF6C7883 /* Pods_InstantCredit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866A16349CE6DBA579F2D3A /* Pods_InstantCredit.framework */; };
+		8C544D4344E445A9D3EA1340 /* Pods_InstantCredit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14932DCBDF53384A6CCECD19 /* Pods_InstantCredit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5866A16349CE6DBA579F2D3A /* Pods_InstantCredit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstantCredit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		14932DCBDF53384A6CCECD19 /* Pods_InstantCredit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstantCredit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EDC7C6BD6873297B56BF359 /* Pods-InstantCredit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstantCredit.release.xcconfig"; path = "Target Support Files/Pods-InstantCredit/Pods-InstantCredit.release.xcconfig"; sourceTree = "<group>"; };
 		730484AE25326011004B73FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		730484B02532B7BF004B73FB /* UserHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHomeView.swift; sourceTree = "<group>"; };
 		730484B22532C3E0004B73FB /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		730484B42532C3E9004B73FB /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
+		7317D2DF254921E400EDD6FA /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		7320BF3F252423FF009CAA58 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		7320BF4125242415009CAA58 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		732C386F2534F5A3000CF5F0 /* PatientInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientInfoView.swift; sourceTree = "<group>"; };
@@ -69,10 +72,10 @@
 		732C387D2535685C000CF5F0 /* HealthProfileView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthProfileView1.swift; sourceTree = "<group>"; };
 		732C387F2535686E000CF5F0 /* HealthProfileView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthProfileView3.swift; sourceTree = "<group>"; };
 		736A83FE253DF4D300910E66 /* Extension_Pharmacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_Pharmacy.swift; sourceTree = "<group>"; };
-		737572D2253394E700ADFD75 /* StartViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewHelpers.swift; sourceTree = "<group>"; };
-		738C75A125462449000B5A11 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		737572D2253394E700ADFD75 /* LandingViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewHelpers.swift; sourceTree = "<group>"; };
 		738C75A32546290F000B5A11 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		738C75A525467CEB000B5A11 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
+		73D4C5EF254C902400F9137B /* LandingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		73D510192536537A00502AC8 /* InsuranceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceViewModel.swift; sourceTree = "<group>"; };
 		73D5101B253676B200502AC8 /* InsuranceView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceView2.swift; sourceTree = "<group>"; };
 		73D5101E2536B6B600502AC8 /* NewPrescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPrescription.swift; sourceTree = "<group>"; };
@@ -83,7 +86,7 @@
 		73E6CCD525239EBD00287255 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73E6CCD725239EBD00287255 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		73E6CCDA25239EBD00287255 /* TemplateApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TemplateApp.xcdatamodel; sourceTree = "<group>"; };
-		73E6CCDC25239EBD00287255 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		73E6CCDC25239EBD00287255 /* Commented_StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commented_StartView.swift; sourceTree = "<group>"; };
 		73E6CCDE25239EC000287255 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73E6CCE125239EC000287255 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		73E6CCE425239EC000287255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -97,8 +100,7 @@
 		73FACE2E2537F93F00A17817 /* Firebase_Admin+Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase_Admin+Users.swift"; sourceTree = "<group>"; };
 		73FACE302537FF5000A17817 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		73FACE3225380FC500A17817 /* AdminHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHomeView.swift; sourceTree = "<group>"; };
-		7A472B690DB2F3D41B2EA674 /* Pods-InstantCredit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstantCredit.debug.xcconfig"; path = "Target Support Files/Pods-InstantCredit/Pods-InstantCredit.debug.xcconfig"; sourceTree = "<group>"; };
-		8C124A00CFF3582272114011 /* Pods-InstantCredit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstantCredit.release.xcconfig"; path = "Target Support Files/Pods-InstantCredit/Pods-InstantCredit.release.xcconfig"; sourceTree = "<group>"; };
+		DC09C54C89A8EF8213AAAC0C /* Pods-InstantCredit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstantCredit.debug.xcconfig"; path = "Target Support Files/Pods-InstantCredit/Pods-InstantCredit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +110,7 @@
 			files = (
 				73F8CAC0254106CC00E86887 /* CloudKit.framework in Frameworks */,
 				73F8CABD2541009900E86887 /* MapKit.framework in Frameworks */,
-				74B8745F7400DE46BF6C7883 /* Pods_InstantCredit.framework in Frameworks */,
+				8C544D4344E445A9D3EA1340 /* Pods_InstantCredit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +122,7 @@
 			children = (
 				73F8CABF254106CC00E86887 /* CloudKit.framework */,
 				73F8CABC2541009900E86887 /* MapKit.framework */,
-				5866A16349CE6DBA579F2D3A /* Pods_InstantCredit.framework */,
+				14932DCBDF53384A6CCECD19 /* Pods_InstantCredit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -128,10 +130,20 @@
 		711934B37356DFA5D28E3080 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7A472B690DB2F3D41B2EA674 /* Pods-InstantCredit.debug.xcconfig */,
-				8C124A00CFF3582272114011 /* Pods-InstantCredit.release.xcconfig */,
+				DC09C54C89A8EF8213AAAC0C /* Pods-InstantCredit.debug.xcconfig */,
+				2EDC7C6BD6873297B56BF359 /* Pods-InstantCredit.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		7317D2DE2548F3E200EDD6FA /* Firebase Code */ = {
+			isa = PBXGroup;
+			children = (
+				73F6C85525373C1B0007545B /* Firebase_Users+Pharmacy.swift */,
+				73FACE2C2537F92F00A17817 /* Firebase_Admin+Orders.swift */,
+				73FACE2E2537F93F00A17817 /* Firebase_Admin+Users.swift */,
+			);
+			path = "Firebase Code";
 			sourceTree = "<group>";
 		};
 		732C386E2534F52A000CF5F0 /* accountView */ = {
@@ -143,40 +155,36 @@
 				732C387F2535686E000CF5F0 /* HealthProfileView3.swift */,
 				732C387B253537DF000CF5F0 /* HealthProfileModel.swift */,
 				732C38732534F5D6000CF5F0 /* InsuranceView.swift */,
-				738C75A125462449000B5A11 /* SwiftUIView.swift */,
 				73D5101B253676B200502AC8 /* InsuranceView2.swift */,
 				73D510192536537A00502AC8 /* InsuranceViewModel.swift */,
 				732C38752534F5DF000CF5F0 /* ShippingView.swift */,
 				732C38772534F5EB000CF5F0 /* BillingView.swift */,
 				732C38792534F5F9000CF5F0 /* PrivacyView.swift */,
-				73D5101D2536B6A300502AC8 /* orderPrescription */,
 			);
 			path = accountView;
 			sourceTree = "<group>";
 		};
-		73D510182536522800502AC8 /* mapView */ = {
+		73D510182536522800502AC8 /* actionView */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			path = mapView;
-			sourceTree = "<group>";
-		};
-		73D5101D2536B6A300502AC8 /* orderPrescription */ = {
-			isa = PBXGroup;
-			children = (
+				730484B02532B7BF004B73FB /* UserHomeView.swift */,
+				73FACE3225380FC500A17817 /* AdminHomeView.swift */,
+				73FACE2A2537D61E00A17817 /* PharmacySearchView.swift */,
+				738C75A32546290F000B5A11 /* MapView.swift */,
 				73D5101E2536B6B600502AC8 /* NewPrescription.swift */,
+				7317D2DF254921E400EDD6FA /* ImagePicker.swift */,
 				73D510202536B6C800502AC8 /* TransferPrescription.swift */,
 				73D510222536B6D200502AC8 /* RefillPrescription.swift */,
 			);
-			path = orderPrescription;
+			path = actionView;
 			sourceTree = "<group>";
 		};
 		73E0481B2523B22A00340628 /* startView */ = {
 			isa = PBXGroup;
 			children = (
 				73FACE302537FF5000A17817 /* LogoView.swift */,
-				73E6CCDC25239EBD00287255 /* StartView.swift */,
-				737572D2253394E700ADFD75 /* StartViewHelpers.swift */,
+				737572D2253394E700ADFD75 /* LandingViewHelpers.swift */,
+				73D4C5EF254C902400F9137B /* LandingView.swift */,
 				7320BF3F252423FF009CAA58 /* SignUpView.swift */,
 				7320BF4125242415009CAA58 /* LoginView.swift */,
 				730484B22532C3E0004B73FB /* PrivacyPolicyView.swift */,
@@ -189,6 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				73E0481D2523B26200340628 /* UIColor+CustomColors.swift */,
+				736A83FE253DF4D300910E66 /* Extension_Pharmacy.swift */,
+				738C75A525467CEB000B5A11 /* FoundationExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -219,19 +229,12 @@
 				73E6CCD725239EBD00287255 /* SceneDelegate.swift */,
 				73E0481B2523B22A00340628 /* startView */,
 				732C386E2534F52A000CF5F0 /* accountView */,
-				73D510182536522800502AC8 /* mapView */,
-				730484B02532B7BF004B73FB /* UserHomeView.swift */,
-				73FACE3225380FC500A17817 /* AdminHomeView.swift */,
-				73FACE2A2537D61E00A17817 /* PharmacySearchView.swift */,
-				738C75A32546290F000B5A11 /* MapView.swift */,
-				73F6C85525373C1B0007545B /* Firebase_Users+Pharmacy.swift */,
-				73FACE2C2537F92F00A17817 /* Firebase_Admin+Orders.swift */,
-				73FACE2E2537F93F00A17817 /* Firebase_Admin+Users.swift */,
-				736A83FE253DF4D300910E66 /* Extension_Pharmacy.swift */,
-				738C75A525467CEB000B5A11 /* FoundationExtensions.swift */,
-				73E6CCDE25239EC000287255 /* Assets.xcassets */,
+				73D510182536522800502AC8 /* actionView */,
+				73E6CCDC25239EBD00287255 /* Commented_StartView.swift */,
+				7317D2DE2548F3E200EDD6FA /* Firebase Code */,
 				73E0481C2523B24300340628 /* Extensions */,
 				73E6CCE325239EC000287255 /* LaunchScreen.storyboard */,
+				73E6CCDE25239EC000287255 /* Assets.xcassets */,
 				73E6CCE625239EC000287255 /* Info.plist */,
 				730484AE25326011004B73FB /* GoogleService-Info.plist */,
 				73E6CCD925239EBD00287255 /* InstantCredit.xcdatamodeld */,
@@ -255,11 +258,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73E6CCE925239EC000287255 /* Build configuration list for PBXNativeTarget "InstantCredit" */;
 			buildPhases = (
-				A2974CD09645B2E051E96107 /* [CP] Check Pods Manifest.lock */,
+				0E5C41A41FA751345C84E92D /* [CP] Check Pods Manifest.lock */,
 				73E6CCCE25239EBD00287255 /* Sources */,
 				73E6CCCF25239EBD00287255 /* Frameworks */,
 				73E6CCD025239EBD00287255 /* Resources */,
-				37E902605EA42761B20D0046 /* [CP] Embed Pods Frameworks */,
+				802E38E3F7B2AC2681397DC3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -277,7 +280,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = ENRAG3DCHICKEN;
 				TargetAttributes = {
 					73E6CCD125239EBD00287255 = {
@@ -318,24 +321,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		37E902605EA42761B20D0046 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InstantCredit/Pods-InstantCredit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InstantCredit/Pods-InstantCredit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InstantCredit/Pods-InstantCredit-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A2974CD09645B2E051E96107 /* [CP] Check Pods Manifest.lock */ = {
+		0E5C41A41FA751345C84E92D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -357,6 +343,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		802E38E3F7B2AC2681397DC3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InstantCredit/Pods-InstantCredit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InstantCredit/Pods-InstantCredit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InstantCredit/Pods-InstantCredit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -366,12 +369,12 @@
 			files = (
 				732C38702534F5A3000CF5F0 /* PatientInfoView.swift in Sources */,
 				732C387C253537DF000CF5F0 /* HealthProfileModel.swift in Sources */,
-				738C75A225462449000B5A11 /* SwiftUIView.swift in Sources */,
 				73FACE2F2537F93F00A17817 /* Firebase_Admin+Users.swift in Sources */,
 				732C38742534F5D6000CF5F0 /* InsuranceView.swift in Sources */,
 				73D510232536B6D200502AC8 /* RefillPrescription.swift in Sources */,
 				7320BF4225242415009CAA58 /* LoginView.swift in Sources */,
 				732C38762534F5DF000CF5F0 /* ShippingView.swift in Sources */,
+				73D4C5F0254C902400F9137B /* LandingView.swift in Sources */,
 				7320BF40252423FF009CAA58 /* SignUpView.swift in Sources */,
 				738C75A42546290F000B5A11 /* MapView.swift in Sources */,
 				73D5101A2536537A00502AC8 /* InsuranceViewModel.swift in Sources */,
@@ -382,17 +385,18 @@
 				730484B32532C3E0004B73FB /* PrivacyPolicyView.swift in Sources */,
 				73D510212536B6C800502AC8 /* TransferPrescription.swift in Sources */,
 				732C38782534F5EB000CF5F0 /* BillingView.swift in Sources */,
+				7317D2E0254921E400EDD6FA /* ImagePicker.swift in Sources */,
 				732C387E2535685C000CF5F0 /* HealthProfileView1.swift in Sources */,
 				73FACE3325380FC500A17817 /* AdminHomeView.swift in Sources */,
 				732C38802535686E000CF5F0 /* HealthProfileView3.swift in Sources */,
 				738C75A625467CEB000B5A11 /* FoundationExtensions.swift in Sources */,
-				737572D3253394E700ADFD75 /* StartViewHelpers.swift in Sources */,
+				737572D3253394E700ADFD75 /* LandingViewHelpers.swift in Sources */,
 				73E6CCDB25239EBD00287255 /* InstantCredit.xcdatamodeld in Sources */,
 				73E0481E2523B26200340628 /* UIColor+CustomColors.swift in Sources */,
 				73F6C85625373C1B0007545B /* Firebase_Users+Pharmacy.swift in Sources */,
 				732C38722534F5B1000CF5F0 /* HealthProfileView2.swift in Sources */,
 				730484B12532B7BF004B73FB /* UserHomeView.swift in Sources */,
-				73E6CCDD25239EBD00287255 /* StartView.swift in Sources */,
+				73E6CCDD25239EBD00287255 /* Commented_StartView.swift in Sources */,
 				73FACE312537FF5000A17817 /* LogoView.swift in Sources */,
 				73E6CCD825239EBD00287255 /* SceneDelegate.swift in Sources */,
 				73FACE2D2537F92F00A17817 /* Firebase_Admin+Orders.swift in Sources */,
@@ -442,6 +446,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -502,6 +507,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -532,7 +538,7 @@
 		};
 		73E6CCEA25239EC000287255 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A472B690DB2F3D41B2EA674 /* Pods-InstantCredit.debug.xcconfig */;
+			baseConfigurationReference = DC09C54C89A8EF8213AAAC0C /* Pods-InstantCredit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = InstantCredit/InstantCredit.entitlements;
@@ -554,7 +560,7 @@
 		};
 		73E6CCEB25239EC000287255 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C124A00CFF3582272114011 /* Pods-InstantCredit.release.xcconfig */;
+			baseConfigurationReference = 2EDC7C6BD6873297B56BF359 /* Pods-InstantCredit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = InstantCredit/InstantCredit.entitlements;

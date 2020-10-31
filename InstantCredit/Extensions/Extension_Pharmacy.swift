@@ -17,16 +17,20 @@ extension Pharmacy: MKAnnotation {
     public var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
-//    public var title: String? { name ?? icao }
-//    public var subtitle: String? { location }
+    public var title: String? { pharmacyName }
+    public var subtitle: String? { address1 }
 }
 
 
 
 
 
-
-extension Pharmacy: Identifiable {
+extension Pharmacy: Comparable {
+    public static func < (lhs: Pharmacy, rhs: Pharmacy) -> Bool {
+        //replace with calcualted distance
+        lhs.latitude < rhs.latitude
+    }
+    
     // should probably be Identifiable & Comparable
    
     static func update(firebasePharmacy: Dictionary<String,Any>, in context: NSManagedObjectContext) {
@@ -82,7 +86,8 @@ extension Pharmacy: Identifiable {
     //Standard query request to Core Data
     static func fetchRequest(_ predicate: NSPredicate) -> NSFetchRequest<Pharmacy> {
         let request = NSFetchRequest<Pharmacy>(entityName: "Pharmacy")
-//        request.sortDescriptors = [NSSortDescriptor(key: "arrival_", ascending: true)]
+        // need to sort by distance
+        request.sortDescriptors = [NSSortDescriptor(key: "latitude", ascending: true)]
         request.predicate = predicate
         return request
     }

@@ -40,15 +40,15 @@ struct PharmacySearchView: View {
         
         VStack {
             
-//            Picker("Pharmacy", selection: $selectedPharmacy) {
-//                ForEach(pharmacies, id: \.pharmacyUUID) { pharmacy in
-//                    Text("\(pharmacy.pharmacyName!)").tag(pharmacy)
-//                }
-//            }
-//            
+            Picker("Pharmacy", selection: $draft) {
+                ForEach(pharmacies, id: \.pharmacyUUID) { pharmacy in
+                    Text("\(pharmacy.pharmacyName!)").tag(pharmacy)
+                }
+            }
             
             
-            MapView(annotations: pharmacies, selection: destination)
+            
+            MapView(annotations: pharmacies.sorted(), selection: destination)
                 .frame(minHeight: 400)
         
 //

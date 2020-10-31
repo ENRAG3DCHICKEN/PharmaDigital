@@ -1,0 +1,30 @@
+//
+//  homeView.swift
+//  InstantCredit
+//
+//  Created by ENRAG3DCHICKEN on 2020-10-10.
+//  Copyright © 2020 ENRAG3DCHICKEN. All rights reserved.
+//
+
+import SwiftUI
+
+struct UserHomeView: View {
+    
+    @State var selection: Int?
+
+    var body: some View {
+        
+        VStack {
+                    
+            NavigationLink(destination: LogoView(), tag: 0, selection: $selection) { Text("") }
+                
+            Button(action: {
+                UserDefaults.standard.removeObject(forKey: "email")
+                UserDefaults.standard.removeObject(forKey: "password")
+                self.selection = 0
+            }) { Text("Logout").font(.caption) }
+        }
+        
+        
+    }
+}
