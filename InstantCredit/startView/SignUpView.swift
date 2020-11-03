@@ -20,41 +20,81 @@ struct SignUpView: View {
     @State var password: String = ""
     
     @State var displayErrorMessage: String = ""
+    @State var displayEmailErrorMessage: String = ""
+    @State var displayPasswordErrorMessage: String = ""
+    
+    
+    @State var emailErrorCondition: Bool = false
+    @State var passwordErrorCondition: Bool = false
 
     
     var body: some View {
-        NavigationView {
-            VStack {
+            VStack(spacing: 0) {
+                
+                Image("yoga").resizable()
+                        .frame(width: 100, height: 60)
+                Text("""
+                        Create an account to
+                    fullfill your prescriptions.
+                    """)
+                    .font(.headline)
+                    .padding()
+                    .lineLimit(nil)
+                
                 TextField("Email", text: $email).simultaneousGesture(TapGesture().onEnded {
                     self.fieldSelection = 1
                 })
-                    .padding(10)
+                    .padding(5)
+                    .border(self.emailErrorCondition == true ? Color.red : self.fieldSelection == 1 ? (Color(UIColor.mainColor)) : Color.gray, width: 1.5)
+                    .padding()
+                HStack {
+                    Text(displayEmailErrorMessage).font(.caption)
+                        .foregroundColor(Color.red)
+                        .padding(.leading)
+                    Spacer()
+                }
                 SecureField("Password", text: $password).simultaneousGesture(TapGesture().onEnded {
                     self.fieldSelection = 2
                 })
-                    .padding(10)
-                
-                Spacer(minLength: 50)
-                Divider()
-                
-                NavigationLink(destination: PrivacyPolicyView(), tag: 1, selection: $selection) { Text("") }
-                NavigationLink(destination: TermsView(), tag: 2, selection: $selection) { Text("") }
-                NavigationLink(destination: UserHomeView(), tag: 3, selection: $selection) { Text("") }
-                    
-                VStack {
-                    Text("By signing up for InstantCredit, you are agreeing to our").font(.caption)
-                    HStack {
-                        Button(action: { self.selection = 1 }) { Text("Privacy Policy").font(.caption) }
-                        Text("and").font(.caption)
-                        Button(action: { self.selection = 2 }) { Text("Terms").font(.caption) }
-                        Text(".").font(.caption)
-                    }
-                }
+                    .padding(5)
+                    .border(self.passwordErrorCondition == true ? Color.red : self.fieldSelection == 2 ? (Color(UIColor.mainColor)) : Color.gray, width: 1.5)
                     .padding()
-                
+                HStack {
+                    Text(displayPasswordErrorMessage).font(.caption)
+                        .foregroundColor(Color.red)
+                        .padding(.leading)
+                    Spacer()
+                }
                 Button(action: {
                     self.displayErrorMessage = ""
                     let validationResult = validateFields(email: self.email, password: self.password)
+                    
+                    if validationResult == "Both Empty" {
+                        self.emailErrorCondition = true
+                        self.passwordErrorCondition = true
+                        self.displayEmailErrorMessage = "Email is required"
+                        self.displayPasswordErrorMessage = "Password is required"
+                    } else if validationResult == "Email Empty" {
+                        self.emailErrorCondition = true
+                        self.passwordErrorCondition = false
+                        self.displayEmailErrorMessage = "Email is required"
+                    } else if validationResult == "Password Empty" {
+                        self.emailErrorCondition = false
+                        self.passwordErrorCondition = true
+                        self.displayPasswordErrorMessage = "Password is required"
+                    } else {
+                        
+                        if validationResult == "Email Bad" {
+                            self.emailErrorCondition = true
+                            self.displayEmailErrorMessage = "Please enter a valid email address"
+                        }
+                        if validationResult == "Password Bad" {
+                            self.passwordErrorCondition = true
+                            self.displayPasswordErrorMessage = "Password must be at least 6 characters and consists of characters and numbers"
+                        }
+                    }
+                
+                    
                     if validationResult == "OK" {
                         
                         // Create the User - via FirebaseAuth
@@ -75,16 +115,56 @@ struct SignUpView: View {
                         print(self.displayErrorMessage)
                     }
                         
-                }, label: { Text("Sign Up").font(.caption) })
-                    .frame(width: 150, height: 30)
-                    .foregroundColor(Color(UIColor.mainColor))
-                    .background(Color(.white))
-                    .shadow(radius: 5)
-                }
+                }, label: { Text("Sign Up").font(.body) })
+
+                    .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+//                    .background(RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2))
+                    .foregroundColor(Color(.white))
+                    .background(Color(UIColor.mainColor))
                     .padding()
-                Text(displayErrorMessage)
-            }
+                    
+                VStack {
+                    Text("By creating an account you are accepting our ")
+                        .font(.footnote)
+                        HStack(spacing: 1) {
+                            Text("Terms of Service")
+                                .font(.footnote)
+                                .underline()
+                                .foregroundColor(Color(UIColor.mainColor))
+                                .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
+                                    self.selection = 1
+                                })
+                            Text(" and ")
+                                .font(.footnote)
+                            Text("Privacy Policy")
+                                .font(.footnote)
+                                .underline()
+                                .foregroundColor(Color(UIColor.mainColor))
+                                .onTapGesture(count: 1, perform: {
+                                    self.selection = 2
+                                })
+                            Text(".")
+                                .font(.footnote)
+                        }
+                    
+                    Text(displayErrorMessage).font(.caption)
+                        .padding()
+                    
+                    NavigationLink(destination: PrivacyPolicyView(), tag: 1, selection: $selection) { EmptyView() }
+                    NavigationLink(destination: TermsView(), tag: 2, selection: $selection) { EmptyView() }
+                    NavigationLink(destination: PatientInfoView(), tag: 3, selection: $selection) { EmptyView() }
+                    
+                    Spacer()
+                }
+
+                
+                }
+            
     }
+    
+    
+    
+    
 }
 
 

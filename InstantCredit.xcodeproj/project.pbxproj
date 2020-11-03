@@ -37,7 +37,6 @@
 		73E6CCD625239EBD00287255 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6CCD525239EBD00287255 /* AppDelegate.swift */; };
 		73E6CCD825239EBD00287255 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6CCD725239EBD00287255 /* SceneDelegate.swift */; };
 		73E6CCDB25239EBD00287255 /* InstantCredit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73E6CCD925239EBD00287255 /* InstantCredit.xcdatamodeld */; };
-		73E6CCDD25239EBD00287255 /* Commented_StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6CCDC25239EBD00287255 /* Commented_StartView.swift */; };
 		73E6CCDF25239EC000287255 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73E6CCDE25239EC000287255 /* Assets.xcassets */; };
 		73E6CCE225239EC000287255 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73E6CCE125239EC000287255 /* Preview Assets.xcassets */; };
 		73E6CCE525239EC000287255 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E6CCE325239EC000287255 /* LaunchScreen.storyboard */; };
@@ -49,6 +48,8 @@
 		73FACE2F2537F93F00A17817 /* Firebase_Admin+Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FACE2E2537F93F00A17817 /* Firebase_Admin+Users.swift */; };
 		73FACE312537FF5000A17817 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FACE302537FF5000A17817 /* LogoView.swift */; };
 		73FACE3325380FC500A17817 /* AdminHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FACE3225380FC500A17817 /* AdminHomeView.swift */; };
+		73FBBC132550CA58007ADE39 /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBBC122550CA58007ADE39 /* PasswordResetView.swift */; };
+		73FBBC172550D93E007ADE39 /* PasswordResetCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBBC162550D93E007ADE39 /* PasswordResetCompletedView.swift */; };
 		8C544D4344E445A9D3EA1340 /* Pods_InstantCredit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14932DCBDF53384A6CCECD19 /* Pods_InstantCredit.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,7 +87,6 @@
 		73E6CCD525239EBD00287255 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73E6CCD725239EBD00287255 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		73E6CCDA25239EBD00287255 /* TemplateApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TemplateApp.xcdatamodel; sourceTree = "<group>"; };
-		73E6CCDC25239EBD00287255 /* Commented_StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commented_StartView.swift; sourceTree = "<group>"; };
 		73E6CCDE25239EC000287255 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73E6CCE125239EC000287255 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		73E6CCE425239EC000287255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -100,6 +100,8 @@
 		73FACE2E2537F93F00A17817 /* Firebase_Admin+Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase_Admin+Users.swift"; sourceTree = "<group>"; };
 		73FACE302537FF5000A17817 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		73FACE3225380FC500A17817 /* AdminHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHomeView.swift; sourceTree = "<group>"; };
+		73FBBC122550CA58007ADE39 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
+		73FBBC162550D93E007ADE39 /* PasswordResetCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetCompletedView.swift; sourceTree = "<group>"; };
 		DC09C54C89A8EF8213AAAC0C /* Pods-InstantCredit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstantCredit.debug.xcconfig"; path = "Target Support Files/Pods-InstantCredit/Pods-InstantCredit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,11 +184,13 @@
 		73E0481B2523B22A00340628 /* startView */ = {
 			isa = PBXGroup;
 			children = (
-				73FACE302537FF5000A17817 /* LogoView.swift */,
 				737572D2253394E700ADFD75 /* LandingViewHelpers.swift */,
+				73FACE302537FF5000A17817 /* LogoView.swift */,
 				73D4C5EF254C902400F9137B /* LandingView.swift */,
 				7320BF3F252423FF009CAA58 /* SignUpView.swift */,
 				7320BF4125242415009CAA58 /* LoginView.swift */,
+				73FBBC122550CA58007ADE39 /* PasswordResetView.swift */,
+				73FBBC162550D93E007ADE39 /* PasswordResetCompletedView.swift */,
 				730484B22532C3E0004B73FB /* PrivacyPolicyView.swift */,
 				730484B42532C3E9004B73FB /* TermsView.swift */,
 			);
@@ -230,7 +234,6 @@
 				73E0481B2523B22A00340628 /* startView */,
 				732C386E2534F52A000CF5F0 /* accountView */,
 				73D510182536522800502AC8 /* actionView */,
-				73E6CCDC25239EBD00287255 /* Commented_StartView.swift */,
 				7317D2DE2548F3E200EDD6FA /* Firebase Code */,
 				73E0481C2523B24300340628 /* Extensions */,
 				73E6CCE325239EC000287255 /* LaunchScreen.storyboard */,
@@ -383,6 +386,7 @@
 				732C387A2534F5F9000CF5F0 /* PrivacyView.swift in Sources */,
 				73D5101C253676B200502AC8 /* InsuranceView2.swift in Sources */,
 				730484B32532C3E0004B73FB /* PrivacyPolicyView.swift in Sources */,
+				73FBBC132550CA58007ADE39 /* PasswordResetView.swift in Sources */,
 				73D510212536B6C800502AC8 /* TransferPrescription.swift in Sources */,
 				732C38782534F5EB000CF5F0 /* BillingView.swift in Sources */,
 				7317D2E0254921E400EDD6FA /* ImagePicker.swift in Sources */,
@@ -390,13 +394,13 @@
 				73FACE3325380FC500A17817 /* AdminHomeView.swift in Sources */,
 				732C38802535686E000CF5F0 /* HealthProfileView3.swift in Sources */,
 				738C75A625467CEB000B5A11 /* FoundationExtensions.swift in Sources */,
+				73FBBC172550D93E007ADE39 /* PasswordResetCompletedView.swift in Sources */,
 				737572D3253394E700ADFD75 /* LandingViewHelpers.swift in Sources */,
 				73E6CCDB25239EBD00287255 /* InstantCredit.xcdatamodeld in Sources */,
 				73E0481E2523B26200340628 /* UIColor+CustomColors.swift in Sources */,
 				73F6C85625373C1B0007545B /* Firebase_Users+Pharmacy.swift in Sources */,
 				732C38722534F5B1000CF5F0 /* HealthProfileView2.swift in Sources */,
 				730484B12532B7BF004B73FB /* UserHomeView.swift in Sources */,
-				73E6CCDD25239EBD00287255 /* Commented_StartView.swift in Sources */,
 				73FACE312537FF5000A17817 /* LogoView.swift in Sources */,
 				73E6CCD825239EBD00287255 /* SceneDelegate.swift in Sources */,
 				73FACE2D2537F92F00A17817 /* Firebase_Admin+Orders.swift in Sources */,

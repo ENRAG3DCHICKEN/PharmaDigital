@@ -17,7 +17,7 @@ struct AdminHomeView: View {
         
         VStack {
                     
-            NavigationLink(destination: LogoView(), tag: 0, selection: $selection) { Text("") }
+            NavigationLink(destination: LogoView(), tag: 0, selection: $selection) { EmptyView() }
                 
             Button(action: {
                 UserDefaults.standard.removeObject(forKey: "email")

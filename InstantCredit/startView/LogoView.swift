@@ -28,12 +28,13 @@ struct LogoView: View {
                 Image("yoga").resizable()
                         .frame(width: 200, height: 120)
         
-                NavigationLink(destination: LandingView(), tag: 1, selection: $selection) { Text("") }
-                NavigationLink(destination: UserHomeView(), tag: 2, selection: $selection) { Text("") }
-                NavigationLink(destination: AdminHomeView(), tag: 3, selection: $selection) { Text("") }
+                NavigationLink(destination: LandingView(), tag: 1, selection: $selection) { EmptyView() }
+                NavigationLink(destination: UserHomeView(), tag: 2, selection: $selection) { EmptyView() }
+                NavigationLink(destination: AdminHomeView(), tag: 3, selection: $selection) { EmptyView() }
+                NavigationLink(destination: PatientInfoView(), tag: 4, selection: $selection) { EmptyView() }
         }
-        .navigationBarHidden(true)
-        .navigationBarTitle(Text("Home"))
+//        .navigationBarHidden(true)
+//        .navigationBarTitle(Text("Home"))
         .onAppear(perform: {
             if UserDefaults.standard.string(forKey: "email") != nil, UserDefaults.standard.string(forKey: "password") != nil {
                 
@@ -65,7 +66,17 @@ struct LogoView: View {
                                 }
                                 // Applies when user is logged in and not identified as an admin account
                                 if self.selection == nil {
-                                    self.selection = 2
+                                    
+                                    //Sign-up Process Completed - UserHomeView
+                                    print(UserDefaults.standard.string(forKey: "completed"))
+                                    if UserDefaults.standard.string(forKey: "completed") == "true" {
+                                        self.selection = 2
+                                    } else {
+                                        //Sign-up Process Incomplete - PatientInfoView
+                                        self.selection = 4
+                                    }
+                                    
+                                    
                                 }
                             }
                         }

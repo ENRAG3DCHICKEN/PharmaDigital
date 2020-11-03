@@ -10,13 +10,11 @@ import SwiftUI
 import Firebase
 
 struct PatientInfoView: View {
-    
+
     @State var selection: Int?
     
-    @State var firstName: String = ""
-    @State var lastName: String = ""
-    @State var address1: String = ""
-    @State var address2: String = ""
+    @State var fullName: String = ""
+    @State var address: String = ""
     @State var city: String = ""
     @State var province: String = ""
     @State var postalCode: String = ""
@@ -24,24 +22,36 @@ struct PatientInfoView: View {
     @State var email: String = ""
 
     var body: some View {
-        NavigationView {
+        
+        VStack {
+            HStack {
+                ForEach(0..<10) { index in
+                    Rectangle()
+                        .foregroundColor(Color(index == 0 ? UIColor.lightGreen : .lightGray))
+                        .frame(height: 5)
+                }
+            }
+                .padding()
+            
             Form {
-                VStack {
-                    TextField("First Name", text: $firstName)
-                    TextField("Last Name", text: $lastName)
-                    TextField("Address-1", text: $address1)
-                    TextField("Address-2", text: $address2)
+                Section {
+                    TextField("Full Name", text: $fullName)
+                }
+                Section {
+                    TextField("Address", text: $address)
                     TextField("Province", text: $province)
                     TextField("Postal Code", text: $postalCode)
                     TextField("Phone", text: $phoneNumber)
                     TextField("Email", text: $email)
-                    
-                    NavigationLink(destination: HealthProfileView1(), tag: 1, selection: $selection) { Text("") }
-                        
-                    Button(action: { self.selection = 1 } ) { Text("Next").font(.caption) }
-                    
                 }
             }
+                
+                Button(action: { self.selection = 1 } ) { Text("Next").font(.caption) }
+                
+                NavigationLink(destination: HealthProfileView1(), tag: 1, selection: $selection) { EmptyView() }
+                    
+                
+            
         }
     }
 }

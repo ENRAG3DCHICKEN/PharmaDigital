@@ -17,17 +17,36 @@ struct LoginView: View {
     @State var email: String = ""
     @State var password: String = ""
     
-    @State var errorMessage: String? = nil
+    @State var errorMessage: String = ""
     @State var selection: Int?
     
     var body: some View {
             VStack {
-                TextField("Email", text: $email)
-                TextField("Password", text: $password)
                 
-                NavigationLink(destination: UserHomeView(), tag: 1, selection: $selection) { Text("") }
+                Image("yoga").resizable()
+                        .frame(width: 100, height: 60)
+                Text("""
+                        Welcome back.
+                    """)
+                    .font(.headline)
+                    .padding()
+                    .lineLimit(nil)
                 
-                NavigationLink(destination: AdminHomeView(), tag: 2, selection: $selection) { Text("") }
+                TextField("Email", text: $email).simultaneousGesture(TapGesture().onEnded {
+                })
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+
+                SecureField("Password", text: $password).simultaneousGesture(TapGesture().onEnded {
+                })
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                Text("Forgot your password?").font(.caption)
+                    .padding()
+                    .onTapGesture(count: 1, perform: {
+                        self.selection = 3
+                    })
                 
                 Button(action: {
                     Auth.auth().signIn(withEmail: self.email.trimmingCharacters(in: .whitespacesAndNewlines), password: self.password.trimmingCharacters(in: .whitespacesAndNewlines)) { (result, err) in
@@ -49,7 +68,7 @@ struct LoginView: View {
                                         print("\(document.documentID) => \(document.data())")
                                         
                                         // Applies when user is logged in and identified as an admin account
-                                        if UserDefaults.standard.string(forKey: "email")! == (document.data()["email"] as! String) {
+                                        if UserDefaults.standard.string(forKey: "email") == (document.data()["email"] as! String) {
                                             self.selection = 2
 
                                         }
@@ -62,7 +81,20 @@ struct LoginView: View {
                             }
                         }
                     }
-                }) { Text("Sign In") }
+                }) { Text("Log In").font(.body)  }
+                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 30)
+                    .foregroundColor(Color(.white))
+                    .background(Color(UIColor.mainColor))
+                    .padding()
+                
+                VStack {
+                    NavigationLink(destination: UserHomeView(), tag: 1, selection: $selection) { EmptyView() }
+                    NavigationLink(destination: AdminHomeView(), tag: 2, selection: $selection) { EmptyView() }
+                    NavigationLink(destination: PasswordResetView(), tag: 3, selection: $selection) { EmptyView() }
+                    Text(errorMessage)
+                    Spacer()
+                }
+                
             }
         }
     }

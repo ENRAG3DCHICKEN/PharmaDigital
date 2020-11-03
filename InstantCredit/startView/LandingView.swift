@@ -75,7 +75,7 @@ struct LandingView: View {
                             Button(action: {
                                 self.selection = 1
                             }, label: { Text("Sign Up").font(.body) })
-                                .frame(width: 150, height: 30)
+                                .frame(width: UIScreen.main.bounds.width / 2.5, height: 30)
                                 .background(RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2))
                                 .foregroundColor(Color(UIColor.mainColor))
                                 .background(Color(.white))
@@ -84,8 +84,8 @@ struct LandingView: View {
                         NavigationLink(destination: LoginView(), tag: 2, selection: $selection) {
                             Button(action: {
                                 self.selection = 2
-                            }, label: { Text("Login").font(.caption) })
-                                .frame(width: 150, height: 30)
+                            }, label: { Text("Login").font(.body) })
+                                .frame(width: UIScreen.main.bounds.width / 2.5, height: 30)
                                 .foregroundColor(Color(UIColor.white))
                                 .background(Color(UIColor.mainColor))
                                 .cornerRadius(10)
@@ -94,8 +94,8 @@ struct LandingView: View {
                     }
                     Spacer()
             }
-                .navigationBarHidden(true)
-                .navigationBarTitle(Text("Home"))
+//                .navigationBarHidden(true)
+//                .navigationBarTitle(Text("Home"))
 //                .background(Color(UIColor.mainColor))
         }
     @State var steadyStatePanOffset: CGSize = .zero

@@ -36,7 +36,7 @@ struct HealthProfileView2: View {
                     }
                 }
                 
-                NavigationLink(destination: HealthProfileView3(), tag: 1, selection: $selection) { Text("") }
+                NavigationLink(destination: HealthProfileView3(), tag: 1, selection: $selection) { EmptyView() }
                     
                 Button(action: { self.selection = 1 }) { Text("Next").font(.caption) }
                 

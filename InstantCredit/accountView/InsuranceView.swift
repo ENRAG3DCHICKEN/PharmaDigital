@@ -40,7 +40,7 @@ struct InsuranceView: View {
                     
                     
                     
-                    NavigationLink(destination: InsuranceView2(), tag: 1, selection: $selection) { Text("") }
+                    NavigationLink(destination: InsuranceView2(), tag: 1, selection: $selection) { EmptyView() }
                         
                     Button(action: { self.selection = 1 }) { Text("Next").font(.caption) }
                 

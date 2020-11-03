@@ -15,7 +15,7 @@ struct HealthProfileView1: View {
     var body: some View {
             VStack {
    
-                NavigationLink(destination: HealthProfileView2(), tag: 1, selection: $selection) { Text("") }
+                NavigationLink(destination: HealthProfileView2(), tag: 1, selection: $selection) { EmptyView() }
                     
                 Button(action: { self.selection = 1 }) { Text("Next").font(.caption) }
                 

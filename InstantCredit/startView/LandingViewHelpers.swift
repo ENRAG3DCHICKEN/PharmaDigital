@@ -13,20 +13,24 @@ import SwiftUI
 func validateFields(email: String, password: String) -> String {
     
     //Check if fields are empty
-    if email.trimmingCharacters(in: .whitespacesAndNewlines) == "" || password.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-        return "Please fill in all the fields"
+    if email.trimmingCharacters(in: .whitespacesAndNewlines) == "" && password.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+        return "Both Empty"
+    } else if email.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+        return "Email Empty"
+    } else if password.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+        return "Password Empty"
     }
     
     //Check if password is valid (Length = 10, at least 1 character, at least 1 special character)
     if isPasswordValid(password) != true {
-        return "Please make sure your password is at least 10 characters & contains a special character and a number."
+        return "Password Bad"
     }
      
     return "OK"
 }
 
 func isPasswordValid(_ password: String) -> Bool {
-    let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{10,}")
+    let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{6,}")
     return passwordTest.evaluate(with: password)
 }
 

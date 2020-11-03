@@ -14,7 +14,7 @@ struct BillingView: View {
         var body: some View {
             NavigationView {
                 VStack {
-                    NavigationLink(destination: PrivacyView(), tag: 1, selection: $selection) { Text("") }
+                    NavigationLink(destination: PrivacyView(), tag: 1, selection: $selection) { EmptyView() }
                         
                     Button(action: { self.selection = 1 }) { Text("Next").font(.caption) }
                     
