@@ -14,7 +14,17 @@ struct PrivacyView: View {
         var body: some View {
 
                 VStack {
-                    NavigationLink(destination: InsuranceView(), tag: 1, selection: $selection) { EmptyView() }
+                    
+                    HStack {
+                        ForEach(0..<10) { index in
+                            Rectangle()
+                                .foregroundColor(Color(index == 8 ? UIColor.lightGreen : .lightGray))
+                                .frame(height: 5)
+                        }
+                    }
+                        .padding()
+                    
+                    NavigationLink(destination: UserHomeView(), tag: 1, selection: $selection) { EmptyView() }
                         
                     Button(action: { self.selection = 1 }) { Text("Next").font(.caption) }
                     

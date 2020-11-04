@@ -18,7 +18,7 @@ struct ShippingView: View {
                     HStack {
                         ForEach(0..<10) { index in
                             Rectangle()
-                                .foregroundColor(Color(index == 0 ? UIColor.lightGreen : .lightGray))
+                                .foregroundColor(Color(index == 6 ? UIColor.lightGreen : .lightGray))
                                 .frame(height: 5)
                         }
                     }

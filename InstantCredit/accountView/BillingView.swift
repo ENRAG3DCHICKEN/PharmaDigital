@@ -13,6 +13,16 @@ struct BillingView: View {
         
         var body: some View {
                 VStack {
+                    
+                    HStack {
+                        ForEach(0..<10) { index in
+                            Rectangle()
+                                .foregroundColor(Color(index == 7 ? UIColor.lightGreen : .lightGray))
+                                .frame(height: 5)
+                        }
+                    }
+                        .padding()
+                    
                     NavigationLink(destination: PrivacyView(), tag: 1, selection: $selection) { EmptyView() }
                         
                     Button(action: { self.selection = 1 }) { Text("Next").font(.caption) }

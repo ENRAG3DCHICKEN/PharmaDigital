@@ -24,7 +24,7 @@ struct HealthProfileView3: View {
                 HStack {
                     ForEach(0..<10) { index in
                         Rectangle()
-                            .foregroundColor(Color(index == 0 ? UIColor.lightGreen : .lightGray))
+                            .foregroundColor(Color(index == 3 ? UIColor.lightGreen : .lightGray))
                             .frame(height: 5)
                     }
                 }
@@ -38,10 +38,12 @@ struct HealthProfileView3: View {
                     }
                     if medicalConditionsFlag == true {
                         List {
-                            ForEach(0..<conditionsListExOther.count) { index in
-                                HStack {
-                                    Toggle(isOn: self.$conditionsListFlag[index]) { Text(conditionsListExOther[index]) }
-                                    Text(self.conditionsListFlag[index] ? "Yes" : "No")
+                            Section {
+                                ForEach(0..<conditionsListExOther.count) { index in
+                                    HStack {
+                                        Toggle(isOn: self.$conditionsListFlag[index]) { Text(conditionsListExOther[index]) }
+                                        Text(self.conditionsListFlag[index] ? "Yes" : "No")
+                                    }
                                 }
                             }
                             TextField("List Other Medical Conditions", text: self.$otherMedicalConditions)

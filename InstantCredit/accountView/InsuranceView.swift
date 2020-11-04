@@ -23,7 +23,7 @@ struct InsuranceView: View {
                 HStack {
                     ForEach(0..<10) { index in
                         Rectangle()
-                            .foregroundColor(Color(index == 0 ? UIColor.lightGreen : .lightGray))
+                            .foregroundColor(Color(index == 4 ? UIColor.lightGreen : .lightGray))
                             .frame(height: 5)
                     }
                 }
@@ -32,7 +32,10 @@ struct InsuranceView: View {
                 Form {
                     
                     TextField("OHIP Number", text: $OHIP)
-                    Toggle(isOn: self.$billToInsuranceFlag) { Text("Would you like us to bill a prescription insurance provider?") }
+                    
+                    Section {
+                        Toggle(isOn: self.$billToInsuranceFlag) { Text("Would you like us to bill a prescription insurance provider?") }
+                    }
                     
                     Picker(selection: $selectedPlanName, label: Text("Plan")) {
                         ForEach(0..<planNameSelections.count) { index in
