@@ -40,7 +40,7 @@ struct NewPrescriptionView: View {
                     self.imagePickerSourceType = .camera
                     self.showImagePicker = true
                 }
-            }
+            } 
         }
             .sheet(isPresented: $showImagePicker) {
                 ImagePicker(sourceType: self.imagePickerSourceType) { image in

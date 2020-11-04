@@ -151,14 +151,14 @@
 		732C386E2534F52A000CF5F0 /* accountView */ = {
 			isa = PBXGroup;
 			children = (
+				732C387B253537DF000CF5F0 /* HealthProfileModel.swift */,
+				73D510192536537A00502AC8 /* InsuranceViewModel.swift */,
 				732C386F2534F5A3000CF5F0 /* PatientInfoView.swift */,
 				732C387D2535685C000CF5F0 /* HealthProfileView1.swift */,
 				732C38712534F5B1000CF5F0 /* HealthProfileView2.swift */,
 				732C387F2535686E000CF5F0 /* HealthProfileView3.swift */,
-				732C387B253537DF000CF5F0 /* HealthProfileModel.swift */,
 				732C38732534F5D6000CF5F0 /* InsuranceView.swift */,
 				73D5101B253676B200502AC8 /* InsuranceView2.swift */,
-				73D510192536537A00502AC8 /* InsuranceViewModel.swift */,
 				732C38752534F5DF000CF5F0 /* ShippingView.swift */,
 				732C38772534F5EB000CF5F0 /* BillingView.swift */,
 				732C38792534F5F9000CF5F0 /* PrivacyView.swift */,

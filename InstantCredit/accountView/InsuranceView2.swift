@@ -15,7 +15,14 @@ struct InsuranceView2: View {
         var body: some View {
                 VStack {
                     
-                    
+                    HStack {
+                        ForEach(0..<10) { index in
+                            Rectangle()
+                                .foregroundColor(Color(index == 0 ? UIColor.lightGreen : .lightGray))
+                                .frame(height: 5)
+                        }
+                    }
+                        .padding()
                     
                     
                     

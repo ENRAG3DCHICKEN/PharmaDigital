@@ -12,14 +12,14 @@ struct PrivacyView: View {
         @State var selection: Int?
         
         var body: some View {
-            NavigationView {
+
                 VStack {
                     NavigationLink(destination: InsuranceView(), tag: 1, selection: $selection) { EmptyView() }
                         
                     Button(action: { self.selection = 1 }) { Text("Next").font(.caption) }
                     
                 }
-            }
+            
         }
     }
 struct PrivacyView_Previews: PreviewProvider {

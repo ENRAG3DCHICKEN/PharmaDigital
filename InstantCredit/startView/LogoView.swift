@@ -68,7 +68,7 @@ struct LogoView: View {
                                 if self.selection == nil {
                                     
                                     //Sign-up Process Completed - UserHomeView
-                                    print(UserDefaults.standard.string(forKey: "completed"))
+                                    print(UserDefaults.standard.string(forKey: "completed") as Any)
                                     if UserDefaults.standard.string(forKey: "completed") == "true" {
                                         self.selection = 2
                                     } else {

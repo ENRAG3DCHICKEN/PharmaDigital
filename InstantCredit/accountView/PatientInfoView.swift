@@ -47,7 +47,7 @@ struct PatientInfoView: View {
             }
                 
                 Button(action: { self.selection = 1 } ) { Text("Next").font(.caption) }
-                
+
                 NavigationLink(destination: HealthProfileView1(), tag: 1, selection: $selection) { EmptyView() }
                     
                 

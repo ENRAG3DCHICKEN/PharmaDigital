@@ -20,21 +20,34 @@ struct HealthProfileView3: View {
     
     var body: some View {
             VStack {
+                
                 HStack {
-                    Toggle(isOn: $medicalConditionsFlag) { Text("Do you have any medical conditions?") }
-                    Text(medicalConditionsFlag ? "Yes" : "No")
-                }
-                if medicalConditionsFlag == true {
-                    List {
-                        ForEach(0..<conditionsListExOther.count) { index in
-                            HStack {
-                                Toggle(isOn: self.$conditionsListFlag[index]) { Text(conditionsListExOther[index]) }
-                                Text(self.conditionsListFlag[index] ? "Yes" : "No")
-                            }
-                        }
-                        TextField("List Other Medical Conditions", text: self.$otherMedicalConditions)
+                    ForEach(0..<10) { index in
+                        Rectangle()
+                            .foregroundColor(Color(index == 0 ? UIColor.lightGreen : .lightGray))
+                            .frame(height: 5)
                     }
-                        
+                }
+                    .padding()
+                
+                
+                Form {
+                    HStack {
+                        Toggle(isOn: $medicalConditionsFlag) { Text("Do you have any medical conditions?") }
+                        Text(medicalConditionsFlag ? "Yes" : "No")
+                    }
+                    if medicalConditionsFlag == true {
+                        List {
+                            ForEach(0..<conditionsListExOther.count) { index in
+                                HStack {
+                                    Toggle(isOn: self.$conditionsListFlag[index]) { Text(conditionsListExOther[index]) }
+                                    Text(self.conditionsListFlag[index] ? "Yes" : "No")
+                                }
+                            }
+                            TextField("List Other Medical Conditions", text: self.$otherMedicalConditions)
+                        }
+                            
+                    }
                 }
             
                 NavigationLink(destination: InsuranceView(), tag: 1, selection: $selection) { EmptyView() }

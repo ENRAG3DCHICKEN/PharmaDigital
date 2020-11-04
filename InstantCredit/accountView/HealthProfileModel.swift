@@ -30,3 +30,5 @@ var conditionsListExOther: [String] = ["Angina",
                                        "Chronic Heartburn",
                                        "Arthiritis",
                                        "Epilepsy"]
+
+var genderSelections: [String] = ["Male","Female"]
