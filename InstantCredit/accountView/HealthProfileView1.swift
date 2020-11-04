@@ -14,7 +14,7 @@ struct HealthProfileView1: View {
     
     @State var selectedDate = Date()
     @State var substituteGeneric: Bool = true
-    @State var selectedGender: String
+    @State var selectedGender: String? = nil
     
     var body: some View {
             VStack {
