@@ -70,46 +70,66 @@ struct InsuranceView2: View {
                     }
                         .padding()
                     
-                    if selectedPlanName != "" {
-                        Section {
-                            Text(selectedPlanName)
-                            TextField("Member ID", text: $memberID1)
-                            TextField("Group #", text: $groupNumber1)
-                            TextField("Policyholder Name", text: $policyholderName1)
-                            TextField("Carrier Code", text: $carrierCode1)
-                            DatePicker("Date of Birth", selection: $selectedDate1, displayedComponents: .date)
-                            TextField("Insurance Phone Number", text: $insurancePhone1)
-                            TextField("Relationship to Cardholder", text: $relationshipToCardholder1)
-                        }
-                    }
-                     
-                    if selectedPlanName2 != "" {
-                        Section {
-                            Text(selectedPlanName2)
-                            TextField("Member ID", text: $memberID2)
-                            TextField("Group #", text: $groupNumber2)
-                            TextField("Policyholder Name", text: $policyholderName2)
-                            TextField("Carrier Code", text: $carrierCode2)
-                            DatePicker("Date of Birth", selection: $selectedDate2, displayedComponents: .date)
-                            TextField("Insurance Phone Number", text: $insurancePhone2)
-                            TextField("Relationship to Cardholder", text: $relationshipToCardholder2)
-                        }
-                    }
+                    Form {
+                    
+                        if selectedPlanName != "" {
+
+                                Section {
+                                    Text(selectedPlanName)
+                                    TextField("Member ID", text: $memberID1)
+                                    TextField("Group #", text: $groupNumber1)
+                                    TextField("Policyholder Name", text: $policyholderName1)
+                                    TextField("Carrier Code", text: $carrierCode1)
+                                    DatePicker("Date of Birth", selection: $selectedDate1, displayedComponents: .date)
+                                    TextField("Insurance Phone Number", text: $insurancePhone1)
+                                    Picker(selection: $relationshipToCardholder1, label: Text("Plan")) {
+                                        ForEach(0..<relationshipToCardholder.count) { index in
+                                            Text(relationshipToCardholder[index]).tag(relationshipToCardholder[index])
+                                        }
+                                    }
+                                }
+                            }
                         
-                    if selectedPlanName3 != "" {
-                        Section {
-                            Text(selectedPlanName3)
-                            TextField("Member ID", text: $memberID3)
-                            TextField("Group #", text: $groupNumber3)
-                            TextField("Policyholder Name", text: $policyholderName3)
-                            TextField("Carrier Code", text: $carrierCode3)
-                            DatePicker("Date of Birth", selection: $selectedDate3, displayedComponents: .date)
-                            TextField("Insurance Phone Number", text: $insurancePhone3)
-                            TextField("Relationship to Cardholder", text: $relationshipToCardholder3)
+                         
+                        if selectedPlanName2 != "" {
+
+                                Section {
+                                    Text(selectedPlanName2)
+                                    TextField("Member ID", text: $memberID2)
+                                    TextField("Group #", text: $groupNumber2)
+                                    TextField("Policyholder Name", text: $policyholderName2)
+                                    TextField("Carrier Code", text: $carrierCode2)
+                                    DatePicker("Date of Birth", selection: $selectedDate2, displayedComponents: .date)
+                                    TextField("Insurance Phone Number", text: $insurancePhone2)
+                                    Picker(selection: $relationshipToCardholder2, label: Text("Plan")) {
+                                        ForEach(0..<relationshipToCardholder.count) { index in
+                                            Text(relationshipToCardholder[index]).tag(relationshipToCardholder[index])
+                                        }
+                                    }
+                                }
+                            }
+                        
+                            
+                        if selectedPlanName3 != "" {
+
+                                Section {
+                                    Text(selectedPlanName3)
+                                    TextField("Member ID", text: $memberID3)
+                                    TextField("Group #", text: $groupNumber3)
+                                    TextField("Policyholder Name", text: $policyholderName3)
+                                    TextField("Carrier Code", text: $carrierCode3)
+                                    DatePicker("Date of Birth", selection: $selectedDate3, displayedComponents: .date)
+                                    TextField("Insurance Phone Number", text: $insurancePhone3)
+                                    Picker(selection: $relationshipToCardholder3, label: Text("Plan")) {
+                                        ForEach(0..<relationshipToCardholder.count) { index in
+                                            Text(relationshipToCardholder[index]).tag(relationshipToCardholder[index])
+                                        }
+                                    }
+                                }
+                            
                         }
+                        
                     }
-                    
-                    
                     
                     
                     NavigationLink(destination: ShippingView(), tag: 1, selection: $selection) { EmptyView() }
@@ -117,5 +137,6 @@ struct InsuranceView2: View {
                     Button(action: { self.selection = 1 }) { Text("Next").font(.caption) }
                     
                 }
+                    .edgesIgnoringSafeArea(.vertical)
             }
         }
