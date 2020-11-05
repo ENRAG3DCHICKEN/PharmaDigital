@@ -24,6 +24,11 @@ struct PatientInfoView: View {
     var body: some View {
         
         VStack {
+            
+            Text("")
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
+            
             HStack {
                 ForEach(0..<9) { index in
                     Rectangle()
@@ -49,6 +54,8 @@ struct PatientInfoView: View {
                 Button(action: { self.selection = 1 } ) { Text("Next").font(.caption) }
 
                 NavigationLink(destination: HealthProfileView1(), tag: 1, selection: $selection) { EmptyView() }
+//                    .navigationBarTitle("")
+//                    .navigationBarHidden(true)
                     
                 
             

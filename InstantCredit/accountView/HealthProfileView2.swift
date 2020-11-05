@@ -20,6 +20,10 @@ struct HealthProfileView2: View {
     var body: some View {
             VStack {
                 
+                Text("")
+                    .navigationBarTitle("")
+                    .navigationBarHidden(true)
+                
                 HStack {
                     ForEach(0..<10) { index in
                         Rectangle()

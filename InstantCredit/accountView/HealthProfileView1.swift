@@ -19,6 +19,10 @@ struct HealthProfileView1: View {
     var body: some View {
             VStack {
                 
+                Text("")
+                    .navigationBarTitle("")
+                    .navigationBarHidden(true)
+                
                 HStack {
                     ForEach(0..<9) { index in
                         Rectangle()
@@ -32,16 +36,10 @@ struct HealthProfileView1: View {
                     Toggle(isOn: self.$substituteGeneric) { Text("Yes, Substitute a generic equivalent when available").font(.callout) }
                     
                     Section {
-                        VStack {
-                            // Date Picker
-                            if #available(iOS 14.0, *) {
-                                DatePicker("Date of Birth", selection: $selectedDate, displayedComponents: .date)
-//                                    .datePickerStyle(GraphicalDatePickerStyle())
-                            } else {
-                                DatePicker("Date of Birth", selection: $selectedDate, displayedComponents: .date)
-                            }
+                        DatePicker("Date of Birth", selection: $selectedDate, displayedComponents: .date)
+
                         }
-                    }
+                    
                     
                     Picker(selection: $selectedGender, label: Text("Gender")) {
                         ForEach(0..<genderSelections.count) { index in

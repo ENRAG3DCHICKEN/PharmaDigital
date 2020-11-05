@@ -15,6 +15,10 @@ struct PrivacyView: View {
 
                 VStack {
                     
+                    Text("")
+                        .navigationBarTitle("")
+                        .navigationBarHidden(true)
+                    
                     HStack {
                         ForEach(0..<10) { index in
                             Rectangle()

@@ -19,6 +19,10 @@ struct LandingView: View {
     var body: some View {
                 VStack(alignment: .center) {
                     
+                    Text("")
+                        .navigationBarTitle("")
+                        .navigationBarHidden(true)
+                    
 //                    Spacer()
                     HStack {
                         Image("yoga").resizable()
@@ -94,9 +98,6 @@ struct LandingView: View {
                     }
                     Spacer()
             }
-//                .navigationBarHidden(true)
-//                .navigationBarTitle(Text("Home"))
-//                .background(Color(UIColor.mainColor))
         }
     @State var steadyStatePanOffset: CGSize = .zero
     @GestureState var gesturePanOffset: CGSize = .zero

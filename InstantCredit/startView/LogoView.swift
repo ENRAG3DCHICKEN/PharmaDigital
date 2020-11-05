@@ -20,13 +20,19 @@ struct LogoView: View {
         NavigationView{
         
             VStack {
+                
+                Text("")
+                    .navigationBarTitle("")
+                    .navigationBarHidden(true)
             
         //Init with Userdefaults to see if logged in at app startup
         //Query DB and decide on the User vs Admin View
         //Navigate
+
                 
                 Image("yoga").resizable()
                         .frame(width: 200, height: 120)
+
         
                 NavigationLink(destination: LandingView(), tag: 1, selection: $selection) { EmptyView() }
                 NavigationLink(destination: UserHomeView(), tag: 2, selection: $selection) { EmptyView() }

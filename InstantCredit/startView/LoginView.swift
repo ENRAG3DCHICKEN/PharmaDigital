@@ -23,8 +23,13 @@ struct LoginView: View {
     var body: some View {
             VStack {
                 
+                Text("")
+                    .navigationBarTitle("")
+                    .navigationBarHidden(true)
+                
                 Image("yoga").resizable()
                         .frame(width: 100, height: 60)
+                
                 Text("""
                         Welcome back.
                     """)

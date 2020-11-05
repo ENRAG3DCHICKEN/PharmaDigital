@@ -33,3 +33,4 @@ struct InsurancePlan: Identifiable {
                                         "RCMP", "SSQ", "Veterans Affairs Canada", "Workers Compensation"]
 
 
+var relationshipToCardholder: [String] = ["Cardholder", "Spouse", "Child Underage", "Child Overage", "Disabled Dependent", "Dependent Student"]
