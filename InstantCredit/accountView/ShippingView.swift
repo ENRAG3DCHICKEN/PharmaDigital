@@ -10,6 +10,13 @@ import SwiftUI
 
 struct ShippingView: View {
         @State var selection: Int?
+    
+        @State var shipFullName: String = ""
+        @State var shipAddress: String = ""
+        @State var shipCity: String = ""
+        @State var shipProvince: String = ""
+        @State var shipPostalCode: String = ""
+        @State var shipPhoneNumber: String = ""
         
         var body: some View {
             
@@ -27,6 +34,22 @@ struct ShippingView: View {
                         }
                     }
                         .padding()
+                    
+                    Form {
+
+                        Text("Shipping Address")
+                        
+                        Section {
+                            TextField("Full Name", text: $shipFullName)
+                            TextField("Address", text: $shipAddress)
+                            TextField("Province", text: $shipProvince)
+                            TextField("Postal Code", text: $shipPostalCode)
+                            TextField("Phone", text: $shipPhoneNumber)
+                        }
+                    }
+                    
+                    
+                    
                     
                     NavigationLink(destination: BillingView(), tag: 1, selection: $selection) { EmptyView() }
                         

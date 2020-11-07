@@ -11,6 +11,13 @@ import SwiftUI
 struct BillingView: View {
         @State var selection: Int?
         
+        @State private var paymentType: String = ""
+        @State private var cardholderName: String = ""
+        @State private var paymentCardNumber: String = ""
+        @State private var expirationMonth: String = ""
+        @State private var expirationYear: String = ""
+        @State private var cvv: String = ""
+        
         var body: some View {
                 VStack {
                     
@@ -26,6 +33,26 @@ struct BillingView: View {
                         }
                     }
                         .padding()
+                    
+                    
+                    
+                    Text("Please enter the following information exactly as it appears on your credit card statement.")
+                    Text("We accept Visa and Mastercard credit cards. We do not accept any debit cards.")
+                    
+                    Form {
+                        Section {
+                            VStack {
+                                TextField("Payment Type (Visa and Mastercard)", text: $paymentType)
+                                TextField("Cardholder Name", text: $cardholderName)
+                                TextField("Payment Card Number (no dashes or spaces)", text: $paymentCardNumber)
+                                TextField("Expiration Month", text: $expirationMonth)
+                                TextField("Expiration Year", text: $expirationYear)
+                                TextField("CVV", text: $cvv)
+                            }
+                        }
+                    }
+                    
+                    
                     
                     NavigationLink(destination: PrivacyView(), tag: 1, selection: $selection) { EmptyView() }
                         
