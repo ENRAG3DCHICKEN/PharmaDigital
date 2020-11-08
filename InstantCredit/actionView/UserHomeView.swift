@@ -23,6 +23,9 @@ struct UserHomeView: View {
                 UserDefaults.standard.removeObject(forKey: "password")
                 self.selection = 0
             }) { Text("Logout").font(.caption) }
+            
+            
+            
         }
         
         

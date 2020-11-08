@@ -96,10 +96,11 @@ struct InsuranceView2: View {
                     self.selection = 2
                 }
             } ) { Text("Next >").font(.body).bold() }
-                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
-                .foregroundColor(Color(.white))
-                .background(Color(UIColor.mainColor))
-                .padding()
+            .disabled(memberID2.isEmpty || groupNumber2.isEmpty || policyholderName2.isEmpty || carrierCode2.isEmpty || insurancePhone2.isEmpty || relationshipToCardholder2.isEmpty)
+            .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+            .foregroundColor(Color(.white))
+            .background(memberID2.isEmpty || groupNumber2.isEmpty || policyholderName2.isEmpty || carrierCode2.isEmpty || insurancePhone2.isEmpty || relationshipToCardholder2.isEmpty ? .gray : Color(UIColor.mainColor))
+            .padding()
             
             NavigationLink(destination: InsuranceView3(billToInsuranceFlag: $billToInsuranceFlag, billToInsuranceFlag2: $billToInsuranceFlag2, billToInsuranceFlag3: $billToInsuranceFlag3, selectedPlanName: $selectedPlanName, selectedPlanName2: $selectedPlanName2, selectedPlanName3: $selectedPlanName3), tag: 1, selection: $selection) { EmptyView() }
             NavigationLink(destination: ShippingView(), tag: 2, selection: $selection) { EmptyView() }

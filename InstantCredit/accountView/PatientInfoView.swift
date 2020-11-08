@@ -66,10 +66,13 @@ struct PatientInfoView: View {
             }
             
             Spacer()
-            Button(action: { self.selection = 1 } ) { Text("Next >").font(.body).bold() }
+            Button(action: {
+                self.selection = 1
+            } ) { Text("Next >").font(.body).bold() }
+                .disabled(fullName.isEmpty || address.isEmpty || province.isEmpty || postalCode.isEmpty || phoneNumber.isEmpty || email.isEmpty)
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))
-                .background(Color(UIColor.mainColor))
+                .background(fullName.isEmpty || address.isEmpty || province.isEmpty || postalCode.isEmpty || phoneNumber.isEmpty || email.isEmpty ? .gray : Color(UIColor.mainColor))
                 .padding()
                 
                 NavigationLink(destination: HealthProfileView1(), tag: 1, selection: $selection) { EmptyView() }

@@ -96,10 +96,12 @@ struct InsuranceView1: View {
                         } else if selectedPlanName2 == "" {
                             self.selection = 2
                         }
+                    
                     } ) { Text("Next >").font(.body).bold() }
+                        .disabled(memberID1.isEmpty || groupNumber1.isEmpty || policyholderName1.isEmpty || carrierCode1.isEmpty || insurancePhone1.isEmpty || relationshipToCardholder1.isEmpty)
                         .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                         .foregroundColor(Color(.white))
-                        .background(Color(UIColor.mainColor))
+                        .background(memberID1.isEmpty || groupNumber1.isEmpty || policyholderName1.isEmpty || carrierCode1.isEmpty || insurancePhone1.isEmpty || relationshipToCardholder1.isEmpty ? .gray : Color(UIColor.mainColor))
                         .padding()
                     
                     

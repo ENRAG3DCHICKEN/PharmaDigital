@@ -62,9 +62,10 @@ struct HealthProfileView1: View {
                 
                 Spacer()
                 Button(action: { self.selection = 1 } ) { Text("Next >").font(.body).bold() }
+                    .disabled(selectedGender.isEmpty)
                     .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                     .foregroundColor(Color(.white))
-                    .background(Color(UIColor.mainColor))
+                    .background(selectedGender.isEmpty ? .gray : Color(UIColor.mainColor))
                     .padding()
                     
                     NavigationLink(destination: HealthProfileView2(), tag: 1, selection: $selection) { EmptyView() }

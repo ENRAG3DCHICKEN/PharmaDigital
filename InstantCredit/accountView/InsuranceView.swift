@@ -105,9 +105,10 @@ struct InsuranceView: View {
                         self.selection = 2
                     }
                 } ) { Text("Next >").font(.body).bold() }
+                    .disabled(OHIP.isEmpty)
                     .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                     .foregroundColor(Color(.white))
-                    .background(Color(UIColor.mainColor))
+                    .background(OHIP.isEmpty ? .gray : Color(UIColor.mainColor))
                     .padding()
                                         
                 NavigationLink(destination: InsuranceView1(billToInsuranceFlag: $billToInsuranceFlag, billToInsuranceFlag2: $billToInsuranceFlag2, billToInsuranceFlag3: $billToInsuranceFlag3, selectedPlanName: $selectedPlanName, selectedPlanName2: $selectedPlanName2, selectedPlanName3: $selectedPlanName3), tag: 1, selection: $selection) { EmptyView() }

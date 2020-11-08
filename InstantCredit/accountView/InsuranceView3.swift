@@ -89,9 +89,10 @@ struct InsuranceView3: View {
             
             Spacer()
             Button(action: { self.selection = 3 } ) { Text("Next >").font(.body).bold() }
+                .disabled(memberID3.isEmpty || groupNumber3.isEmpty || policyholderName3.isEmpty || carrierCode3.isEmpty || insurancePhone3.isEmpty || relationshipToCardholder3.isEmpty)
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))
-                .background(Color(UIColor.mainColor))
+                .background(memberID3.isEmpty || groupNumber3.isEmpty || policyholderName3.isEmpty || carrierCode3.isEmpty || insurancePhone3.isEmpty || relationshipToCardholder3.isEmpty ? .gray : Color(UIColor.mainColor))
                 .padding()
         
     

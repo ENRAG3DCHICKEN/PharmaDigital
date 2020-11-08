@@ -47,9 +47,8 @@ struct ShippingView: View {
                     }
                         .padding()
                     
-                    Text("Shipping Address")
-                    
                     Form {
+                        Text("Delivery Shipping Address")
                         Section {
                             TextField("Full Name", text: $shipFullName)
                             TextField("Address", text: $shipAddress)
@@ -61,9 +60,10 @@ struct ShippingView: View {
                     
                     Spacer()
                     Button(action: { self.selection = 1 } ) { Text("Next >").font(.body).bold() }
+                        .disabled(shipFullName.isEmpty || shipAddress.isEmpty || shipProvince.isEmpty || shipPostalCode.isEmpty || shipPhoneNumber.isEmpty)
                         .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                         .foregroundColor(Color(.white))
-                        .background(Color(UIColor.mainColor))
+                        .background(shipFullName.isEmpty || shipAddress.isEmpty || shipProvince.isEmpty || shipPostalCode.isEmpty || shipPhoneNumber.isEmpty ? .gray : Color(UIColor.mainColor))
                         .padding()
                     
                     

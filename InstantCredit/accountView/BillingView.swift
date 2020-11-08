@@ -65,9 +65,10 @@ struct BillingView: View {
                     
                     Spacer()
                     Button(action: { self.selection = 1 } ) { Text("Next >").font(.body).bold() }
+                        .disabled(paymentType.isEmpty || cardholderName.isEmpty || paymentCardNumber.isEmpty || expirationMonth.isEmpty || expirationYear.isEmpty || cvv.isEmpty)
                         .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                         .foregroundColor(Color(.white))
-                        .background(Color(UIColor.mainColor))
+                        .background(paymentType.isEmpty || cardholderName.isEmpty || paymentCardNumber.isEmpty || expirationMonth.isEmpty || expirationYear.isEmpty || cvv.isEmpty ? .gray : Color(UIColor.mainColor))
                         .padding()
                     
                     NavigationLink(destination: PrivacyView(), tag: 1, selection: $selection) { EmptyView() }
