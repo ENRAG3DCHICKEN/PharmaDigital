@@ -20,6 +20,7 @@ struct LogoView: View {
         NavigationView{
         
             VStack {
+                ZStack {
                 
                 Text("")
                     .navigationBarTitle("")
@@ -29,16 +30,20 @@ struct LogoView: View {
         //Query DB and decide on the User vs Admin View
         //Navigate
 
-                
+                LinearGradient(gradient: Gradient(colors: [Color(UIColor.gradiant4), Color(UIColor.gradiant3)]), startPoint: .top, endPoint: .bottom)
                 Image("yoga").resizable()
                         .frame(width: 200, height: 120)
+                    
 
         
                 NavigationLink(destination: LandingView(), tag: 1, selection: $selection) { EmptyView() }
                 NavigationLink(destination: UserHomeView(), tag: 2, selection: $selection) { EmptyView() }
                 NavigationLink(destination: AdminHomeView(), tag: 3, selection: $selection) { EmptyView() }
                 NavigationLink(destination: PatientInfoView(), tag: 4, selection: $selection) { EmptyView() }
+                }
         }
+            
+            
 //        .navigationBarHidden(true)
 //        .navigationBarTitle(Text("Home"))
         .onAppear(perform: {
@@ -98,6 +103,7 @@ struct LogoView: View {
         )}
             .background(Color(UIColor.mainColor))
     }
+    
 }
 
 struct LogoView_Previews: PreviewProvider {

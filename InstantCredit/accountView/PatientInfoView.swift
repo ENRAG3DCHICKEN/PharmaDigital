@@ -28,6 +28,18 @@ struct PatientInfoView: View {
             Text("")
                 .navigationBarTitle("")
                 .navigationBarHidden(true)
+        
+            Image("cropped-img7")
+                .resizable()
+                .frame(height: UIScreen.main.bounds.height * 0.2)
+                .overlay(
+                    Text("Help us match you to the right counselor.")
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.2)
+                        .foregroundColor(.white)
+                        .background(Color.black)
+                        .opacity(0.7)
+                )
+                  
             
             HStack {
                 ForEach(0..<9) { index in
@@ -43,21 +55,24 @@ struct PatientInfoView: View {
                     TextField("Full Name", text: $fullName)
                 }
                 Section {
+                    
                     TextField("Address", text: $address)
                     TextField("Province", text: $province)
                     TextField("Postal Code", text: $postalCode)
                     TextField("Phone", text: $phoneNumber)
                     TextField("Email", text: $email)
+                    
                 }
             }
+            
+            Spacer()
+            Button(action: { self.selection = 1 } ) { Text("Next >").font(.body).bold() }
+                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                .foregroundColor(Color(.white))
+                .background(Color(UIColor.mainColor))
+                .padding()
                 
-                Button(action: { self.selection = 1 } ) { Text("Next").font(.caption) }
-
                 NavigationLink(destination: HealthProfileView1(), tag: 1, selection: $selection) { EmptyView() }
-//                    .navigationBarTitle("")
-//                    .navigationBarHidden(true)
-                    
-                
             
         }
     }

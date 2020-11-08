@@ -45,6 +45,18 @@ struct InsuranceView3: View {
                 .navigationBarTitle("")
                 .navigationBarHidden(true)
             
+            Image("cropped-img7")
+                .resizable()
+                .frame(height: UIScreen.main.bounds.height * 0.2)
+                .overlay(
+                    Text("Help us match you to the right counselor.")
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.2)
+                        .foregroundColor(.white)
+                        .background(Color.black)
+                        .opacity(0.7)
+                )
+                  
+            
             HStack {
                 ForEach(0..<10) { index in
                     Rectangle()
@@ -71,14 +83,20 @@ struct InsuranceView3: View {
                         }
                     }
                 }
+
             }
+            
+            
+            Spacer()
+            Button(action: { self.selection = 3 } ) { Text("Next >").font(.body).bold() }
+                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                .foregroundColor(Color(.white))
+                .background(Color(UIColor.mainColor))
+                .padding()
         
     
         NavigationLink(destination: ShippingView(), tag: 3, selection: $selection) { EmptyView() }
             
-        Button(action: {
-            self.selection = 3
-        }) { Text("Next").font(.caption) }
             }
     }
 }

@@ -46,6 +46,19 @@ struct InsuranceView1: View {
                         .navigationBarTitle("")
                         .navigationBarHidden(true)
                     
+                    Image("cropped-img7")
+                        .resizable()
+                        .frame(height: UIScreen.main.bounds.height * 0.2)
+                        .overlay(
+                            Text("Help us match you to the right counselor.")
+                                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.2)
+                                .foregroundColor(.white)
+                                .background(Color.black)
+                                .opacity(0.7)
+                        )
+                          
+                    
+                    
                     HStack {
                         ForEach(0..<10) { index in
                             Rectangle()
@@ -74,25 +87,26 @@ struct InsuranceView1: View {
                                     }
                                 }
                             }
-
-
-                        
                     }
+                    
+                    Spacer()
+                    Button(action: {
+                        if selectedPlanName2 != "" {
+                            self.selection = 1
+                        } else if selectedPlanName2 == "" {
+                            self.selection = 2
+                        }
+                    } ) { Text("Next >").font(.body).bold() }
+                        .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                        .foregroundColor(Color(.white))
+                        .background(Color(UIColor.mainColor))
+                        .padding()
                     
                     
                     NavigationLink(destination: InsuranceView2(billToInsuranceFlag: $billToInsuranceFlag, billToInsuranceFlag2: $billToInsuranceFlag2, billToInsuranceFlag3: $billToInsuranceFlag3, selectedPlanName: $selectedPlanName, selectedPlanName2: $selectedPlanName2, selectedPlanName3: $selectedPlanName3), tag: 1, selection: $selection) { EmptyView() }
                     NavigationLink(destination: ShippingView(), tag: 2, selection: $selection) { EmptyView() }
                         
-                    Button(action: {
-                        print(selectedPlanName2)
-                        if selectedPlanName2 != "" {
-                            self.selection = 1
-                        }
-                        else {
-                            self.selection = 2
-                        }
-                        
-                    }) { Text("Next").font(.caption) }
+
                     
                 }
             }

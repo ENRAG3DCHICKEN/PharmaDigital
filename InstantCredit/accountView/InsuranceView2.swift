@@ -46,6 +46,18 @@ struct InsuranceView2: View {
                 .navigationBarTitle("")
                 .navigationBarHidden(true)
             
+            Image("cropped-img7")
+                .resizable()
+                .frame(height: UIScreen.main.bounds.height * 0.2)
+                .overlay(
+                    Text("Help us match you to the right counselor.")
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.2)
+                        .foregroundColor(.white)
+                        .background(Color.black)
+                        .opacity(0.7)
+                )
+                  
+            
             HStack {
                 ForEach(0..<10) { index in
                     Rectangle()
@@ -75,19 +87,23 @@ struct InsuranceView2: View {
                     }
                 }
             }
-            NavigationLink(destination: InsuranceView3(billToInsuranceFlag: $billToInsuranceFlag, billToInsuranceFlag2: $billToInsuranceFlag2, billToInsuranceFlag3: $billToInsuranceFlag3, selectedPlanName: $selectedPlanName, selectedPlanName2: $selectedPlanName2, selectedPlanName3: $selectedPlanName3), tag: 1, selection: $selection) { EmptyView() }
-            NavigationLink(destination: ShippingView(), tag: 3, selection: $selection) { EmptyView() }
-                
+            
+            Spacer()
             Button(action: {
-                print(selectedPlanName3)
                 if selectedPlanName3 != "" {
                     self.selection = 1
-                }
-                else {
+                } else if selectedPlanName3 == "" {
                     self.selection = 2
                 }
+            } ) { Text("Next >").font(.body).bold() }
+                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                .foregroundColor(Color(.white))
+                .background(Color(UIColor.mainColor))
+                .padding()
+            
+            NavigationLink(destination: InsuranceView3(billToInsuranceFlag: $billToInsuranceFlag, billToInsuranceFlag2: $billToInsuranceFlag2, billToInsuranceFlag3: $billToInsuranceFlag3, selectedPlanName: $selectedPlanName, selectedPlanName2: $selectedPlanName2, selectedPlanName3: $selectedPlanName3), tag: 1, selection: $selection) { EmptyView() }
+            NavigationLink(destination: ShippingView(), tag: 2, selection: $selection) { EmptyView() }
                 
-            }) { Text("Next").font(.caption) }
             
         }
     }

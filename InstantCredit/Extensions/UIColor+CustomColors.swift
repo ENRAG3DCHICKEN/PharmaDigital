@@ -39,5 +39,16 @@ extension UIColor {
 extension UIColor {
         static var mainColor: UIColor { return UIColor(red: 44/255, green: 94/255, blue: 54/255, alpha: 1) }
         static var lightGreen: UIColor { return UIColor(red: 90/255, green: 187/255, blue: 94/255, alpha: 1) }
+    
+        static var gradiant1: UIColor { return UIColor(red: 20/255, green: 79/255, blue: 94/255, alpha: 1) }
+        static var gradiant2: UIColor { return UIColor(red: 112/255, green: 177/255, blue: 127/255, alpha: 1) }
+    
+    
+        static var gradiant3: UIColor { return UIColor(red: 34/255, green: 193/255, blue: 195/255, alpha: 1) }
+        static var gradiant4: UIColor { return UIColor(red: 253/255, green: 187/255, blue: 45/255, alpha: 1) }
+    
+    
+    // #134e5e//#71b280
+    
     }
     
