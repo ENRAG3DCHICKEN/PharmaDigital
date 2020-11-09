@@ -45,20 +45,23 @@ struct HealthProfileView1: View {
                     .padding()
                 
                 Form {
-                    Toggle(isOn: self.$substituteGeneric) { Text("Yes, Substitute a generic equivalent when available").font(.callout) }
-                    
-                    Section {
-                        DatePicker("Date of Birth", selection: $selectedDate, displayedComponents: .date)
+                    Section(header: Text("Health Profile")) {
+                        Toggle(isOn: self.$substituteGeneric) { Text("Yes, Substitute a generic equivalent when available").font(.callout) }
+                        
+                        Section {
+                            DatePicker("Date of Birth", selection: $selectedDate, displayedComponents: .date)
 
-                        }
-                    
-                    
-                    Picker(selection: $selectedGender, label: Text("Gender")) {
-                        ForEach(0..<genderSelections.count) { index in
-                            Text(genderSelections[index]).tag(genderSelections[index])
+                            }
+                        
+                        
+                        Picker(selection: $selectedGender, label: Text("Gender")) {
+                            ForEach(0..<genderSelections.count) { index in
+                                Text(genderSelections[index]).tag(genderSelections[index])
+                            }
                         }
                     }
                 }
+                    .padding()
                 
                 Spacer()
                 Button(action: { self.selection = 1 } ) { Text("Next >").font(.body).bold() }

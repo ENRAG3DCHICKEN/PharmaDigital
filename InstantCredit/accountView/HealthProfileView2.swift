@@ -47,26 +47,28 @@ struct HealthProfileView2: View {
                     .padding()
                 
                 Form {
-                    
-                    HStack {
-                        Toggle(isOn: $allergiesFlag) { Text("Do you have any drug allergies?") }
-                        Text(allergiesFlag ? "Yes" : "No")
-                    }
-        
-                    if allergiesFlag == true {
-                        List {
-                            Section {
-                                ForEach(0..<allergiesListExOther.count) { index in
-                                    HStack {
-                                        Toggle(isOn: self.$allergiesListFlag[index]) { Text(allergiesListExOther[index]) }
-                                        Text(self.allergiesListFlag[index] ? "Yes" : "No")
+                    Section(header: Text("Health Profile")) {
+                        HStack {
+                            Toggle(isOn: $allergiesFlag) { Text("Do you have any drug allergies?") }
+                            Text(allergiesFlag ? "Yes" : "No")
+                        }
+            
+                        if allergiesFlag == true {
+                            List {
+                                Section {
+                                    ForEach(0..<allergiesListExOther.count) { index in
+                                        HStack {
+                                            Toggle(isOn: self.$allergiesListFlag[index]) { Text(allergiesListExOther[index]) }
+                                            Text(self.allergiesListFlag[index] ? "Yes" : "No")
+                                        }
                                     }
                                 }
+                                TextField("List Other Allergies", text: self.$otherAllergies)
                             }
-                            TextField("List Other Allergies", text: self.$otherAllergies)
                         }
                     }
                 }
+                    .padding()
                 
                 Spacer()
                 Button(action: { self.selection = 1 } ) { Text("Next >").font(.body).bold() }

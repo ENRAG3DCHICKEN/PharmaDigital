@@ -51,49 +51,51 @@ struct InsuranceView: View {
                     .padding()
                 
                 Form {
-                    
-                    TextField("OHIP Number", text: $OHIP)
-                    
-                    Section {
-                        Toggle(isOn: self.$billToInsuranceFlag) { Text("Would you like us to bill a prescription insurance provider?") }
+                    Section(header: Text("Insurance Details")) {
+                        TextField("OHIP Number", text: $OHIP)
                         
-                        if billToInsuranceFlag == true {
-                            Picker(selection: $selectedPlanName, label: Text("Plan")) {
-                                ForEach(0..<planNameSelections.count) { index in
-                                    Text(planNameSelections[index]).tag(planNameSelections[index])
+                        Section {
+                            Toggle(isOn: self.$billToInsuranceFlag) { Text("Would you like us to bill a prescription insurance provider?").font(.callout) }
+                            
+                            if billToInsuranceFlag == true {
+                                Picker(selection: $selectedPlanName, label: Text("Plan")) {
+                                    ForEach(0..<planNameSelections.count) { index in
+                                        Text(planNameSelections[index]).tag(planNameSelections[index])
+                                    }
                                 }
                             }
                         }
-                    }
-                    
-                    Section {
-                        if selectedPlanName != "" {
-                            Toggle(isOn: self.$billToInsuranceFlag2) { Text("Would you like us to bill another prescription insurance provider?") }
-                        }
                         
-                        if billToInsuranceFlag2 == true {
-                            Picker(selection: $selectedPlanName2, label: Text("Plan")) {
-                                ForEach(0..<planNameSelections.count) { index in
-                                    Text(planNameSelections[index]).tag(planNameSelections[index])
+                        Section {
+                            if selectedPlanName != "" {
+                                Toggle(isOn: self.$billToInsuranceFlag2) { Text("Would you like us to bill another prescription insurance provider?").font(.callout) }
+                            }
+                            
+                            if billToInsuranceFlag2 == true {
+                                Picker(selection: $selectedPlanName2, label: Text("Plan")) {
+                                    ForEach(0..<planNameSelections.count) { index in
+                                        Text(planNameSelections[index]).tag(planNameSelections[index])
+                                    }
                                 }
                             }
                         }
-                    }
-                    
-                    Section {
-                        if selectedPlanName2 != "" {
-                            Toggle(isOn: self.$billToInsuranceFlag3) { Text("Would you like us to bill another prescription insurance provider?") }
-                        }
                         
-                        if billToInsuranceFlag3 == true {
-                            Picker(selection: $selectedPlanName3, label: Text("Plan")) {
-                                ForEach(0..<planNameSelections.count) { index in
-                                    Text(planNameSelections[index]).tag(planNameSelections[index])
+                        Section {
+                            if selectedPlanName2 != "" {
+                                Toggle(isOn: self.$billToInsuranceFlag3) { Text("Would you like us to bill another prescription insurance provider?").font(.callout) }
+                            }
+                            
+                            if billToInsuranceFlag3 == true {
+                                Picker(selection: $selectedPlanName3, label: Text("Plan")) {
+                                    ForEach(0..<planNameSelections.count) { index in
+                                        Text(planNameSelections[index]).tag(planNameSelections[index])
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                    .padding()
                     
                     
                 

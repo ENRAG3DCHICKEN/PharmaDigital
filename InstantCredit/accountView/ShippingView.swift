@@ -60,6 +60,7 @@ struct ShippingView: View {
                             TextField("Phone", text: $shipPhoneNumber)
                         }
                     }
+                    .padding()
                     
                     Spacer()
                     Button(action: { self.selection = 1 } ) { Text("Next >").font(.body).bold() }

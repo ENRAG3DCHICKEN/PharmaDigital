@@ -49,10 +49,11 @@ struct BillingView: View {
                     
                     
                     Text("We accept Visa and Mastercard credit cards.")
+                        .padding()
                     Text("We do not accept any debit cards.")
                     
                     Form {
-                        Section {
+                        Section(header: Text("Billing Info")) {
                                 Picker(selection: $paymentType, label: Text("Payment Type (Visa and Mastercard)")) {
                                     ForEach(0..<paymentMethods.count) { index in
                                         Text(paymentMethods[index]).tag(paymentMethods[index])
@@ -66,6 +67,7 @@ struct BillingView: View {
                             
                         }
                     }
+                        .padding()
                     
                     Spacer()
                     Button(action: { self.selection = 1 } ) { Text("Next >").font(.body).bold() }

@@ -71,7 +71,7 @@ struct InsuranceView2: View {
              
                 if selectedPlanName2 != "" {
 
-                    Section {
+                    Section(header: Text("Insurance Details")) {
                         Text(selectedPlanName2)
                         TextField("Member ID", text: $memberID2)
                         TextField("Group #", text: $groupNumber2)
@@ -87,6 +87,7 @@ struct InsuranceView2: View {
                     }
                 }
             }
+                .padding()
             
             Spacer()
             Button(action: {

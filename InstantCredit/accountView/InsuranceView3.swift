@@ -66,9 +66,9 @@ struct InsuranceView3: View {
             }
                 .padding()
             
-            Form{
+            Form {
                 if selectedPlanName3 != "" {
-                    Section {
+                    Section(header: Text("Insurance Details")) {
                         Text(selectedPlanName3)
                         TextField("Member ID", text: $memberID3)
                         TextField("Group #", text: $groupNumber3)
@@ -85,6 +85,7 @@ struct InsuranceView3: View {
                 }
 
             }
+                .padding()
             
             
             Spacer()
