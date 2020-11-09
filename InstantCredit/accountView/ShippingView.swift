@@ -48,11 +48,14 @@ struct ShippingView: View {
                         .padding()
                     
                     Form {
-                        Text("Delivery Shipping Address")
-                        Section {
+                        Section(header: Text("Delivery Shipping Address")) {
                             TextField("Full Name", text: $shipFullName)
                             TextField("Address", text: $shipAddress)
-                            TextField("Province", text: $shipProvince)
+                            Picker(selection: $shipProvince, label: Text("Province")) {
+                                ForEach(0..<provinces.count) { index in
+                                    Text(provinces[index]).tag(provinces[index])
+                                }
+                            }
                             TextField("Postal Code", text: $shipPostalCode)
                             TextField("Phone", text: $shipPhoneNumber)
                         }

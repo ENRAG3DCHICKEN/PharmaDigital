@@ -53,7 +53,11 @@ struct BillingView: View {
                     
                     Form {
                         Section {
-                                TextField("Payment Type (Visa and Mastercard)", text: $paymentType)
+                                Picker(selection: $paymentType, label: Text("Payment Type (Visa and Mastercard)")) {
+                                    ForEach(0..<paymentMethods.count) { index in
+                                        Text(paymentMethods[index]).tag(paymentMethods[index])
+                                    }
+                                }
                                 TextField("Cardholder Name", text: $cardholderName)
                                 TextField("Card Number (no dashes / spaces)", text: $paymentCardNumber)
                                 TextField("Expiration Month", text: $expirationMonth)

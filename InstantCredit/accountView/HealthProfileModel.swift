@@ -33,3 +33,15 @@ var conditionsListExOther: [String] = ["Angina",
 
 var genderSelections: [String] = ["Male",
                                   "Female"]
+
+var provinces: [String] = ["Ontario",
+                          "British Columbia",
+                          "Alberta",
+                          "Quebec",
+                          "Saskatchewan",
+                          "Manitoba",
+                          "Nova Scotia",
+                          "New Brunswick",
+                          "Prince Edward Island"]
+
+var paymentMethods: [String] = ["Visa", "Mastercard"]
