@@ -67,11 +67,6 @@ struct PharmacySearchView: View {
 }
 
 
-//
-
-
-
-
 
 
 

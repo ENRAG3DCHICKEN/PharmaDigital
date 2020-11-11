@@ -20,6 +20,11 @@ struct ShippingView: View {
         
         var body: some View {
             
+            //ADD in a local pickup or a same-day delivery option
+            
+            
+            
+            
                 VStack {
                     
                     Text("")
