@@ -137,7 +137,11 @@ struct PrivacyView: View {
                     
                     
                     Spacer()
-                    Button(action: { self.selection = 1 } ) { Text("Next >").font(.body).bold() }
+                    Button(action: {
+                        UserDefaults.standard.set(true, forKey: "completed")
+                        self.selection = 1
+                        
+                    } ) { Text("Next >").font(.body).bold() }
                         .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                         .foregroundColor(Color(.white))
                         .background(Color(UIColor.mainColor))

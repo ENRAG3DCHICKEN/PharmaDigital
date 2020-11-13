@@ -21,30 +21,51 @@ struct PharmacySearchView: View {
     
     @FetchRequest(fetchRequest: Pharmacy.fetchRequest(.all)) var pharmacies: FetchedResults<Pharmacy>
     
-    @State private var draft: Patient?
+    @State private var selection: Int? = nil
     
+//    @State private var draft: Patient?
+    
+    @State private var selectedPharmacy: Pharmacy
+    
+    init(firstPharma: Pharmacy) {
+        
+        _selectedPharmacy = State(wrappedValue: firstPharma)
+    }
 
     
+//
+//    var selectedPharmacy: Binding<MKAnnotation?> {
+//        return Binding<MKAnnotation?>(
+//            get: { return self.draft!.selectedPharmacy },
+//            set: { annotation in
+//                if let pharmacy = annotation as? Pharmacy {
+//                    self.draft!.selectedPharmacy = pharmacy
+//                }
+//            }
+//        )
+//    }
     
-    var selectedPharmacy: Binding<MKAnnotation?> {
+    var selectedPharmacyMarker: Binding<MKAnnotation?> {
         return Binding<MKAnnotation?>(
-            get: { return self.draft!.selectedPharmacy },
+            get: { return selectedPharmacy },
             set: { annotation in
                 if let pharmacy = annotation as? Pharmacy {
-                    self.draft!.selectedPharmacy = pharmacy
+                    selectedPharmacy = pharmacy
                 }
             }
         )
     }
     
     var body: some View {
-        NavigationView{
         VStack {
             
+            Text("")
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
+                          
             Form {
                 Section {
-            
-                    Picker("Pharmacy", selection: $draft.selectedPharmacy) {
+                    Picker("Pharmacy", selection: $selectedPharmacy) {
                 ForEach(pharmacies, id: \.self) { pharmacy in
                     Text("\(pharmacy.pharmacyName!)").tag(pharmacy.pharmacyName)
                 }
@@ -52,7 +73,7 @@ struct PharmacySearchView: View {
             
             
             
-            MapView(annotations: pharmacies.sorted(), selection: selectedPharmacy)
+            MapView(annotations: pharmacies.sorted(), selection: selectedPharmacyMarker)
                 .frame(minHeight: 400)
         
 
@@ -64,13 +85,30 @@ struct PharmacySearchView: View {
             
             }
             }
-        }
-            .onAppear(perform: {
-                populateCoreData_Pharmacy(context: self.context)
+            Button(action: {
+                //Store into Core Data
                 
-            })
+                
+                
+                
+                self.selection = 1
+                
+                
+                
+            } ) { Text("Next >").font(.body).bold() }
+                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                .foregroundColor(Color(.white))
+                .background(Color(UIColor.mainColor))
+                .padding()
+                
+                NavigationLink(destination: PatientInfoView(), tag: 1, selection: $selection) { EmptyView() }
+        }
+//            .onAppear(perform: {
+//                populateCoreData_Pharmacy(context: self.context)
+//
+//            })
     }
-    }}
+    }
 
 
 

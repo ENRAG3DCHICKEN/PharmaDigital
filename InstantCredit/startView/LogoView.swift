@@ -11,6 +11,10 @@ import Firebase
 import FirebaseAuth
 
 struct LogoView: View {
+    
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(fetchRequest: Pharmacy.fetchRequest(.all)) var pharmacies: FetchedResults<Pharmacy>
+    
     @State var selection: Int?
     
     @State var email: String?
@@ -39,7 +43,7 @@ struct LogoView: View {
                 NavigationLink(destination: LandingView(), tag: 1, selection: $selection) { EmptyView() }
                 NavigationLink(destination: HomeView(), tag: 2, selection: $selection) { EmptyView() }
                 NavigationLink(destination: AdminHomeView(), tag: 3, selection: $selection) { EmptyView() }
-                NavigationLink(destination: PatientInfoView(), tag: 4, selection: $selection) { EmptyView() }
+                NavigationLink(destination: PharmacySearchView(firstPharma: pharmacies.first!), tag: 4, selection: $selection) { EmptyView() }
                 }
         }
             

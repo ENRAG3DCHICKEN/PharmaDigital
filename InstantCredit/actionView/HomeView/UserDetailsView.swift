@@ -122,6 +122,11 @@ struct UserDetailsView: View {
                 .background(Color(UIColor.buttonBar))
                 .padding().shadow(radius: 5, y: 5)
         }
+            Button(action: {
+                UserDefaults.standard.removeObject(forKey: "email")
+                UserDefaults.standard.removeObject(forKey: "password")
+                self.selection = 7
+            }) { Text("Logout").font(.caption) }
             Spacer()
         
         }

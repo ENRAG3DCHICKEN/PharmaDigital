@@ -12,6 +12,9 @@ import Firebase
 
 struct SignUpView: View {
     
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(fetchRequest: Pharmacy.fetchRequest(.all)) var pharmacies: FetchedResults<Pharmacy>
+    
     @State var selection: Int? = nil
     
     @State var fieldSelection: Int? = nil
@@ -157,7 +160,7 @@ struct SignUpView: View {
                     
                     NavigationLink(destination: PrivacyPolicyView(), tag: 1, selection: $selection) { EmptyView() }
                     NavigationLink(destination: TermsView(), tag: 2, selection: $selection) { EmptyView() }
-                    NavigationLink(destination: PatientInfoView(), tag: 3, selection: $selection) { EmptyView() }
+                    NavigationLink(destination: PharmacySearchView(firstPharma: pharmacies.first!), tag: 3, selection: $selection) { EmptyView() }
                     
                     Spacer()
                 }

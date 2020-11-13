@@ -49,7 +49,6 @@ struct BillingView: View {
                     
                     
                     Text("We accept Visa and Mastercard credit cards.")
-                        .padding()
                     Text("We do not accept any debit cards.")
                     
                     Form {
