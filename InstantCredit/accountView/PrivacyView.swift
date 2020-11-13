@@ -143,7 +143,7 @@ struct PrivacyView: View {
                         .background(Color(UIColor.mainColor))
                         .padding()
                     
-                    NavigationLink(destination: UserHomeView(), tag: 1, selection: $selection) { EmptyView() }
+                    NavigationLink(destination: HomeView(), tag: 1, selection: $selection) { EmptyView() }
                     
                 }
             

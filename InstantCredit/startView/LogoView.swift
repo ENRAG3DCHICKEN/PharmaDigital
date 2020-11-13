@@ -37,7 +37,7 @@ struct LogoView: View {
 
         
                 NavigationLink(destination: LandingView(), tag: 1, selection: $selection) { EmptyView() }
-                NavigationLink(destination: UserHomeView(), tag: 2, selection: $selection) { EmptyView() }
+                NavigationLink(destination: HomeView(), tag: 2, selection: $selection) { EmptyView() }
                 NavigationLink(destination: AdminHomeView(), tag: 3, selection: $selection) { EmptyView() }
                 NavigationLink(destination: PatientInfoView(), tag: 4, selection: $selection) { EmptyView() }
                 }

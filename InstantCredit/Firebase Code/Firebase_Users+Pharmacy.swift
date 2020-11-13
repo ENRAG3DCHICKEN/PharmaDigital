@@ -45,7 +45,7 @@ func populateCoreData_Pharmacy(context: NSManagedObjectContext) {
                     
                     //PULL the entire object and update or put it into Core Data
                     print(document.data())
-                    Pharmacy.update(firebasePharmacy: document.data(), in: context)
+                    Pharmacy.update(fbPharmacyData: document.data(), in: context)
                 }
             }
         }

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		730484AF25326011004B73FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 730484AE25326011004B73FB /* GoogleService-Info.plist */; };
-		730484B12532B7BF004B73FB /* UserHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730484B02532B7BF004B73FB /* UserHomeView.swift */; };
+		730484B12532B7BF004B73FB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730484B02532B7BF004B73FB /* HomeView.swift */; };
 		730484B32532C3E0004B73FB /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730484B22532C3E0004B73FB /* PrivacyPolicyView.swift */; };
 		730484B52532C3E9004B73FB /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730484B42532C3E9004B73FB /* TermsView.swift */; };
 		7317D2E0254921E400EDD6FA /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7317D2DF254921E400EDD6FA /* ImagePicker.swift */; };
@@ -62,7 +62,7 @@
 		14932DCBDF53384A6CCECD19 /* Pods_InstantCredit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstantCredit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EDC7C6BD6873297B56BF359 /* Pods-InstantCredit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstantCredit.release.xcconfig"; path = "Target Support Files/Pods-InstantCredit/Pods-InstantCredit.release.xcconfig"; sourceTree = "<group>"; };
 		730484AE25326011004B73FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		730484B02532B7BF004B73FB /* UserHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHomeView.swift; sourceTree = "<group>"; };
+		730484B02532B7BF004B73FB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		730484B22532C3E0004B73FB /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		730484B42532C3E9004B73FB /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
 		7317D2DF254921E400EDD6FA /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -163,6 +163,7 @@
 			children = (
 				732C387B253537DF000CF5F0 /* HealthProfileModel.swift */,
 				73D510192536537A00502AC8 /* InsuranceViewModel.swift */,
+				EE0AFFC6255C3D5100DCE905 /* SearchView */,
 				732C386F2534F5A3000CF5F0 /* PatientInfoView.swift */,
 				732C387D2535685C000CF5F0 /* HealthProfileView1.swift */,
 				732C38712534F5B1000CF5F0 /* HealthProfileView2.swift */,
@@ -173,7 +174,6 @@
 				EEA2092C2555D62400921616 /* InsuranceView3.swift */,
 				732C38772534F5EB000CF5F0 /* BillingView.swift */,
 				732C38792534F5F9000CF5F0 /* PrivacyView.swift */,
-				EE0AFFC6255C3D5100DCE905 /* SearchView */,
 			);
 			path = accountView;
 			sourceTree = "<group>";
@@ -181,7 +181,7 @@
 		73D510182536522800502AC8 /* actionView */ = {
 			isa = PBXGroup;
 			children = (
-				EE0AFFC5255C3D2000DCE905 /* UserHomeView */,
+				EE0AFFC5255C3D2000DCE905 /* HomeView */,
 				73FACE3225380FC500A17817 /* AdminHomeView.swift */,
 			);
 			path = actionView;
@@ -261,10 +261,10 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		EE0AFFC5255C3D2000DCE905 /* UserHomeView */ = {
+		EE0AFFC5255C3D2000DCE905 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				730484B02532B7BF004B73FB /* UserHomeView.swift */,
+				730484B02532B7BF004B73FB /* HomeView.swift */,
 				EE25BA12255A05BF00721345 /* UserDetailsView.swift */,
 				EE25BA16255A453C00721345 /* NewPrescription.swift */,
 				732C38752534F5DF000CF5F0 /* FulfillmentView.swift */,
@@ -272,7 +272,7 @@
 				73D510222536B6D200502AC8 /* RefillPrescription.swift */,
 				73D510202536B6C800502AC8 /* TransferPrescription.swift */,
 			);
-			path = UserHomeView;
+			path = HomeView;
 			sourceTree = "<group>";
 		};
 		EE0AFFC6255C3D5100DCE905 /* SearchView */ = {
@@ -444,7 +444,7 @@
 				73E0481E2523B26200340628 /* UIColor+CustomColors.swift in Sources */,
 				73F6C85625373C1B0007545B /* Firebase_Users+Pharmacy.swift in Sources */,
 				732C38722534F5B1000CF5F0 /* HealthProfileView2.swift in Sources */,
-				730484B12532B7BF004B73FB /* UserHomeView.swift in Sources */,
+				730484B12532B7BF004B73FB /* HomeView.swift in Sources */,
 				73FACE312537FF5000A17817 /* LogoView.swift in Sources */,
 				73E6CCD825239EBD00287255 /* SceneDelegate.swift in Sources */,
 				73FACE2D2537F92F00A17817 /* Firebase_Admin+Orders.swift in Sources */,

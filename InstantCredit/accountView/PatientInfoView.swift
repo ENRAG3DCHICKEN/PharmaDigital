@@ -68,7 +68,15 @@ struct PatientInfoView: View {
             
             Spacer()
             Button(action: {
+                //Store into Core Data
+                
+                
+                
+                
                 self.selection = 1
+                
+                
+                
             } ) { Text("Next >").font(.body).bold() }
                 .disabled(fullName.isEmpty || address.isEmpty || province.isEmpty || postalCode.isEmpty || phoneNumber.isEmpty)
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)

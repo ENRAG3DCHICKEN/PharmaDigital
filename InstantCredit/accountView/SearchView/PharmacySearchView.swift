@@ -21,50 +21,56 @@ struct PharmacySearchView: View {
     
     @FetchRequest(fetchRequest: Pharmacy.fetchRequest(.all)) var pharmacies: FetchedResults<Pharmacy>
     
-    @State private var draft: Pharmacy?
+    @State private var draft: Patient?
+    
+
     
     
-    
-    var destination: Binding<MKAnnotation?> {
+    var selectedPharmacy: Binding<MKAnnotation?> {
         return Binding<MKAnnotation?>(
-            get: { return self.draft },
+            get: { return self.draft!.selectedPharmacy },
             set: { annotation in
                 if let pharmacy = annotation as? Pharmacy {
-                    self.draft = pharmacy
+                    self.draft!.selectedPharmacy = pharmacy
                 }
             }
         )
     }
     
     var body: some View {
-        
+        NavigationView{
         VStack {
             
-            Picker("Pharmacy", selection: $draft) {
-                ForEach(pharmacies, id: \.pharmacyUUID) { pharmacy in
-                    Text("\(pharmacy.pharmacyName!)").tag(pharmacy)
+            Form {
+                Section {
+            
+                    Picker("Pharmacy", selection: $draft.selectedPharmacy) {
+                ForEach(pharmacies, id: \.self) { pharmacy in
+                    Text("\(pharmacy.pharmacyName!)").tag(pharmacy.pharmacyName)
                 }
             }
             
             
             
-            MapView(annotations: pharmacies.sorted(), selection: destination)
+            MapView(annotations: pharmacies.sorted(), selection: selectedPharmacy)
                 .frame(minHeight: 400)
         
-//
+
 //            List {
 //                ForEach(pharmacies, id: \.pharmacyUUID) { pharmacy in
 //                    Text(pharmacy.pharmacyName!)
 //                }
 //            }
             
-            
+            }
+            }
         }
             .onAppear(perform: {
                 populateCoreData_Pharmacy(context: self.context)
+                
             })
     }
-}
+    }}
 
 
 

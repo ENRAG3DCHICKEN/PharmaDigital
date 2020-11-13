@@ -33,29 +33,39 @@ extension Pharmacy: Comparable {
     
     // should probably be Identifiable & Comparable
    
-    static func update(firebasePharmacy: Dictionary<String,Any>, in context: NSManagedObjectContext) {
+    static func update(fbPharmacyData: Dictionary<String,Any>, in context: NSManagedObjectContext) {
         
         //Look for a pharmacy with a specific item:
-        print(firebasePharmacy["PharmacyUUID"] as! CVarArg)
-        let request = fetchRequest(NSPredicate(format: "pharmacyUUID = %@", firebasePharmacy["PharmacyUUID"] as! CVarArg))
+            
+            //Retrieve all PharmacyUUID records from Firebase
+            print(fbPharmacyData["PharmacyUUID"] as! CVarArg)
+            
+            //Setup NSFetchRequest variable using the same Pharmacy UUID as Firebase
+            let request = fetchRequest(NSPredicate(format: "pharmacyUUID = %@", fbPharmacyData["PharmacyUUID"] as! CVarArg))
+                                       
+        print("A")
         print(request)
-        let results = (try? context.fetch(request)) ?? []
+            //Retrieve all Core Data records with the same PharmacyUUID (same as Firebase - using the NSFetchRequest variable setup in the line directly above)
+            let results = (try? context.fetch(request)) ?? []
+        print("B")
         print(results)
+        
         let pharmacy = results.first ?? Pharmacy(context: context)
+        print("C")
         print(pharmacy)
         
         //If pharmacy exists, update existing pharmacy in core data - else if pharmacy doesn't exist, create & populate!
-        pharmacy.accreditationNumber = firebasePharmacy["AccreditationNumber"] as! Int64
-        pharmacy.address1 = firebasePharmacy["Address1"] as? String
-        pharmacy.address2 = firebasePharmacy["Address2"] as? String
-        pharmacy.city = firebasePharmacy["City"] as? String
-        pharmacy.longitude = Double(truncating: firebasePharmacy["Longitude"] as! NSNumber)
-        pharmacy.latitude = Double(truncating: firebasePharmacy["Latitude"] as! NSNumber)
-        pharmacy.pharmacyName = firebasePharmacy["PharmacyName"] as? String
-        pharmacy.pharmacyUUID = UUID(uuidString: firebasePharmacy["PharmacyUUID"] as! String)
-        pharmacy.phoneNumber = firebasePharmacy["PhoneNumber"] as! Int64
-        pharmacy.postalCode = firebasePharmacy["PostalCode"] as? String
-        pharmacy.province = firebasePharmacy["Province"] as? String
+        pharmacy.accreditationNumber = fbPharmacyData["AccreditationNumber"] as! Int64
+        pharmacy.address1 = fbPharmacyData["Address1"] as? String
+        pharmacy.address2 = fbPharmacyData["Address2"] as? String
+        pharmacy.city = fbPharmacyData["City"] as? String
+        pharmacy.longitude = Double(truncating: fbPharmacyData["Longitude"] as! NSNumber)
+        pharmacy.latitude = Double(truncating: fbPharmacyData["Latitude"] as! NSNumber)
+        pharmacy.pharmacyName = fbPharmacyData["PharmacyName"] as? String
+        pharmacy.pharmacyUUID = UUID(uuidString: fbPharmacyData["PharmacyUUID"] as! String)
+        pharmacy.phoneNumber = fbPharmacyData["PhoneNumber"] as! Int64
+        pharmacy.postalCode = fbPharmacyData["PostalCode"] as? String
+        pharmacy.province = fbPharmacyData["Province"] as? String
             
         pharmacy.objectWillChange.send()
         
@@ -77,7 +87,7 @@ extension Pharmacy: Comparable {
 //            try persistentContainer.viewContext.execute(deleteRequest)
             try context.save()
         } catch(let error) {
-            print("couldn't save flight update to CoreData: \(error.localizedDescription)")
+            print("couldn't save pharmacy update to CoreData: \(error.localizedDescription)")
         }
     }
         

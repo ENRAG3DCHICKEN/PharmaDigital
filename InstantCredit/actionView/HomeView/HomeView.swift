@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct UserHomeView: View {
+struct HomeView: View {
     
     @State private var selection = 2
 

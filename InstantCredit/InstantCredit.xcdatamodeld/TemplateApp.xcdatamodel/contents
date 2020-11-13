@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H15" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Orders" representedClassName="Orders" syncable="YES" codeGenerationType="class">
         <attribute name="orderCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="orderPaid" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -15,17 +15,19 @@
         <attribute name="address1" optional="YES" attributeType="String"/>
         <attribute name="address2" optional="YES" attributeType="String"/>
         <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="emailAddressUID" optional="YES" attributeType="String"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
-        <attribute name="patientUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="phoneNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="postalCode" optional="YES" attributeType="String"/>
         <attribute name="privacyFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="province" optional="YES" attributeType="String"/>
+        <attribute name="signupCompletionFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="healthProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient_HealthProfileDetails" inverseName="patient" inverseEntity="Patient_HealthProfileDetails"/>
         <relationship name="insuranceProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient_InsuranceDetails" inverseName="patient" inverseEntity="Patient_InsuranceDetails"/>
         <relationship name="orderHistory" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Orders" inverseName="patient" inverseEntity="Orders"/>
         <relationship name="paymentProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient_PaymentDetails" inverseName="patient" inverseEntity="Patient_PaymentDetails"/>
+        <relationship name="selectedPharmacy_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pharmacy" inverseName="patientCustomer_" inverseEntity="Pharmacy"/>
         <relationship name="shippingProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient_ShippingDetails" inverseName="patient" inverseEntity="Patient_ShippingDetails"/>
     </entity>
     <entity name="Patient_HealthProfileDetails" representedClassName="Patient_HealthProfileDetails" syncable="YES" codeGenerationType="class">
@@ -88,14 +90,15 @@
         <attribute name="postalCode" optional="YES" attributeType="String"/>
         <attribute name="province" optional="YES" attributeType="String"/>
         <relationship name="orderHistory_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Orders" inverseName="orderFilledBy" inverseEntity="Orders"/>
+        <relationship name="patientCustomer_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Patient" inverseName="selectedPharmacy_" inverseEntity="Patient"/>
     </entity>
     <elements>
         <element name="Orders" positionX="-71.890625" positionY="164.27734375" width="128" height="178"/>
-        <element name="Patient" positionX="338.61328125" positionY="141.1796875" width="187.84375" height="268"/>
+        <element name="Patient" positionX="332.17578125" positionY="112.11328125" width="187.84375" height="298"/>
         <element name="Patient_HealthProfileDetails" positionX="98.0390625" positionY="2.3046875" width="207.96484375" height="193"/>
         <element name="Patient_InsuranceDetails" positionX="573.07421875" positionY="18.75" width="199.984375" height="238"/>
         <element name="Patient_PaymentDetails" positionX="111.93359375" positionY="389.453125" width="161.90625" height="163"/>
         <element name="Patient_ShippingDetails" positionX="590.54296875" positionY="381.8671875" width="182.3828125" height="163"/>
-        <element name="Pharmacy" positionX="-298.2578125" positionY="332.48828125" width="128" height="223"/>
+        <element name="Pharmacy" positionX="-264.43359375" positionY="358.1015625" width="128" height="238"/>
     </elements>
 </model>

@@ -93,7 +93,7 @@ struct LoginView: View {
                     .padding()
                 
                 VStack {
-                    NavigationLink(destination: UserHomeView(), tag: 1, selection: $selection) { EmptyView() }
+                    NavigationLink(destination: HomeView(), tag: 1, selection: $selection) { EmptyView() }
                     NavigationLink(destination: AdminHomeView(), tag: 2, selection: $selection) { EmptyView() }
                     NavigationLink(destination: PasswordResetView(), tag: 3, selection: $selection) { EmptyView() }
                     Text(errorMessage)
