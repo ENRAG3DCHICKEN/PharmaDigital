@@ -78,10 +78,26 @@ struct LoginView: View {
 
                                         }
                                     }
+                                    
                                     // Applies when user is logged in and not identified as an admin account
                                     if self.selection == nil {
-                                        self.selection = 1
+                                        
+                                        //Sign-up Process Completed - UserHomeView
+                                        print(UserDefaults.standard.string(forKey: "completed") as Any)
+                                        if UserDefaults.standard.string(forKey: "completed") == "true" {
+                                            self.selection = 1
+                                        } else {
+                                            //Sign-up Process Incomplete - PatientInfoView
+                                            self.selection = 4
+                                        }
+                                        
+                                        
                                     }
+                                    
+                                    
+                                    
+                                    
+                                    
                                 }
                             }
                         }
@@ -96,6 +112,7 @@ struct LoginView: View {
                     NavigationLink(destination: HomeView(), tag: 1, selection: $selection) { EmptyView() }
                     NavigationLink(destination: AdminHomeView(), tag: 2, selection: $selection) { EmptyView() }
                     NavigationLink(destination: PasswordResetView(), tag: 3, selection: $selection) { EmptyView() }
+                    NavigationLink(destination: PharmacySearchView(), tag: 4, selection: $selection) { EmptyView() }
                     Text(errorMessage)
                     Spacer()
                 }

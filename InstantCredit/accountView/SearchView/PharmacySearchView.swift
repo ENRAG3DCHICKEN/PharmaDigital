@@ -14,7 +14,7 @@ struct PharmacySearchView: View {
     
 
 //
-    @Environment(\.managedObjectContext) var context
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 //    //
 //    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "longitude",ascending: true)]) var pharmacies: FetchedResults<Pharmacy>
 //
@@ -23,27 +23,7 @@ struct PharmacySearchView: View {
     
     @State private var selection: Int? = nil
     
-//    @State private var draft: Patient?
-    
-    @State private var selectedPharmacy: Pharmacy
-    
-    init(firstPharma: Pharmacy) {
-        
-        _selectedPharmacy = State(wrappedValue: firstPharma)
-    }
-
-    
-//
-//    var selectedPharmacy: Binding<MKAnnotation?> {
-//        return Binding<MKAnnotation?>(
-//            get: { return self.draft!.selectedPharmacy },
-//            set: { annotation in
-//                if let pharmacy = annotation as? Pharmacy {
-//                    self.draft!.selectedPharmacy = pharmacy
-//                }
-//            }
-//        )
-//    }
+    @State private var selectedPharmacy: Pharmacy?
     
     var selectedPharmacyMarker: Binding<MKAnnotation?> {
         return Binding<MKAnnotation?>(
@@ -66,15 +46,16 @@ struct PharmacySearchView: View {
             Form {
                 Section {
                     Picker("Pharmacy", selection: $selectedPharmacy) {
-                ForEach(pharmacies, id: \.self) { pharmacy in
-                    Text("\(pharmacy.pharmacyName!)").tag(pharmacy.pharmacyName)
-                }
+                        ForEach(pharmacies, id: \.self) { pharmacy in
+                            Text("\(pharmacy.pharmacyName!)").tag(pharmacy as Pharmacy?)
+                        }
+
             }
-            
             
             
             MapView(annotations: pharmacies.sorted(), selection: selectedPharmacyMarker)
                 .frame(minHeight: 400)
+                
         
 
 //            List {
@@ -86,9 +67,7 @@ struct PharmacySearchView: View {
             }
             }
             Button(action: {
-                //Store into Core Data
-                
-                
+                //Store into Core Datar
                 
                 
                 self.selection = 1
@@ -103,12 +82,15 @@ struct PharmacySearchView: View {
                 
                 NavigationLink(destination: PatientInfoView(), tag: 1, selection: $selection) { EmptyView() }
         }
-//            .onAppear(perform: {
-//                populateCoreData_Pharmacy(context: self.context)
-//
-//            })
+        
+            .onAppear(perform: {
+                print("start")
+                populateCoreData_Pharmacy(context: context)
+                print("done")
+            })
     }
     }
+
 
 
 

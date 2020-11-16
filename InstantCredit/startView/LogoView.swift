@@ -12,9 +12,6 @@ import FirebaseAuth
 
 struct LogoView: View {
     
-    @Environment(\.managedObjectContext) var context
-    @FetchRequest(fetchRequest: Pharmacy.fetchRequest(.all)) var pharmacies: FetchedResults<Pharmacy>
-    
     @State var selection: Int?
     
     @State var email: String?
@@ -29,10 +26,6 @@ struct LogoView: View {
                 Text("")
                     .navigationBarTitle("")
                     .navigationBarHidden(true)
-            
-        //Init with Userdefaults to see if logged in at app startup
-        //Query DB and decide on the User vs Admin View
-        //Navigate
 
                 LinearGradient(gradient: Gradient(colors: [Color(UIColor.gradiant4), Color(UIColor.gradiant3)]), startPoint: .top, endPoint: .bottom)
                 Image("yoga").resizable()
@@ -43,13 +36,10 @@ struct LogoView: View {
                 NavigationLink(destination: LandingView(), tag: 1, selection: $selection) { EmptyView() }
                 NavigationLink(destination: HomeView(), tag: 2, selection: $selection) { EmptyView() }
                 NavigationLink(destination: AdminHomeView(), tag: 3, selection: $selection) { EmptyView() }
-                NavigationLink(destination: PharmacySearchView(firstPharma: pharmacies.first!), tag: 4, selection: $selection) { EmptyView() }
+                NavigationLink(destination: PharmacySearchView(), tag: 4, selection: $selection) { EmptyView() }
                 }
         }
             
-            
-//        .navigationBarHidden(true)
-//        .navigationBarTitle(Text("Home"))
         .onAppear(perform: {
             if UserDefaults.standard.string(forKey: "email") != nil, UserDefaults.standard.string(forKey: "password") != nil {
                 
@@ -88,6 +78,7 @@ struct LogoView: View {
                                         self.selection = 2
                                     } else {
                                         //Sign-up Process Incomplete - PatientInfoView
+                                        print("leaving")
                                         self.selection = 4
                                     }
                                     

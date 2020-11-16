@@ -9,8 +9,12 @@
 import SwiftUI
 import UIKit
 import MapKit
+//import CoreData
 
 struct MapView: UIViewRepresentable {
+    
+//    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    
     
     let annotations: [MKAnnotation]
     @Binding var selection: MKAnnotation?

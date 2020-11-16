@@ -10,7 +10,6 @@ import SwiftUI
 
 struct LandingView: View {
 
-    @Environment(\.managedObjectContext) var context
     @State var selection: Int? = nil
     @State var carouselPane: Int = 0
     
@@ -96,10 +95,6 @@ struct LandingView: View {
                     }
                     Spacer()
             }
-                .onAppear(perform: {
-                    populateCoreData_Pharmacy(context: self.context)
-                    
-                })
         }
     @State var steadyStatePanOffset: CGSize = .zero
     @GestureState var gesturePanOffset: CGSize = .zero

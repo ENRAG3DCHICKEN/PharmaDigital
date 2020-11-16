@@ -86,6 +86,10 @@ extension Pharmacy: Comparable {
 //            let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
 //            try persistentContainer.viewContext.execute(deleteRequest)
             try context.save()
+            
+            //New code after bug on ipad vs iphone
+            pharmacy.objectWillChange.send()
+            
         } catch(let error) {
             print("couldn't save pharmacy update to CoreData: \(error.localizedDescription)")
         }
