@@ -12,6 +12,7 @@ import FirebaseAuth
 
 struct LogoView: View {
     
+    
     @State var selection: Int?
     
     @State var email: String?
@@ -95,7 +96,10 @@ struct LogoView: View {
                   
                 }
             }
-        )}
+        )
+            
+            
+        }
             .background(Color(UIColor.mainColor))
     }
     

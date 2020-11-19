@@ -18,7 +18,7 @@ extension Pharmacy: MKAnnotation {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     public var title: String? { pharmacyName }
-    public var subtitle: String? { address1 }
+    public var subtitle: String? { address }
 }
 
 
@@ -38,10 +38,10 @@ extension Pharmacy: Comparable {
         //Look for a pharmacy with a specific item:
             
             //Retrieve all PharmacyUUID records from Firebase
-            print(fbPharmacyData["PharmacyUUID"] as! CVarArg)
+            print(fbPharmacyData["AccreditationNumber"] as! CVarArg)
             
             //Setup NSFetchRequest variable using the same Pharmacy UUID as Firebase
-            let request = fetchRequest(NSPredicate(format: "pharmacyUUID = %@", fbPharmacyData["PharmacyUUID"] as! CVarArg))
+            let request = fetchRequest(NSPredicate(format: "accreditationNumber = %@", fbPharmacyData["AccreditationNumber"] as! CVarArg))
                                        
         print("A")
         print(request)
@@ -56,13 +56,11 @@ extension Pharmacy: Comparable {
         
         //If pharmacy exists, update existing pharmacy in core data - else if pharmacy doesn't exist, create & populate!
         pharmacy.accreditationNumber = fbPharmacyData["AccreditationNumber"] as! Int64
-        pharmacy.address1 = fbPharmacyData["Address1"] as? String
-        pharmacy.address2 = fbPharmacyData["Address2"] as? String
+        pharmacy.address = fbPharmacyData["Address1"] as? String
         pharmacy.city = fbPharmacyData["City"] as? String
         pharmacy.longitude = Double(truncating: fbPharmacyData["Longitude"] as! NSNumber)
         pharmacy.latitude = Double(truncating: fbPharmacyData["Latitude"] as! NSNumber)
         pharmacy.pharmacyName = fbPharmacyData["PharmacyName"] as? String
-        pharmacy.pharmacyUUID = UUID(uuidString: fbPharmacyData["PharmacyUUID"] as! String)
         pharmacy.phoneNumber = fbPharmacyData["PhoneNumber"] as! Int64
         pharmacy.postalCode = fbPharmacyData["PostalCode"] as? String
         pharmacy.province = fbPharmacyData["Province"] as? String

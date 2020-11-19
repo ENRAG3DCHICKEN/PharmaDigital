@@ -23,14 +23,14 @@ struct PharmacySearchView: View {
     
     @State private var selection: Int? = nil
     
-    @State private var selectedPharmacy: Pharmacy?
+    @State private var chosenPharmacy : Pharmacy?
     
     var selectedPharmacyMarker: Binding<MKAnnotation?> {
         return Binding<MKAnnotation?>(
-            get: { return selectedPharmacy },
+            get: { return chosenPharmacy },
             set: { annotation in
                 if let pharmacy = annotation as? Pharmacy {
-                    selectedPharmacy = pharmacy
+                    chosenPharmacy = pharmacy
                 }
             }
         )
@@ -45,13 +45,11 @@ struct PharmacySearchView: View {
                           
             Form {
                 Section {
-                    Picker("Pharmacy", selection: $selectedPharmacy) {
-                        ForEach(pharmacies, id: \.self) { pharmacy in
+                    Picker("Pharmacy", selection: $chosenPharmacy) {
+                        ForEach(pharmacies.sorted(), id: \.self) { pharmacy in
                             Text("\(pharmacy.pharmacyName!)").tag(pharmacy as Pharmacy?)
                         }
-
             }
-            
             
             MapView(annotations: pharmacies.sorted(), selection: selectedPharmacyMarker)
                 .frame(minHeight: 400)
@@ -67,12 +65,36 @@ struct PharmacySearchView: View {
             }
             }
             Button(action: {
-                //Store into Core Datar
-                
+                //Store into Core Data
                 
                 self.selection = 1
                 
                 
+                
+                DispatchQueue.global(qos: .userInitiated).async {
+                    //Standard query request to Core Data
+                    let request = NSFetchRequest<Patient>(entityName: "Patient")
+                    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
+                    request.predicate = NSPredicate(format: "emailAddress = %@", UserDefaults.standard.string(forKey: "email")!)
+                    
+                    let results = (try? context.fetch(request)) ?? []
+                    let patient = results.first ?? Patient(context: context)
+                    
+                    
+                    patient.selectedPharmacy = chosenPharmacy!.pharmacyName
+                    patient.objectWillChange.send()
+                    
+                    //One to One Relationships
+//                    patient.healthInfo.objectWillChange.send()
+//                    patient.insuranceInfo.objectWillChange.send()
+//                    patient.paymentInfo.objectWillChange.send()
+//                    patient.shippingInfo.objectWillChange.send()
+                    
+                    //One to Many Relationships
+                    patient.orderHistory.forEach { $0.objectWillChange.send() }
+                    patient.orderPharmacy.forEach { $0.objectWillChange.send() }
+                }
+
                 
             } ) { Text("Next >").font(.body).bold() }
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
@@ -106,3 +128,4 @@ struct PharmacySearchView: View {
 //            let pharmacies = try? self.context.fetch(request)
             
 //    @FetchRequest var pharmacies: FetchedResults<Pharmacy>
+
