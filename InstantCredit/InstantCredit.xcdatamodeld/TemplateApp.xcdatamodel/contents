@@ -12,13 +12,13 @@
         <relationship name="patient_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="orderHistory_" inverseEntity="Patient"/>
     </entity>
     <entity name="Patient" representedClassName="Patient" syncable="YES" codeGenerationType="class">
-        <attribute name="address1" optional="YES" attributeType="String"/>
+        <attribute name="address" optional="YES" attributeType="String"/>
         <attribute name="city" optional="YES" attributeType="String"/>
         <attribute name="emailAddress" optional="YES" attributeType="String"/>
-        <attribute name="firstName" optional="YES" attributeType="String"/>
-        <attribute name="lastName" optional="YES" attributeType="String"/>
-        <attribute name="phoneNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="fullName" optional="YES" attributeType="String"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="String"/>
         <attribute name="postalCode" optional="YES" attributeType="String"/>
+        <attribute name="privacyCompletionFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="privacyFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="province" optional="YES" attributeType="String"/>
         <attribute name="selectedPharmacy" optional="YES" attributeType="String"/>
@@ -32,10 +32,8 @@
     </entity>
     <entity name="PatientHealthDetails" representedClassName="PatientHealthDetails" syncable="YES" codeGenerationType="class">
         <attribute name="allergiesFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="dobdd" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="dobmm" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="dobyy" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="emailAddress_" optional="YES" attributeType="String"/>
+        <attribute name="birthDate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailAddress" optional="YES" attributeType="String"/>
         <attribute name="gender" optional="YES" attributeType="String"/>
         <attribute name="genericSubstitution" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="medicalConditionsFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -46,24 +44,22 @@
     <entity name="PatientInsuranceDetails" representedClassName="PatientInsuranceDetails" syncable="YES" codeGenerationType="class">
         <attribute name="billToInsuranceFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="carrierCode" optional="YES" attributeType="String"/>
+        <attribute name="emailAddress_" optional="YES" attributeType="String"/>
         <attribute name="groupNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="insurancePhoneNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="memberIDNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="ohip" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="planName" optional="YES" attributeType="String"/>
-        <attribute name="policyholderDOBDD" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="policyholderDOBMM" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="policyholderDOBYY" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="policyholderDOB" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="policyholderName" optional="YES" attributeType="String"/>
         <attribute name="relationshipToCardholder" optional="YES" attributeType="String"/>
         <relationship name="patient_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="insuranceInfo_" inverseEntity="Patient"/>
     </entity>
     <entity name="PatientPaymentDetails" representedClassName="PatientPaymentDetails" syncable="YES" codeGenerationType="class">
         <attribute name="cardholderName" optional="YES" attributeType="String"/>
-        <attribute name="cvv" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="expirationDateDD" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="expirationDateMM" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="expirationDateYY" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="cvv" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="emailAddress_" optional="YES" attributeType="String"/>
+        <attribute name="expirationDate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="paymentCardNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="paymentType" optional="YES" attributeType="String"/>
         <relationship name="patient_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="paymentInfo_" inverseEntity="Patient"/>
@@ -72,6 +68,7 @@
         <attribute name="address1" optional="YES" attributeType="String"/>
         <attribute name="address2" optional="YES" attributeType="String"/>
         <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="emailAddress_" optional="YES" attributeType="String"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="postalCode" optional="YES" attributeType="String"/>
@@ -93,11 +90,11 @@
     </entity>
     <elements>
         <element name="Orders" positionX="183.9375" positionY="-35.2734375" width="128" height="178"/>
-        <element name="Patient" positionX="473.3359375" positionY="97.109375" width="187.84375" height="28"/>
-        <element name="PatientHealthDetails" positionX="937.76953125" positionY="-80.50390625" width="207.96484375" height="208"/>
-        <element name="PatientInsuranceDetails" positionX="870.8515625" positionY="131.9375" width="199.984375" height="238"/>
-        <element name="PatientPaymentDetails" positionX="815.8515625" positionY="389.6796875" width="161.90625" height="163"/>
-        <element name="PatientShippingDetails" positionX="765.03515625" positionY="582.4375" width="182.3828125" height="163"/>
+        <element name="Patient" positionX="473.3359375" positionY="97.109375" width="187.84375" height="298"/>
+        <element name="PatientHealthDetails" positionX="937.76953125" positionY="-80.50390625" width="207.96484375" height="178"/>
+        <element name="PatientInsuranceDetails" positionX="870.8515625" positionY="131.9375" width="199.984375" height="223"/>
+        <element name="PatientPaymentDetails" positionX="815.8515625" positionY="389.6796875" width="161.90625" height="148"/>
+        <element name="PatientShippingDetails" positionX="765.03515625" positionY="582.4375" width="182.3828125" height="178"/>
         <element name="Pharmacy" positionX="-153.51171875" positionY="419.09765625" width="111.53515625" height="208"/>
     </elements>
 </model>

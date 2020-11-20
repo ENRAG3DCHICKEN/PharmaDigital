@@ -7,8 +7,11 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct HealthProfileView3: View {
+    
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
     @State var selection: Int?
     
@@ -71,7 +74,15 @@ struct HealthProfileView3: View {
                 .padding()
                 
                 Spacer()
-                Button(action: { self.selection = 1 } ) { Text("Next >").font(.body).bold() }
+                Button(action: {
+                    
+                    self.selection = 1
+                    
+                    UserDefaults.standard.set(self.medicalConditionsFlag, forKey: "medicalConditionsFlag")
+                    UserDefaults.standard.set(self.conditionsListFlag, forKey: "conditionsListFlag")
+                    UserDefaults.standard.set(self.otherMedicalConditions, forKey: "otherMedicalConditions")
+                    
+                } ) { Text("Next >").font(.body).bold() }
                     .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                     .foregroundColor(Color(.white))
                     .background(Color(UIColor.mainColor))

@@ -7,9 +7,15 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct PrivacyView: View {
+
+        @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+        
         @State var selection: Int?
+        
+        @State var privacyCompletionFlag: Bool = false
         
         var body: some View {
 
@@ -122,10 +128,9 @@ struct PrivacyView: View {
                     
                     //Toggle This
                     
-                    Text("I have reviewed the Costco Health Center Notice of Privacy Practices effective April 14, 2003 (the “Notice”) and understand that all my medical information will be used by Costco in accordance with the Notice.")
-                    
-                    
-                    
+
+                        
+                    Toggle(isOn: self.$privacyCompletionFlag) { Text("I have reviewed the Costco Health Center Notice of Privacy Practices effective April 14, 2003 (the “Notice”) and understand that all my medical information will be used by Costco in accordance with the Notice.").font(.callout) }
                     
                     
                     
@@ -138,13 +143,22 @@ struct PrivacyView: View {
                     
                     Spacer()
                     Button(action: {
-                        UserDefaults.standard.set(true, forKey: "completed")
+                        
                         self.selection = 1
                         
+                        UserDefaults.standard.set(true, forKey: "privacyCompletionFlag")
+                        UserDefaults.standard.set(true, forKey: "signupCompletionFlag")
+//                        updateCoreDataFromUserDefaults()
+                            
+                        
+                        
+                        
                     } ) { Text("Next >").font(.body).bold() }
+                        .environment(\.managedObjectContext, self.context)
+                        .disabled(privacyCompletionFlag == false)
                         .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                         .foregroundColor(Color(.white))
-                        .background(Color(UIColor.mainColor))
+                        .background(privacyCompletionFlag == false ? .gray : Color(UIColor.mainColor))
                         .padding()
                     
                     NavigationLink(destination: HomeView(), tag: 1, selection: $selection) { EmptyView() }

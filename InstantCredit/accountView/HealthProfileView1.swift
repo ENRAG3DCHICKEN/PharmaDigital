@@ -7,12 +7,15 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct HealthProfileView1: View {
 
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    
     @State var selection: Int?
     
-    @State var selectedDate = Date()
+    @State var birthDate = Date()
     @State var substituteGeneric: Bool = true
     @State var selectedGender: String = ""
     
@@ -49,7 +52,7 @@ struct HealthProfileView1: View {
                         Toggle(isOn: self.$substituteGeneric) { Text("Yes, Substitute a generic equivalent when available").font(.callout) }
                         
                         Section {
-                            DatePicker("Date of Birth", selection: $selectedDate, displayedComponents: .date)
+                            DatePicker("Date of Birth", selection: $birthDate, displayedComponents: .date)
 
                             }
                         
@@ -64,7 +67,15 @@ struct HealthProfileView1: View {
                     .padding()
                 
                 Spacer()
-                Button(action: { self.selection = 1 } ) { Text("Next >").font(.body).bold() }
+                Button(action: {
+                    
+                    self.selection = 1
+                    
+                    UserDefaults.standard.set(self.birthDate, forKey: "birthDate")
+                    UserDefaults.standard.set(self.substituteGeneric, forKey: "substituteGender")
+                    UserDefaults.standard.set(self.selectedGender, forKey: "selectedGender")
+                    
+                } ) { Text("Next >").font(.body).bold() }
                     .disabled(selectedGender.isEmpty)
                     .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                     .foregroundColor(Color(.white))

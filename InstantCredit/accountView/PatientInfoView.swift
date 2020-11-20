@@ -8,9 +8,12 @@
 
 import SwiftUI
 import Firebase
+import CoreData
 
 struct PatientInfoView: View {
 
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    
     @State var selection: Int?
     
     @State var fullName: String = ""
@@ -68,16 +71,17 @@ struct PatientInfoView: View {
             
             Spacer()
             Button(action: {
-                //Store into Core Data
-                
-                
-                
-                
+
                 self.selection = 1
                 
+                UserDefaults.standard.set(self.fullName, forKey: "fullName")
+                UserDefaults.standard.set(self.address, forKey: "address")
+                UserDefaults.standard.set(self.city, forKey: "city")
+                UserDefaults.standard.set(self.province, forKey: "province")
+                UserDefaults.standard.set(self.postalCode, forKey: "postalCode")
+                UserDefaults.standard.set(self.phoneNumber, forKey: "phoneNumber")
                 
-                
-            } ) { Text("Next >").font(.body).bold() }
+            })  { Text("Next >").font(.body).bold() }
                 .disabled(fullName.isEmpty || address.isEmpty || province.isEmpty || postalCode.isEmpty || phoneNumber.isEmpty)
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))

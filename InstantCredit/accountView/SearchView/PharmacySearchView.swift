@@ -65,43 +65,19 @@ struct PharmacySearchView: View {
             }
             }
             Button(action: {
-                //Store into Core Data
-                
                 self.selection = 1
                 
-                
-                
-                DispatchQueue.global(qos: .userInitiated).async {
-                    //Standard query request to Core Data
-                    let request = NSFetchRequest<Patient>(entityName: "Patient")
-                    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
-                    request.predicate = NSPredicate(format: "emailAddress = %@", UserDefaults.standard.string(forKey: "email")!)
-                    
-                    let results = (try? context.fetch(request)) ?? []
-                    let patient = results.first ?? Patient(context: context)
-                    
-                    
-                    patient.selectedPharmacy = chosenPharmacy!.pharmacyName
-                    patient.objectWillChange.send()
-                    
-                    //One to One Relationships
-//                    patient.healthInfo.objectWillChange.send()
-//                    patient.insuranceInfo.objectWillChange.send()
-//                    patient.paymentInfo.objectWillChange.send()
-//                    patient.shippingInfo.objectWillChange.send()
-                    
-                    //One to Many Relationships
-                    patient.orderHistory.forEach { $0.objectWillChange.send() }
-                    patient.orderPharmacy.forEach { $0.objectWillChange.send() }
-                }
+                UserDefaults.standard.set(self.chosenPharmacy!.pharmacyName, forKey: "chosenPharmacy")
+         
 
                 
             } ) { Text("Next >").font(.body).bold() }
+                .disabled(chosenPharmacy == nil)
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))
-                .background(Color(UIColor.mainColor))
+                .background( chosenPharmacy == nil ? .gray : Color(UIColor.mainColor))
                 .padding()
-                
+            
                 NavigationLink(destination: PatientInfoView(), tag: 1, selection: $selection) { EmptyView() }
         }
         
@@ -129,3 +105,34 @@ struct PharmacySearchView: View {
             
 //    @FetchRequest var pharmacies: FetchedResults<Pharmacy>
 
+
+
+
+//
+//
+//
+////Store into Core Data
+//DispatchQueue.global(qos: .userInitiated).async {
+//    //Standard query request to Core Data
+//    let request = NSFetchRequest<Patient>(entityName: "Patient")
+//    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
+//    request.predicate = NSPredicate(format: "emailAddress = %@", UserDefaults.standard.string(forKey: "email")!)
+//
+//    let results = (try? context.fetch(request)) ?? []
+//    let patient = results.first ?? Patient(context: context)
+//
+//    patient.emailAddress = UserDefaults.standard.string(forKey: "email")!
+//    patient.selectedPharmacy = chosenPharmacy!.pharmacyName
+//
+//    patient.objectWillChange.send()
+//
+//    //One to One Relationships
+////                    patient.healthInfo.objectWillChange.send()
+////                    patient.insuranceInfo.objectWillChange.send()
+////                    patient.paymentInfo.objectWillChange.send()
+////                    patient.shippingInfo.objectWillChange.send()
+//
+//    //One to Many Relationships
+//    patient.orderHistory.forEach { $0.objectWillChange.send() }
+//    patient.orderPharmacy.forEach { $0.objectWillChange.send() }
+//}

@@ -7,8 +7,12 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct BillingView: View {
+        
+        @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    
         @State var selection: Int?
         
         @State private var paymentType: String = ""
@@ -69,7 +73,18 @@ struct BillingView: View {
                         .padding()
                     
                     Spacer()
-                    Button(action: { self.selection = 1 } ) { Text("Next >").font(.body).bold() }
+                    Button(action: {
+                        
+                        self.selection = 1
+                        
+                        UserDefaults.standard.set(self.paymentType, forKey: "paymentType")
+                        UserDefaults.standard.set(self.cardholderName, forKey: "cardholderName")
+                        UserDefaults.standard.set(self.paymentCardNumber, forKey: "paymentCardNumber")
+                        UserDefaults.standard.set(self.expirationMonth, forKey: "expirationMonth")
+                        UserDefaults.standard.set(self.expirationYear, forKey: "expirationYear")
+                        UserDefaults.standard.set(self.cvv, forKey: "cvv")
+                        
+                    } ) { Text("Next >").font(.body).bold() }
                         .disabled(paymentType.isEmpty || cardholderName.isEmpty || paymentCardNumber.isEmpty || expirationMonth.isEmpty || expirationYear.isEmpty || cvv.isEmpty)
                         .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                         .foregroundColor(Color(.white))

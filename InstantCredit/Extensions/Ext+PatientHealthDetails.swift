@@ -15,11 +15,4 @@ import UIKit
 extension PatientHealthDetails {
 
     
-    var emailAddress: String {
-        get { emailAddress_! } // TODO: maybe protect against when app ships?
-        set { emailAddress_ = newValue }
-    }
-    
-    public var id: String { emailAddress }
-
 }

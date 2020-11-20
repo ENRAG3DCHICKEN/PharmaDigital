@@ -7,8 +7,11 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct InsuranceView3: View {
+
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
     @State var selection: Int?
 
@@ -89,7 +92,19 @@ struct InsuranceView3: View {
             
             
             Spacer()
-            Button(action: { self.selection = 3 } ) { Text("Next >").font(.body).bold() }
+            Button(action: {
+                
+                self.selection = 3
+                
+                UserDefaults.standard.set(self.memberID3, forKey: "memberID3")
+                UserDefaults.standard.set(self.groupNumber3, forKey: "groupNumber3")
+                UserDefaults.standard.set(self.policyholderName3, forKey: "policyholderName3")
+                UserDefaults.standard.set(self.carrierCode3, forKey: "carrierCode3")
+                UserDefaults.standard.set(self.selectedDate3, forKey: "selectedDate3")
+                UserDefaults.standard.set(self.insurancePhone3, forKey: "insurancePhone3")
+                UserDefaults.standard.set(self.relationshipToCardholder3, forKey: "relationshipToCardholder3")
+                
+            } ) { Text("Next >").font(.body).bold() }
                 .disabled(memberID3.isEmpty || groupNumber3.isEmpty || policyholderName3.isEmpty || carrierCode3.isEmpty || insurancePhone3.isEmpty || relationshipToCardholder3.isEmpty)
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))

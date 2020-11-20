@@ -52,6 +52,7 @@
 		73FBBC172550D93E007ADE39 /* PasswordResetCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBBC162550D93E007ADE39 /* PasswordResetCompletedView.swift */; };
 		8C544D4344E445A9D3EA1340 /* Pods_InstantCredit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14932DCBDF53384A6CCECD19 /* Pods_InstantCredit.framework */; };
 		EE0AFFCB255C6B7D00DCE905 /* SummaryCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0AFFCA255C6B7D00DCE905 /* SummaryCompletionView.swift */; };
+		EE22E3BE25678A5300907B43 /* FormSubmissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE22E3BD25678A5300907B43 /* FormSubmissionHelper.swift */; };
 		EE25BA13255A05BF00721345 /* UserDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE25BA12255A05BF00721345 /* UserDetailsView.swift */; };
 		EE25BA17255A453C00721345 /* NewPrescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE25BA16255A453C00721345 /* NewPrescription.swift */; };
 		EE99250F2565E0D100EB4120 /* Ext+Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE99250E2565E0D100EB4120 /* Ext+Patient.swift */; };
@@ -111,6 +112,7 @@
 		73FBBC162550D93E007ADE39 /* PasswordResetCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetCompletedView.swift; sourceTree = "<group>"; };
 		DC09C54C89A8EF8213AAAC0C /* Pods-InstantCredit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstantCredit.debug.xcconfig"; path = "Target Support Files/Pods-InstantCredit/Pods-InstantCredit.debug.xcconfig"; sourceTree = "<group>"; };
 		EE0AFFCA255C6B7D00DCE905 /* SummaryCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCompletionView.swift; sourceTree = "<group>"; };
+		EE22E3BD25678A5300907B43 /* FormSubmissionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSubmissionHelper.swift; sourceTree = "<group>"; };
 		EE25BA12255A05BF00721345 /* UserDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsView.swift; sourceTree = "<group>"; };
 		EE25BA16255A453C00721345 /* NewPrescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPrescription.swift; sourceTree = "<group>"; };
 		EE99250E2565E0D100EB4120 /* Ext+Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+Patient.swift"; sourceTree = "<group>"; };
@@ -174,10 +176,11 @@
 				732C387F2535686E000CF5F0 /* HealthProfileView3.swift */,
 				732C38732534F5D6000CF5F0 /* InsuranceView.swift */,
 				73D5101B253676B200502AC8 /* InsuranceView1.swift */,
-				732C38772534F5EB000CF5F0 /* BillingView.swift */,
 				EEA209292555D61500921616 /* InsuranceView2.swift */,
 				EEA2092C2555D62400921616 /* InsuranceView3.swift */,
+				732C38772534F5EB000CF5F0 /* BillingView.swift */,
 				732C38792534F5F9000CF5F0 /* PrivacyView.swift */,
+				EE22E3BD25678A5300907B43 /* FormSubmissionHelper.swift */,
 			);
 			path = accountView;
 			sourceTree = "<group>";
@@ -284,8 +287,8 @@
 		EE0AFFC6255C3D5100DCE905 /* SearchView */ = {
 			isa = PBXGroup;
 			children = (
-				73FACE2A2537D61E00A17817 /* PharmacySearchView.swift */,
 				738C75A32546290F000B5A11 /* MapView.swift */,
+				73FACE2A2537D61E00A17817 /* PharmacySearchView.swift */,
 			);
 			path = SearchView;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				732C387C253537DF000CF5F0 /* HealthProfileModel.swift in Sources */,
 				73FACE2F2537F93F00A17817 /* Firebase_Admin+Users.swift in Sources */,
 				732C38742534F5D6000CF5F0 /* InsuranceView.swift in Sources */,
+				EE22E3BE25678A5300907B43 /* FormSubmissionHelper.swift in Sources */,
 				73D510232536B6D200502AC8 /* RefillPrescription.swift in Sources */,
 				EEA2092D2555D62400921616 /* InsuranceView3.swift in Sources */,
 				7320BF4225242415009CAA58 /* LoginView.swift in Sources */,

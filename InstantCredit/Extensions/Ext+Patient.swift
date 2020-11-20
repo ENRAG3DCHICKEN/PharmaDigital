@@ -14,6 +14,7 @@ import UIKit
 extension Patient {
     
     //One to One Relationships
+
     var healthInfo: PatientHealthDetails {
         get { healthInfo_! }
         set { healthInfo_ = newValue }
@@ -41,6 +42,4 @@ extension Patient {
         set { orderPharmacy_ = newValue as NSSet }
     }
     
-    public var id: String { emailAddress! }
-
 }
