@@ -18,7 +18,7 @@
 		732C38722534F5B1000CF5F0 /* HealthProfileView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C38712534F5B1000CF5F0 /* HealthProfileView2.swift */; };
 		732C38742534F5D6000CF5F0 /* InsuranceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C38732534F5D6000CF5F0 /* InsuranceView.swift */; };
 		732C38762534F5DF000CF5F0 /* FulfillmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C38752534F5DF000CF5F0 /* FulfillmentView.swift */; };
-		732C38782534F5EB000CF5F0 /* BillingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C38772534F5EB000CF5F0 /* BillingView.swift */; };
+		732C38782534F5EB000CF5F0 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C38772534F5EB000CF5F0 /* PaymentView.swift */; };
 		732C387A2534F5F9000CF5F0 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C38792534F5F9000CF5F0 /* PrivacyView.swift */; };
 		732C387C253537DF000CF5F0 /* HealthProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C387B253537DF000CF5F0 /* HealthProfileModel.swift */; };
 		732C387E2535685C000CF5F0 /* HealthProfileView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C387D2535685C000CF5F0 /* HealthProfileView1.swift */; };
@@ -59,6 +59,9 @@
 		EEA2092A2555D61500921616 /* InsuranceView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA209292555D61500921616 /* InsuranceView2.swift */; };
 		EEA2092D2555D62400921616 /* InsuranceView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA2092C2555D62400921616 /* InsuranceView3.swift */; };
 		EEACFED325664AA60030C7E1 /* Ext+PatientHealthDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEACFED225664AA60030C7E1 /* Ext+PatientHealthDetails.swift */; };
+		EEE57BD62568A2CA00EEECC6 /* Ext+PatientInsuranceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE57BD52568A2CA00EEECC6 /* Ext+PatientInsuranceDetails.swift */; };
+		EEE57BD92568A2EC00EEECC6 /* Ext+PatientPaymentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE57BD82568A2EC00EEECC6 /* Ext+PatientPaymentDetails.swift */; };
+		EEE57BDB2568A30600EEECC6 /* Ext+PatientFulfillmentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE57BDA2568A30600EEECC6 /* Ext+PatientFulfillmentDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +78,7 @@
 		732C38712534F5B1000CF5F0 /* HealthProfileView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthProfileView2.swift; sourceTree = "<group>"; };
 		732C38732534F5D6000CF5F0 /* InsuranceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceView.swift; sourceTree = "<group>"; };
 		732C38752534F5DF000CF5F0 /* FulfillmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FulfillmentView.swift; sourceTree = "<group>"; };
-		732C38772534F5EB000CF5F0 /* BillingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingView.swift; sourceTree = "<group>"; };
+		732C38772534F5EB000CF5F0 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		732C38792534F5F9000CF5F0 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 		732C387B253537DF000CF5F0 /* HealthProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthProfileModel.swift; sourceTree = "<group>"; };
 		732C387D2535685C000CF5F0 /* HealthProfileView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthProfileView1.swift; sourceTree = "<group>"; };
@@ -119,6 +122,9 @@
 		EEA209292555D61500921616 /* InsuranceView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceView2.swift; sourceTree = "<group>"; };
 		EEA2092C2555D62400921616 /* InsuranceView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceView3.swift; sourceTree = "<group>"; };
 		EEACFED225664AA60030C7E1 /* Ext+PatientHealthDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+PatientHealthDetails.swift"; sourceTree = "<group>"; };
+		EEE57BD52568A2CA00EEECC6 /* Ext+PatientInsuranceDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+PatientInsuranceDetails.swift"; sourceTree = "<group>"; };
+		EEE57BD82568A2EC00EEECC6 /* Ext+PatientPaymentDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+PatientPaymentDetails.swift"; sourceTree = "<group>"; };
+		EEE57BDA2568A30600EEECC6 /* Ext+PatientFulfillmentDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+PatientFulfillmentDetails.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +175,7 @@
 			children = (
 				732C387B253537DF000CF5F0 /* HealthProfileModel.swift */,
 				73D510192536537A00502AC8 /* InsuranceViewModel.swift */,
+				EE22E3BD25678A5300907B43 /* FormSubmissionHelper.swift */,
 				EE0AFFC6255C3D5100DCE905 /* SearchView */,
 				732C386F2534F5A3000CF5F0 /* PatientInfoView.swift */,
 				732C387D2535685C000CF5F0 /* HealthProfileView1.swift */,
@@ -178,9 +185,8 @@
 				73D5101B253676B200502AC8 /* InsuranceView1.swift */,
 				EEA209292555D61500921616 /* InsuranceView2.swift */,
 				EEA2092C2555D62400921616 /* InsuranceView3.swift */,
-				732C38772534F5EB000CF5F0 /* BillingView.swift */,
+				732C38772534F5EB000CF5F0 /* PaymentView.swift */,
 				732C38792534F5F9000CF5F0 /* PrivacyView.swift */,
-				EE22E3BD25678A5300907B43 /* FormSubmissionHelper.swift */,
 			);
 			path = accountView;
 			sourceTree = "<group>";
@@ -216,6 +222,9 @@
 				73E0481D2523B26200340628 /* Ext+UIColor.swift */,
 				EE99250E2565E0D100EB4120 /* Ext+Patient.swift */,
 				EEACFED225664AA60030C7E1 /* Ext+PatientHealthDetails.swift */,
+				EEE57BD52568A2CA00EEECC6 /* Ext+PatientInsuranceDetails.swift */,
+				EEE57BD82568A2EC00EEECC6 /* Ext+PatientPaymentDetails.swift */,
+				EEE57BDA2568A30600EEECC6 /* Ext+PatientFulfillmentDetails.swift */,
 				736A83FE253DF4D300910E66 /* Ext+Pharmacy.swift */,
 				738C75A525467CEB000B5A11 /* FoundationExtensions.swift */,
 			);
@@ -423,12 +432,15 @@
 				732C387C253537DF000CF5F0 /* HealthProfileModel.swift in Sources */,
 				73FACE2F2537F93F00A17817 /* Firebase_Admin+Users.swift in Sources */,
 				732C38742534F5D6000CF5F0 /* InsuranceView.swift in Sources */,
+				EEE57BD92568A2EC00EEECC6 /* Ext+PatientPaymentDetails.swift in Sources */,
 				EE22E3BE25678A5300907B43 /* FormSubmissionHelper.swift in Sources */,
 				73D510232536B6D200502AC8 /* RefillPrescription.swift in Sources */,
+				EEE57BDB2568A30600EEECC6 /* Ext+PatientFulfillmentDetails.swift in Sources */,
 				EEA2092D2555D62400921616 /* InsuranceView3.swift in Sources */,
 				7320BF4225242415009CAA58 /* LoginView.swift in Sources */,
 				EE25BA17255A453C00721345 /* NewPrescription.swift in Sources */,
 				732C38762534F5DF000CF5F0 /* FulfillmentView.swift in Sources */,
+				EEE57BD62568A2CA00EEECC6 /* Ext+PatientInsuranceDetails.swift in Sources */,
 				EEACFED325664AA60030C7E1 /* Ext+PatientHealthDetails.swift in Sources */,
 				73D4C5F0254C902400F9137B /* LandingView.swift in Sources */,
 				7320BF40252423FF009CAA58 /* SignUpView.swift in Sources */,
@@ -442,7 +454,7 @@
 				EE99250F2565E0D100EB4120 /* Ext+Patient.swift in Sources */,
 				73FBBC132550CA58007ADE39 /* PasswordResetView.swift in Sources */,
 				73D510212536B6C800502AC8 /* TransferPrescription.swift in Sources */,
-				732C38782534F5EB000CF5F0 /* BillingView.swift in Sources */,
+				732C38782534F5EB000CF5F0 /* PaymentView.swift in Sources */,
 				7317D2E0254921E400EDD6FA /* ImagePicker.swift in Sources */,
 				EEA2092A2555D61500921616 /* InsuranceView2.swift in Sources */,
 				732C387E2535685C000CF5F0 /* HealthProfileView1.swift in Sources */,

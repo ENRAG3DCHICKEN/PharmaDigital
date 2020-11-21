@@ -41,9 +41,9 @@ struct PrivacyView: View {
                     
                     
                     HStack {
-                        ForEach(0..<10) { index in
+                        ForEach(0..<8) { index in
                             Rectangle()
-                                .foregroundColor(Color(index == 8 ? UIColor.lightGreen : .lightGray))
+                                .foregroundColor(Color(index <= 7 ? UIColor.lightGreen : .lightGray))
                                 .frame(height: 5)
                         }
                     }
@@ -52,9 +52,9 @@ struct PrivacyView: View {
                     
                     
                     
-                    
+                        
                     Text("You authorize Costco to use and disclose personal health information as stated below: ")
-                    
+                        
                     Text("""
                 
                 1. COSTCO'S COMMITMENT TO PRIVACY.
@@ -124,7 +124,8 @@ struct PrivacyView: View {
                 
                 I have reviewed the Costco Health Center Notice of Privacy Practices effective April 14, 2003 (the “Notice”) and understand that all my medical information will be used by Costco in accordance with the Notice.")
                 """
-            )
+                    )
+                
                     
                     //Toggle This
                     
@@ -140,18 +141,15 @@ struct PrivacyView: View {
                     
                     
                     
-                    
-                    Spacer()
+      
                     Button(action: {
                         
                         self.selection = 1
                         
                         UserDefaults.standard.set(true, forKey: "privacyCompletionFlag")
                         UserDefaults.standard.set(true, forKey: "signupCompletionFlag")
-//                        updateCoreDataFromUserDefaults()
-                            
                         
-                        
+                        FormSubmissionToCoreData(context: context)
                         
                     } ) { Text("Next >").font(.body).bold() }
                         .environment(\.managedObjectContext, self.context)

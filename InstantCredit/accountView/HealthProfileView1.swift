@@ -39,9 +39,9 @@ struct HealthProfileView1: View {
                       
                 
                 HStack {
-                    ForEach(0..<9) { index in
+                    ForEach(0..<8) { index in
                         Rectangle()
-                            .foregroundColor(Color(index == 1 ? UIColor.lightGreen : .lightGray))
+                            .foregroundColor(Color(index <= 1 ? UIColor.lightGreen : .lightGray))
                             .frame(height: 5)
                     }
                 }

@@ -17,11 +17,11 @@ struct InsuranceView: View {
     
         @State var OHIP: String = ""
     
-        @State var billToInsuranceFlag: Bool = false
+        @State var billToInsuranceFlag1: Bool = false
         @State var billToInsuranceFlag2: Bool = false
         @State var billToInsuranceFlag3: Bool = false
     
-        @State var selectedPlanName: String = ""
+        @State var selectedPlanName1: String = ""
         @State var selectedPlanName2: String = ""
         @State var selectedPlanName3: String = ""
         
@@ -46,9 +46,9 @@ struct InsuranceView: View {
                       
                 
                 HStack {
-                    ForEach(0..<10) { index in
+                    ForEach(0..<8) { index in
                         Rectangle()
-                            .foregroundColor(Color(index == 4 ? UIColor.lightGreen : .lightGray))
+                            .foregroundColor(Color(index <= 4 ? UIColor.lightGreen : .lightGray))
                             .frame(height: 5)
                     }
                 }
@@ -59,10 +59,10 @@ struct InsuranceView: View {
                         TextField("OHIP Number", text: $OHIP)
                         
                         Section {
-                            Toggle(isOn: self.$billToInsuranceFlag) { Text("Would you like us to bill a prescription insurance provider?").font(.callout) }
+                            Toggle(isOn: self.$billToInsuranceFlag1) { Text("Would you like us to bill a prescription insurance provider?").font(.callout) }
                             
-                            if billToInsuranceFlag == true {
-                                Picker(selection: $selectedPlanName, label: Text("Plan")) {
+                            if billToInsuranceFlag1 == true {
+                                Picker(selection: $selectedPlanName1, label: Text("Plan")) {
                                     ForEach(0..<planNameSelections.count) { index in
                                         Text(planNameSelections[index]).tag(planNameSelections[index])
                                     }
@@ -71,7 +71,7 @@ struct InsuranceView: View {
                         }
                         
                         Section {
-                            if selectedPlanName != "" {
+                            if selectedPlanName1 != "" {
                                 Toggle(isOn: self.$billToInsuranceFlag2) { Text("Would you like us to bill another prescription insurance provider?").font(.callout) }
                             }
                             
@@ -106,17 +106,17 @@ struct InsuranceView: View {
                 Spacer()
                 Button(action: {
                     
-                    if selectedPlanName != "" {
+                    if selectedPlanName1 != "" {
                         self.selection = 1
-                    } else if selectedPlanName == "" {
+                    } else if selectedPlanName1 == "" {
                         self.selection = 2
                     }
                     
                     UserDefaults.standard.set(self.OHIP, forKey: "OHIP")
-                    UserDefaults.standard.set(self.billToInsuranceFlag, forKey: "billToInsuranceFlag")
+                    UserDefaults.standard.set(self.billToInsuranceFlag1, forKey: "billToInsuranceFlag")
                     UserDefaults.standard.set(self.billToInsuranceFlag2, forKey: "billToInsuranceFlag2")
                     UserDefaults.standard.set(self.billToInsuranceFlag3, forKey: "billToInsuranceFlag3")
-                    UserDefaults.standard.set(self.selectedPlanName, forKey: "selectedPlanName")
+                    UserDefaults.standard.set(self.selectedPlanName1, forKey: "selectedPlanName")
                     UserDefaults.standard.set(self.selectedPlanName2, forKey: "selectedPlanName2")
                     UserDefaults.standard.set(self.selectedPlanName3, forKey: "selectedPlanName3")
                     
@@ -127,9 +127,9 @@ struct InsuranceView: View {
                     .background(OHIP.isEmpty ? .gray : Color(UIColor.mainColor))
                     .padding()
                                         
-                NavigationLink(destination: InsuranceView1(billToInsuranceFlag: $billToInsuranceFlag, billToInsuranceFlag2: $billToInsuranceFlag2, billToInsuranceFlag3: $billToInsuranceFlag3, selectedPlanName: $selectedPlanName, selectedPlanName2: $selectedPlanName2, selectedPlanName3: $selectedPlanName3), tag: 1, selection: $selection) { EmptyView() }
+                NavigationLink(destination: InsuranceView1(billToInsuranceFlag1: $billToInsuranceFlag1, billToInsuranceFlag2: $billToInsuranceFlag2, billToInsuranceFlag3: $billToInsuranceFlag3, selectedPlanName1: $selectedPlanName1, selectedPlanName2: $selectedPlanName2, selectedPlanName3: $selectedPlanName3), tag: 1, selection: $selection) { EmptyView() }
                 
-                NavigationLink(destination: ShippingView(), tag: 2, selection: $selection) { EmptyView() }
+                NavigationLink(destination: PaymentView(), tag: 2, selection: $selection) { EmptyView() }
                         
                         
                     

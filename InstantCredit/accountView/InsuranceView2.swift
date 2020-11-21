@@ -15,11 +15,11 @@ struct InsuranceView2: View {
     
     @State var selection: Int?
 
-    @Binding var billToInsuranceFlag: Bool
+    @Binding var billToInsuranceFlag1: Bool
     @Binding var billToInsuranceFlag2: Bool
     @Binding var billToInsuranceFlag3: Bool
 
-    @Binding var selectedPlanName: String
+    @Binding var selectedPlanName1: String
     @Binding var selectedPlanName2: String
     @Binding var selectedPlanName3: String
     
@@ -31,12 +31,12 @@ struct InsuranceView2: View {
     @State private var insurancePhone2: String = ""
     @State private var relationshipToCardholder2: String = ""
     
-    init(billToInsuranceFlag: Binding<Bool>, billToInsuranceFlag2: Binding<Bool>, billToInsuranceFlag3: Binding<Bool>, selectedPlanName: Binding<String>, selectedPlanName2: Binding<String>, selectedPlanName3: Binding<String>) {
-        _billToInsuranceFlag = billToInsuranceFlag
+    init(billToInsuranceFlag1: Binding<Bool>, billToInsuranceFlag2: Binding<Bool>, billToInsuranceFlag3: Binding<Bool>, selectedPlanName1: Binding<String>, selectedPlanName2: Binding<String>, selectedPlanName3: Binding<String>) {
+        _billToInsuranceFlag1 = billToInsuranceFlag1
         _billToInsuranceFlag2 = billToInsuranceFlag2
         _billToInsuranceFlag3 = billToInsuranceFlag3
         
-        _selectedPlanName = selectedPlanName
+        _selectedPlanName1 = selectedPlanName1
         _selectedPlanName2 = selectedPlanName2
         _selectedPlanName3 = selectedPlanName3
     }
@@ -62,9 +62,9 @@ struct InsuranceView2: View {
                   
             
             HStack {
-                ForEach(0..<10) { index in
+                ForEach(0..<8) { index in
                     Rectangle()
-                        .foregroundColor(Color(index == 5 ? UIColor.lightGreen : .lightGray))
+                        .foregroundColor(Color(index <= 5 ? UIColor.lightGreen : .lightGray))
                         .frame(height: 5)
                 }
             }
@@ -115,8 +115,8 @@ struct InsuranceView2: View {
             .background(memberID2.isEmpty || groupNumber2.isEmpty || policyholderName2.isEmpty || carrierCode2.isEmpty || insurancePhone2.isEmpty || relationshipToCardholder2.isEmpty ? .gray : Color(UIColor.mainColor))
             .padding()
             
-            NavigationLink(destination: InsuranceView3(billToInsuranceFlag: $billToInsuranceFlag, billToInsuranceFlag2: $billToInsuranceFlag2, billToInsuranceFlag3: $billToInsuranceFlag3, selectedPlanName: $selectedPlanName, selectedPlanName2: $selectedPlanName2, selectedPlanName3: $selectedPlanName3), tag: 1, selection: $selection) { EmptyView() }
-            NavigationLink(destination: ShippingView(), tag: 2, selection: $selection) { EmptyView() }
+            NavigationLink(destination: InsuranceView3(billToInsuranceFlag1: $billToInsuranceFlag1, billToInsuranceFlag2: $billToInsuranceFlag2, billToInsuranceFlag3: $billToInsuranceFlag3, selectedPlanName1: $selectedPlanName1, selectedPlanName2: $selectedPlanName2, selectedPlanName3: $selectedPlanName3), tag: 1, selection: $selection) { EmptyView() }
+            NavigationLink(destination: PaymentView(), tag: 2, selection: $selection) { EmptyView() }
                 
             
         }

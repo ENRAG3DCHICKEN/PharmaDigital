@@ -1,18 +1,17 @@
 //
-//  Ext+PatientHealthDetails.swift
+//  Ext+PatientShippingDetails.swift
 //  InstantCredit
 //
-//  Created by ENRAG3DMINX on 11/19/20.
+//  Created by ENRAG3DMINX on 11/20/20.
 //  Copyright © 2020 ENRAG3DCHICKEN. All rights reserved.
 //
-
 
 import SwiftUI
 import CoreData
 import Combine
 import UIKit
 
-extension PatientHealthDetails {
+extension PatientFulfillmentDetails {
 
     var patient: Patient {
         get { patient_! }
@@ -20,3 +19,4 @@ extension PatientHealthDetails {
     }
     
 }
+    

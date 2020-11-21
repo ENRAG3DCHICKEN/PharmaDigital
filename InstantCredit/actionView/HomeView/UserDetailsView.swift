@@ -77,22 +77,7 @@ struct UserDetailsView: View {
                 .background(Color(UIColor.buttonBar))
                 .padding().shadow(radius: 5, y: 5)
         }
-        NavigationLink(destination: ShippingView(), tag: 4, selection: $selection) {
-            Button(action: {
-                self.selection = 4
-        }, label: {
-            HStack {
-                Text("Delivery Shipping Address").font(.body).bold()
-                Spacer()
-                Text(">").font(.body).bold()
-            }.padding()
-        })
-                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
-                .foregroundColor(Color(.white))
-                .background(Color(UIColor.buttonBar))
-                .padding().shadow(radius: 5, y: 5)
-        }
-        NavigationLink(destination: BillingView(), tag: 5, selection: $selection) {
+        NavigationLink(destination: PaymentView(), tag: 4, selection: $selection) {
             Button(action: {
                 self.selection = 5
             }, label: {
@@ -107,7 +92,7 @@ struct UserDetailsView: View {
                 .background(Color(UIColor.buttonBar))
                 .padding().shadow(radius: 5, y: 5)
         }
-        NavigationLink(destination: PrivacyView(), tag: 6, selection: $selection) {
+        NavigationLink(destination: PrivacyView(), tag: 5, selection: $selection) {
             Button(action: {
                 self.selection = 6
             }, label: {

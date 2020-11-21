@@ -15,11 +15,11 @@ struct InsuranceView3: View {
     
     @State var selection: Int?
 
-    @Binding var billToInsuranceFlag: Bool
+    @Binding var billToInsuranceFlag1: Bool
     @Binding var billToInsuranceFlag2: Bool
     @Binding var billToInsuranceFlag3: Bool
 
-    @Binding var selectedPlanName: String
+    @Binding var selectedPlanName1: String
     @Binding var selectedPlanName2: String
     @Binding var selectedPlanName3: String
 
@@ -31,12 +31,12 @@ struct InsuranceView3: View {
     @State private var insurancePhone3: String = ""
     @State private var relationshipToCardholder3: String = ""
     
-    init(billToInsuranceFlag: Binding<Bool>, billToInsuranceFlag2: Binding<Bool>, billToInsuranceFlag3: Binding<Bool>, selectedPlanName: Binding<String>, selectedPlanName2: Binding<String>, selectedPlanName3: Binding<String>) {
-        _billToInsuranceFlag = billToInsuranceFlag
+    init(billToInsuranceFlag1: Binding<Bool>, billToInsuranceFlag2: Binding<Bool>, billToInsuranceFlag3: Binding<Bool>, selectedPlanName1: Binding<String>, selectedPlanName2: Binding<String>, selectedPlanName3: Binding<String>) {
+        _billToInsuranceFlag1 = billToInsuranceFlag1
         _billToInsuranceFlag2 = billToInsuranceFlag2
         _billToInsuranceFlag3 = billToInsuranceFlag3
         
-        _selectedPlanName = selectedPlanName
+        _selectedPlanName1 = selectedPlanName1
         _selectedPlanName2 = selectedPlanName2
         _selectedPlanName3 = selectedPlanName3
     }
@@ -61,9 +61,9 @@ struct InsuranceView3: View {
                   
             
             HStack {
-                ForEach(0..<10) { index in
+                ForEach(0..<8) { index in
                     Rectangle()
-                        .foregroundColor(Color(index == 5 ? UIColor.lightGreen : .lightGray))
+                        .foregroundColor(Color(index <= 5 ? UIColor.lightGreen : .lightGray))
                         .frame(height: 5)
                 }
             }
@@ -112,7 +112,7 @@ struct InsuranceView3: View {
                 .padding()
         
     
-        NavigationLink(destination: ShippingView(), tag: 3, selection: $selection) { EmptyView() }
+        NavigationLink(destination: PaymentView(), tag: 3, selection: $selection) { EmptyView() }
             
             }
     }

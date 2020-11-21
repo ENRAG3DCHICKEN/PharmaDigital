@@ -27,7 +27,7 @@ extension Patient {
         get { paymentInfo_! }
         set { paymentInfo_ = newValue }
     }
-    var shippingInfo: PatientShippingDetails {
+    var shippingInfo: PatientFulfillmentDetails {
         get { shippingInfo_! }
         set { shippingInfo_ = newValue }
     }

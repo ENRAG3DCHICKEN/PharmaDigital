@@ -44,9 +44,9 @@ struct PatientInfoView: View {
                   
             Section {
                 HStack {
-                    ForEach(0..<9) { index in
+                    ForEach(0..<8) { index in
                         Rectangle()
-                            .foregroundColor(Color(index == 0 ? UIColor.lightGreen : .lightGray))
+                            .foregroundColor(Color(index <= 0 ? UIColor.lightGreen : .lightGray))
                             .frame(height: 5)
                     }
                 }

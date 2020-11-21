@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ShippingView: View {
+struct FulfillmentView: View {
         @State var selection: Int?
     
         @State var shipFullName: String = ""
@@ -76,15 +76,9 @@ struct ShippingView: View {
                         .padding()
                     
                     
-                    NavigationLink(destination: BillingView(), tag: 1, selection: $selection) { EmptyView() }
+                    NavigationLink(destination: PaymentView(), tag: 1, selection: $selection) { EmptyView() }
                     
                 }
             
         }
     }
-
-struct ShippingView_Previews: PreviewProvider {
-    static var previews: some View {
-        ShippingView()
-    }
-}

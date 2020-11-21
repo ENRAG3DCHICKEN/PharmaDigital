@@ -9,7 +9,7 @@
 import SwiftUI
 import CoreData
 
-struct BillingView: View {
+struct PaymentView: View {
         
         @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
@@ -42,9 +42,9 @@ struct BillingView: View {
                           
                     
                     HStack {
-                        ForEach(0..<10) { index in
+                        ForEach(0..<8) { index in
                             Rectangle()
-                                .foregroundColor(Color(index == 7 ? UIColor.lightGreen : .lightGray))
+                                .foregroundColor(Color(index <= 6 ? UIColor.lightGreen : .lightGray))
                                 .frame(height: 5)
                         }
                     }
@@ -98,9 +98,3 @@ struct BillingView: View {
             
         }
     }
-
-struct BillingView_Previews: PreviewProvider {
-    static var previews: some View {
-        BillingView()
-    }
-}

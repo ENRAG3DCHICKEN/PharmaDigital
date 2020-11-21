@@ -41,9 +41,9 @@ struct HealthProfileView2: View {
                       
                 
                 HStack {
-                    ForEach(0..<10) { index in
+                    ForEach(0..<8) { index in
                         Rectangle()
-                            .foregroundColor(Color(index == 2 ? UIColor.lightGreen : .lightGray))
+                            .foregroundColor(Color(index <= 2 ? UIColor.lightGreen : .lightGray))
                             .frame(height: 5)
                     }
                 }
