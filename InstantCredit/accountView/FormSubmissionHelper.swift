@@ -23,20 +23,18 @@ func FormSubmissionToCoreData(context: NSManagedObjectContext) {
     
     //Store User Defaults data into Core Data
 
-    PatientObjectUpdate(context: context)
-    PatientHealthDetailsObjectUpdate(context: context)
-    PatientInsuranceDetailsObjectUpdate(context: context)
-    PatientPaymentDetailsObjectUpdate(context: context)
+    let patient: Patient = PatientObjectUpdate(context: context)
+    let patientHealthDetails: PatientHealthDetails = PatientHealthDetailsObjectUpdate(context: context)
+    let patientInsuranceDetails: PatientInsuranceDetails = PatientInsuranceDetailsObjectUpdate(context: context)
+    let patientPaymentDetails: PatientPaymentDetails = PatientPaymentDetailsObjectUpdate(context: context)
     
-    //Validate that all user defaults data is now in Core Data
-
-    
+    groupedObjectsWillChange(context: context, patient: patient, patientHealthDetails: patientHealthDetails, patientInsuranceDetails: patientInsuranceDetails, patientPaymentDetails: patientPaymentDetails)
     
     print("Form Submission Completed!")
 
 }
 
-func PatientObjectUpdate(context: NSManagedObjectContext) {
+func PatientObjectUpdate(context: NSManagedObjectContext) -> Patient {
     
     //Standard query request to Core Data
     let request = NSFetchRequest<Patient>(entityName: "Patient")
@@ -57,22 +55,23 @@ func PatientObjectUpdate(context: NSManagedObjectContext) {
 
     patient.privacyCompletionFlag = UserDefaults.standard.bool(forKey: "privacyCompletionFlag")
     patient.signupCompletionFlag = UserDefaults.standard.bool(forKey: "signupCompletionFlag")
+    
+    patient.healthInfo = PatientHealthDetailsObjectUpdate(context: context)
+    patient.insuranceInfo = PatientInsuranceDetailsObjectUpdate(context: context)
+    patient.paymentInfo = PatientPaymentDetailsObjectUpdate(context: context)
+    
+    
+    do {
+        try context.save()
+    } catch(let error) {
+        print("couldn't save pharmacy update to CoreData: \(error.localizedDescription)")
+    }
 
-    patient.objectWillChange.send()
-
-    //One to One Relationships
-    patient.healthInfo.objectWillChange.send()
-    patient.insuranceInfo.objectWillChange.send()
-    patient.paymentInfo.objectWillChange.send()
-    patient.shippingInfo.objectWillChange.send()
-
-    //One to Many Relationships
-    patient.orderHistory.forEach { $0.objectWillChange.send() }
-    patient.orderPharmacy.forEach { $0.objectWillChange.send() }
+    return patient
     
 }
 
-func PatientHealthDetailsObjectUpdate(context: NSManagedObjectContext) {
+func PatientHealthDetailsObjectUpdate(context: NSManagedObjectContext) -> PatientHealthDetails {
     
     //Standard query request to Core Data
     let request = NSFetchRequest<PatientHealthDetails>(entityName: "PatientHealthDetails")
@@ -82,25 +81,34 @@ func PatientHealthDetailsObjectUpdate(context: NSManagedObjectContext) {
     let results = (try? context.fetch(request)) ?? []
     let patientHealthDetails = results.first ?? PatientHealthDetails(context: context)
 
-    patientHealthDetails.birthDate = Int64(UserDefaults.standard.integer(forKey: "birthDate"))
+    patientHealthDetails.emailAddress = UserDefaults.standard.string(forKey: "email")
+    
+//    let date = UserDefaults.standard.object(forKey: "birthDate") as! Date
+//    let df = DateFormatter()
+//    df.dateFormat = "dd/MM/yyyy HH:mm"
+//    print(df.string(from: date))
+
+    
+//    patientHealthDetails.birthDate = UserDefaults.standard.object(forKey: "birthDate")
     patientHealthDetails.genericSubstitution = UserDefaults.standard.bool(forKey: "substituteGender")
     patientHealthDetails.gender = UserDefaults.standard.string(forKey: "selectedGender")
-    
+     
     patientHealthDetails.allergiesFlag = UserDefaults.standard.bool(forKey: "allergiesFlag")
     patientHealthDetails.specificAllergies = UserDefaults.standard.string(forKey: "otherAllergies")
     
     patientHealthDetails.medicalConditionsFlag = UserDefaults.standard.bool(forKey: "medicalConditionsFlag")
     patientHealthDetails.specificMedicalConditions = UserDefaults.standard.string(forKey: "otherMedicalConditions")
 
-    patientHealthDetails.objectWillChange.send()
-
-    //One to One Relationships
-    patientHealthDetails.patient.objectWillChange.send()
-
-    //One to Many Relationships
+    do {
+        try context.save()
+    } catch(let error) {
+        print("couldn't save pharmacy update to CoreData: \(error.localizedDescription)")
+    }
+    
+    return patientHealthDetails
 }
  
-func PatientInsuranceDetailsObjectUpdate(context: NSManagedObjectContext) {
+func PatientInsuranceDetailsObjectUpdate(context: NSManagedObjectContext) -> PatientInsuranceDetails {
     
     //Standard query request to Core Data
     let request = NSFetchRequest<PatientInsuranceDetails>(entityName: "PatientInsuranceDetails")
@@ -109,6 +117,8 @@ func PatientInsuranceDetailsObjectUpdate(context: NSManagedObjectContext) {
 
     let results = (try? context.fetch(request)) ?? []
     let patientInsuranceDetails = results.first ?? PatientInsuranceDetails(context: context)
+    
+    patientInsuranceDetails.emailAddress = UserDefaults.standard.string(forKey: "email")
 
     patientInsuranceDetails.ohip = Int64(UserDefaults.standard.integer(forKey: "OHIP"))
     patientInsuranceDetails.billToInsuranceFlag1 = UserDefaults.standard.bool(forKey: "billToInsuranceFlag1")
@@ -139,17 +149,17 @@ func PatientInsuranceDetailsObjectUpdate(context: NSManagedObjectContext) {
     patientInsuranceDetails.relationshipToCardholder1 = UserDefaults.standard.string(forKey: "relationshipToCardholder1")
     patientInsuranceDetails.relationshipToCardholder2 = UserDefaults.standard.string(forKey: "relationshipToCardholder2")
     patientInsuranceDetails.relationshipToCardholder3 = UserDefaults.standard.string(forKey: "relationshipToCardholder3")
+        
+    do {
+        try context.save()
+    } catch(let error) {
+        print("couldn't save pharmacy update to CoreData: \(error.localizedDescription)")
+    }
     
-    patientInsuranceDetails.objectWillChange.send()
-
-    //One to One Relationships
-    patientInsuranceDetails.patient.objectWillChange.send()
-
-    //One to Many Relationships
-    
+    return patientInsuranceDetails
 }
 
-func PatientPaymentDetailsObjectUpdate(context: NSManagedObjectContext) {
+func PatientPaymentDetailsObjectUpdate(context: NSManagedObjectContext) -> PatientPaymentDetails {
     
     //Standard query request to Core Data
     let request = NSFetchRequest<PatientPaymentDetails>(entityName: "PatientPaymentDetails")
@@ -158,6 +168,8 @@ func PatientPaymentDetailsObjectUpdate(context: NSManagedObjectContext) {
 
     let results = (try? context.fetch(request)) ?? []
     let patientPaymentDetails = results.first ?? PatientPaymentDetails(context: context)
+    
+    patientPaymentDetails.emailAddress = UserDefaults.standard.string(forKey: "email")
 
     patientPaymentDetails.paymentType = UserDefaults.standard.string(forKey: "paymentType")
     patientPaymentDetails.cardholderName = UserDefaults.standard.string(forKey: "cardholderName")
@@ -165,12 +177,56 @@ func PatientPaymentDetailsObjectUpdate(context: NSManagedObjectContext) {
     patientPaymentDetails.expirationMM = Int64(UserDefaults.standard.integer(forKey: "expirationMonth"))
     patientPaymentDetails.expirationYY = Int64(UserDefaults.standard.integer(forKey: "expirationYear"))
     patientPaymentDetails.cvv = Int64(UserDefaults.standard.integer(forKey: "cvv"))
+    
+    do {
+        try context.save()
+    } catch(let error) {
+        print("couldn't save pharmacy update to CoreData: \(error.localizedDescription)")
+    }
+    
+    return patientPaymentDetails
+}
 
-    patientPaymentDetails.objectWillChange.send()
+func groupedObjectsWillChange(context: NSManagedObjectContext, patient: Patient, patientHealthDetails: PatientHealthDetails, patientInsuranceDetails: PatientInsuranceDetails, patientPaymentDetails: PatientPaymentDetails) {
+    
+    //Object will Change
+        //Patient Object
+        patient.objectWillChange.send()
+        //PatientHealthDetails Ojbect
+        patientHealthDetails.objectWillChange.send()
+        //PatientInsuranceDetails
+        patientInsuranceDetails.objectWillChange.send()
+        //PatientPaymentDetails
+        patientPaymentDetails.objectWillChange.send()
 
-    //One to One Relationships
-    patientPaymentDetails.patient.objectWillChange.send()
-
-    //One to Many Relationships
+    //Relationships will Change
+        //One to One Relationships
+        patient.healthInfo.objectWillChange.send()
+        patient.insuranceInfo.objectWillChange.send()
+        patient.paymentInfo.objectWillChange.send()
+//        patient.shippingInfo.objectWillChange.send()
+        //One to Many Relationships
+        patient.orderHistory.forEach { $0.objectWillChange.send() }
+        patient.orderPharmacy.forEach { $0.objectWillChange.send() }
+        
+//        //One to One Relationships
+//        patientHealthDetails.patient.objectWillChange.send()
+//        //One to Many Relationships
+//        
+//        //One to One Relationships
+//        patientInsuranceDetails.patient.objectWillChange.send()
+//        //One to Many Relationships
+//        
+//        //One to One Relationships
+//        patientPaymentDetails.patient.objectWillChange.send()
+//        //One to Many Relationships
+//    
+//
+    
+        do {
+            try context.save()
+        } catch(let error) {
+            print("couldn't save pharmacy update to CoreData: \(error.localizedDescription)")
+        }
     
 }

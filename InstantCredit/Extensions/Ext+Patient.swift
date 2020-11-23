@@ -11,6 +11,8 @@ import CoreData
 import Combine
 import UIKit
 
+
+//Make Patient both identifiable and comporable
 extension Patient {
     
     //One to One Relationships
@@ -27,10 +29,10 @@ extension Patient {
         get { paymentInfo_! }
         set { paymentInfo_ = newValue }
     }
-    var shippingInfo: PatientFulfillmentDetails {
-        get { shippingInfo_! }
-        set { shippingInfo_ = newValue }
-    }
+//    var shippingInfo: PatientFulfillmentDetails {
+//        get { shippingInfo_! }
+//        set { shippingInfo_ = newValue }
+//    }
 
     //One to Many Relationships
     var orderHistory: Set<Orders> {

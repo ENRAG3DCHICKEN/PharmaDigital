@@ -19,7 +19,6 @@
         <attribute name="phoneNumber" optional="YES" attributeType="String"/>
         <attribute name="postalCode" optional="YES" attributeType="String"/>
         <attribute name="privacyCompletionFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="privacyFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="province" optional="YES" attributeType="String"/>
         <attribute name="selectedPharmacy" optional="YES" attributeType="String"/>
         <attribute name="signupCompletionFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -34,7 +33,7 @@
         <attribute name="address1" optional="YES" attributeType="String"/>
         <attribute name="address2" optional="YES" attributeType="String"/>
         <attribute name="city" optional="YES" attributeType="String"/>
-        <attribute name="emailAddress_" optional="YES" attributeType="String"/>
+        <attribute name="emailAddress" optional="YES" attributeType="String"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="postalCode" optional="YES" attributeType="String"/>
@@ -43,7 +42,7 @@
     </entity>
     <entity name="PatientHealthDetails" representedClassName="PatientHealthDetails" syncable="YES" codeGenerationType="class">
         <attribute name="allergiesFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="birthDate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="birthDate" optional="YES" attributeType="Transformable"/>
         <attribute name="emailAddress" optional="YES" attributeType="String"/>
         <attribute name="gender" optional="YES" attributeType="String"/>
         <attribute name="genericSubstitution" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -59,7 +58,7 @@
         <attribute name="carrierCode1" optional="YES" attributeType="String"/>
         <attribute name="carrierCode2" optional="YES" attributeType="String"/>
         <attribute name="carrierCode3" optional="YES" attributeType="String"/>
-        <attribute name="emailAddress_" optional="YES" attributeType="String"/>
+        <attribute name="emailAddress" optional="YES" attributeType="String"/>
         <attribute name="groupNumber1" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="groupNumber2" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="groupNumber3" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -87,7 +86,7 @@
     <entity name="PatientPaymentDetails" representedClassName="PatientPaymentDetails" syncable="YES" codeGenerationType="class">
         <attribute name="cardholderName" optional="YES" attributeType="String"/>
         <attribute name="cvv" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="emailAddress_" optional="YES" attributeType="String"/>
+        <attribute name="emailAddress" optional="YES" attributeType="String"/>
         <attribute name="expirationMM" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="expirationYY" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="paymentCardNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -109,11 +108,11 @@
     </entity>
     <elements>
         <element name="Orders" positionX="183.9375" positionY="-35.2734375" width="128" height="178"/>
-        <element name="Patient" positionX="473.3359375" positionY="97.109375" width="187.84375" height="298"/>
+        <element name="Patient" positionX="473.3359375" positionY="97.109375" width="187.84375" height="283"/>
+        <element name="PatientFulfillmentDetails" positionX="765.03515625" positionY="582.4375" width="182.3828125" height="178"/>
         <element name="PatientHealthDetails" positionX="937.76953125" positionY="-80.50390625" width="207.96484375" height="178"/>
         <element name="PatientInsuranceDetails" positionX="870.8515625" positionY="131.9375" width="199.984375" height="493"/>
         <element name="PatientPaymentDetails" positionX="815.8515625" positionY="389.6796875" width="161.90625" height="163"/>
-        <element name="PatientFulfillmentDetails" positionX="765.03515625" positionY="582.4375" width="182.3828125" height="178"/>
         <element name="Pharmacy" positionX="-153.51171875" positionY="419.09765625" width="111.53515625" height="208"/>
     </elements>
 </model>

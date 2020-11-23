@@ -57,6 +57,7 @@ struct PatientInfoView: View {
                 Section(header: Text("Patient Info")) {
                     TextField("Full Name", text: $fullName)
                     TextField("Address", text: $address)
+                    TextField("City", text: $city)
                     Picker(selection: $province, label: Text("Province")) {
                         ForEach(0..<provinces.count) { index in
                             Text(provinces[index]).tag(provinces[index])
@@ -82,10 +83,10 @@ struct PatientInfoView: View {
                 UserDefaults.standard.set(self.phoneNumber, forKey: "phoneNumber")
                 
             })  { Text("Next >").font(.body).bold() }
-                .disabled(fullName.isEmpty || address.isEmpty || province.isEmpty || postalCode.isEmpty || phoneNumber.isEmpty)
+            .disabled(fullName.isEmpty || address.isEmpty || city.isEmpty || province.isEmpty || postalCode.isEmpty || phoneNumber.isEmpty)
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))
-                .background(fullName.isEmpty || address.isEmpty || province.isEmpty || postalCode.isEmpty || phoneNumber.isEmpty ? .gray : Color(UIColor.mainColor))
+            .background(fullName.isEmpty || address.isEmpty || city.isEmpty || province.isEmpty || postalCode.isEmpty || phoneNumber.isEmpty ? .gray : Color(UIColor.mainColor))
                 .padding()
                 
                 NavigationLink(destination: HealthProfileView1(), tag: 1, selection: $selection) { EmptyView() }

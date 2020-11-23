@@ -76,7 +76,6 @@ extension Pharmacy: Comparable {
 
         
         do {
-            try context.save()
             
 //            Code for debugging - allows you to delete all the individual records and fields from an entity - everything in Pharmacy while leaving pharmacy intact
 //            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Pharmacy.fetchRequest()

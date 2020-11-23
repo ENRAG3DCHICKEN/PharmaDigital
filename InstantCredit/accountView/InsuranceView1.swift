@@ -116,7 +116,7 @@ struct InsuranceView1: View {
                         .foregroundColor(Color(.white))
                         .background(memberID1.isEmpty || groupNumber1.isEmpty || policyholderName1.isEmpty || carrierCode1.isEmpty || insurancePhone1.isEmpty || relationshipToCardholder1.isEmpty ? .gray : Color(UIColor.mainColor))
                         .padding()
-                    
+                     
                     
                     NavigationLink(destination: InsuranceView2(billToInsuranceFlag1: $billToInsuranceFlag1, billToInsuranceFlag2: $billToInsuranceFlag2, billToInsuranceFlag3: $billToInsuranceFlag3, selectedPlanName1: $selectedPlanName1, selectedPlanName2: $selectedPlanName2, selectedPlanName3: $selectedPlanName3), tag: 1, selection: $selection) { EmptyView() }
                     NavigationLink(destination: PaymentView(), tag: 2, selection: $selection) { EmptyView() }
