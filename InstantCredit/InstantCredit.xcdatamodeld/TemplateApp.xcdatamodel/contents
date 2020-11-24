@@ -7,7 +7,7 @@
         <attribute name="orderStart" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="orderUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="pharmacyName" optional="YES" attributeType="String"/>
-        <attribute name="prescription" optional="YES" attributeType="Transformable"/>
+        <attribute name="prescription" optional="YES" attributeType="String"/>
         <relationship name="fiulfillmentPharmacy_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pharmacy" inverseName="orderHistory_" inverseEntity="Pharmacy"/>
         <relationship name="patient_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="orderHistory_" inverseEntity="Patient"/>
     </entity>
@@ -42,7 +42,7 @@
     </entity>
     <entity name="PatientHealthDetails" representedClassName="PatientHealthDetails" syncable="YES" codeGenerationType="class">
         <attribute name="allergiesFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="birthDate" optional="YES" attributeType="Transformable"/>
+        <attribute name="birthDate" optional="YES" attributeType="String"/>
         <attribute name="emailAddress" optional="YES" attributeType="String"/>
         <attribute name="gender" optional="YES" attributeType="String"/>
         <attribute name="genericSubstitution" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

@@ -83,13 +83,13 @@ func PatientHealthDetailsObjectUpdate(context: NSManagedObjectContext) -> Patien
 
     patientHealthDetails.emailAddress = UserDefaults.standard.string(forKey: "email")
     
-//    let date = UserDefaults.standard.object(forKey: "birthDate") as! Date
-//    let df = DateFormatter()
-//    df.dateFormat = "dd/MM/yyyy HH:mm"
+    let date = UserDefaults.standard.object(forKey: "birthDate") as! Date
+    let df = DateFormatter()
+    df.dateFormat = "dd/MM/yyyy"
 //    print(df.string(from: date))
-
+    let birthDate = df.string(from: date)
     
-//    patientHealthDetails.birthDate = UserDefaults.standard.object(forKey: "birthDate")
+    patientHealthDetails.birthDate = birthDate
     patientHealthDetails.genericSubstitution = UserDefaults.standard.bool(forKey: "substituteGender")
     patientHealthDetails.gender = UserDefaults.standard.string(forKey: "selectedGender")
      
