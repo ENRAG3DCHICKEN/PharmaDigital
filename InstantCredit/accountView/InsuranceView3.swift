@@ -23,22 +23,39 @@ struct InsuranceView3: View {
     @Binding var selectedPlanName2: String
     @Binding var selectedPlanName3: String
 
-    @State private var memberID3: String = ""
-    @State private var groupNumber3: String = ""
-    @State private var policyholderName3: String = ""
-    @State private var carrierCode3: String = ""
-    @State private var selectedDate3 = Date()
-    @State private var insurancePhone3: String = ""
-    @State private var relationshipToCardholder3: String = ""
+    @State private var memberID3: String
+    @State private var groupNumber3: String
+    @State private var policyholderName3: String
+    @State private var carrierCode3: String
+    @State private var selectedDate3: Date
+    @State private var insurancePhone3: String
+    @State private var relationshipToCardholder3: String
     
     init(billToInsuranceFlag1: Binding<Bool>, billToInsuranceFlag2: Binding<Bool>, billToInsuranceFlag3: Binding<Bool>, selectedPlanName1: Binding<String>, selectedPlanName2: Binding<String>, selectedPlanName3: Binding<String>) {
         _billToInsuranceFlag1 = billToInsuranceFlag1
         _billToInsuranceFlag2 = billToInsuranceFlag2
         _billToInsuranceFlag3 = billToInsuranceFlag3
-        
         _selectedPlanName1 = selectedPlanName1
         _selectedPlanName2 = selectedPlanName2
         _selectedPlanName3 = selectedPlanName3
+        
+        if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
+            _memberID3 = State(wrappedValue: UserDefaults.standard.string(forKey: "memberID3")!)
+            _groupNumber3 = State(wrappedValue: UserDefaults.standard.string(forKey: "groupNumber3")!)
+            _policyholderName3 = State(wrappedValue: UserDefaults.standard.string(forKey: "policyholderName3")!)
+            _carrierCode3 = State(wrappedValue: UserDefaults.standard.string(forKey: "carrierCode3")!)
+            _selectedDate3 = State(wrappedValue: UserDefaults.standard.object(forKey: "selectedDate3") as! Date)
+            _insurancePhone3 = State(wrappedValue: UserDefaults.standard.string(forKey: "insurancePhone3")!)
+            _relationshipToCardholder3 = State(wrappedValue: UserDefaults.standard.string(forKey: "relationshipToCardholder3")!)
+        } else {
+            _memberID3 = State(wrappedValue: "")
+            _groupNumber3 = State(wrappedValue: "")
+            _policyholderName3 = State(wrappedValue: "")
+            _carrierCode3 = State(wrappedValue: "")
+            _selectedDate3 = State(wrappedValue: Date())
+            _insurancePhone3 = State(wrappedValue: "")
+            _relationshipToCardholder3 = State(wrappedValue: "")
+        }
     }
     
     var body: some View {
@@ -92,29 +109,44 @@ struct InsuranceView3: View {
             
             
             Spacer()
-            Button(action: {
-                
-                self.selection = 3
-                
-                UserDefaults.standard.set(self.memberID3, forKey: "memberID3")
-                UserDefaults.standard.set(self.groupNumber3, forKey: "groupNumber3")
-                UserDefaults.standard.set(self.policyholderName3, forKey: "policyholderName3")
-                UserDefaults.standard.set(self.carrierCode3, forKey: "carrierCode3")
-                UserDefaults.standard.set(self.selectedDate3, forKey: "selectedDate3")
-                UserDefaults.standard.set(self.insurancePhone3, forKey: "insurancePhone3")
-                UserDefaults.standard.set(self.relationshipToCardholder3, forKey: "relationshipToCardholder3")
-                
-            } ) { Text("Next >").font(.body).bold() }
-                .disabled(memberID3.isEmpty || groupNumber3.isEmpty || policyholderName3.isEmpty || carrierCode3.isEmpty || insurancePhone3.isEmpty || relationshipToCardholder3.isEmpty)
-                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
-                .foregroundColor(Color(.white))
-                .background(memberID3.isEmpty || groupNumber3.isEmpty || policyholderName3.isEmpty || carrierCode3.isEmpty || insurancePhone3.isEmpty || relationshipToCardholder3.isEmpty ? .gray : Color(UIColor.mainColor))
-                .padding()
-        
-    
-        NavigationLink(destination: PaymentView(), tag: 3, selection: $selection) { EmptyView() }
             
+            if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
+                Button(action: {
+                    self.selection = 9
+                    UserDefaults.standard.set(self.memberID3, forKey: "memberID3")
+                    UserDefaults.standard.set(self.groupNumber3, forKey: "groupNumber3")
+                    UserDefaults.standard.set(self.policyholderName3, forKey: "policyholderName3")
+                    UserDefaults.standard.set(self.carrierCode3, forKey: "carrierCode3")
+                    UserDefaults.standard.set(self.selectedDate3, forKey: "selectedDate3")
+                    UserDefaults.standard.set(self.insurancePhone3, forKey: "insurancePhone3")
+                    UserDefaults.standard.set(self.relationshipToCardholder3, forKey: "relationshipToCardholder3")
+                    FormSubmissionToCoreData(context: context)
+                } ) { Text("Submit").font(.body).bold() }
+                    .disabled(memberID3.isEmpty || groupNumber3.isEmpty || policyholderName3.isEmpty || carrierCode3.isEmpty || insurancePhone3.isEmpty || relationshipToCardholder3.isEmpty)
+                    .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                    .foregroundColor(Color(.white))
+                    .background(memberID3.isEmpty || groupNumber3.isEmpty || policyholderName3.isEmpty || carrierCode3.isEmpty || insurancePhone3.isEmpty || relationshipToCardholder3.isEmpty ? .gray : Color(UIColor.mainColor))
+                    .padding()
+            } else {
+                Button(action: {
+                    self.selection = 3
+                    UserDefaults.standard.set(self.memberID3, forKey: "memberID3")
+                    UserDefaults.standard.set(self.groupNumber3, forKey: "groupNumber3")
+                    UserDefaults.standard.set(self.policyholderName3, forKey: "policyholderName3")
+                    UserDefaults.standard.set(self.carrierCode3, forKey: "carrierCode3")
+                    UserDefaults.standard.set(self.selectedDate3, forKey: "selectedDate3")
+                    UserDefaults.standard.set(self.insurancePhone3, forKey: "insurancePhone3")
+                    UserDefaults.standard.set(self.relationshipToCardholder3, forKey: "relationshipToCardholder3")
+                } ) { Text("Next >").font(.body).bold() }
+                    .disabled(memberID3.isEmpty || groupNumber3.isEmpty || policyholderName3.isEmpty || carrierCode3.isEmpty || insurancePhone3.isEmpty || relationshipToCardholder3.isEmpty)
+                    .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                    .foregroundColor(Color(.white))
+                    .background(memberID3.isEmpty || groupNumber3.isEmpty || policyholderName3.isEmpty || carrierCode3.isEmpty || insurancePhone3.isEmpty || relationshipToCardholder3.isEmpty ? .gray : Color(UIColor.mainColor))
+                    .padding()
             }
+            NavigationLink(destination: PaymentView(), tag: 3, selection: $selection) { EmptyView() }
+            NavigationLink(destination: HomeView(selectionValue: 1), tag: 9, selection: $selection) { EmptyView() }
+        }
     }
 }
 

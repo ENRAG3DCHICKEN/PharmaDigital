@@ -15,10 +15,22 @@ struct HealthProfileView2: View {
     
     @State var selection: Int?
     
-    @State var allergiesFlag: Bool = false
-    @State var allergiesListFlag: [Bool] = Array(repeating: false, count: allergiesListExOther.count)
-    @State var otherAllergies: String = ""
+    @State var allergiesFlag: Bool
+    @State var allergiesListFlag: [Bool]
+    @State var otherAllergies: String
   
+    init() {
+        if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
+            _allergiesFlag = State(wrappedValue: UserDefaults.standard.bool(forKey: "allergiesFlag"))
+            _allergiesListFlag = State(wrappedValue: UserDefaults.standard.object(forKey: "allergiesListFlag") as! [Bool])
+//            _allergiesListFlag = State(wrappedValue: Array(repeating: false, count: allergiesListExOther.count))
+            _otherAllergies = State(wrappedValue: UserDefaults.standard.string(forKey: "otherAllergies")!)
+        } else {
+            _allergiesFlag = State(wrappedValue: false)
+            _allergiesListFlag = State(wrappedValue: Array(repeating: false, count: allergiesListExOther.count))
+            _otherAllergies = State(wrappedValue: "")
+        }
+    }
     
     var body: some View {
             VStack {
@@ -77,9 +89,19 @@ struct HealthProfileView2: View {
                 Button(action: {
                     self.selection = 1
                     
+//                    var combinedAllergies: String {
+//                        var allergies: String = self.otherAllergies
+//                        for index in 0..<allergiesListFlag.count {
+//                            if allergiesListFlag[index] == true {
+//                                allergies = allergies + allergiesListExOther[index]
+//                            }
+//                        }
+//                        return allergies
+//                    }
+                    
                     UserDefaults.standard.set(self.allergiesFlag, forKey: "allergiesFlag")
                     UserDefaults.standard.set(self.allergiesListFlag, forKey: "allergiesListFlag")
-                    UserDefaults.standard.set(self.otherAllergies, forKey: "otherAllergies")
+                    UserDefaults.standard.set(otherAllergies, forKey: "otherAllergies")
                     
                 } ) { Text("Next >").font(.body).bold() }
                     .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)

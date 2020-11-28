@@ -23,8 +23,6 @@ extension Pharmacy: MKAnnotation {
 
 
 
-
-
 extension Pharmacy: Comparable {
     public static func < (lhs: Pharmacy, rhs: Pharmacy) -> Bool {
         //replace with calcualted distance

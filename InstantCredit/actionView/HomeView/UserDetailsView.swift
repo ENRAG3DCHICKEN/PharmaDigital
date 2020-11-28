@@ -15,6 +15,11 @@ struct UserDetailsView: View {
     var body: some View {
         
         VStack(spacing: 0) {
+            
+        Text("")
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+                      
 
         Image("cropped-img7")
             .resizable()
@@ -27,21 +32,36 @@ struct UserDetailsView: View {
                     .opacity(0.7)
             )
             
-        Text("")
-            
+        NavigationLink(destination: PharmacySearchView(), tag: 0, selection: $selection) {
+            Button(action: {
+                self.selection = 0
+            }, label: {
+                HStack {
+                Image(systemName: "map").font(.body)
+                Text("Pharmacy Selection").font(.body).bold()
+                Spacer()
+                Text(">").font(.body).bold()
+                }.padding()
+                
+            })
+                .frame(width: UIScreen.main.bounds.width * 0.92, height: 30)
+                .foregroundColor(Color(.white))
+                .background(Color(UIColor.buttonBar))
+                .padding().shadow(radius: 5, y: 5)
+        }
         NavigationLink(destination: PatientInfoView(), tag: 1, selection: $selection) {
             Button(action: {
                 self.selection = 1
             }, label: {
                 HStack {
-                    
+                Image(systemName: "person.crop.circle").font(.body)
                 Text("Patient Info").font(.body).bold()
                 Spacer()
                 Text(">").font(.body).bold()
                 }.padding()
                 
             })
-                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                .frame(width: UIScreen.main.bounds.width * 0.92, height: 30)
                 .foregroundColor(Color(.white))
                 .background(Color(UIColor.buttonBar))
                 .padding().shadow(radius: 5, y: 5)
@@ -51,13 +71,13 @@ struct UserDetailsView: View {
                 self.selection = 2
             }, label: {
                 HStack {
-                    
+                Image(systemName: "cross.case").font(.body)
                 Text("Health Profile").font(.body).bold()
                 Spacer()
                 Text(">").font(.body).bold()
                 }.padding()
             })
-                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                .frame(width: UIScreen.main.bounds.width * 0.92, height: 30)
                 .foregroundColor(Color(.white))
                 .background(Color(UIColor.buttonBar))
                 .padding().shadow(radius: 5, y: 5)
@@ -67,53 +87,75 @@ struct UserDetailsView: View {
                 self.selection = 3
             }, label: {
                 HStack {
+                    Image(systemName: "scroll").font(.body)
                     Text("Insurance Details").font(.body).bold()
                     Spacer()
                     Text(">").font(.body).bold()
                 }.padding()
             })
-                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                .frame(width: UIScreen.main.bounds.width * 0.92, height: 30)
                 .foregroundColor(Color(.white))
                 .background(Color(UIColor.buttonBar))
                 .padding().shadow(radius: 5, y: 5)
         }
         NavigationLink(destination: PaymentView(), tag: 4, selection: $selection) {
             Button(action: {
-                self.selection = 5
+                self.selection = 4
             }, label: {
                 HStack {
-                    Text("Billing Info").font(.body).bold()
+                    Image(systemName: "creditcard").font(.body)
+                    Text("Payment Info").font(.body).bold()
                     Spacer()
                     Text(">").font(.body).bold()
                 }.padding()
             })
-                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                .frame(width: UIScreen.main.bounds.width * 0.92, height: 30)
                 .foregroundColor(Color(.white))
                 .background(Color(UIColor.buttonBar))
                 .padding().shadow(radius: 5, y: 5)
         }
         NavigationLink(destination: PrivacyView(), tag: 5, selection: $selection) {
             Button(action: {
-                self.selection = 6
+                self.selection = 5
             }, label: {
                 HStack {
+                    Image(systemName: "lock.rotation").font(.body)
                     Text("Privacy Policy").font(.body).bold()
                     Spacer()
                     Text(">").font(.body).bold()
                 }.padding()
             })
-                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                .frame(width: UIScreen.main.bounds.width * 0.92, height: 30)
                 .foregroundColor(Color(.white))
                 .background(Color(UIColor.buttonBar))
                 .padding().shadow(radius: 5, y: 5)
         }
+            
+        NavigationLink(destination: LogoView(), tag: 6, selection: $selection) {
             Button(action: {
                 UserDefaults.standard.removeObject(forKey: "email")
                 UserDefaults.standard.removeObject(forKey: "password")
-                self.selection = 7
-            }) { Text("Logout").font(.caption) }
-            Spacer()
+                self.selection = 6
+            }, label: {
+                HStack {
+                    Image(systemName: "key").font(.body)
+                    Text("Logout").font(.body).bold()
+                    Spacer()
+                    Text(">").font(.body).bold()
+                }.padding()
+            })
+                .frame(width: UIScreen.main.bounds.width * 0.92, height: 30)
+                .foregroundColor(Color(.white))
+                .background(Color(UIColor.buttonBar))
+                .padding().shadow(radius: 5, y: 5)
+        }
         
+            
+     
+            
+
+        Spacer()
+    
         }
             
         

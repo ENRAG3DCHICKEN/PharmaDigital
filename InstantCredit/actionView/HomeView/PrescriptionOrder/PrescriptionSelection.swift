@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct NewPrescription: View {
+struct PrescriptionSelection: View {
     @State private var isOn1: Bool = true
     @State private var isOn2: Bool = false
     
@@ -33,8 +33,8 @@ struct NewPrescription: View {
         let on2 = Binding<Bool>(get: { self.isOn2 }, set: { self.isOn1 = false; self.isOn2 = $0})
         
         VStack {
-            Text("Only place transfer requests now for prescriptions you wish to have filled at this time")
-            Text("Please place your orders for future prescriptions near the time you wish to have them shipped")
+
+            Text("Do you have a written prescription?")
             
             Toggle(isOn: on1) { Text("I have a written prescription. I will mail it to the pharmacy. ").font(.callout) }
             Toggle(isOn: on2) { Text("I do not have a written prescription. My doctor will call or fax the pharmacy. ").font(.callout) }
@@ -47,21 +47,12 @@ struct NewPrescription: View {
                         TextField("Pharmacy Postal Code", text: $PharmacyPostalCode)
                     }
                 }
-                
-                
             } else if isOn1 == false, isOn2 == true {
                 VStack {
                     Text("Phone: \(PharmacyPhone)")
                     Text("Fax: \(PharmacyFax)")
                 }
             }
-            
         }
-    }
-}
-
-struct NewPrescription_Previews: PreviewProvider {
-    static var previews: some View {
-        NewPrescription()
     }
 }

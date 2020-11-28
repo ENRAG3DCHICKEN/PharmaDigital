@@ -25,6 +25,15 @@ struct PharmacySearchView: View {
     
     @State private var chosenPharmacy : Pharmacy?
     
+//    init() {
+//        if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
+//            _chosenPharmacy = State(wrappedValue: UserDefaults.standard.object(forKey: "chosenPharmacy") as? Pharmacy)
+//        } else {
+//            _chosenPharmacy = State(wrappedValue: nil)
+//        }
+//    }
+
+    
     var selectedPharmacyMarker: Binding<MKAnnotation?> {
         return Binding<MKAnnotation?>(
             get: { return chosenPharmacy },
@@ -49,44 +58,46 @@ struct PharmacySearchView: View {
                         ForEach(pharmacies.sorted(), id: \.self) { pharmacy in
                             Text("\(pharmacy.pharmacyName!)").tag(pharmacy as Pharmacy?)
                         }
-            }
+                    }
             
             MapView(annotations: pharmacies.sorted(), selection: selectedPharmacyMarker)
                 .frame(minHeight: 400)
-                
-        
-
-//            List {
-//                ForEach(pharmacies, id: \.pharmacyUUID) { pharmacy in
-//                    Text(pharmacy.pharmacyName!)
-//                }
-//            }
-            
+                }
             }
-            }
-            Button(action: {
-                self.selection = 1
-                
-                UserDefaults.standard.set(self.chosenPharmacy!.pharmacyName, forKey: "chosenPharmacy")
-         
-
-                
-            } ) { Text("Next >").font(.body).bold() }
-                .disabled(chosenPharmacy == nil)
-                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
-                .foregroundColor(Color(.white))
-                .background( chosenPharmacy == nil ? .gray : Color(UIColor.mainColor))
-                .padding()
             
+            if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
+                Button(action: {
+                    UserDefaults.standard.set(chosenPharmacy!.pharmacyName, forKey: "chosenPharmacy")
+                    self.selection = 9
+                    FormSubmissionToCoreData(context: context)
+                } ) { Text("Submit").font(.body).bold() }
+                    .disabled(chosenPharmacy == nil)
+                    .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                    .foregroundColor(Color(.white))
+                    .background( chosenPharmacy == nil ? .gray : Color(UIColor.mainColor))
+                    .padding()
+            } else {
+                Button(action: {
+//                    print(chosenPharmacy!)
+//                    UserDefaults.standard.set(chosenPharmacy!, forKey: "chosenPharmacy")
+                    UserDefaults.standard.set(chosenPharmacy!.pharmacyName, forKey: "chosenPharmacy")
+                    self.selection = 1
+                } ) { Text("Next >").font(.body).bold() }
+                    .disabled(chosenPharmacy == nil)
+                    .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                    .foregroundColor(Color(.white))
+                    .background( chosenPharmacy == nil ? .gray : Color(UIColor.mainColor))
+                    .padding()
+            }
                 NavigationLink(destination: PatientInfoView(), tag: 1, selection: $selection) { EmptyView() }
+                NavigationLink(destination: HomeView(selectionValue: 1), tag: 9, selection: $selection) { EmptyView() }
         }
-        
             .onAppear(perform: {
                 print("start")
                 populateCoreData_Pharmacy(context: context)
                 print("done")
             })
-    }
+        }
     }
 
 

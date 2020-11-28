@@ -16,12 +16,30 @@ struct PatientInfoView: View {
     
     @State var selection: Int?
     
-    @State var fullName: String = ""
-    @State var address: String = ""
-    @State var city: String = ""
-    @State var province: String = ""
-    @State var postalCode: String = ""
-    @State var phoneNumber: String = ""
+    @State var fullName: String
+    @State var address: String
+    @State var city: String
+    @State var province: String
+    @State var postalCode: String
+    @State var phoneNumber: String
+    
+    init() {
+        if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
+            _fullName = State(wrappedValue: UserDefaults.standard.string(forKey: "fullName")!)
+            _address = State(wrappedValue: UserDefaults.standard.string(forKey: "address")!)
+            _city = State(wrappedValue: UserDefaults.standard.string(forKey: "city")!)
+            _province = State(wrappedValue: UserDefaults.standard.string(forKey: "province")!)
+            _postalCode = State(wrappedValue: UserDefaults.standard.string(forKey: "postalCode")!)
+            _phoneNumber = State(wrappedValue: UserDefaults.standard.string(forKey: "phoneNumber")!)
+        } else {
+            _fullName = State(wrappedValue: "")
+            _address = State(wrappedValue: "")
+            _city = State(wrappedValue: "")
+            _province = State(wrappedValue: "")
+            _postalCode = State(wrappedValue: "")
+            _phoneNumber = State(wrappedValue: "")
+        }
+    }
 
     var body: some View {
         
@@ -71,25 +89,47 @@ struct PatientInfoView: View {
                 .padding()
             
             Spacer()
-            Button(action: {
-
-                self.selection = 1
+            
+            if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
+                Button(action: {
+                    self.selection = 9
+                    
+                    UserDefaults.standard.set(self.fullName, forKey: "fullName")
+                    UserDefaults.standard.set(self.address, forKey: "address")
+                    UserDefaults.standard.set(self.city, forKey: "city")
+                    UserDefaults.standard.set(self.province, forKey: "province")
+                    UserDefaults.standard.set(self.postalCode, forKey: "postalCode")
+                    UserDefaults.standard.set(self.phoneNumber, forKey: "phoneNumber")
+                    
+                    FormSubmissionToCoreData(context: context)
+                })  { Text("Submit").font(.body).bold() }
+                .disabled(fullName.isEmpty || address.isEmpty || city.isEmpty || province.isEmpty || postalCode.isEmpty || phoneNumber.isEmpty)
+                    .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                    .foregroundColor(Color(.white))
+                .background(fullName.isEmpty || address.isEmpty || city.isEmpty || province.isEmpty || postalCode.isEmpty || phoneNumber.isEmpty ? .gray : Color(UIColor.mainColor))
+                    .padding()
+            } else {
                 
-                UserDefaults.standard.set(self.fullName, forKey: "fullName")
-                UserDefaults.standard.set(self.address, forKey: "address")
-                UserDefaults.standard.set(self.city, forKey: "city")
-                UserDefaults.standard.set(self.province, forKey: "province")
-                UserDefaults.standard.set(self.postalCode, forKey: "postalCode")
-                UserDefaults.standard.set(self.phoneNumber, forKey: "phoneNumber")
-                
-            })  { Text("Next >").font(.body).bold() }
-            .disabled(fullName.isEmpty || address.isEmpty || city.isEmpty || province.isEmpty || postalCode.isEmpty || phoneNumber.isEmpty)
-                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
-                .foregroundColor(Color(.white))
-            .background(fullName.isEmpty || address.isEmpty || city.isEmpty || province.isEmpty || postalCode.isEmpty || phoneNumber.isEmpty ? .gray : Color(UIColor.mainColor))
-                .padding()
-                
+                Button(action: {
+                    self.selection = 1
+                    
+                    UserDefaults.standard.set(self.fullName, forKey: "fullName")
+                    UserDefaults.standard.set(self.address, forKey: "address")
+                    UserDefaults.standard.set(self.city, forKey: "city")
+                    UserDefaults.standard.set(self.province, forKey: "province")
+                    UserDefaults.standard.set(self.postalCode, forKey: "postalCode")
+                    UserDefaults.standard.set(self.phoneNumber, forKey: "phoneNumber")
+                    
+                })  { Text("Next >").font(.body).bold() }
+                .disabled(fullName.isEmpty || address.isEmpty || city.isEmpty || province.isEmpty || postalCode.isEmpty || phoneNumber.isEmpty)
+                    .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                    .foregroundColor(Color(.white))
+                .background(fullName.isEmpty || address.isEmpty || city.isEmpty || province.isEmpty || postalCode.isEmpty || phoneNumber.isEmpty ? .gray : Color(UIColor.mainColor))
+                    .padding()
+            
+            }
                 NavigationLink(destination: HealthProfileView1(), tag: 1, selection: $selection) { EmptyView() }
+                NavigationLink(destination: HomeView(selectionValue: 1), tag: 9, selection: $selection) { EmptyView() }
             
         }
     }

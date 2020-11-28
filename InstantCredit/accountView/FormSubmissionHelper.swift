@@ -45,7 +45,7 @@ func PatientObjectUpdate(context: NSManagedObjectContext) -> Patient {
     let patient = results.first ?? Patient(context: context)
 
     patient.emailAddress = UserDefaults.standard.string(forKey: "email")
-    patient.selectedPharmacy = UserDefaults.standard.string(forKey: "chosenPharmacy")
+    patient.selectedPharmacy = UserDefaults.standard.string(forKey: "chosenPharmacy") 
     patient.fullName = UserDefaults.standard.string(forKey: "fullName")
     patient.address = UserDefaults.standard.string(forKey: "address")
     patient.city = UserDefaults.standard.string(forKey: "city")
@@ -83,20 +83,22 @@ func PatientHealthDetailsObjectUpdate(context: NSManagedObjectContext) -> Patien
 
     patientHealthDetails.emailAddress = UserDefaults.standard.string(forKey: "email")
     
-    let date = UserDefaults.standard.object(forKey: "birthDate") as! Date
-    let df = DateFormatter()
-    df.dateFormat = "dd/MM/yyyy"
-//    print(df.string(from: date))
-    let birthDate = df.string(from: date)
+            let date = UserDefaults.standard.object(forKey: "birthDate") as! Date
+            let df = DateFormatter()
+            df.dateFormat = "dd/MM/yyyy"
+        //    print(df.string(from: date))
+            let birthDate = df.string(from: date)
     
     patientHealthDetails.birthDate = birthDate
     patientHealthDetails.genericSubstitution = UserDefaults.standard.bool(forKey: "substituteGender")
     patientHealthDetails.gender = UserDefaults.standard.string(forKey: "selectedGender")
      
     patientHealthDetails.allergiesFlag = UserDefaults.standard.bool(forKey: "allergiesFlag")
+    //Missing a set of Allergies
     patientHealthDetails.specificAllergies = UserDefaults.standard.string(forKey: "otherAllergies")
     
     patientHealthDetails.medicalConditionsFlag = UserDefaults.standard.bool(forKey: "medicalConditionsFlag")
+    //Missing a set of Medical Conditions
     patientHealthDetails.specificMedicalConditions = UserDefaults.standard.string(forKey: "otherMedicalConditions")
 
     do {

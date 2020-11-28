@@ -15,11 +15,22 @@ struct HealthProfileView3: View {
     
     @State var selection: Int?
     
-    @State var medicalConditionsFlag: Bool = false
-    @State var conditionsListFlag: [Bool] = Array(repeating: false, count: conditionsListExOther.count)
-    @State var otherMedicalConditions: String = ""
+    @State var medicalConditionsFlag: Bool
+    @State var conditionsListFlag: [Bool]
+    @State var otherMedicalConditions: String
 
-    
+    init() {
+        if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
+            _medicalConditionsFlag = State(wrappedValue: UserDefaults.standard.bool(forKey: "medicalConditionsFlag"))
+            _conditionsListFlag = State(wrappedValue: UserDefaults.standard.object(forKey: "conditionsListFlag") as! [Bool])
+            _otherMedicalConditions = State(wrappedValue: UserDefaults.standard.string(forKey: "otherMedicalConditions")!)
+        } else {
+            _medicalConditionsFlag = State(wrappedValue: false)
+            _conditionsListFlag = State(wrappedValue: Array(repeating: false, count: conditionsListExOther.count))
+            _otherMedicalConditions = State(wrappedValue: "")
+        }
+    }
+
     
     var body: some View {
             VStack {
@@ -74,21 +85,33 @@ struct HealthProfileView3: View {
                 .padding()
                 
                 Spacer()
-                Button(action: {
-                    
-                    self.selection = 1
-                    
-                    UserDefaults.standard.set(self.medicalConditionsFlag, forKey: "medicalConditionsFlag")
-                    UserDefaults.standard.set(self.conditionsListFlag, forKey: "conditionsListFlag")
-                    UserDefaults.standard.set(self.otherMedicalConditions, forKey: "otherMedicalConditions")
-                    
+                
+                if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
+                    Button(action: {
+                        self.selection = 9
+                        UserDefaults.standard.set(self.medicalConditionsFlag, forKey: "medicalConditionsFlag")
+                        UserDefaults.standard.set(self.conditionsListFlag, forKey: "conditionsListFlag")
+                        UserDefaults.standard.set(self.otherMedicalConditions, forKey: "otherMedicalConditions")
+                        FormSubmissionToCoreData(context: context)
+                    } ) { Text("Submit").font(.body).bold() }
+                        .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                        .foregroundColor(Color(.white))
+                        .background(Color(UIColor.mainColor))
+                        .padding()
+                } else {
+                    Button(action: {
+                        self.selection = 1
+                        UserDefaults.standard.set(self.medicalConditionsFlag, forKey: "medicalConditionsFlag")
+                        UserDefaults.standard.set(self.conditionsListFlag, forKey: "conditionsListFlag")
+                        UserDefaults.standard.set(self.otherMedicalConditions, forKey: "otherMedicalConditions")
                 } ) { Text("Next >").font(.body).bold() }
                     .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                     .foregroundColor(Color(.white))
                     .background(Color(UIColor.mainColor))
                     .padding()
-            
+                }
                 NavigationLink(destination: InsuranceView(), tag: 1, selection: $selection) { EmptyView() }
+                NavigationLink(destination: HomeView(selectionValue: 1), tag: 9, selection: $selection) { EmptyView() }
             }
         }
     }

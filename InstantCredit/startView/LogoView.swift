@@ -74,8 +74,8 @@ struct LogoView: View {
                                 if self.selection == nil {
                                     
                                     //Sign-up Process Completed - UserHomeView
-                                    print(UserDefaults.standard.string(forKey: "completed") as Any)
-                                    if UserDefaults.standard.string(forKey: "completed") == "true" {
+                                    print(UserDefaults.standard.bool(forKey: "signupCompletionFlag"))
+                                    if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
                                         self.selection = 2
                                     } else {
                                         //Sign-up Process Incomplete - PatientInfoView

@@ -15,9 +15,21 @@ struct HealthProfileView1: View {
     
     @State var selection: Int?
     
-    @State var birthDate = Date()
-    @State var substituteGeneric: Bool = true
-    @State var selectedGender: String = ""
+    @State var birthDate: Date
+    @State var substituteGeneric: Bool
+    @State var selectedGender: String
+    
+    init() {
+        if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
+            _birthDate = State(wrappedValue: UserDefaults.standard.object(forKey: "birthDate") as! Date)
+            _substituteGeneric = State(wrappedValue: UserDefaults.standard.bool(forKey: "substituteGeneric"))
+            _selectedGender = State(wrappedValue: UserDefaults.standard.string(forKey: "selectedGender")!)
+        } else {
+            _birthDate = State(wrappedValue: Date())
+            _substituteGeneric = State(wrappedValue: true)
+            _selectedGender = State(wrappedValue: "")
+        }
+    }
     
     var body: some View {
             VStack {
