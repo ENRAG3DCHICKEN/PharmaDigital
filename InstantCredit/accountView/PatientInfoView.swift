@@ -59,16 +59,17 @@ struct PatientInfoView: View {
                         .background(Color.black)
                         .opacity(0.7)
                 )
-                  
-            Section {
-                HStack {
-                    ForEach(0..<8) { index in
-                        Rectangle()
-                            .foregroundColor(Color(index <= 0 ? UIColor.lightGreen : .lightGray))
-                            .frame(height: 5)
+            if UserDefaults.standard.bool(forKey: "signupCompletionFlag") != true {
+                Section {
+                    HStack {
+                        ForEach(0..<8) { index in
+                            Rectangle()
+                                .foregroundColor(Color(index <= 0 ? UIColor.lightGreen : .lightGray))
+                                .frame(height: 5)
+                        }
                     }
+                        .padding()
                 }
-                    .padding()
             }
             
             Form {

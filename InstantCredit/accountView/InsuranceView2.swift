@@ -77,15 +77,16 @@ struct InsuranceView2: View {
                         .opacity(0.7)
                 )
                   
-            
-            HStack {
-                ForEach(0..<8) { index in
-                    Rectangle()
-                        .foregroundColor(Color(index <= 5 ? UIColor.lightGreen : .lightGray))
-                        .frame(height: 5)
+            if UserDefaults.standard.bool(forKey: "signupCompletionFlag") != true {
+                HStack {
+                    ForEach(0..<8) { index in
+                        Rectangle()
+                            .foregroundColor(Color(index <= 5 ? UIColor.lightGreen : .lightGray))
+                            .frame(height: 5)
+                    }
                 }
+                    .padding()
             }
-                .padding()
             
             Form {
              

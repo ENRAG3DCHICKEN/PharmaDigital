@@ -62,16 +62,16 @@ struct InsuranceView: View {
                             .background(Color.black)
                             .opacity(0.7)
                     )
-                      
-                
-                HStack {
-                    ForEach(0..<8) { index in
-                        Rectangle()
-                            .foregroundColor(Color(index <= 4 ? UIColor.lightGreen : .lightGray))
-                            .frame(height: 5)
+                if UserDefaults.standard.bool(forKey: "signupCompletionFlag") != true {
+                    HStack {
+                        ForEach(0..<8) { index in
+                            Rectangle()
+                                .foregroundColor(Color(index <= 4 ? UIColor.lightGreen : .lightGray))
+                                .frame(height: 5)
+                        }
                     }
+                        .padding()
                 }
-                    .padding()
                 
                 Form {
                     Section(header: Text("Insurance Details")) {
@@ -79,6 +79,15 @@ struct InsuranceView: View {
                         
                         Section {
                             Toggle(isOn: self.$billToInsuranceFlag1) { Text("Would you like us to bill a prescription insurance provider?").font(.callout) }
+                                .onReceive( [self.$billToInsuranceFlag1].publisher.first()) { (value) in
+                                    if value.wrappedValue == false {
+                                        billToInsuranceFlag2 = false
+                                        billToInsuranceFlag3 = false
+                                        selectedPlanName1 = ""
+                                        selectedPlanName2 = ""
+                                        selectedPlanName3 = ""
+                                    }
+                                }
                             
                             if billToInsuranceFlag1 == true {
                                 Picker(selection: $selectedPlanName1, label: Text("Plan")) {
@@ -90,11 +99,19 @@ struct InsuranceView: View {
                         }
                         
                         Section {
-                            if selectedPlanName1 != "" {
+                            if billToInsuranceFlag1 == true && selectedPlanName1 != "" {
                                 Toggle(isOn: self.$billToInsuranceFlag2) { Text("Would you like us to bill another prescription insurance provider?").font(.callout) }
+                                    .onReceive( [self.$billToInsuranceFlag2].publisher.first()) { (value) in
+                                        if value.wrappedValue == false {
+                                            billToInsuranceFlag3 = false
+                                            selectedPlanName2 = ""
+                                            selectedPlanName3 = ""
+                                        }
+                                    }
                             }
+
                             
-                            if billToInsuranceFlag2 == true {
+                            if billToInsuranceFlag1 == true && selectedPlanName1 != "" && billToInsuranceFlag2 == true {
                                 Picker(selection: $selectedPlanName2, label: Text("Plan")) {
                                     ForEach(0..<planNameSelections.count) { index in
                                         Text(planNameSelections[index]).tag(planNameSelections[index])
@@ -104,11 +121,16 @@ struct InsuranceView: View {
                         }
                         
                         Section {
-                            if selectedPlanName2 != "" {
+                            if billToInsuranceFlag1 == true && selectedPlanName1 != "" && billToInsuranceFlag2 == true && selectedPlanName2 != "" {
                                 Toggle(isOn: self.$billToInsuranceFlag3) { Text("Would you like us to bill another prescription insurance provider?").font(.callout) }
+                                    .onReceive( [self.$billToInsuranceFlag3].publisher.first()) { (value) in
+                                        if value.wrappedValue == false {
+                                            selectedPlanName3 = ""
+                                        }
+                                    }
                             }
                             
-                            if billToInsuranceFlag3 == true {
+                            if billToInsuranceFlag1 == true && selectedPlanName1 != "" && billToInsuranceFlag2 == true && selectedPlanName2 != "" && billToInsuranceFlag3 == true {
                                 Picker(selection: $selectedPlanName3, label: Text("Plan")) {
                                     ForEach(0..<planNameSelections.count) { index in
                                         Text(planNameSelections[index]).tag(planNameSelections[index])
@@ -124,7 +146,7 @@ struct InsuranceView: View {
                 
                 Spacer()
                 
-                if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
+                if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true && billToInsuranceFlag1 != true {
                     Button(action: {
                         if selectedPlanName1 != "" {
                             self.selection = 1
@@ -160,10 +182,10 @@ struct InsuranceView: View {
                         UserDefaults.standard.set(self.selectedPlanName2, forKey: "selectedPlanName2")
                         UserDefaults.standard.set(self.selectedPlanName3, forKey: "selectedPlanName3")
                     } ) { Text("Next >").font(.body).bold() }
-                        .disabled(OHIP.isEmpty)
+                        .disabled(OHIP.isEmpty || (billToInsuranceFlag1 == true && selectedPlanName1 == "") || (billToInsuranceFlag2 == true && selectedPlanName2 == "") || (billToInsuranceFlag3 == true && selectedPlanName3 == ""))
                         .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                         .foregroundColor(Color(.white))
-                        .background(OHIP.isEmpty ? .gray : Color(UIColor.mainColor))
+                        .background((OHIP.isEmpty || (billToInsuranceFlag1 == true && selectedPlanName1 == "") || (billToInsuranceFlag2 == true && selectedPlanName2 == "") || (billToInsuranceFlag3 == true && selectedPlanName3 == "")) ? .gray : Color(UIColor.mainColor))
                         .padding()
                 }
                 
@@ -175,8 +197,3 @@ struct InsuranceView: View {
                 }
             }
         }
-struct Insurance_Previews: PreviewProvider {
-    static var previews: some View {
-        InsuranceView()
-    }
-}

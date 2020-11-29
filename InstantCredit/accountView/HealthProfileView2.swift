@@ -51,15 +51,16 @@ struct HealthProfileView2: View {
                     )
                 
                       
-                
-                HStack {
-                    ForEach(0..<8) { index in
-                        Rectangle()
-                            .foregroundColor(Color(index <= 2 ? UIColor.lightGreen : .lightGray))
-                            .frame(height: 5)
+                if UserDefaults.standard.bool(forKey: "signupCompletionFlag") != true {
+                    HStack {
+                        ForEach(0..<8) { index in
+                            Rectangle()
+                                .foregroundColor(Color(index <= 2 ? UIColor.lightGreen : .lightGray))
+                                .frame(height: 5)
+                        }
                     }
+                        .padding()
                 }
-                    .padding()
                 
                 Form {
                     Section(header: Text("Health Profile")) {
