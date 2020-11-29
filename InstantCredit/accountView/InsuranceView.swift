@@ -172,14 +172,9 @@ struct InsuranceView: View {
                 NavigationLink(destination: PaymentView(), tag: 2, selection: $selection) { EmptyView() }
                 
                 NavigationLink(destination: HomeView(selectionValue: 1), tag: 9, selection: $selection) { EmptyView() }
-                        
-                    
-                
-                    
                 }
             }
         }
-
 struct Insurance_Previews: PreviewProvider {
     static var previews: some View {
         InsuranceView()

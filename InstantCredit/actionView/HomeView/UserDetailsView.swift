@@ -11,7 +11,7 @@ import SwiftUI
 struct UserDetailsView: View {
     
     
-    @State var selection: Int? = nil
+    @State var selection: Int?
     var body: some View {
         
         VStack(spacing: 0) {

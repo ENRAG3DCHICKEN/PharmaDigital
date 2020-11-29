@@ -40,13 +40,13 @@ struct InsuranceView2: View {
         _selectedPlanName3 = selectedPlanName3
         
         if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
-            _memberID2 = State(wrappedValue: UserDefaults.standard.string(forKey: "memberID2")!)
-            _groupNumber2 = State(wrappedValue: UserDefaults.standard.string(forKey: "groupNumber2")!)
-            _policyholderName2 = State(wrappedValue: UserDefaults.standard.string(forKey: "policyholderName2")!)
-            _carrierCode2 = State(wrappedValue: UserDefaults.standard.string(forKey: "carrierCode2")!)
-            _selectedDate2 = State(wrappedValue: UserDefaults.standard.object(forKey: "selectedDate2") as! Date)
-            _insurancePhone2 = State(wrappedValue: UserDefaults.standard.string(forKey: "insurancePhone2")!)
-            _relationshipToCardholder2 = State(wrappedValue: UserDefaults.standard.string(forKey: "relationshipToCardholder2")!)
+            _memberID2 = State(wrappedValue: UserDefaults.standard.string(forKey: "memberID2") ?? "")
+            _groupNumber2 = State(wrappedValue: UserDefaults.standard.string(forKey: "groupNumber2") ?? "")
+            _policyholderName2 = State(wrappedValue: UserDefaults.standard.string(forKey: "policyholderName2") ?? "")
+            _carrierCode2 = State(wrappedValue: UserDefaults.standard.string(forKey: "carrierCode2") ?? "")
+            _selectedDate2 = State(wrappedValue: UserDefaults.standard.object(forKey: "selectedDate2") as? Date ?? Date())
+            _insurancePhone2 = State(wrappedValue: UserDefaults.standard.string(forKey: "insurancePhone2") ?? "")
+            _relationshipToCardholder2 = State(wrappedValue: UserDefaults.standard.string(forKey: "relationshipToCardholder2") ?? "")
         } else {
             _memberID2 = State(wrappedValue: "")
             _groupNumber2 = State(wrappedValue: "")
