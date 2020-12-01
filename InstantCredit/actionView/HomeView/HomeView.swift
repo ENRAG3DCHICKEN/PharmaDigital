@@ -65,7 +65,7 @@ struct ObtainPrescriptions: View {
                 .navigationBarHidden(true)
                           
         
-            NavigationLink(destination: NewPrescriptionView(), tag: 1, selection: $selection) {
+            NavigationLink(destination: NewPrescriptionMessage(), tag: 1, selection: $selection) {
                 ZStack {
                     LinearGradient(gradient: Gradient(colors: [Color(UIColor.tile1b),Color(UIColor.tile1a)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     HStack {
@@ -143,7 +143,7 @@ struct ObtainPrescriptions: View {
             }
             
             
-            NavigationLink(destination: TransferPrescriptionView(), tag: 3, selection: $selection) {
+            NavigationLink(destination: TransferPrescriptionMessage(), tag: 3, selection: $selection) {
                 ZStack {
                     LinearGradient(gradient: Gradient(colors: [Color(UIColor.tile3b),Color(UIColor.tile3a)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     HStack {
@@ -197,39 +197,36 @@ struct PastPrescriptions: View {
     
     //PUll this from Core Data
     init() {
-        _FullName = State(wrappedValue: "")
+        _FullName = State(wrappedValue: UserDefaults.standard.string(forKey: "fullName")!)
     }
     
     var body: some View {
         VStack {
-        Section {
-            VStack{
-                
-                Text("")
-                    .navigationBarTitle("")
-                    .navigationBarHidden(true)
-                              
-                
-                Text("In Process Prescriptions for: \(FullName)")
-                //Pull Current Order History
-                
-                //If BLANK
-                
-                Text("You have no orders to be processed")
+            Section {
+                VStack{
+                    
+                    Text("")
+                        .navigationBarTitle("")
+                        .navigationBarHidden(true)
+                                  
+                    
+                    
+                    Text("In Process Prescriptions for: \(FullName)").font(.headline)
+                    //Pull Current Order History
+                    
+                    //If BLANK
+                    Text("You have no orders to be processed").font(.body)
+                    
+                    Text("Prescription History for: \(FullName)").font(.headline)
+                    //Pull Past Order History
+                    
+                    // If BLANK
+                    Text("There are no orders in your order history").font(.body)
+                }
             }
-            
         }
         
-        Section {
-            VStack {
-                Text("Prescription History for: \(FullName)")
-                //Pull Past Order History
-                
-                // If BLANK
-                Text("There are no orders in your order history")
-            }
-        }
-        }
     }
 }
+
 

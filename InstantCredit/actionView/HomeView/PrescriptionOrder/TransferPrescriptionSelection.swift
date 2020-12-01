@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct TransferPrescriptionView: View {
+struct TransferPrescriptionSelection: View {
     @State private var isOn1: Bool = true
     @State private var isOn2: Bool = false
     
@@ -44,8 +44,7 @@ struct TransferPrescriptionView: View {
         let on2 = Binding<Bool>(get: { self.isOn2 }, set: { self.isOn1 = false; self.isOn2 = $0})
         
         VStack {
-            Text("Only place transfer requests now for prescriptions you wish to have filled at this time")
-            Text("Please place your orders for future prescriptions near the time you wish to have them shipped")
+
             
             Toggle(isOn: on1) { Text("My prescription will be transferred based on the below details: ").font(.callout) }
             Toggle(isOn: on2) { Text("My old pharmacy will call or fax").font(.callout) }

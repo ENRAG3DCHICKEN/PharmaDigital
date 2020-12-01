@@ -12,7 +12,7 @@ import MapKit
 
 struct PharmacySearchView: View {
     
-
+    
 //
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 //    //
@@ -25,13 +25,14 @@ struct PharmacySearchView: View {
     
     @State private var chosenPharmacy : Pharmacy?
     
-//    init() {
-//        if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
-//            _chosenPharmacy = State(wrappedValue: UserDefaults.standard.object(forKey: "chosenPharmacy") as? Pharmacy)
-//        } else {
-//            _chosenPharmacy = State(wrappedValue: nil)
-//        }
-//    }
+    init(pharmacy: Pharmacy?) {
+        _chosenPharmacy = State(wrappedValue: pharmacy)
+    }
+    
+    init() {
+        _chosenPharmacy = State(wrappedValue: nil)
+    }
+
 
     
     var selectedPharmacyMarker: Binding<MKAnnotation?> {
@@ -67,7 +68,7 @@ struct PharmacySearchView: View {
             
             if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
                 Button(action: {
-                    UserDefaults.standard.set(chosenPharmacy!.pharmacyName, forKey: "chosenPharmacy")
+                    UserDefaults.standard.set(chosenPharmacy!.accreditationNumber, forKey: "chosenPharmacy")
                     self.selection = 9
                     FormSubmissionToCoreData(context: context)
                 } ) { Text("Submit").font(.body).bold() }
@@ -78,9 +79,9 @@ struct PharmacySearchView: View {
                     .padding()
             } else {
                 Button(action: {
-//                    print(chosenPharmacy!)
-//                    UserDefaults.standard.set(chosenPharmacy!, forKey: "chosenPharmacy")
-                    UserDefaults.standard.set(chosenPharmacy!.pharmacyName, forKey: "chosenPharmacy")
+                    UserDefaults.standard.set(chosenPharmacy!.accreditationNumber, forKey: "chosenPharmacy")
+                    print("checkHERE")
+                    print(UserDefaults.standard.double(forKey: "chosenPharmacy"))
                     self.selection = 1
                 } ) { Text("Next >").font(.body).bold() }
                     .disabled(chosenPharmacy == nil)
@@ -96,6 +97,7 @@ struct PharmacySearchView: View {
                 print("start")
                 populateCoreData_Pharmacy(context: context)
                 print("done")
+                
             })
         }
     }
@@ -120,30 +122,3 @@ struct PharmacySearchView: View {
 
 
 //
-//
-//
-////Store into Core Data
-//DispatchQueue.global(qos: .userInitiated).async {
-//    //Standard query request to Core Data
-//    let request = NSFetchRequest<Patient>(entityName: "Patient")
-//    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
-//    request.predicate = NSPredicate(format: "emailAddress = %@", UserDefaults.standard.string(forKey: "email")!)
-//
-//    let results = (try? context.fetch(request)) ?? []
-//    let patient = results.first ?? Patient(context: context)
-//
-//    patient.emailAddress = UserDefaults.standard.string(forKey: "email")!
-//    patient.selectedPharmacy = chosenPharmacy!.pharmacyName
-//
-//    patient.objectWillChange.send()
-//
-//    //One to One Relationships
-////                    patient.healthInfo.objectWillChange.send()
-////                    patient.insuranceInfo.objectWillChange.send()
-////                    patient.paymentInfo.objectWillChange.send()
-////                    patient.shippingInfo.objectWillChange.send()
-//
-//    //One to Many Relationships
-//    patient.orderHistory.forEach { $0.objectWillChange.send() }
-//    patient.orderPharmacy.forEach { $0.objectWillChange.send() }
-//}

@@ -7,11 +7,16 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct UserDetailsView: View {
     
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
     @State var selection: Int?
+    
+    
+    @State var chosenPharmacy: Pharmacy?
     var body: some View {
         
         VStack(spacing: 0) {
@@ -32,9 +37,11 @@ struct UserDetailsView: View {
                     .opacity(0.7)
             )
             
-        NavigationLink(destination: PharmacySearchView(), tag: 0, selection: $selection) {
-            Button(action: {
-                self.selection = 0
+            NavigationLink(destination: PharmacySearchView(pharmacy: chosenPharmacy), tag: 0, selection: $selection) {
+                Button(action: {
+                    print("tryhere")
+                    print(chosenPharmacy?.pharmacyName ?? "no pharmacy detected")
+                    self.selection = 0
             }, label: {
                 HStack {
                 Image(systemName: "map").font(.body)
@@ -156,10 +163,20 @@ struct UserDetailsView: View {
 
         Spacer()
     
+        
+
         }
-            
-        
-        
-        
+            .onAppear {
+                DispatchQueue.global(qos: .userInitiated).async {
+                    //Standard query request to Core Data
+                    let request = NSFetchRequest<Pharmacy>(entityName: "Pharmacy")
+                    request.sortDescriptors = [NSSortDescriptor(key: "accreditationNumber", ascending: true)]
+                    request.predicate = NSPredicate(format: "accreditationNumber == %@", String(UserDefaults.standard.integer(forKey: "chosenPharmacy")))
+    
+                    let results = (try? context.fetch(request)) ?? []
+                    self.chosenPharmacy = results.first
+                    print(UserDefaults.standard.integer(forKey: "chosenPharmacy"))
+                }
+            }
     }
 }

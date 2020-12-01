@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct PrescriptionSelection: View {
+struct NewPrescriptionSelection: View {
     @State private var isOn1: Bool = true
     @State private var isOn2: Bool = false
     

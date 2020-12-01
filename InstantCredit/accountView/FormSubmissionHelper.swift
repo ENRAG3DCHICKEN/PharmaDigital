@@ -45,13 +45,15 @@ func PatientObjectUpdate(context: NSManagedObjectContext) -> Patient {
     let patient = results.first ?? Patient(context: context)
 
     patient.emailAddress = UserDefaults.standard.string(forKey: "email")
-    patient.selectedPharmacy = UserDefaults.standard.string(forKey: "chosenPharmacy") 
+//    patient.selectedPharmacy = UserDefaults.standard.string(forKey: "chosenPharmacy") 
     patient.fullName = UserDefaults.standard.string(forKey: "fullName")
     patient.address = UserDefaults.standard.string(forKey: "address")
     patient.city = UserDefaults.standard.string(forKey: "city")
     patient.province = UserDefaults.standard.string(forKey: "province")
     patient.postalCode = UserDefaults.standard.string(forKey: "postalCode")
     patient.phoneNumber = UserDefaults.standard.string(forKey: "phoneNumber")
+    
+//    patient.orderPharmacy =
 
     patient.privacyCompletionFlag = UserDefaults.standard.bool(forKey: "privacyCompletionFlag")
     patient.signupCompletionFlag = UserDefaults.standard.bool(forKey: "signupCompletionFlag")
@@ -59,6 +61,8 @@ func PatientObjectUpdate(context: NSManagedObjectContext) -> Patient {
     patient.healthInfo = PatientHealthDetailsObjectUpdate(context: context)
     patient.insuranceInfo = PatientInsuranceDetailsObjectUpdate(context: context)
     patient.paymentInfo = PatientPaymentDetailsObjectUpdate(context: context)
+    
+
     
     
     do {
