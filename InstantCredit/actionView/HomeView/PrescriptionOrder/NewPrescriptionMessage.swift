@@ -11,6 +11,14 @@ import SwiftUI
 struct NewPrescriptionMessage: View {
     
     @State private var selection: Int?
+    
+    @State private var chosenPharmacy: Pharmacy?
+    
+    init(chosenPharmacy: Pharmacy?) {
+        _chosenPharmacy = State(wrappedValue: chosenPharmacy)
+    }
+    
+    
     var body: some View {
         
         VStack {
@@ -32,7 +40,7 @@ struct NewPrescriptionMessage: View {
                 .background(Color(UIColor.mainColor))
                 .padding()
             
-            NavigationLink(destination: NewPrescriptionSelection(), tag: 1, selection: $selection) { EmptyView() }
+            NavigationLink(destination: NewPrescriptionSelection(chosenPharmacy: chosenPharmacy!), tag: 1, selection: $selection) { EmptyView() }
 
         }
     }

@@ -9,23 +9,14 @@
 import SwiftUI
 
 struct NewPrescriptionSelection: View {
+    
+    @State private var chosenPharmacy: Pharmacy
+    
     @State private var isOn1: Bool = true
     @State private var isOn2: Bool = false
     
-    @State private var PharmacyName: String
-    @State private var PharmacyAddress: String
-    @State private var PharmacyPostalCode: String
-    
-    @State private var PharmacyPhone: String
-    @State private var PharmacyFax: String
-    
-    init() {
-        //Replace this with a core data pull
-        _PharmacyName = State(wrappedValue: "")
-        _PharmacyAddress = State(wrappedValue: "")
-        _PharmacyPostalCode = State(wrappedValue: "")
-        _PharmacyPhone = State(wrappedValue: "")
-        _PharmacyFax = State(wrappedValue: "")
+    init(chosenPharmacy: Pharmacy) {
+        _chosenPharmacy = State(wrappedValue: chosenPharmacy)
     }
     
     var body: some View {
@@ -42,15 +33,15 @@ struct NewPrescriptionSelection: View {
             if isOn1 == true, isOn2 == false {
                 Form {
                     Section {
-                        TextField("Pharmacy Name", text: $PharmacyName)
-                        TextField("Pharmacy Address", text: $PharmacyAddress)
-                        TextField("Pharmacy Postal Code", text: $PharmacyPostalCode)
+                        Text("Pharmacy Name: \(chosenPharmacy.pharmacyName!)")
+                        Text("Pharmacy Address: \(chosenPharmacy.address!)")
+                        Text("Pharmacy Postal Code: \(chosenPharmacy.postalCode!)")
                     }
                 }
             } else if isOn1 == false, isOn2 == true {
                 VStack {
-                    Text("Phone: \(PharmacyPhone)")
-                    Text("Fax: \(PharmacyFax)")
+                    Text("Pharmacy Phone: \(chosenPharmacy.phoneNumber)")
+                    Text("Pharmacy Fax: \(chosenPharmacy.faxNumber)")
                 }
             }
         }

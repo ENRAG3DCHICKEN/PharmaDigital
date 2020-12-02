@@ -37,7 +37,7 @@ struct UserDetailsView: View {
                     .opacity(0.7)
             )
             
-            NavigationLink(destination: PharmacySearchView(pharmacy: chosenPharmacy), tag: 0, selection: $selection) {
+            NavigationLink(destination: PharmacySearchView(chosenPharmacy: chosenPharmacy), tag: 0, selection: $selection) {
                 Button(action: {
                     print("tryhere")
                     print(chosenPharmacy?.pharmacyName ?? "no pharmacy detected")

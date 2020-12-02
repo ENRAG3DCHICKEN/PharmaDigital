@@ -25,8 +25,8 @@ struct PharmacySearchView: View {
     
     @State private var chosenPharmacy : Pharmacy?
     
-    init(pharmacy: Pharmacy?) {
-        _chosenPharmacy = State(wrappedValue: pharmacy)
+    init(chosenPharmacy: Pharmacy?) {
+        _chosenPharmacy = State(wrappedValue: chosenPharmacy)
     }
     
     init() {
