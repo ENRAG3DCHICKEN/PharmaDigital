@@ -46,6 +46,7 @@ extension UIColor {
         static var gradiant3: UIColor { return UIColor(red: 34/255, green: 193/255, blue: 195/255, alpha: 1) }
         static var gradiant4: UIColor { return UIColor(red: 253/255, green: 187/255, blue: 45/255, alpha: 1) }
         //
+        static var backBar: UIColor { return UIColor(red: 236/255, green: 139/255, blue: 47/255, alpha: 1) }
         static var buttonBar: UIColor { return UIColor(red: 143/255, green: 155/255, blue: 146/255, alpha: 1) }
         //
         static var tile1a: UIColor { return UIColor(red: 33/255, green: 155/255, blue: 154/255, alpha: 1) }

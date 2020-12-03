@@ -59,7 +59,8 @@ extension Pharmacy: Comparable {
         pharmacy.longitude = Double(truncating: fbPharmacyData["Longitude"] as! NSNumber)
         pharmacy.latitude = Double(truncating: fbPharmacyData["Latitude"] as! NSNumber)
         pharmacy.pharmacyName = fbPharmacyData["PharmacyName"] as? String
-        pharmacy.phoneNumber = fbPharmacyData["PhoneNumber"] as! Int64
+        pharmacy.phoneNumber = fbPharmacyData["PhoneNumber"] as? String
+        pharmacy.faxNumber = fbPharmacyData["FaxNumber"] as? String
         pharmacy.postalCode = fbPharmacyData["PostalCode"] as? String
         pharmacy.province = fbPharmacyData["Province"] as? String
             

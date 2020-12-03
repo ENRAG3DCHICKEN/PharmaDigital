@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct TransferPrescriptionSelection: View {
+    
+    @State private var chosenPharmacy: Pharmacy
+    
     @State private var isOn1: Bool = true
     @State private var isOn2: Bool = false
     
@@ -28,32 +31,37 @@ struct TransferPrescriptionSelection: View {
     @State private var rx6: String = ""
     @State private var med6: String = ""
     
-    
-    @State private var PharmacyPhone = ""
-    @State private var PharmacyFax = ""
-    
-    
-    init() {
-        //Replace this with a core data pull
-        _PharmacyPhone = State(wrappedValue: "")
-        _PharmacyFax = State(wrappedValue: "")
+    init(chosenPharmacy: Pharmacy) {
+        _chosenPharmacy = State(wrappedValue: chosenPharmacy)
     }
     
     var body: some View {
-        let on1 = Binding<Bool>(get: { self.isOn1 }, set: { self.isOn1 = $0; self.isOn2 = false})
-        let on2 = Binding<Bool>(get: { self.isOn2 }, set: { self.isOn1 = false; self.isOn2 = $0})
+        let on1 = Binding<Bool>(get: { self.isOn1 }, set: { self.isOn1 = $0; self.isOn2.toggle()})
+        let on2 = Binding<Bool>(get: { self.isOn2 }, set: { self.isOn1.toggle(); self.isOn2 = $0})
         
-        VStack {
+        VStack(spacing: 0) {
+            
+            Text("")
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
+            
+            
+            Text("Transfer Prescription Request").font(.headline)
 
-            
-            Toggle(isOn: on1) { Text("My prescription will be transferred based on the below details: ").font(.callout) }
-            Toggle(isOn: on2) { Text("My old pharmacy will call or fax").font(.callout) }
-            
-            if isOn1 == true, isOn2 == false {
-                Form {
+            Form {
+                
+                Section {
+                    Toggle(isOn: on1) { Text("My prescription will be transferred based on the below details: ").font(.callout) }
+                    Toggle(isOn: on2) { Text("My old pharmacy will call or fax").font(.callout) }
+                }
+                
+                Spacer()
+                
+                if isOn1 == true, isOn2 == false {
+                
                     Section {
-                        TextField("Pharmacy Name", text: $priorPharmacyName)
-                        TextField("Pharmacy Phone", text: $priorPharmacyPhone)
+                        TextField("Old Pharmacy Name", text: $priorPharmacyName)
+                        TextField("Old Pharmacy Phone", text: $priorPharmacyPhone)
                     }
                     Section {
                         HStack {
@@ -85,17 +93,15 @@ struct TransferPrescriptionSelection: View {
                             TextField("Medication: ", text: $med6)
                         }
                     }
-                }
+                    
+                } else if isOn1 == false, isOn2 == true {
                 
-                
-            } else if isOn1 == false, isOn2 == true {
-                VStack {
-                    Text("Phone: \(PharmacyPhone)")
-                    Text("Fax: \(PharmacyFax)")
+                    VStack {
+                        Text("New Pharmacy Phone: \(chosenPharmacy.phoneNumber!)")
+                        Text("New Pharmacy Fax: \(chosenPharmacy.faxNumber!)")
+                    }
                 }
             }
-            
-            
         }
     }
 }

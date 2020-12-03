@@ -97,10 +97,11 @@
         <attribute name="accreditationNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="address" optional="YES" attributeType="String"/>
         <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="faxNumber" optional="YES" attributeType="String"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="pharmacyName" optional="YES" attributeType="String"/>
-        <attribute name="phoneNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="String"/>
         <attribute name="postalCode" optional="YES" attributeType="String"/>
         <attribute name="province" optional="YES" attributeType="String"/>
         <relationship name="orderHistory_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Orders" inverseName="fiulfillmentPharmacy_" inverseEntity="Orders"/>
@@ -113,6 +114,6 @@
         <element name="PatientHealthDetails" positionX="937.76953125" positionY="-80.50390625" width="207.96484375" height="178"/>
         <element name="PatientInsuranceDetails" positionX="870.8515625" positionY="131.9375" width="199.984375" height="493"/>
         <element name="PatientPaymentDetails" positionX="815.8515625" positionY="389.6796875" width="161.90625" height="163"/>
-        <element name="Pharmacy" positionX="-153.51171875" positionY="419.09765625" width="111.53515625" height="208"/>
+        <element name="Pharmacy" positionX="-153.51171875" positionY="419.09765625" width="111.53515625" height="223"/>
     </elements>
 </model>

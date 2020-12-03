@@ -21,16 +21,38 @@ struct NewPrescriptionMessage: View {
     
     var body: some View {
         
-        VStack {
+        VStack(spacing: 0) {
             
             Text("")
                 .navigationBarTitle("")
                 .navigationBarHidden(true)
             
-            Text("Only place transfer requests now for prescriptions you wish to have filled at this time")
-            Text("Please place your orders for future prescriptions near the time you wish to have them shipped")
+            Text("New Prescription Request").font(.headline)
             
             Spacer()
+            
+            Form {
+                Section {
+                    Text("Only place transfer requests now for prescriptions you wish to have filled at this time")
+                        .font(.body)
+                        .multilineTextAlignment(.center)
+                    
+                    Text("Please place your orders for future prescriptions near the time you wish to have them shipped")
+                        .font(.body)
+                        .multilineTextAlignment(.center)
+                }
+            }
+            
+            Spacer()
+            
+            
+            Button(action: {
+                self.selection = 0
+            } ) { Text("< Back").font(.body).bold() }
+                .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                .foregroundColor(Color(.white))
+            .background(Color(UIColor.backBar))
+                .padding()
             
             Button(action: {
                 self.selection = 1
@@ -40,6 +62,7 @@ struct NewPrescriptionMessage: View {
                 .background(Color(UIColor.mainColor))
                 .padding()
             
+            NavigationLink(destination: HomeView(), tag: 0, selection: $selection) { EmptyView() }
             NavigationLink(destination: NewPrescriptionSelection(chosenPharmacy: chosenPharmacy!), tag: 1, selection: $selection) { EmptyView() }
 
         }

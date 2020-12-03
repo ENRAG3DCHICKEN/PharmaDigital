@@ -31,6 +31,8 @@ extension String {
     func contains(elementIn array: [String]) -> Bool {
         array.contains(where: { self.contains($0) })
     }
+    
+    var digits: [Int] { compactMap(\.wholeNumberValue) }
 }
 
 extension DateFormatter {
