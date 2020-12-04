@@ -22,8 +22,6 @@ struct NewPrescriptionSelection: View {
     }
     
     var body: some View {
-//        let on1 = Binding<Bool>(get: { self.isOn1 }, set: { self.isOn1 = $0; self.isOn2 = false })
-//        let on2 = Binding<Bool>(get: { self.isOn2 }, set: { self.isOn1 = false; self.isOn2 = $0 })
         
         let on1 = Binding<Bool>(get: { self.isOn1 }, set: { self.isOn1 = $0; self.isOn2.toggle() })
         let on2 = Binding<Bool>(get: { self.isOn2 }, set: { self.isOn1.toggle(); self.isOn2 = $0 })
@@ -65,7 +63,7 @@ struct NewPrescriptionSelection: View {
             } ) { Text("< Back").font(.body).bold() }
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))
-            .background(Color(UIColor.backBar))
+            .background(Color(UIColor.gradiant1))
                 .padding()
             
             Button(action: {
@@ -77,7 +75,7 @@ struct NewPrescriptionSelection: View {
                 .padding()
             
             NavigationLink(destination: NewPrescriptionMessage(chosenPharmacy: chosenPharmacy), tag: 0, selection: $selection) { EmptyView() }
-            NavigationLink(destination: HomeView(), tag: 1, selection: $selection) { EmptyView() }
+            NavigationLink(destination: FulfillmentView(), tag: 1, selection: $selection) { EmptyView() }
 
             
         }

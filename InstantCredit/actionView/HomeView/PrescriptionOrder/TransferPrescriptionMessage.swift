@@ -49,7 +49,7 @@ struct TransferPrescriptionMessage: View {
             } ) { Text("< Back").font(.body).bold() }
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))
-            .background(Color(UIColor.backBar))
+            .background(Color(UIColor.gradiant1))
                 .padding()
             
             Button(action: {
@@ -58,8 +58,7 @@ struct TransferPrescriptionMessage: View {
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))
                 .background(Color(UIColor.mainColor))
-                .padding()
-            
+                .padding()   
             
             NavigationLink(destination: HomeView(), tag: 0, selection: $selection) { EmptyView() }
             NavigationLink(destination: TransferPrescriptionSelection(chosenPharmacy: chosenPharmacy!), tag: 1, selection: $selection) { EmptyView() }
