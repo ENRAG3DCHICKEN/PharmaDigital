@@ -75,7 +75,7 @@ struct NewPrescriptionSelection: View {
                 .padding()
             
             NavigationLink(destination: NewPrescriptionMessage(chosenPharmacy: chosenPharmacy), tag: 0, selection: $selection) { EmptyView() }
-            NavigationLink(destination: FulfillmentView(), tag: 1, selection: $selection) { EmptyView() }
+            NavigationLink(destination: FulfillmentView(chosenPharmacy: chosenPharmacy, indicator: 2), tag: 1, selection: $selection) { EmptyView() }
 
             
         }

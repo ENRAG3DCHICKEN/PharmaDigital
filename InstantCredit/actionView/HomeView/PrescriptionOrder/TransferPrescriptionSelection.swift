@@ -17,9 +17,6 @@ struct TransferPrescriptionSelection: View {
     @State private var isOn1: Bool = true
     @State private var isOn2: Bool = false
    
-    
-    
-    
     @State private var priorPharmacyName: String = ""
     @State private var priorPharmacyPhone: String = ""
     
@@ -115,6 +112,33 @@ struct TransferPrescriptionSelection: View {
                     }
                 }
             }
+            
+            
+            
+            
+            
+            
+//             @State private var priorPharmacyName: String = ""
+//             @State private var priorPharmacyPhone: String = ""
+//
+//             @State private var transferAll: Bool = true
+//
+//             @State private var rx1: String = ""
+//             @State private var med1: String = ""
+//             @State private var rx2: String = ""
+//             @State private var med2: String = ""
+//             @State private var rx3: String = ""
+//             @State private var med3: String = ""
+//             @State private var rx4: String = ""
+//             @State private var med4: String = ""
+//             @State private var rx5: String = ""
+//             @State private var med5: String = ""
+//             @State private var rx6: String = ""
+//             @State private var med6: String = ""
+//
+            
+            
+            
                 Button(action: {
                     self.selection = 0
                 } ) { Text("< Back").font(.body).bold() }
@@ -124,7 +148,20 @@ struct TransferPrescriptionSelection: View {
                     .padding()
                             
                 Button(action: {
+                    
+                    UserDefaults.standard.set(self.priorPharmacyName, forKey: "transPriorPharmacyName")
+                    UserDefaults.standard.set(self.priorPharmacyPhone, forKey: "transPriorPharmacyPhone")
+                    UserDefaults.standard.set(self.transferAll, forKey: "transAllFlag")
+                    
+                    UserDefaults.standard.set( (self.rx1 + " " + med1), forKey: "transMedication1")
+                    UserDefaults.standard.set( (self.rx2 + " " + med2), forKey: "transMedication2")
+                    UserDefaults.standard.set( (self.rx3 + " " + med3), forKey: "transMedication3")
+                    UserDefaults.standard.set( (self.rx4 + " " + med4), forKey: "transMedication4")
+                    UserDefaults.standard.set( (self.rx5 + " " + med5), forKey: "transMedication5")
+                    UserDefaults.standard.set( (self.rx6 + " " + med6), forKey: "transMedication6")
+                
                     self.selection = 1
+                    
                 } ) { Text("Next >").font(.body).bold() }
                     .disabled( (isOn1 == true && isOn2 == false && priorPharmacyName.isEmpty) || (isOn1 == true && isOn2 == false && priorPharmacyPhone.isEmpty) || (transferAll == false && rx1.isEmpty) || (transferAll == false && med1.isEmpty) )
                     .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
@@ -133,7 +170,7 @@ struct TransferPrescriptionSelection: View {
                     .padding()
                             
                 NavigationLink(destination: TransferPrescriptionMessage(chosenPharmacy: chosenPharmacy), tag: 0, selection: $selection) { EmptyView() }
-                NavigationLink(destination: FulfillmentView(), tag: 1, selection: $selection) { EmptyView() }
+                NavigationLink(destination: FulfillmentView(chosenPharmacy: chosenPharmacy, indicator: 4), tag: 1, selection: $selection) { EmptyView() }
                 
             
         }

@@ -10,7 +10,11 @@ import SwiftUI
 
 struct FulfillmentView: View {
     
+        @State private var indicator: Int
+    
         @State private var selection: Int?
+    
+        @State private var chosenPharmacy: Pharmacy
     
         @State private var optionLocalPickup: Bool = true
         @State private var optionDelivery_Regular: Bool = false
@@ -22,6 +26,11 @@ struct FulfillmentView: View {
         @State private var shipProvince: String = ""
         @State private var shipPostalCode: String = ""
         @State private var shipPhoneNumber: String = ""
+    
+        init(chosenPharmacy: Pharmacy, indicator: Int) {
+            _chosenPharmacy = State(wrappedValue: chosenPharmacy)
+            _indicator = State(wrappedValue: indicator)
+        }
         
         var body: some View {
             
@@ -62,24 +71,58 @@ struct FulfillmentView: View {
                         .padding()
             }
             
-            
-            Button(action: { self.selection = 0 } ) { Text("< Cancel").font(.body).bold() }
+            Button(action: {
+                //Back to New Prescriptions
+                if indicator == 2 {
+                    self.selection = 2
+                //Back to Refill Prescriptions
+                } else if indicator == 3 {
+                    self.selection = 3
+                //Back to Transfer Prescriptions
+                } else if indicator == 4 {
+                    self.selection = 4
+                }
+            }) { Text("< Back").font(.body).bold() }
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))
                 .background(Color(UIColor.gradiant1))
                 .padding()
             
-            Button(action: { self.selection = 1 } ) { Text("Next >").font(.body).bold() }
-                .disabled(shipFullName.isEmpty || shipAddress.isEmpty || shipProvince.isEmpty || shipPostalCode.isEmpty || shipPhoneNumber.isEmpty)
+            Button(action: {
+  
+                if optionLocalPickup {
+                    UserDefaults.standard.set("optionLocalPickup", forKey: "shipOption")
+                } else if optionDelivery_Regular {
+                    UserDefaults.standard.set("optionDelivery_Regular", forKey: "shipOption")
+                } else if optionDelivery_Sameday {
+                    UserDefaults.standard.set("optionDelivery_Sameday", forKey: "shipOption")
+                }
+                
+                UserDefaults.standard.set(shipFullName, forKey: "shipFullName")
+                UserDefaults.standard.set(shipAddress, forKey: "shipAddress")
+                UserDefaults.standard.set(shipCity, forKey: "shipCity")
+                UserDefaults.standard.set(shipProvince, forKey: "shipProvince")
+                UserDefaults.standard.set(shipPostalCode, forKey: "shipPostalCode")
+                UserDefaults.standard.set(shipPhoneNumber, forKey: "shipPhoneNumber")
+                
+                self.selection = 1
+                
+            } ) { Text("Next >").font(.body).bold() }
+                .disabled( !optionLocalPickup && shipFullName.isEmpty || !optionLocalPickup && shipAddress.isEmpty || !optionLocalPickup && shipProvince.isEmpty || !optionLocalPickup && shipPostalCode.isEmpty || !optionLocalPickup && shipPhoneNumber.isEmpty)
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))
-                .background(shipFullName.isEmpty || shipAddress.isEmpty || shipProvince.isEmpty || shipPostalCode.isEmpty || shipPhoneNumber.isEmpty ? .gray : Color(UIColor.mainColor))
+                .background( !optionLocalPickup && shipFullName.isEmpty || !optionLocalPickup && shipAddress.isEmpty || !optionLocalPickup && shipProvince.isEmpty || !optionLocalPickup && shipPostalCode.isEmpty || !optionLocalPickup && shipPhoneNumber.isEmpty ? .gray : Color(UIColor.mainColor))
                 .padding()
             
-            NavigationLink(destination: HomeView(), tag: 0, selection: $selection) { EmptyView() }
+            //Go BACK Views
+            NavigationLink(destination: NewPrescriptionSelection(chosenPharmacy: chosenPharmacy), tag: 2, selection: $selection) { EmptyView() }
+//            NavigationLink(destination: HomeView(), tag: 3, selection: $selection) { EmptyView() }
+            NavigationLink(destination: TransferPrescriptionSelection(chosenPharmacy: chosenPharmacy), tag: 4, selection: $selection) { EmptyView() }
             
-            NavigationLink(destination: SummaryCompletionView(), tag: 1, selection: $selection) { EmptyView() }
-                    
+            
+            //Go FORWARD Views
+            NavigationLink(destination: SummaryCompletionView(chosenPharmacy: chosenPharmacy, indicator: indicator), tag: 1, selection: $selection) { EmptyView() }
+            
         }
     }
 }
