@@ -49,8 +49,8 @@ struct TransferPrescriptionMessage: View {
             } ) { Text("< Back").font(.body).bold() }
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))
-            .background(Color(UIColor.gradiant1))
-                .padding()
+                .background(Color(UIColor.gradiant1))
+                .padding(.horizontal)
             
             Button(action: {
                 self.selection = 1

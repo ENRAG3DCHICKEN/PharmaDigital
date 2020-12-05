@@ -63,8 +63,8 @@ struct NewPrescriptionSelection: View {
             } ) { Text("< Back").font(.body).bold() }
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))
-            .background(Color(UIColor.gradiant1))
-                .padding()
+                .background(Color(UIColor.gradiant1))
+                .padding(.horizontal)   
             
             Button(action: {
                 self.selection = 1
@@ -75,7 +75,7 @@ struct NewPrescriptionSelection: View {
                 .padding()
             
             NavigationLink(destination: NewPrescriptionMessage(chosenPharmacy: chosenPharmacy), tag: 0, selection: $selection) { EmptyView() }
-            NavigationLink(destination: FulfillmentView(chosenPharmacy: chosenPharmacy, indicator: 2), tag: 1, selection: $selection) { EmptyView() }
+            NavigationLink(destination: CheckoutView(chosenPharmacy: chosenPharmacy, indicator: 2), tag: 1, selection: $selection) { EmptyView() }
 
             
         }

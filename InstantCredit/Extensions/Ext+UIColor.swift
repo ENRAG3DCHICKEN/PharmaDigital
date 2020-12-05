@@ -52,7 +52,7 @@ extension UIColor {
         static var tile1a: UIColor { return UIColor(red: 33/255, green: 155/255, blue: 154/255, alpha: 1) }
         static var tile1b: UIColor { return UIColor(red: 27/255, green: 61/255, blue: 95/255, alpha: 1) }
         static var tile2a: UIColor { return UIColor(red: 253/255, green: 174/255, blue: 81/255, alpha: 1) }
-        static var tile2b: UIColor { return UIColor(red: 252/255, green: 139/255, blue: 37/255, alpha: 1) }
+        static var tile2b: UIColor { return UIColor(red: 245/255, green: 139/255, blue: 37/255, alpha: 1) }
 //        static var tile3a: UIColor { return UIColor(red: 169/255, green: 224/255, blue: 200/255, alpha: 1) }
 //        static var tile3b: UIColor { return UIColor(red: 67/255, green: 156/255, blue: 227/255, alpha: 1) }
     static var tile3a: UIColor { return UIColor(red: 215/255, green: 169/255, blue: 110/255, alpha: 1) }

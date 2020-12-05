@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct FulfillmentView: View {
+struct CheckoutView: View {
     
         @State private var indicator: Int
     
@@ -39,37 +39,39 @@ struct FulfillmentView: View {
         let od3 = Binding<Bool>(get: { self.optionDelivery_Sameday }, set: { self.optionDelivery_Sameday = $0; self.optionLocalPickup = false; self.optionDelivery_Regular = false })
 
         VStack {
-            
-            Text("")
-                .navigationBarTitle("")
-                .navigationBarHidden(true)
-                
-            Text("Checkout View").font(.headline)
-            Form {
-                Toggle(isOn: od1) { Text("In-Store Pick Up - FREE") }
-                Toggle(isOn: od2) { Text("Ship to Home, Regular Delivery - FREE") }
-                Toggle(isOn: od3) { Text("Ship to Home, Same-Day Delivery - $5") }
-                
-            }
-                
-            if optionLocalPickup == true {
-                Spacer()
-            }
-            
-            if optionDelivery_Regular == true || optionDelivery_Sameday == true {
+            VStack(spacing: 0) {
+                Text("")
+                    .navigationBarTitle("")
+                    .navigationBarHidden(true)
+                    
+                Text("Checkout View").font(.headline)
                 Form {
-                       TextField("Full Name", text: $shipFullName)
-                        TextField("Address", text: $shipAddress)
-                        Picker(selection: $shipProvince, label: Text("Province")) {
-                            ForEach(0..<provinces.count) { index in
-                                Text(provinces[index]).tag(provinces[index])
+                    Toggle(isOn: od1) { Text("In-Store Pick Up - FREE").font(.body) }
+                    Toggle(isOn: od2) { Text("Ship to Home, Regular Delivery - FREE").font(.body) }
+                    Toggle(isOn: od3) { Text("Ship to Home, Same-Day Delivery - $5").font(.body) }
+                    
+                }
+                    
+                if optionLocalPickup == true {
+                    Spacer()
+                }
+                
+                if optionDelivery_Regular == true || optionDelivery_Sameday == true {
+                    Form {
+                           TextField("Full Name", text: $shipFullName)
+                            TextField("Address", text: $shipAddress)
+                            Picker(selection: $shipProvince, label: Text("Province")) {
+                                ForEach(0..<provinces.count) { index in
+                                    Text(provinces[index]).tag(provinces[index])
+                                }
                             }
+                            TextField("Postal Code", text: $shipPostalCode)
+                            TextField("Phone", text: $shipPhoneNumber)
                         }
-                        TextField("Postal Code", text: $shipPostalCode)
-                        TextField("Phone", text: $shipPhoneNumber)
-                    }
-                        .padding()
+                            .padding()
+                }
             }
+                Spacer()
             
             Button(action: {
                 //Back to New Prescriptions
@@ -86,7 +88,7 @@ struct FulfillmentView: View {
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))
                 .background(Color(UIColor.gradiant1))
-                .padding()
+            .padding(.horizontal)
             
             Button(action: {
   
@@ -114,16 +116,17 @@ struct FulfillmentView: View {
                 .background( !optionLocalPickup && shipFullName.isEmpty || !optionLocalPickup && shipAddress.isEmpty || !optionLocalPickup && shipProvince.isEmpty || !optionLocalPickup && shipPostalCode.isEmpty || !optionLocalPickup && shipPhoneNumber.isEmpty ? .gray : Color(UIColor.mainColor))
                 .padding()
             
-            //Go BACK Views
-            NavigationLink(destination: NewPrescriptionSelection(chosenPharmacy: chosenPharmacy), tag: 2, selection: $selection) { EmptyView() }
-//            NavigationLink(destination: HomeView(), tag: 3, selection: $selection) { EmptyView() }
-            NavigationLink(destination: TransferPrescriptionSelection(chosenPharmacy: chosenPharmacy), tag: 4, selection: $selection) { EmptyView() }
-            
-            
-            //Go FORWARD Views
-            NavigationLink(destination: SummaryCompletionView(chosenPharmacy: chosenPharmacy, indicator: indicator), tag: 1, selection: $selection) { EmptyView() }
+                //Go BACK Views
+                NavigationLink(destination: NewPrescriptionSelection(chosenPharmacy: chosenPharmacy), tag: 2, selection: $selection) { EmptyView() }
+    //            NavigationLink(destination: HomeView(), tag: 3, selection: $selection) { EmptyView() }
+                NavigationLink(destination: TransferPrescriptionSelection(chosenPharmacy: chosenPharmacy), tag: 4, selection: $selection) { EmptyView() }
+                
+                
+                //Go FORWARD Views
+                NavigationLink(destination: SummaryCompletionView(chosenPharmacy: chosenPharmacy, indicator: indicator), tag: 1, selection: $selection) { EmptyView() }
             
         }
     }
 }
+
 
