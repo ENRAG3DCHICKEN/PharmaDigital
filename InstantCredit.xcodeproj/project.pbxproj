@@ -23,6 +23,7 @@
 		732C387C253537DF000CF5F0 /* HealthProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C387B253537DF000CF5F0 /* HealthProfileModel.swift */; };
 		732C387E2535685C000CF5F0 /* HealthProfileView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C387D2535685C000CF5F0 /* HealthProfileView1.swift */; };
 		732C38802535686E000CF5F0 /* HealthProfileView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C387F2535686E000CF5F0 /* HealthProfileView3.swift */; };
+		7347EB13257B270B006C8ED1 /* OrderSubmissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7347EB12257B270A006C8ED1 /* OrderSubmissionHelper.swift */; };
 		734825AC2572242D00CF2CBF /* NewPrescriptionMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734825AB2572242D00CF2CBF /* NewPrescriptionMessage.swift */; };
 		736A83FF253DF4D300910E66 /* Ext+Pharmacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736A83FE253DF4D300910E66 /* Ext+Pharmacy.swift */; };
 		737572D3253394E700ADFD75 /* LandingViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737572D2253394E700ADFD75 /* LandingViewHelpers.swift */; };
@@ -86,6 +87,7 @@
 		732C387B253537DF000CF5F0 /* HealthProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthProfileModel.swift; sourceTree = "<group>"; };
 		732C387D2535685C000CF5F0 /* HealthProfileView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthProfileView1.swift; sourceTree = "<group>"; };
 		732C387F2535686E000CF5F0 /* HealthProfileView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthProfileView3.swift; sourceTree = "<group>"; };
+		7347EB12257B270A006C8ED1 /* OrderSubmissionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSubmissionHelper.swift; sourceTree = "<group>"; };
 		734825AB2572242D00CF2CBF /* NewPrescriptionMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPrescriptionMessage.swift; sourceTree = "<group>"; };
 		736A83FE253DF4D300910E66 /* Ext+Pharmacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+Pharmacy.swift"; sourceTree = "<group>"; };
 		737572D2253394E700ADFD75 /* LandingViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewHelpers.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				73D510202536B6C800502AC8 /* TransferPrescriptionSelection.swift */,
 				732C38752534F5DF000CF5F0 /* CheckoutView.swift */,
 				EE0AFFCA255C6B7D00DCE905 /* SummaryCompletionView.swift */,
+				7347EB12257B270A006C8ED1 /* OrderSubmissionHelper.swift */,
 			);
 			path = PrescriptionOrder;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				EE0AFFCB255C6B7D00DCE905 /* SummaryCompletionView.swift in Sources */,
 				738C75A625467CEB000B5A11 /* FoundationExtensions.swift in Sources */,
 				73FBBC172550D93E007ADE39 /* PasswordResetCompletedView.swift in Sources */,
+				7347EB13257B270B006C8ED1 /* OrderSubmissionHelper.swift in Sources */,
 				737572D3253394E700ADFD75 /* LandingViewHelpers.swift in Sources */,
 				73E6CCDB25239EBD00287255 /* InstantCredit.xcdatamodeld in Sources */,
 				73E0481E2523B26200340628 /* Ext+UIColor.swift in Sources */,

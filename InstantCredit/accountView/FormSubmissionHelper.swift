@@ -16,11 +16,7 @@ import CoreData
 
 
 func FormSubmissionToCoreData(context: NSManagedObjectContext) {
-    
-    //Save Data into User Defaults
 
-    
-    
     //Store User Defaults data into Core Data
 
     let patient: Patient = PatientObjectUpdate(context: context)

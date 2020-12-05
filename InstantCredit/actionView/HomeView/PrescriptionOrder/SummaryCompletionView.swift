@@ -7,8 +7,11 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SummaryCompletionView: View {
+    
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
     @State private var selection: Int?
     
@@ -84,7 +87,11 @@ struct SummaryCompletionView: View {
                 .padding(.horizontal)
                 .foregroundColor(Color(.white))
             
-            Button(action: { self.selection = 1 } ) { Text("Confirm Order >").font(.body).bold() }
+            Button(action: {
+                OrderSubmissionToCoreData(context: context, indicator: indicator)
+                self.selection = 1
+            } ) { Text("Confirm Order >").font(.body).bold() }
+                .environment(\.managedObjectContext, self.context)
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .background(Color(UIColor.mainColor))
                 .padding()

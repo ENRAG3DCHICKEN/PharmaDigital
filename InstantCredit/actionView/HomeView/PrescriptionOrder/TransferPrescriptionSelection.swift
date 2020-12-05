@@ -113,32 +113,6 @@ struct TransferPrescriptionSelection: View {
                 }
             }
             
-            
-            
-            
-            
-            
-//             @State private var priorPharmacyName: String = ""
-//             @State private var priorPharmacyPhone: String = ""
-//
-//             @State private var transferAll: Bool = true
-//
-//             @State private var rx1: String = ""
-//             @State private var med1: String = ""
-//             @State private var rx2: String = ""
-//             @State private var med2: String = ""
-//             @State private var rx3: String = ""
-//             @State private var med3: String = ""
-//             @State private var rx4: String = ""
-//             @State private var med4: String = ""
-//             @State private var rx5: String = ""
-//             @State private var med5: String = ""
-//             @State private var rx6: String = ""
-//             @State private var med6: String = ""
-//
-            
-            
-            
                 Button(action: {
                     self.selection = 0
                 } ) { Text("< Back").font(.body).bold() }

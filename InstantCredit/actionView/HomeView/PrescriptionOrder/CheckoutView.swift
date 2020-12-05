@@ -46,9 +46,9 @@ struct CheckoutView: View {
                     
                 Text("Checkout View").font(.headline)
                 Form {
-                    Toggle(isOn: od1) { Text("In-Store Pick Up - FREE").font(.body) }
-                    Toggle(isOn: od2) { Text("Ship to Home, Regular Delivery - FREE").font(.body) }
-                    Toggle(isOn: od3) { Text("Ship to Home, Same-Day Delivery - $5").font(.body) }
+                    Toggle(isOn: od1) { Text("In-Store Pick Up").font(.body) }
+                    Toggle(isOn: od2) { Text("Ship to Home, Regular Delivery").font(.body) }
+                    Toggle(isOn: od3) { Text("Ship to Home, Same-Day Delivery ($5)").font(.body) }
                     
                 }
                     

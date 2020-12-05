@@ -2,12 +2,12 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Orders" representedClassName="Orders" syncable="YES" codeGenerationType="class">
         <attribute name="orderCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="orderPaid" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="orderPrepared" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="orderStart" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="orderUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="pharmacyName" optional="YES" attributeType="String"/>
         <attribute name="prescription" optional="YES" attributeType="String"/>
+        <attribute name="trans_priorPharmacyName" optional="YES" attributeType="String"/>
+        <attribute name="trans_priorPharmacyPhone" optional="YES" attributeType="String"/>
+        <attribute name="trans_transferAll" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="fiulfillmentPharmacy_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pharmacy" inverseName="orderHistory_" inverseEntity="Pharmacy"/>
         <relationship name="patient_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="orderHistory_" inverseEntity="Patient"/>
     </entity>
@@ -30,12 +30,11 @@
         <relationship name="shippingInfo_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PatientFulfillmentDetails" inverseName="patient_" inverseEntity="PatientFulfillmentDetails"/>
     </entity>
     <entity name="PatientFulfillmentDetails" representedClassName="PatientFulfillmentDetails" syncable="YES" codeGenerationType="class">
-        <attribute name="address1" optional="YES" attributeType="String"/>
-        <attribute name="address2" optional="YES" attributeType="String"/>
+        <attribute name="address" optional="YES" attributeType="String"/>
         <attribute name="city" optional="YES" attributeType="String"/>
         <attribute name="emailAddress" optional="YES" attributeType="String"/>
-        <attribute name="firstName" optional="YES" attributeType="String"/>
-        <attribute name="lastName" optional="YES" attributeType="String"/>
+        <attribute name="fullName" optional="YES" attributeType="String"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="String"/>
         <attribute name="postalCode" optional="YES" attributeType="String"/>
         <attribute name="province" optional="YES" attributeType="String"/>
         <relationship name="patient_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="shippingInfo_" inverseEntity="Patient"/>
@@ -110,7 +109,7 @@
     <elements>
         <element name="Orders" positionX="183.9375" positionY="-35.2734375" width="128" height="178"/>
         <element name="Patient" positionX="473.3359375" positionY="97.109375" width="187.84375" height="283"/>
-        <element name="PatientFulfillmentDetails" positionX="765.03515625" positionY="582.4375" width="182.3828125" height="178"/>
+        <element name="PatientFulfillmentDetails" positionX="765.03515625" positionY="582.4375" width="182.3828125" height="163"/>
         <element name="PatientHealthDetails" positionX="937.76953125" positionY="-80.50390625" width="207.96484375" height="178"/>
         <element name="PatientInsuranceDetails" positionX="870.8515625" positionY="131.9375" width="199.984375" height="493"/>
         <element name="PatientPaymentDetails" positionX="815.8515625" positionY="389.6796875" width="161.90625" height="163"/>
