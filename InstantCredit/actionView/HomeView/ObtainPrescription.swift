@@ -67,7 +67,7 @@ struct ObtainPrescriptions: View {
                 
             }
             
-            NavigationLink(destination: RefillPrescriptionView(), tag: 2, selection: $selection) {
+            NavigationLink(destination: RefillPrescriptionMessage(chosenPharmacy: chosenPharmacy), tag: 2, selection: $selection) {
                 ZStack {
                     LinearGradient(gradient: Gradient(colors: [Color(UIColor.tile2b),Color(UIColor.tile2a)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     HStack {

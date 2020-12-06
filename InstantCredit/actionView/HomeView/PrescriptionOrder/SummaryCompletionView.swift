@@ -88,7 +88,7 @@ struct SummaryCompletionView: View {
                 .foregroundColor(Color(.white))
             
             Button(action: {
-                OrderSubmissionToCoreData(context: context, indicator: indicator)
+                OrderSubmissionToCoreData(context: context, chosenPharmacy: chosenPharmacy, indicator: indicator)
                 self.selection = 1
             } ) { Text("Confirm Order >").font(.body).bold() }
                 .environment(\.managedObjectContext, self.context)

@@ -10,12 +10,11 @@ import SwiftUI
 
 struct CheckoutView: View {
     
-        @State private var indicator: Int
-    
         @State private var selection: Int?
-    
+        
         @State private var chosenPharmacy: Pharmacy
-    
+        @State private var indicator: Int
+
         @State private var optionLocalPickup: Bool = true
         @State private var optionDelivery_Regular: Bool = false
         @State private var optionDelivery_Sameday: Bool = false
@@ -38,40 +37,39 @@ struct CheckoutView: View {
         let od2 = Binding<Bool>(get: { self.optionDelivery_Regular }, set: { self.optionDelivery_Regular = $0; self.optionLocalPickup = false; self.optionDelivery_Sameday = false })
         let od3 = Binding<Bool>(get: { self.optionDelivery_Sameday }, set: { self.optionDelivery_Sameday = $0; self.optionLocalPickup = false; self.optionDelivery_Regular = false })
 
-        VStack {
-            VStack(spacing: 0) {
-                Text("")
+            VStack() {
+
+//                Text("")
+
+                Text("Checkout View").font(.headline)
                     .navigationBarTitle("")
                     .navigationBarHidden(true)
-                    
-                Text("Checkout View").font(.headline)
+               
                 Form {
-                    Toggle(isOn: od1) { Text("In-Store Pick Up").font(.body) }
-                    Toggle(isOn: od2) { Text("Ship to Home, Regular Delivery").font(.body) }
-                    Toggle(isOn: od3) { Text("Ship to Home, Same-Day Delivery ($5)").font(.body) }
+                    Section(header: Text("Shipping Options: "))  {
+                        Toggle(isOn: od1) { Text("In-Store Pick Up - FREE").font(.body) }
+                        Toggle(isOn: od2) { Text("Regular Delivery - FREE").font(.body) }
+                        Toggle(isOn: od3) { Text("Same-Day Delivery - ($5)").font(.body) }
+                    }
                     
-                }
-                    
-                if optionLocalPickup == true {
-                    Spacer()
-                }
-                
-                if optionDelivery_Regular == true || optionDelivery_Sameday == true {
-                    Form {
-                           TextField("Full Name", text: $shipFullName)
-                            TextField("Address", text: $shipAddress)
-                            Picker(selection: $shipProvince, label: Text("Province")) {
-                                ForEach(0..<provinces.count) { index in
-                                    Text(provinces[index]).tag(provinces[index])
+
+                    if optionDelivery_Regular == true || optionDelivery_Sameday == true {
+                        Section(header: Text("Shipping Details: ")) {
+                               TextField("Full Name", text: $shipFullName)
+                                TextField("Address", text: $shipAddress)
+                                Picker(selection: $shipProvince, label: Text("Province")) {
+                                    ForEach(0..<provinces.count) { index in
+                                        Text(provinces[index]).tag(provinces[index])
+                                    }
                                 }
-                            }
-                            TextField("Postal Code", text: $shipPostalCode)
-                            TextField("Phone", text: $shipPhoneNumber)
+                                TextField("Postal Code", text: $shipPostalCode)
+                                TextField("Phone", text: $shipPhoneNumber)
                         }
-                            .padding()
+//                                .padding()
+                    }
                 }
-            }
-                Spacer()
+            
+            Spacer()
             
             Button(action: {
                 //Back to New Prescriptions
@@ -118,7 +116,7 @@ struct CheckoutView: View {
             
                 //Go BACK Views
                 NavigationLink(destination: NewPrescriptionSelection(chosenPharmacy: chosenPharmacy), tag: 2, selection: $selection) { EmptyView() }
-    //            NavigationLink(destination: HomeView(), tag: 3, selection: $selection) { EmptyView() }
+                NavigationLink(destination: RefillPrescriptionSelection(chosenPharmacy: chosenPharmacy), tag: 3, selection: $selection) { EmptyView() }
                 NavigationLink(destination: TransferPrescriptionSelection(chosenPharmacy: chosenPharmacy), tag: 4, selection: $selection) { EmptyView() }
                 
                 
