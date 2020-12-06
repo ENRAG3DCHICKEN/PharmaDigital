@@ -11,11 +11,11 @@ import SwiftUI
 struct NewPrescriptionSelection: View {
     
     @State private var selection: Int?
-    
     @State private var chosenPharmacy: Pharmacy
     
     @State private var isOn1: Bool = true
     @State private var isOn2: Bool = false
+    @State private var prescriptionSource: String?
     
     init(chosenPharmacy: Pharmacy) {
         _chosenPharmacy = State(wrappedValue: chosenPharmacy)
@@ -67,6 +67,11 @@ struct NewPrescriptionSelection: View {
                 .padding(.horizontal)   
             
             Button(action: {
+                if isOn1 == true, isOn2 == false {
+                    self.prescriptionSource = "Written Prescription"
+                } else if isOn1 == false, isOn2 == true {
+                    self.prescriptionSource = "Call/Fax from Doctor"
+                }
                 self.selection = 1
             } ) { Text("Next >").font(.body).bold() }
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
@@ -75,7 +80,7 @@ struct NewPrescriptionSelection: View {
                 .padding()
             
             NavigationLink(destination: NewPrescriptionMessage(chosenPharmacy: chosenPharmacy), tag: 0, selection: $selection) { EmptyView() }
-            NavigationLink(destination: CheckoutView(chosenPharmacy: chosenPharmacy, indicator: 2), tag: 1, selection: $selection) { EmptyView() }
+            NavigationLink(destination: CheckoutView(chosenPharmacy: chosenPharmacy, prescriptionSource: prescriptionSource, indicator: 2), tag: 1, selection: $selection) { EmptyView() }
 
             
         }

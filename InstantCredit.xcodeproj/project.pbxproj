@@ -221,7 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				EE0AFFC5255C3D2000DCE905 /* HomeView */,
-				73FACE3225380FC500A17817 /* AdminHomeView.swift */,
 			);
 			path = actionView;
 			sourceTree = "<group>";
@@ -230,7 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				737572D2253394E700ADFD75 /* LandingViewHelpers.swift */,
-				73FACE302537FF5000A17817 /* LogoView.swift */,
 				73D4C5EF254C902400F9137B /* LandingView.swift */,
 				7320BF3F252423FF009CAA58 /* SignUpView.swift */,
 				7320BF4125242415009CAA58 /* LoginView.swift */,
@@ -281,6 +279,8 @@
 				73F8CABE254100ED00E86887 /* InstantCredit.entitlements */,
 				73E6CCD525239EBD00287255 /* AppDelegate.swift */,
 				73E6CCD725239EBD00287255 /* SceneDelegate.swift */,
+				73FACE302537FF5000A17817 /* LogoView.swift */,
+				73FACE3225380FC500A17817 /* AdminHomeView.swift */,
 				73E0481B2523B22A00340628 /* startView */,
 				732C386E2534F52A000CF5F0 /* accountView */,
 				73D510182536522800502AC8 /* actionView */,

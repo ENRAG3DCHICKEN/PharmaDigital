@@ -15,11 +15,13 @@ struct SummaryCompletionView: View {
     
     @State private var selection: Int?
     
+    @State private var prescriptionSource: String?
     @State private var chosenPharmacy: Pharmacy
     @State private var indicator: Int
     
-    init(chosenPharmacy: Pharmacy, indicator: Int) {
+    init(chosenPharmacy: Pharmacy, prescriptionSource: String?, indicator: Int) {
         _chosenPharmacy = State(wrappedValue: chosenPharmacy)
+        _prescriptionSource = State(wrappedValue: prescriptionSource)
         _indicator = State(wrappedValue: indicator)
     }
     
@@ -88,7 +90,7 @@ struct SummaryCompletionView: View {
                 .foregroundColor(Color(.white))
             
             Button(action: {
-                OrderSubmissionToCoreData(context: context, chosenPharmacy: chosenPharmacy, indicator: indicator)
+                OrderSubmissionToCoreDataAndFB(context: context, chosenPharmacy: chosenPharmacy, prescriptionSource: prescriptionSource, indicator: indicator)
                 self.selection = 1
             } ) { Text("Confirm Order >").font(.body).bold() }
                 .environment(\.managedObjectContext, self.context)
@@ -97,7 +99,7 @@ struct SummaryCompletionView: View {
                 .padding()
                 .foregroundColor(Color(.white))
             
-            NavigationLink(destination: CheckoutView(chosenPharmacy: chosenPharmacy, indicator: indicator), tag: 0, selection: $selection) { EmptyView() }
+            NavigationLink(destination: CheckoutView(chosenPharmacy: chosenPharmacy, prescriptionSource: prescriptionSource, indicator: indicator), tag: 0, selection: $selection) { EmptyView() }
             
             NavigationLink(destination: HomeView(), tag: 1, selection: $selection) { EmptyView() }
                     

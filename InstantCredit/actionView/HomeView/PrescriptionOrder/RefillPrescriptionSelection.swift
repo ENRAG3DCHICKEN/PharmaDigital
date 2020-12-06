@@ -76,7 +76,7 @@ struct RefillPrescriptionSelection: View {
                 .padding()
             
             NavigationLink(destination: RefillPrescriptionMessage(chosenPharmacy: chosenPharmacy), tag: 0, selection: $selection) { EmptyView() }
-            NavigationLink(destination: CheckoutView(chosenPharmacy: chosenPharmacy, indicator: 3), tag: 1, selection: $selection) { EmptyView() }
+            NavigationLink(destination: CheckoutView(chosenPharmacy: chosenPharmacy, prescriptionSource: nil, indicator: 3), tag: 1, selection: $selection) { EmptyView() }
             
         }
     }

@@ -16,6 +16,7 @@ struct TransferPrescriptionSelection: View {
     
     @State private var isOn1: Bool = true
     @State private var isOn2: Bool = false
+    @State private var prescriptionSource: String?
    
     @State private var priorPharmacyName: String = ""
     @State private var priorPharmacyPhone: String = ""
@@ -56,7 +57,7 @@ struct TransferPrescriptionSelection: View {
                 
                 Section {
                     Toggle(isOn: on1) { Text("My prescription will be transferred based on the below details: ").font(.callout) }
-                    Toggle(isOn: on2) { Text("My old pharmacy will call or fax").font(.callout) }
+                    Toggle(isOn: on2) { Text("My old pharmacy will call or fax: ").font(.callout) }
                 }
                 
                 
@@ -123,6 +124,12 @@ struct TransferPrescriptionSelection: View {
                             
                 Button(action: {
                     
+                    if isOn1 == true, isOn2 == false {
+                        self.prescriptionSource = "Written Prescription"
+                    } else if isOn1 == false, isOn2 == true {
+                        self.prescriptionSource = "Call/Fax from Doctor"
+                    }
+                    
                     UserDefaults.standard.set(self.priorPharmacyName, forKey: "transPriorPharmacyName")
                     UserDefaults.standard.set(self.priorPharmacyPhone, forKey: "transPriorPharmacyPhone")
                     UserDefaults.standard.set(self.transferAll, forKey: "transAllFlag")
@@ -144,7 +151,7 @@ struct TransferPrescriptionSelection: View {
                     .padding()
                             
                 NavigationLink(destination: TransferPrescriptionMessage(chosenPharmacy: chosenPharmacy), tag: 0, selection: $selection) { EmptyView() }
-                NavigationLink(destination: CheckoutView(chosenPharmacy: chosenPharmacy, indicator: 4), tag: 1, selection: $selection) { EmptyView() }
+                NavigationLink(destination: CheckoutView(chosenPharmacy: chosenPharmacy, prescriptionSource: prescriptionSource, indicator: 4), tag: 1, selection: $selection) { EmptyView() }
                 
             
         }

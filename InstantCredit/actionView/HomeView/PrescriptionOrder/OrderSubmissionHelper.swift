@@ -10,9 +10,10 @@
 
 import SwiftUI
 import CoreData
+import Firebase
 
 
-func OrderSubmissionToCoreData(context: NSManagedObjectContext, chosenPharmacy: Pharmacy, indicator: Int) {
+func OrderSubmissionToCoreDataAndFB(context: NSManagedObjectContext, chosenPharmacy: Pharmacy, prescriptionSource: String?, indicator: Int) {
 
     //Standard query request to Core Data
     let request = NSFetchRequest<PatientFulfillmentDetails>(entityName: "PatientFulfillmentDetails")
@@ -20,11 +21,11 @@ func OrderSubmissionToCoreData(context: NSManagedObjectContext, chosenPharmacy: 
     request.predicate = NSPredicate(format: "emailAddress = %@", UserDefaults.standard.string(forKey: "email")!)
     
     let patientFulfillmentDetails: PatientFulfillmentDetails = PatientFulfillmentDetailsObjectUpdate(context: context)
-    let orders: Orders = OrdersObjectUpdate(context: context, chosenPharmacy: chosenPharmacy, indicator: indicator)
-    
+    let orders: Orders = OrdersObjectUpdate(context: context, chosenPharmacy: chosenPharmacy, prescriptionSource: prescriptionSource, indicator: indicator)
     groupedObjectsWillChange_Orders(context: context, patientFulfillmentDetails: patientFulfillmentDetails, orders: orders)
+    print("Core Data Order Submission Completed!")
     
-    print("Order Submission Completed!")
+    SendOrdersToFirestore(orders: orders)
 
 }
 
@@ -55,7 +56,7 @@ func PatientFulfillmentDetailsObjectUpdate(context: NSManagedObjectContext) -> P
     return patientFulfillmentDetails
 }
 
-func OrdersObjectUpdate(context: NSManagedObjectContext, chosenPharmacy: Pharmacy, indicator: Int) -> Orders {
+func OrdersObjectUpdate(context: NSManagedObjectContext, chosenPharmacy: Pharmacy, prescriptionSource: String?, indicator: Int) -> Orders {
     
     let orders = Orders(context: context)
     
@@ -66,21 +67,21 @@ func OrdersObjectUpdate(context: NSManagedObjectContext, chosenPharmacy: Pharmac
     //Back to New Prescriptions
     if indicator == 2 {
         orders.orderType = "New Prescription"
+        orders.prescriptionSource = prescriptionSource
     //Back to Refill Prescriptions
     } else if indicator == 3 {
         orders.orderType = "Refill Prescription"
+        orders.prescriptionSource = prescriptionSource
     //Back to Transfer Prescriptions
     } else if indicator == 4 {
         orders.orderType = "Tramsfer Prescription"
+        orders.prescriptionSource = prescriptionSource
         orders.trans_priorPharmacyName = UserDefaults.standard.string(forKey: "transPriorPharmacyName")
         orders.trans_priorPharmacyPhone = UserDefaults.standard.string(forKey: "transPriorPharmacyPhone")
         orders.trans_transferAll = UserDefaults.standard.bool(forKey: "transAllFlag")
         orders.trans_prescription = UserDefaults.standard.string(forKey: "transMedication1")! + UserDefaults.standard.string(forKey: "transMedication2")! + UserDefaults.standard.string(forKey: "transMedication3")! + UserDefaults.standard.string(forKey: "transMedication4")! + UserDefaults.standard.string(forKey: "transMedication5")! + UserDefaults.standard.string(forKey: "transMedication6")!
     }
-    
-    
-    
-    
+
     do {
         try context.save()
     } catch(let error) {
@@ -90,20 +91,47 @@ func OrdersObjectUpdate(context: NSManagedObjectContext, chosenPharmacy: Pharmac
     return orders
 }
 
-
-
 func groupedObjectsWillChange_Orders(context: NSManagedObjectContext, patientFulfillmentDetails: PatientFulfillmentDetails, orders: Orders) {
 
-        //PatientFulfillmentDetails
-        patientFulfillmentDetails.objectWillChange.send()
+    //PatientFulfillmentDetails
+    patientFulfillmentDetails.objectWillChange.send()
+    
+    //Orders
+    orders.objectWillChange.send()
+
+    do {
+        try context.save()
+    } catch(let error) {
+        print("couldn't save patient fulfillment details update to CoreData: \(error.localizedDescription)")
+    }
+}
+
+func SendOrdersToFirestore(orders: Orders) {
+    
+    //Populate Core Data asynchronously on secondary queue
+    DispatchQueue.global(qos: .userInitiated).async {
         
-        //Orders
-        orders.objectWillChange.send()
-
-        do {
-            try context.save()
-        } catch(let error) {
-            print("couldn't save patient fulfillment details update to CoreData: \(error.localizedDescription)")
+        //Search firebase for documents = pharmacies
+        let db = Firestore.firestore()
+        
+        // Add a new document in collection "cities"
+        db.collection("orders").document((orders.orderUUID)!.uuidString).setData([
+            "orderCompleted": orders.orderCompleted,
+            "orderType": orders.orderType!,
+            "orderUUID": ((orders.orderUUID)?.uuidString)!,
+            "pharmacyName": orders.pharmacyName!,
+            "prescriptionSource": orders.prescriptionSource ?? "",
+            "refill_prescription": orders.refill_prescription ?? "",
+            "trans_prescription": orders.trans_prescription ?? "",
+            "trans_priorPharmacyName": orders.trans_priorPharmacyName ?? "",
+            "trans_priorPharmacyPhone": orders.trans_priorPharmacyPhone ?? "",
+            "trans_transferAll": orders.trans_transferAll,
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
         }
-
+    }
 }

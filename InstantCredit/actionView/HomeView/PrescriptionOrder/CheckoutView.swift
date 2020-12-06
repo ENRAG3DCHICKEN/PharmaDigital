@@ -14,7 +14,8 @@ struct CheckoutView: View {
         
         @State private var chosenPharmacy: Pharmacy
         @State private var indicator: Int
-
+        @State private var prescriptionSource: String?
+    
         @State private var optionLocalPickup: Bool = true
         @State private var optionDelivery_Regular: Bool = false
         @State private var optionDelivery_Sameday: Bool = false
@@ -26,8 +27,9 @@ struct CheckoutView: View {
         @State private var shipPostalCode: String = ""
         @State private var shipPhoneNumber: String = ""
     
-        init(chosenPharmacy: Pharmacy, indicator: Int) {
+        init(chosenPharmacy: Pharmacy, prescriptionSource: String?, indicator: Int) {
             _chosenPharmacy = State(wrappedValue: chosenPharmacy)
+            _prescriptionSource = State(wrappedValue: prescriptionSource)
             _indicator = State(wrappedValue: indicator)
         }
         
@@ -121,7 +123,7 @@ struct CheckoutView: View {
                 
                 
                 //Go FORWARD Views
-                NavigationLink(destination: SummaryCompletionView(chosenPharmacy: chosenPharmacy, indicator: indicator), tag: 1, selection: $selection) { EmptyView() }
+                NavigationLink(destination: SummaryCompletionView(chosenPharmacy: chosenPharmacy, prescriptionSource: prescriptionSource, indicator: indicator), tag: 1, selection: $selection) { EmptyView() }
             
         }
     }
