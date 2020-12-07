@@ -60,9 +60,6 @@ struct TransferPrescriptionSelection: View {
                     Toggle(isOn: on2) { Text("My old pharmacy will call or fax: ").font(.callout) }
                 }
                 
-                
-                
-                
                 if isOn1 == true, isOn2 == false {
                 
                     Section {

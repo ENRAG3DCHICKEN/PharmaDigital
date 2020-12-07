@@ -24,8 +24,10 @@ func OrderSubmissionToCoreDataAndFB(context: NSManagedObjectContext, chosenPharm
     let orders: Orders = OrdersObjectUpdate(context: context, chosenPharmacy: chosenPharmacy, prescriptionSource: prescriptionSource, indicator: indicator)
     groupedObjectsWillChange_Orders(context: context, patientFulfillmentDetails: patientFulfillmentDetails, orders: orders)
     print("Core Data Order Submission Completed!")
-    
+
     SendOrdersToFirestore(orders: orders)
+    
+    ClearOrderRelatedUserDefaults()
 
 }
 
@@ -63,6 +65,8 @@ func OrdersObjectUpdate(context: NSManagedObjectContext, chosenPharmacy: Pharmac
     orders.orderCompleted = false
     orders.orderUUID = UUID()
     orders.pharmacyName = chosenPharmacy.pharmacyName
+    orders.pharmacyAccreditationNumber = chosenPharmacy.accreditationNumber
+    orders.pharmacyEmailAddress = chosenPharmacy.emailAddress
     
     //Back to New Prescriptions
     if indicator == 2 {
@@ -119,7 +123,9 @@ func SendOrdersToFirestore(orders: Orders) {
             "orderCompleted": orders.orderCompleted,
             "orderType": orders.orderType!,
             "orderUUID": ((orders.orderUUID)?.uuidString)!,
+            "pharmacyAccreditationNumber": orders.pharmacyAccreditationNumber,
             "pharmacyName": orders.pharmacyName!,
+            "pharmacyEmailAddress": orders.pharmacyEmailAddress!,
             "prescriptionSource": orders.prescriptionSource ?? "",
             "refill_prescription": orders.refill_prescription ?? "",
             "trans_prescription": orders.trans_prescription ?? "",
@@ -134,4 +140,19 @@ func SendOrdersToFirestore(orders: Orders) {
             }
         }
     }
+}
+
+func ClearOrderRelatedUserDefaults() {
+
+    UserDefaults.standard.removeObject(forKey: "transPriorPharmacyName")
+    UserDefaults.standard.removeObject(forKey: "transPriorPharmacyPhone")
+    UserDefaults.standard.removeObject(forKey: "transAllFlag")
+    
+    UserDefaults.standard.removeObject(forKey: "transMedication1")
+    UserDefaults.standard.removeObject(forKey: "transMedication2")
+    UserDefaults.standard.removeObject(forKey: "transMedication3")
+    UserDefaults.standard.removeObject(forKey: "transMedication4")
+    UserDefaults.standard.removeObject(forKey: "transMedication5")
+    UserDefaults.standard.removeObject(forKey: "transMedication6")
+    
 }

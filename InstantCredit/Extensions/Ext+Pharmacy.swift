@@ -54,8 +54,9 @@ extension Pharmacy: Comparable {
         
         //If pharmacy exists, update existing pharmacy in core data - else if pharmacy doesn't exist, create & populate!
         pharmacy.accreditationNumber = fbPharmacyData["AccreditationNumber"] as! Int64
-        pharmacy.address = fbPharmacyData["Address1"] as? String
+        pharmacy.address = fbPharmacyData["Address"] as? String
         pharmacy.city = fbPharmacyData["City"] as? String
+        pharmacy.emailAddress = fbPharmacyData["EmailAddress"] as? String
         pharmacy.longitude = Double(truncating: fbPharmacyData["Longitude"] as! NSNumber)
         pharmacy.latitude = Double(truncating: fbPharmacyData["Latitude"] as! NSNumber)
         pharmacy.pharmacyName = fbPharmacyData["PharmacyName"] as? String
@@ -63,6 +64,7 @@ extension Pharmacy: Comparable {
         pharmacy.faxNumber = fbPharmacyData["FaxNumber"] as? String
         pharmacy.postalCode = fbPharmacyData["PostalCode"] as? String
         pharmacy.province = fbPharmacyData["Province"] as? String
+        pharmacy.pharmacyUUID = fbPharmacyData["PharmacyUUID"] as? String
             
         pharmacy.objectWillChange.send()
         
