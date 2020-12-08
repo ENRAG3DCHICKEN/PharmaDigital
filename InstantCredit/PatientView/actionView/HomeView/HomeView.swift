@@ -55,13 +55,6 @@ struct HomeView: View {
 
 struct PastPrescriptions: View {
     
-    @State private var FullName: String
-    
-    //PUll this from Core Data
-    init() {
-        _FullName = State(wrappedValue: UserDefaults.standard.string(forKey: "fullName")!)
-    }
-    
     var body: some View {
         VStack {
             Section {
@@ -73,13 +66,13 @@ struct PastPrescriptions: View {
                                   
                     
                     
-                    Text("In Process Prescriptions for: \(FullName)").font(.headline)
+                    Text("In Process Prescriptions for: \(UserDefaults.standard.string(forKey: "fullName")!)").font(.headline)
                     //Pull Current Order History
                     
                     //If BLANK
                     Text("You have no orders to be processed").font(.body)
                     
-                    Text("Prescription History for: \(FullName)").font(.headline)
+                    Text("Prescription History for: \(UserDefaults.standard.string(forKey: "fullName")!)").font(.headline)
                     //Pull Past Order History
                     
                     // If BLANK
@@ -90,5 +83,3 @@ struct PastPrescriptions: View {
         
     }
 }
-
-

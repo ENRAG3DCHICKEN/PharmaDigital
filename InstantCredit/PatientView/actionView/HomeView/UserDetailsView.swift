@@ -142,6 +142,7 @@ struct UserDetailsView: View {
             Button(action: {
                 UserDefaults.standard.removeObject(forKey: "email")
                 UserDefaults.standard.removeObject(forKey: "password")
+                UserDefaults.standard.removeObject(forKey: "signupCompletionFlag")
                 self.selection = 6
             }, label: {
                 HStack {

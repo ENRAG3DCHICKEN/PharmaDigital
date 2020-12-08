@@ -11,14 +11,14 @@ import CoreData
 
 struct AdminHomeView: View {
     
-    @State private var selection: Int?
+    @State private var selection: Int
 
     init(selectionValue: Int) {
         _selection = State(wrappedValue: selectionValue)
     }
     
     init() {
-        _selection = State(wrappedValue: 3)
+        _selection = State(wrappedValue: 2)
     }
     
     var body: some View {
@@ -55,9 +55,7 @@ struct AdminHomeView: View {
 
 struct AdminDetailsView: View {
     
-    
     @State private var selection: Int?
-
 
     var body: some View {
         
@@ -67,10 +65,12 @@ struct AdminDetailsView: View {
                 .navigationBarTitle("")
                 .navigationBarHidden(true)
             
-            NavigationLink(destination: LogoView(), tag: 6, selection: $selection) {
+            NavigationLink(destination: LogoView(priorLogin: true), tag: 6, selection: $selection) {
                 Button(action: {
                     UserDefaults.standard.removeObject(forKey: "email")
                     UserDefaults.standard.removeObject(forKey: "password")
+                    UserDefaults.standard.removeObject(forKey: "signupCompletionFlag")
+                    
                     self.selection = 6
                 }, label: {
                     HStack {
@@ -86,45 +86,53 @@ struct AdminDetailsView: View {
                     .padding().shadow(radius: 5, y: 5)
             }
         }
-        
     }
 }
 
 struct PendingPrescriptions: View {
-    
+
     @FetchRequest(fetchRequest: Orders.fetchRequest(NSPredicate(format: "pharmacyEmailAddress == %@", UserDefaults.standard.string(forKey: "email")!))) var orders: FetchedResults<Orders>
-    
     @State private var selection: Int?
 
-
     var body: some View {
-        
-        Text("")
-            .navigationBarTitle("")
-            .navigationBarHidden(true)
-        
-//        List {
-//            ForEach(orders) { order in
-//                Text(order.orderUUID)
-//            }
-//        }
-    }
-}
 
-struct CompletedPrescriptions: View {
-    
-    @State private var selection: Int?
-
-
-    var body: some View {
-        
         VStack {
-            
             Text("")
                 .navigationBarTitle("")
                 .navigationBarHidden(true)
-            
+
+                List {
+                    ForEach(orders, id: \.self) { (order: Orders) in
+                        NavigationLink(destination: HomeView())
+                        { Text((order.orderUUID)!.uuidString) }
+                    }
+                }
+                    .padding()
         }
-        
+    }
+}
+
+
+
+struct CompletedPrescriptions: View {
+    
+    @FetchRequest(fetchRequest: Orders.fetchRequest(NSPredicate(format: "pharmacyEmailAddress == %@", UserDefaults.standard.string(forKey: "email")!))) var orders: FetchedResults<Orders>
+    @State private var selection: Int?
+
+    var body: some View {
+
+        VStack {
+            Text("")
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
+
+                List {
+                    ForEach(orders, id: \.self) { (order: Orders) in
+                        NavigationLink(destination: HomeView())
+                        { Text((order.orderUUID)!.uuidString) }
+                    }
+                }
+                    .padding()
+        }
     }
 }

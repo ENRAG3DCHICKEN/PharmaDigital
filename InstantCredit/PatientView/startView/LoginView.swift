@@ -11,8 +11,11 @@
 import SwiftUI
 import FirebaseAuth
 import Firebase
+import CoreData
 
 struct LoginView: View {
+    
+    @Environment(\.managedObjectContext) var context
     
     @State var email: String = ""
     @State var password: String = ""
@@ -62,6 +65,16 @@ struct LoginView: View {
                             
                             UserDefaults.standard.set(self.email, forKey: "email")
                             UserDefaults.standard.set(self.password, forKey: "password")
+                            
+                            //Fetch Patient from Core Data and find the SignupCompletionFlag Property
+                            let request = NSFetchRequest<Patient>(entityName: "Patient")
+                            request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
+                            request.predicate = NSPredicate(format: "emailAddress = %@", UserDefaults.standard.string(forKey: "email")!)
+
+                            let results = (try? context.fetch(request)) ?? []
+                            let patient = results.first
+                            
+                            UserDefaults.standard.set(patient?.signupCompletionFlag,forKey: "signupCompletionFlag")
                             
                             //User authenticated - checking if user is admin account
                             let db = Firestore.firestore()

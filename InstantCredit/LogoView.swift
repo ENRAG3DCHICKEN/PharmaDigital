@@ -15,7 +15,7 @@ struct LogoView: View {
     @State var priorLogin: Bool
 
     init(priorLogin: Bool) {
-        _priorLogin = State(wrappedValue: true)
+        _priorLogin = State(wrappedValue: priorLogin)
     }
     
     init() {
@@ -29,7 +29,10 @@ struct LogoView: View {
                 LogoViewContents()
             }
         } else {
-                LogoViewContents()
+
+            LogoViewContents()
+
+            
         }
     }
 }
