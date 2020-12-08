@@ -55,6 +55,7 @@ struct AdminHomeView: View {
 
 struct AdminDetailsView: View {
     
+    
     @State private var selection: Int?
 
 
@@ -86,15 +87,18 @@ struct AdminDetailsView: View {
 
 struct PendingPrescriptions: View {
     
+    @FetchRequest(fetchRequest: Orders.fetchRequest(NSPredicate(format: "pharmacyEmailAddress == %@", UserDefaults.standard.string(forKey: "email")!))) var orders: FetchedResults<Orders>
+    
     @State private var selection: Int?
 
 
     var body: some View {
-        
-        VStack {
-            
-        }
-        
+        Text("")
+//        List {
+//            ForEach(orders) { order in
+//                Text(order.orderUUID)
+//            }
+//        }
     }
 }
 

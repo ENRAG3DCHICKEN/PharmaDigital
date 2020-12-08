@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Orders" representedClassName="Orders" syncable="YES" codeGenerationType="class">
         <attribute name="orderCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="orderSubmissionTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="orderType" optional="YES" attributeType="String"/>
         <attribute name="orderUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="pharmacyAccreditationNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -114,7 +115,7 @@
         <relationship name="patientCustomer_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Patient" inverseName="orderPharmacy_" inverseEntity="Patient"/>
     </entity>
     <elements>
-        <element name="Orders" positionX="183.9375" positionY="-35.2734375" width="128" height="253"/>
+        <element name="Orders" positionX="183.9375" positionY="-35.2734375" width="128" height="28"/>
         <element name="Patient" positionX="473.3359375" positionY="97.109375" width="187.84375" height="283"/>
         <element name="PatientFulfillmentDetails" positionX="765.03515625" positionY="582.4375" width="182.3828125" height="163"/>
         <element name="PatientHealthDetails" positionX="937.76953125" positionY="-80.50390625" width="207.96484375" height="178"/>

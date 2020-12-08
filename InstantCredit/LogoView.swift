@@ -12,14 +12,25 @@ import FirebaseAuth
 
 struct LogoView: View {
     
+    @State var priorLogin: Bool
     
     @State var selection: Int?
     
     @State var email: String?
     @State var password: String?
+    
+    init(priorLogin: Bool) {
+        _priorLogin = State(wrappedValue: true)
+    }
+    
+    init() {
+        _priorLogin = State(wrappedValue: false)
+    }
 
     var body: some View {
-        NavigationView{
+        
+
+        NavigationView {
         
             VStack {
                 ZStack {
@@ -97,7 +108,6 @@ struct LogoView: View {
                 }
             }
         )
-            
             
         }
             .background(Color(UIColor.mainColor))

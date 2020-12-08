@@ -67,6 +67,7 @@ func OrdersObjectUpdate(context: NSManagedObjectContext, chosenPharmacy: Pharmac
     orders.pharmacyName = chosenPharmacy.pharmacyName
     orders.pharmacyAccreditationNumber = chosenPharmacy.accreditationNumber
     orders.pharmacyEmailAddress = chosenPharmacy.emailAddress
+    orders.orderSubmissionTime = Date()
     
     //Back to New Prescriptions
     if indicator == 2 {
@@ -121,6 +122,7 @@ func SendOrdersToFirestore(orders: Orders) {
         // Add a new document in collection "cities"
         db.collection("orders").document((orders.orderUUID)!.uuidString).setData([
             "orderCompleted": orders.orderCompleted,
+            "orderSubmissionTime": orders.orderSubmissionTime as Any,
             "orderType": orders.orderType!,
             "orderUUID": ((orders.orderUUID)?.uuidString)!,
             "pharmacyAccreditationNumber": orders.pharmacyAccreditationNumber,
