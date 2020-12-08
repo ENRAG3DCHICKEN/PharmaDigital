@@ -31,9 +31,9 @@ struct SignUpView: View {
     var body: some View {
             VStack(spacing: 0) {
                 
-                Text("")
-                    .navigationBarTitle("")
-                    .navigationBarHidden(true)
+//                Text("")
+//                    .navigationBarTitle("")
+//                    .navigationBarHidden(true)
                 
                 Image("yoga").resizable()
                         .frame(width: 100, height: 60)

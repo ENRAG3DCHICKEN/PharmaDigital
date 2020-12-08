@@ -18,7 +18,7 @@ struct AdminHomeView: View {
     }
     
     init() {
-        _selection = State(wrappedValue: 2)
+        _selection = State(wrappedValue: 3)
     }
     
     var body: some View {
@@ -62,6 +62,11 @@ struct AdminDetailsView: View {
     var body: some View {
         
         VStack {
+            
+            Text("")
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
+            
             NavigationLink(destination: LogoView(), tag: 6, selection: $selection) {
                 Button(action: {
                     UserDefaults.standard.removeObject(forKey: "email")
@@ -93,7 +98,11 @@ struct PendingPrescriptions: View {
 
 
     var body: some View {
+        
         Text("")
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+        
 //        List {
 //            ForEach(orders) { order in
 //                Text(order.orderUUID)
@@ -110,6 +119,10 @@ struct CompletedPrescriptions: View {
     var body: some View {
         
         VStack {
+            
+            Text("")
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
             
         }
         

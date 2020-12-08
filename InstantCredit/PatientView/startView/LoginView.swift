@@ -23,9 +23,9 @@ struct LoginView: View {
     var body: some View {
             VStack {
                 
-                Text("")
-                    .navigationBarTitle("")
-                    .navigationBarHidden(true)
+//                Text("")
+//                    .navigationBarTitle("")
+//                    .navigationBarHidden(true)
                 
                 Image("yoga").resizable()
                         .frame(width: 100, height: 60)
@@ -60,12 +60,17 @@ struct LoginView: View {
                             self.errorMessage = err!.localizedDescription
                         } else {
                             
+                            UserDefaults.standard.set(self.email, forKey: "email")
+                            UserDefaults.standard.set(self.password, forKey: "password")
+                            
                             //User authenticated - checking if user is admin account
                             let db = Firestore.firestore()
                             db.collection("admin").getDocuments() { (querySnapshot, err) in
                                 if let err = err {
                                     print("Error getting documents: \(err)")
                                 } else {
+                                    
+
                                     
                                     for document in querySnapshot!.documents {
                                         
