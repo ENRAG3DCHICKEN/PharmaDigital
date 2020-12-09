@@ -13,7 +13,7 @@
 
 import SwiftUI
 import CoreData
-
+import Firebase
 
 func FormSubmissionToCoreData(context: NSManagedObjectContext) {
 
@@ -50,6 +50,7 @@ func PatientObjectUpdate(context: NSManagedObjectContext) -> Patient {
     patient.province = UserDefaults.standard.string(forKey: "province")
     patient.postalCode = UserDefaults.standard.string(forKey: "postalCode")
     patient.phoneNumber = UserDefaults.standard.string(forKey: "phoneNumber")
+    patient.patientUUID = UUID()
     
 //    patient.orderPharmacy =
 
@@ -237,4 +238,107 @@ func groupedObjectsWillChange(context: NSManagedObjectContext, patient: Patient,
 
 func SendFormToFirebase(context: NSManagedObjectContext, patient: Patient, patientHealthDetails: PatientHealthDetails, patientInsuranceDetails: PatientInsuranceDetails, patientPaymentDetails: PatientPaymentDetails) {
     
+    //Populate Core Data asynchronously on secondary queue
+    DispatchQueue.global(qos: .userInitiated).async {
+        
+        //Search firebase for documents = users
+        let db = Firestore.firestore()
+        
+        // Add a new document in collection "users"
+        db.collection("users").document((patient.patientUUID)!.uuidString).setData([
+            "address": patient.address ?? "",
+            "city": patient.city ?? "",
+            "emailAddress": patient.emailAddress ?? "",
+            "fullName": patient.fullName ?? "",
+            "patientUUID": ((patient.patientUUID)?.uuidString)!,
+            "phoneNumber": patient.phoneNumber ?? "",
+            "postalCode": patient.postalCode ?? "",
+            "privacyCompletionFlag": patient.privacyCompletionFlag,
+            "province": patient.province ?? "",
+            "selectedPharmacy": patient.selectedPharmacy ?? "",
+            "signupCompletionFlag": patient.signupCompletionFlag,
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+        
+        // Add a new document in collection "users", 
+        db.collection("users").document((patient.patientUUID)!.uuidString).collection("HealthProfile").addDocument(data: [
+            "allergiesFlag": patientHealthDetails.allergiesFlag,
+            "birthDate": patientHealthDetails.birthDate ?? "",
+            "emailAddress": patientHealthDetails.emailAddress ?? "",
+            "gender": patientHealthDetails.gender ?? "",
+            "genericSubstitution": patientHealthDetails.genericSubstitution,
+            "medicalConditionsFlag": patientHealthDetails.medicalConditionsFlag,
+            "specificAllergies": patientHealthDetails.specificAllergies ?? "",
+            "specificMedicalConditions": patientHealthDetails.specificMedicalConditions ?? "",
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+        
+        // Add a new document in collection "users",
+        db.collection("users").document((patient.patientUUID)!.uuidString).collection("InsuranceDetails").addDocument(data: [
+            "billToInsuranceFlag1": patientInsuranceDetails.billToInsuranceFlag1,
+            "billToInsuranceFlag2": patientInsuranceDetails.billToInsuranceFlag2,
+            "billToInsuranceFlag3": patientInsuranceDetails.billToInsuranceFlag3,
+            "carrierCode1": patientInsuranceDetails.carrierCode1 ?? "",
+            "carrierCode2": patientInsuranceDetails.carrierCode2 ?? "",
+            "carrierCode3": patientInsuranceDetails.carrierCode3 ?? "",
+            "emailAddress": patientInsuranceDetails.emailAddress ?? "",
+            "groupNumber1": patientInsuranceDetails.groupNumber1,
+            "groupNumber2": patientInsuranceDetails.groupNumber2,
+            "groupNumber3": patientInsuranceDetails.groupNumber3,
+            "InsurancePhoneNumber1": patientInsuranceDetails.insurancePhoneNumber1,
+            "InsurancePhoneNumber2": patientInsuranceDetails.insurancePhoneNumber2,
+            "InsurancePhoneNumber3": patientInsuranceDetails.insurancePhoneNumber3,
+            "memberIDNumber1": patientInsuranceDetails.memberIDNumber1,
+            "memberIDNumber2": patientInsuranceDetails.memberIDNumber2,
+            "memberIDNumber3": patientInsuranceDetails.memberIDNumber3,
+            "ohip": patientInsuranceDetails.ohip,
+            "planName1": patientInsuranceDetails.planName1 ?? "",
+            "planName2": patientInsuranceDetails.planName2 ?? "",
+            "planName3": patientInsuranceDetails.planName3 ?? "",
+            "policyholderDOB1": patientInsuranceDetails.policyholderDOB1,
+            "policyholderDOB2": patientInsuranceDetails.policyholderDOB2,
+            "policyholderDOB3": patientInsuranceDetails.policyholderDOB3,
+            "policyholderName1": patientInsuranceDetails.policyholderName1 ?? "",
+            "policyholderName2": patientInsuranceDetails.policyholderName2 ?? "",
+            "policyholderName3": patientInsuranceDetails.policyholderName3 ?? "",
+            "relationshipToCardholder1": patientInsuranceDetails.relationshipToCardholder1 ?? "",
+            "relationshipToCardholder2": patientInsuranceDetails.relationshipToCardholder2 ?? "",
+            "relationshipToCardholder3": patientInsuranceDetails.relationshipToCardholder3 ?? "",
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+        
+        // Add a new document in collection "users",
+        db.collection("users").document((patient.patientUUID)!.uuidString).collection("PaymentDetails").addDocument(data: [
+            "cardholderName": patientPaymentDetails.cardholderName ?? "",
+            "cvv": patientPaymentDetails.cvv,
+            "emailAddress": patientPaymentDetails.emailAddress ?? "",
+            "expirationMM": patientPaymentDetails.expirationMM,
+            "expirationYY": patientPaymentDetails.expirationYY,
+            "paymentCardNumber": patientPaymentDetails.paymentCardNumber,
+            "paymentType": patientPaymentDetails.paymentType ?? "",
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+        
+    }
 }
+
