@@ -121,7 +121,6 @@ struct PendingPrescriptions: View {
 
 struct CompletedPrescriptions: View {
     
-//    @FetchRequest(fetchRequest: Orders.fetchRequest(NSPredicate(format: "pharmacyEmailAddress == %@", UserDefaults.standard.string(forKey: "email")!))) var orders: FetchedResults<Orders>
     @FetchRequest(fetchRequest: Orders.fetchRequest(
         NSCompoundPredicate(andPredicateWithSubpredicates: [
             NSPredicate(format: "pharmacyEmailAddress == %@", UserDefaults.standard.string(forKey: "email")!), NSPredicate(format: "orderCompleted = %d", true)

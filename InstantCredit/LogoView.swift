@@ -17,7 +17,7 @@ struct LogoView: View {
     init(priorLogin: Bool) {
         _priorLogin = State(wrappedValue: priorLogin)
     }
-    
+
     init() {
         _priorLogin = State(wrappedValue: false)
     }
