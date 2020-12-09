@@ -91,7 +91,12 @@ struct AdminDetailsView: View {
 
 struct PendingPrescriptions: View {
 
-    @FetchRequest(fetchRequest: Orders.fetchRequest(NSPredicate(format: "pharmacyEmailAddress == %@", UserDefaults.standard.string(forKey: "email")!))) var orders: FetchedResults<Orders>
+    @FetchRequest(fetchRequest: Orders.fetchRequest(
+        NSCompoundPredicate(andPredicateWithSubpredicates: [
+            NSPredicate(format: "pharmacyEmailAddress == %@", UserDefaults.standard.string(forKey: "email")!), NSPredicate(format: "orderCompleted = %d", false)
+        ])
+    )) var orders: FetchedResults<Orders>
+    
     @State private var selection: Int?
 
     var body: some View {
@@ -116,7 +121,13 @@ struct PendingPrescriptions: View {
 
 struct CompletedPrescriptions: View {
     
-    @FetchRequest(fetchRequest: Orders.fetchRequest(NSPredicate(format: "pharmacyEmailAddress == %@", UserDefaults.standard.string(forKey: "email")!))) var orders: FetchedResults<Orders>
+//    @FetchRequest(fetchRequest: Orders.fetchRequest(NSPredicate(format: "pharmacyEmailAddress == %@", UserDefaults.standard.string(forKey: "email")!))) var orders: FetchedResults<Orders>
+    @FetchRequest(fetchRequest: Orders.fetchRequest(
+        NSCompoundPredicate(andPredicateWithSubpredicates: [
+            NSPredicate(format: "pharmacyEmailAddress == %@", UserDefaults.standard.string(forKey: "email")!), NSPredicate(format: "orderCompleted = %d", true)
+        ])
+    )) var orders: FetchedResults<Orders>
+    
     @State private var selection: Int?
 
     var body: some View {
