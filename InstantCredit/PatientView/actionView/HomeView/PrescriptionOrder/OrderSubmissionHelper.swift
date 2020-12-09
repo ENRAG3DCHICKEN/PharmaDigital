@@ -77,6 +77,7 @@ func OrdersObjectUpdate(context: NSManagedObjectContext, chosenPharmacy: Pharmac
     } else if indicator == 3 {
         orders.orderType = "Refill Prescription"
         orders.prescriptionSource = prescriptionSource
+        orders.refill_prescription = UserDefaults.standard.string(forKey: "refill_prescription")
     //Back to Transfer Prescriptions
     } else if indicator == 4 {
         orders.orderType = "Tramsfer Prescription"
@@ -145,6 +146,8 @@ func SendOrdersToFirestore(orders: Orders) {
 }
 
 func ClearOrderRelatedUserDefaults() {
+    
+    UserDefaults.standard.removeObject(forKey: "refill_prescription")
 
     UserDefaults.standard.removeObject(forKey: "transPriorPharmacyName")
     UserDefaults.standard.removeObject(forKey: "transPriorPharmacyPhone")
@@ -156,5 +159,12 @@ func ClearOrderRelatedUserDefaults() {
     UserDefaults.standard.removeObject(forKey: "transMedication4")
     UserDefaults.standard.removeObject(forKey: "transMedication5")
     UserDefaults.standard.removeObject(forKey: "transMedication6")
+    
+    UserDefaults.standard.removeObject(forKey: "shipFullName")
+    UserDefaults.standard.removeObject(forKey: "shipAddress")
+    UserDefaults.standard.removeObject(forKey: "shipCity")
+    UserDefaults.standard.removeObject(forKey: "shipProvince")
+    UserDefaults.standard.removeObject(forKey: "shipPostalCode")
+    UserDefaults.standard.removeObject(forKey: "shipPhoneNumber")
     
 }

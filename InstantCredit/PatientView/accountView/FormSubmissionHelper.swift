@@ -27,6 +27,8 @@ func FormSubmissionToCoreData(context: NSManagedObjectContext) {
     groupedObjectsWillChange(context: context, patient: patient, patientHealthDetails: patientHealthDetails, patientInsuranceDetails: patientInsuranceDetails, patientPaymentDetails: patientPaymentDetails)
     
     print("Form Submission Completed!")
+    
+    SendFormToFirebase(context: context, patient: patient, patientHealthDetails: patientHealthDetails, patientInsuranceDetails: patientInsuranceDetails, patientPaymentDetails: patientPaymentDetails)
 
 }
 
@@ -230,5 +232,9 @@ func groupedObjectsWillChange(context: NSManagedObjectContext, patient: Patient,
         } catch(let error) {
             print("couldn't save pharmacy update to CoreData: \(error.localizedDescription)")
         }
+    
+}
+
+func SendFormToFirebase(context: NSManagedObjectContext, patient: Patient, patientHealthDetails: PatientHealthDetails, patientInsuranceDetails: PatientInsuranceDetails, patientPaymentDetails: PatientPaymentDetails) {
     
 }

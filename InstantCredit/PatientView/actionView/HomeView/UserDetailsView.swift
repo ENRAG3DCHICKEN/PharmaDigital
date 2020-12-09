@@ -140,9 +140,7 @@ struct UserDetailsView: View {
             
         NavigationLink(destination: LogoView(priorLogin: true), tag: 6, selection: $selection) {
             Button(action: {
-                UserDefaults.standard.removeObject(forKey: "email")
-                UserDefaults.standard.removeObject(forKey: "password")
-                UserDefaults.standard.removeObject(forKey: "signupCompletionFlag")
+                ClearPatientUserDefaults_Logout()
                 self.selection = 6
             }, label: {
                 HStack {

@@ -47,7 +47,6 @@ struct AdminHomeView: View {
                         }
                             .tag(3)
             }
-            
         }
     }
 }
@@ -108,7 +107,7 @@ struct PendingPrescriptions: View {
 
                 List {
                     ForEach(orders, id: \.self) { (order: Orders) in
-                        NavigationLink(destination: HomeView())
+                        NavigationLink(destination: AdminOrderView(chosenOrder: order))
                         { Text((order.orderUUID)!.uuidString) }
                     }
                 }
@@ -138,7 +137,7 @@ struct CompletedPrescriptions: View {
 
                 List {
                     ForEach(orders, id: \.self) { (order: Orders) in
-                        NavigationLink(destination: HomeView())
+                        NavigationLink(destination: AdminOrderView(chosenOrder: order))
                         { Text((order.orderUUID)!.uuidString) }
                     }
                 }

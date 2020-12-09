@@ -90,16 +90,6 @@ struct HealthProfileView2: View {
                 Button(action: {
                     self.selection = 1
                     
-//                    var combinedAllergies: String {
-//                        var allergies: String = self.otherAllergies
-//                        for index in 0..<allergiesListFlag.count {
-//                            if allergiesListFlag[index] == true {
-//                                allergies = allergies + allergiesListExOther[index]
-//                            }
-//                        }
-//                        return allergies
-//                    }
-                    
                     UserDefaults.standard.set(self.allergiesFlag, forKey: "allergiesFlag")
                     UserDefaults.standard.set(self.allergiesListFlag, forKey: "allergiesListFlag")
                     UserDefaults.standard.set(otherAllergies, forKey: "otherAllergies")

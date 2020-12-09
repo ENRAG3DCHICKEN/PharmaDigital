@@ -67,9 +67,10 @@ struct RefillPrescriptionSelection: View {
                 .padding(.horizontal)
             
             Button(action: {
+                UserDefaults.standard.set( (rx1 + rx2 + rx3 + rx4 + rx5 + rx6), forKey: "refill_prescription")
                 self.selection = 1
             } ) { Text("Next >").font(.body).bold() }
-                            .disabled(rx1.isEmpty)
+                .disabled(rx1.isEmpty)
                 .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
                 .foregroundColor(Color(.white))
                 .background( (rx1.isEmpty) ? .gray : Color(UIColor.mainColor))

@@ -20,7 +20,7 @@ struct LandingView: View {
                         .navigationBarTitle("")
                         .navigationBarHidden(true)
                     
-//                    Spacer()
+
                     HStack {
                         Image("yoga").resizable()
                                 .frame(width: 100, height: 50)
@@ -30,19 +30,19 @@ struct LandingView: View {
                             .font(.title)
                     }
                         .padding()
-//                    Spacer()
-//                    withAnimation {
+
+
                         GeometryReader { geometry in
                         CarouselView(geoemtry: geometry, carouselPane: carouselPane)
                     
-//                            .frame(width: geometry.size.width, height: geometry.size.height)
+
                             .offset(CGSize(width: panOffset.width, height: 0))
                     }
                         .edgesIgnoringSafeArea(.horizontal)
                         .gesture(self.panGesture())
                         .animation(.easeInOut)
 
-//                    }
+
                     GeometryReader { geometry in
                     
                         HStack {
@@ -70,7 +70,7 @@ struct LandingView: View {
 
                     }
                         
-//                    Spacer()
+
                     HStack {
                         NavigationLink(destination: SignUpView(), tag: 1, selection: $selection) {
                             Button(action: {
@@ -125,7 +125,7 @@ struct LandingView: View {
                 carouselPane += 1
             }
 
-//            steadyStatePanOffset = steadyStatePanOffset + (finalDragGestureValue.translation)
+
             print(steadyStatePanOffset)
             print(UIScreen.main.bounds.width)
         }
@@ -166,7 +166,7 @@ struct CardView: View {
                 ForEach(cardList, id: \.id) { cards in
                     Image(cards.fileName).centerCropped()
                         
-//                        .resizable()
+
                         .frame(width: passedGeometry.size.width, height: passedGeometry.size.height)
                         .opacity(cards.id == passedCarouselPane+1 ? 1 : 0.6)
                         
@@ -212,10 +212,3 @@ var text2 = ["""
 
 
 
-
-
-struct startView_Previews: PreviewProvider {
-    static var previews: some View {
-        LandingView()
-    }
-}
