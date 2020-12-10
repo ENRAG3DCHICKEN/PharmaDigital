@@ -42,14 +42,14 @@ func PatientObjectUpdate(context: NSManagedObjectContext) -> Patient {
     let results = (try? context.fetch(request)) ?? []
     let patient = results.first ?? Patient(context: context)
 
-    patient.emailAddress = UserDefaults.standard.string(forKey: "email")
+    patient.emailAddress = UserDefaults.standard.string(forKey: "email")!
 //    patient.selectedPharmacy = UserDefaults.standard.string(forKey: "chosenPharmacy") 
-    patient.fullName = UserDefaults.standard.string(forKey: "fullName")
-    patient.address = UserDefaults.standard.string(forKey: "address")
-    patient.city = UserDefaults.standard.string(forKey: "city")
-    patient.province = UserDefaults.standard.string(forKey: "province")
-    patient.postalCode = UserDefaults.standard.string(forKey: "postalCode")
-    patient.phoneNumber = UserDefaults.standard.string(forKey: "phoneNumber")
+    patient.fullName = UserDefaults.standard.string(forKey: "fullName")!
+    patient.address = UserDefaults.standard.string(forKey: "address")!
+    patient.city = UserDefaults.standard.string(forKey: "city")!
+    patient.province = UserDefaults.standard.string(forKey: "province")!
+    patient.postalCode = UserDefaults.standard.string(forKey: "postalCode")!
+    patient.phoneNumber = UserDefaults.standard.string(forKey: "phoneNumber")!
     patient.patientUUID = UUID()
     
 //    patient.orderPharmacy =
@@ -84,7 +84,7 @@ func PatientHealthDetailsObjectUpdate(context: NSManagedObjectContext) -> Patien
     let results = (try? context.fetch(request)) ?? []
     let patientHealthDetails = results.first ?? PatientHealthDetails(context: context)
 
-    patientHealthDetails.emailAddress = UserDefaults.standard.string(forKey: "email")
+    patientHealthDetails.emailAddress = UserDefaults.standard.string(forKey: "email")!
     
             let date = UserDefaults.standard.object(forKey: "birthDate") as! Date
             let df = DateFormatter()
@@ -94,7 +94,7 @@ func PatientHealthDetailsObjectUpdate(context: NSManagedObjectContext) -> Patien
     
     patientHealthDetails.birthDate = birthDate
     patientHealthDetails.genericSubstitution = UserDefaults.standard.bool(forKey: "substituteGeneric")
-    patientHealthDetails.gender = UserDefaults.standard.string(forKey: "selectedGender")
+    patientHealthDetails.gender = UserDefaults.standard.string(forKey: "selectedGender")!
      
     //PatientHealthDetails - Allergies
     patientHealthDetails.allergiesFlag = UserDefaults.standard.bool(forKey: "allergiesFlag")
@@ -192,10 +192,10 @@ func PatientPaymentDetailsObjectUpdate(context: NSManagedObjectContext) -> Patie
     let results = (try? context.fetch(request)) ?? []
     let patientPaymentDetails = results.first ?? PatientPaymentDetails(context: context)
     
-    patientPaymentDetails.emailAddress = UserDefaults.standard.string(forKey: "email")
+    patientPaymentDetails.emailAddress = UserDefaults.standard.string(forKey: "email")!
 
-    patientPaymentDetails.paymentType = UserDefaults.standard.string(forKey: "paymentType")
-    patientPaymentDetails.cardholderName = UserDefaults.standard.string(forKey: "cardholderName")
+    patientPaymentDetails.paymentType = UserDefaults.standard.string(forKey: "paymentType")!
+    patientPaymentDetails.cardholderName = UserDefaults.standard.string(forKey: "cardholderName")!
     patientPaymentDetails.paymentCardNumber = Int64(UserDefaults.standard.integer(forKey: "paymentCardNumber"))
     patientPaymentDetails.expirationMM = Int64(UserDefaults.standard.integer(forKey: "expirationMonth"))
     patientPaymentDetails.expirationYY = Int64(UserDefaults.standard.integer(forKey: "expirationYear"))
@@ -263,17 +263,17 @@ func SendFormToFirebase(context: NSManagedObjectContext, patient: Patient, patie
         let db = Firestore.firestore()
         
         // Add a new document in collection "users"
-        db.collection("users").document((patient.patientUUID)!.uuidString).setData([
-            "address": patient.address ?? "",
-            "city": patient.city ?? "",
-            "emailAddress": patient.emailAddress ?? "",
-            "fullName": patient.fullName ?? "",
-            "patientUUID": ((patient.patientUUID)?.uuidString)!,
-            "phoneNumber": patient.phoneNumber ?? "",
-            "postalCode": patient.postalCode ?? "",
+        db.collection("users").document((patient.patientUUID).uuidString).setData([
+            "address": patient.address ,
+            "city": patient.city,
+            "emailAddress": patient.emailAddress ,
+            "fullName": patient.fullName ,
+            "patientUUID": ((patient.patientUUID).uuidString),
+            "phoneNumber": patient.phoneNumber ,
+            "postalCode": patient.postalCode ,
             "privacyCompletionFlag": patient.privacyCompletionFlag,
-            "province": patient.province ?? "",
-            "selectedPharmacy": patient.selectedPharmacy ?? "",
+            "province": patient.province ,
+            "selectedPharmacy": patient.selectedPharmacy ,
             "signupCompletionFlag": patient.signupCompletionFlag,
         ]) { err in
             if let err = err {
@@ -284,15 +284,15 @@ func SendFormToFirebase(context: NSManagedObjectContext, patient: Patient, patie
         }
         
         // Add a new document in collection "users",
-        db.collection("users").document((patient.patientUUID)!.uuidString).collection("HealthProfile").addDocument(data: [
+        db.collection("users").document((patient.patientUUID).uuidString).collection("HealthProfile").addDocument(data: [
             "allergiesFlag": patientHealthDetails.allergiesFlag,
-            "birthDate": patientHealthDetails.birthDate ?? "",
-            "emailAddress": patientHealthDetails.emailAddress ?? "",
-            "gender": patientHealthDetails.gender ?? "",
+            "birthDate": patientHealthDetails.birthDate ,
+            "emailAddress": patientHealthDetails.emailAddress ,
+            "gender": patientHealthDetails.gender ,
             "genericSubstitution": patientHealthDetails.genericSubstitution,
             "medicalConditionsFlag": patientHealthDetails.medicalConditionsFlag,
-            "specificAllergies": patientHealthDetails.specificAllergies ?? "",
-            "specificMedicalConditions": patientHealthDetails.specificMedicalConditions ?? "",
+            "specificAllergies": patientHealthDetails.specificAllergies ,
+            "specificMedicalConditions": patientHealthDetails.specificMedicalConditions ,
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -302,7 +302,7 @@ func SendFormToFirebase(context: NSManagedObjectContext, patient: Patient, patie
         }
         
         // Add a new document in collection "users",
-        db.collection("users").document((patient.patientUUID)!.uuidString).collection("InsuranceDetails").addDocument(data: [
+        db.collection("users").document((patient.patientUUID).uuidString).collection("InsuranceDetails").addDocument(data: [
             "billToInsuranceFlag1": patientInsuranceDetails.billToInsuranceFlag1,
             "billToInsuranceFlag2": patientInsuranceDetails.billToInsuranceFlag2,
             "billToInsuranceFlag3": patientInsuranceDetails.billToInsuranceFlag3,
@@ -341,14 +341,14 @@ func SendFormToFirebase(context: NSManagedObjectContext, patient: Patient, patie
         }
         
         // Add a new document in collection "users",
-        db.collection("users").document((patient.patientUUID)!.uuidString).collection("PaymentDetails").addDocument(data: [
-            "cardholderName": patientPaymentDetails.cardholderName ?? "",
+        db.collection("users").document((patient.patientUUID).uuidString).collection("PaymentDetails").addDocument(data: [
+            "cardholderName": patientPaymentDetails.cardholderName,
             "cvv": patientPaymentDetails.cvv,
-            "emailAddress": patientPaymentDetails.emailAddress ?? "",
+            "emailAddress": patientPaymentDetails.emailAddress,
             "expirationMM": patientPaymentDetails.expirationMM,
             "expirationYY": patientPaymentDetails.expirationYY,
             "paymentCardNumber": patientPaymentDetails.paymentCardNumber,
-            "paymentType": patientPaymentDetails.paymentType ?? "",
+            "paymentType": patientPaymentDetails.paymentType,
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")

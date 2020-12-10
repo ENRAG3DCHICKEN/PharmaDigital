@@ -10,12 +10,17 @@ import CoreData
 import Combine
 import UIKit
 
+//PatientInsuranceDetails Core Data, Optional Value Check
 extension PatientInsuranceDetails {
-
+    
+    //Attributes
+    
+    //One to One Relationships
     var patient: Patient {
         get { patient_! }
         set { patient_ = newValue }
     }
     
+    //One to Many Relationships
+
 }
-    

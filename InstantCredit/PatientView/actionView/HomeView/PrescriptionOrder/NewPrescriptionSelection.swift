@@ -44,15 +44,15 @@ struct NewPrescriptionSelection: View {
                 
                 if isOn1 == true, isOn2 == false {
                     Section {
-                        Text("Pharmacy Name: \(chosenPharmacy.pharmacyName!)")
-                        Text("Pharmacy Address: \(chosenPharmacy.address!)")
-                        Text("Pharmacy Postal Code: \(chosenPharmacy.postalCode!)")
+                        Text("Pharmacy Name: \(chosenPharmacy.pharmacyName)")
+                        Text("Pharmacy Address: \(chosenPharmacy.address)")
+                        Text("Pharmacy Postal Code: \(chosenPharmacy.postalCode)")
                     }
                     
                 } else if isOn1 == false, isOn2 == true {
                     Section {
-                        Text("Pharmacy Phone: \(chosenPharmacy.phoneNumber!)")
-                        Text("Pharmacy Fax: \(chosenPharmacy.faxNumber!)")
+                        Text("Pharmacy Phone: \(chosenPharmacy.phoneNumber)")
+                        Text("Pharmacy Fax: \(chosenPharmacy.faxNumber)")
                     }
                 }
             }

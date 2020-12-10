@@ -13,10 +13,58 @@ import UIKit
 
 
 //Make Patient both identifiable and comporable
+
+
+//Patient Core Data, Optional Value Check
 extension Patient {
     
+    //Attributes
+    var address: String {
+        get { address_! }
+        set { address_ = newValue }
+    }
+    var city: String {
+        get { city_! }
+        set { city_ = newValue }
+    }
+    var emailAddress: String {
+        get { emailAddress_! }
+        set { emailAddress_ = newValue }
+    }
+    var fullName: String {
+        get { fullName_! }
+        set { fullName_ = newValue }
+    }
+    var patientUUID: UUID {
+        get { patientUUID_! }
+        set { patientUUID_ = newValue }
+    }
+    var phoneNumber: String {
+        get { phoneNumber_! }
+        set { phoneNumber_ = newValue }
+    }
+    var postalCode: String {
+        get { postalCode_! }
+        set { postalCode_ = newValue }
+    }
+    var privacyCompletionFlag: Bool {
+        get { privacyCompletionFlag_ }
+        set { privacyCompletionFlag_ = newValue }
+    }
+    var province: String {
+        get { province_! }
+        set { province_ = newValue }
+    }
+    var selectedPharmacy: String {
+        get { selectedPharmacy_! }
+        set { selectedPharmacy_ = newValue }
+    }
+    var signupCompletionFlag: Bool {
+        get { signupCompletionFlag_ }
+        set { signupCompletionFlag_ = newValue }
+    }
+        
     //One to One Relationships
-
     var healthInfo: PatientHealthDetails {
         get { healthInfo_! }
         set { healthInfo_ = newValue }
@@ -29,10 +77,10 @@ extension Patient {
         get { paymentInfo_! }
         set { paymentInfo_ = newValue }
     }
-//    var shippingInfo: PatientFulfillmentDetails {
-//        get { shippingInfo_! }
-//        set { shippingInfo_ = newValue }
-//    }
+    var shippingInfo: PatientFulfillmentDetails {
+        get { shippingInfo_! }
+        set { shippingInfo_ = newValue }
+    }
 
     //One to Many Relationships
     var orderHistory: Set<Orders> {

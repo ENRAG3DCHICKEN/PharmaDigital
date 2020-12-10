@@ -108,7 +108,7 @@ struct PendingPrescriptions: View {
                 List {
                     ForEach(orders, id: \.self) { (order: Orders) in
                         NavigationLink(destination: AdminOrderView(chosenOrder: order))
-                        { Text((order.orderUUID)!.uuidString) }
+                        { Text((order.orderUUID).uuidString) }
                     }
                 }
                     .padding()
@@ -138,7 +138,7 @@ struct CompletedPrescriptions: View {
                 List {
                     ForEach(orders, id: \.self) { (order: Orders) in
                         NavigationLink(destination: AdminOrderView(chosenOrder: order))
-                        { Text((order.orderUUID)!.uuidString) }
+                        { Text((order.orderUUID).uuidString) }
                     }
                 }
                     .padding()

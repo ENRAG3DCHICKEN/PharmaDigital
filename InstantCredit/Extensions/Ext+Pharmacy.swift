@@ -11,8 +11,6 @@ import Combine
 import UIKit
 import MapKit
 
-
-
 extension Pharmacy: MKAnnotation {
     public var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -20,8 +18,6 @@ extension Pharmacy: MKAnnotation {
     public var title: String? { pharmacyName }
     public var subtitle: String? { address }
 }
-
-
 
 extension Pharmacy: Comparable {
     public static func < (lhs: Pharmacy, rhs: Pharmacy) -> Bool {
@@ -54,17 +50,17 @@ extension Pharmacy: Comparable {
         
         //If pharmacy exists, update existing pharmacy in core data - else if pharmacy doesn't exist, create & populate!
         pharmacy.accreditationNumber = fbPharmacyData["AccreditationNumber"] as! Int64
-        pharmacy.address = fbPharmacyData["Address"] as? String
-        pharmacy.city = fbPharmacyData["City"] as? String
-        pharmacy.emailAddress = fbPharmacyData["EmailAddress"] as? String
+        pharmacy.address = (fbPharmacyData["Address"] as? String)!
+        pharmacy.city = (fbPharmacyData["City"] as? String)!
+        pharmacy.emailAddress = (fbPharmacyData["EmailAddress"] as? String)!
         pharmacy.longitude = Double(truncating: fbPharmacyData["Longitude"] as! NSNumber)
         pharmacy.latitude = Double(truncating: fbPharmacyData["Latitude"] as! NSNumber)
-        pharmacy.pharmacyName = fbPharmacyData["PharmacyName"] as? String
-        pharmacy.phoneNumber = fbPharmacyData["PhoneNumber"] as? String
-        pharmacy.faxNumber = fbPharmacyData["FaxNumber"] as? String
-        pharmacy.postalCode = fbPharmacyData["PostalCode"] as? String
-        pharmacy.province = fbPharmacyData["Province"] as? String
-        pharmacy.pharmacyUUID = fbPharmacyData["PharmacyUUID"] as? String
+        pharmacy.pharmacyName = (fbPharmacyData["PharmacyName"] as? String)!
+        pharmacy.phoneNumber = (fbPharmacyData["PhoneNumber"] as? String)!
+        pharmacy.faxNumber = (fbPharmacyData["FaxNumber"] as? String)!
+        pharmacy.postalCode = (fbPharmacyData["PostalCode"] as? String)!
+        pharmacy.province = (fbPharmacyData["Province"] as? String)!
+        pharmacy.pharmacyUUID = (fbPharmacyData["PharmacyUUID"] as? String)!
             
         pharmacy.objectWillChange.send()
         
@@ -73,9 +69,7 @@ extension Pharmacy: Comparable {
         //Add relationships will change!
         
         print(pharmacy)
-        
-
-        
+    
         do {
             
 //            Code for debugging - allows you to delete all the individual records and fields from an entity - everything in Pharmacy while leaving pharmacy intact
@@ -93,8 +87,6 @@ extension Pharmacy: Comparable {
         }
     }
         
-    
-
     //Standard query request to Core Data
     static func fetchRequest(_ predicate: NSPredicate) -> NSFetchRequest<Pharmacy> {
         let request = NSFetchRequest<Pharmacy>(entityName: "Pharmacy")
@@ -104,13 +96,79 @@ extension Pharmacy: Comparable {
         return request
     }
 
-    // Downcast from NSSet to Set<Orders> and checks if nil, and returns empty array if nil
+
+
+    
+}
+
+
+//Pharmacy Core Data, Optional Value Check
+extension Pharmacy {
+    
+    //Attributes
+    var accreditationNumber: Int64 {
+        get { accreditationNumber_ }
+        set { accreditationNumber_ = newValue }
+    }
+    var address: String {
+        get { address_! }
+        set { address_ = newValue }
+    }
+    var city: String {
+        get { city_! }
+        set { city_ = newValue }
+    }
+    var emailAddress: String {
+        get { emailAddress_! }
+        set { emailAddress_ = newValue }
+    }
+    var faxNumber: String {
+        get { faxNumber_! }
+        set { faxNumber_ = newValue }
+    }
+    var latitude: Double {
+        get { latitude_ }
+        set { latitude_ = newValue }
+    }
+    var longitude: Double {
+        get { longitude_ }
+        set { longitude_ = newValue }
+    }
+    var pharmacyName: String {
+        get { pharmacyName_! }
+        set { pharmacyName_ = newValue }
+    }
+    var pharmacyUUID: String {
+        get { pharmacyUUID_! }
+        set { pharmacyUUID_ = newValue }
+    }
+    var phoneNumber: String {
+        get { phoneNumber_! }
+        set { phoneNumber_ = newValue }
+    }
+    var postalCode: String {
+        get { postalCode_! }
+        set { postalCode_ = newValue }
+    }
+    var province: String {
+        get { province_! }
+        set { province_ = newValue }
+    }
+    
+    //One to One Relationships
+ 
+    
+    //One to Many Relationships
+        // Downcast from NSSet to Set<Orders> and checks if nil, and returns empty array if nil
     var orderHistory: Set<Orders> {
         get { (orderHistory_ as? Set<Orders>) ?? [] }
         set { orderHistory_ = newValue as NSSet }
     }
-
     
+    var patientCustomer: Set<Patient> {
+        get { (patientCustomer_ as? Set<Patient>) ?? [] }
+        set { patientCustomer_ = newValue as NSSet }
+    }
 }
 
 

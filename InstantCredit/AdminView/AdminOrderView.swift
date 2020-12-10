@@ -7,8 +7,11 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AdminOrderView: View {
+    
+
     
     @State private var chosenOrder: Orders
     
@@ -25,23 +28,34 @@ struct AdminOrderView: View {
                 
                 //Order Details
                 Section(header: Text("Order Details: ")) {
-                    Text("Order Type: \(chosenOrder.orderType!)")
-                    Text("Prescription Source: \(chosenOrder.prescriptionSource!)")
+                    Text("Order Type: \(chosenOrder.orderType)")
                     if chosenOrder.orderType == "New Prescription" || chosenOrder.orderType == "Transfer Prescription" {
-                        Text("Prescription Source: \(chosenOrder.prescriptionSource!)")
+                        Text("Prescription Source: \(chosenOrder.prescriptionSource)")
                     }
                     if chosenOrder.orderType == "Refill Prescription" {
-                        Text("Refill Prescription: \(chosenOrder.refill_prescription!)")
+                        Text("Refill Prescription: \(chosenOrder.refill_prescription)")
                     }
                     if chosenOrder.orderType == "Transfer Prescription" {
-                        Text("Transfer from Pharmacy (Name): \(chosenOrder.trans_priorPharmacyName!)")
-                        Text("Transfer from Pharmacy (Phone): \(chosenOrder.trans_priorPharmacyPhone!)")
+                        Text("Transfer from Pharmacy (Name): \(chosenOrder.trans_priorPharmacyName)")
+                        Text("Transfer from Pharmacy (Phone): \(chosenOrder.trans_priorPharmacyPhone)")
                         Text("Transfer All Medication: \(chosenOrder.trans_transferAll ? "Yes" : "No")")
-                    }
-                    if chosenOrder.trans_transferAll == false {
-                        Text("Transfer the Following Medications: \(chosenOrder.trans_prescription!)")
+                        
+                        if chosenOrder.trans_transferAll == false {
+                            Text("Transfer the Following Medications: \(chosenOrder.trans_prescription)")
+                        }
+
                     }
                 }
+                
+                //Patient Details
+                Section(header: Text("Patient Details: ")) {
+                    Text("")
+                }
+                
+                
+                
+                
+                
                 
                 
             }
@@ -49,16 +63,7 @@ struct AdminOrderView: View {
         EmptyView()
         
         //Order Details
-        
-        
-        //Show order submission Time
-        // Order Completion status
-        // order type
-        //prescription source
-        //refill rx
-        //trans rx
-        //trans prior pharmacy name and phone
-        // trans transfer all
+
         
         
         // all patient data except flags, and selected pharmacy

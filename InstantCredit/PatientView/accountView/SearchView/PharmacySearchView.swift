@@ -57,7 +57,7 @@ struct PharmacySearchView: View {
                 Section {
                     Picker("Pharmacy", selection: $chosenPharmacy) {
                         ForEach(pharmacies.sorted(), id: \.self) { pharmacy in
-                            Text("\(pharmacy.pharmacyName!)").tag(pharmacy as Pharmacy?)
+                            Text("\(pharmacy.pharmacyName)").tag(pharmacy as Pharmacy?)
                         }
                     }
             

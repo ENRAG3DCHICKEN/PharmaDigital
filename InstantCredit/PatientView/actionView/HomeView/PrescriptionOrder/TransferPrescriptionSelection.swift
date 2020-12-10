@@ -105,8 +105,8 @@ struct TransferPrescriptionSelection: View {
                 } else if isOn1 == false, isOn2 == true {
                 
                     Section {
-                        Text("New Pharmacy Phone: \(chosenPharmacy.phoneNumber!)").multilineTextAlignment(.leading)
-                        Text("New Pharmacy Fax: \(chosenPharmacy.faxNumber!)").multilineTextAlignment(.leading)
+                        Text("New Pharmacy Phone: \(chosenPharmacy.phoneNumber)").multilineTextAlignment(.leading)
+                        Text("New Pharmacy Fax: \(chosenPharmacy.faxNumber)").multilineTextAlignment(.leading)
                     }
                 }
             }
@@ -129,7 +129,7 @@ struct TransferPrescriptionSelection: View {
                     
                     UserDefaults.standard.set(self.priorPharmacyName, forKey: "transPriorPharmacyName")
                     UserDefaults.standard.set(self.priorPharmacyPhone, forKey: "transPriorPharmacyPhone")
-                    UserDefaults.standard.set(self.transferAll, forKey: "transAllFlag")
+                    UserDefaults.standard.set(self.transferAll, forKey: "trans_transferAll")
                     
                     UserDefaults.standard.set( (self.rx1 + " " + med1), forKey: "transMedication1")
                     UserDefaults.standard.set( (self.rx2 + " " + med2), forKey: "transMedication2")

@@ -37,9 +37,9 @@ struct SummaryCompletionView: View {
 //            ScrollView {
                 Form {
                     Section(header: Text("Your prescription will be fulfilled by: ")) {
-                        Text("Pharmacy Name: \(chosenPharmacy.pharmacyName!)")
-                        Text("Pharmacy Phone: \(chosenPharmacy.phoneNumber!)")
-                        Text("Pharmacy Fax: \(chosenPharmacy.faxNumber!)")
+                        Text("Pharmacy Name: \(chosenPharmacy.pharmacyName)")
+                        Text("Pharmacy Phone: \(chosenPharmacy.phoneNumber)")
+                        Text("Pharmacy Fax: \(chosenPharmacy.faxNumber)")
                     }
                     
                     
@@ -60,10 +60,10 @@ struct SummaryCompletionView: View {
                     } else {
                         //Local Pickup Details
                         Section(header: Text("Your prescription will be available for pickup at: ")) {
-                            Text("Pharmacy Name: \(chosenPharmacy.pharmacyName!)")
-                            Text("Pharmacy Address: \(chosenPharmacy.address!)")
-                            Text("Pharmacy Postal Code: \(chosenPharmacy.postalCode!)")
-                            Text("Pharmacy Phone: \(chosenPharmacy.phoneNumber!)")
+                            Text("Pharmacy Name: \(chosenPharmacy.pharmacyName)")
+                            Text("Pharmacy Address: \(chosenPharmacy.address)")
+                            Text("Pharmacy Postal Code: \(chosenPharmacy.postalCode)")
+                            Text("Pharmacy Phone: \(chosenPharmacy.phoneNumber)")
                         }
                     }
                     

@@ -39,9 +39,9 @@ struct RefillPrescriptionSelection: View {
 
             Form {
                 Section(header: Text("Pharmacy Details: ")) {
-                    Text("Pharmacy Name: \(chosenPharmacy.pharmacyName!)")
-                    Text("Pharmacy Address: \(chosenPharmacy.address!)")
-                    Text("Pharmacy Phone: \(chosenPharmacy.phoneNumber!)")
+                    Text("Pharmacy Name: \(chosenPharmacy.pharmacyName)")
+                    Text("Pharmacy Address: \(chosenPharmacy.address)")
+                    Text("Pharmacy Phone: \(chosenPharmacy.phoneNumber)")
                 }
                 
                 Section() {

@@ -43,13 +43,13 @@ func PatientFulfillmentDetailsObjectUpdate(context: NSManagedObjectContext) -> P
     let results = (try? context.fetch(request)) ?? []
     let patientFulfillmentDetails = results.first ?? PatientFulfillmentDetails(context: context)
     
-    patientFulfillmentDetails.address = UserDefaults.standard.string(forKey: "shipAddress")
-    patientFulfillmentDetails.city = UserDefaults.standard.string(forKey: "shipCity")
-    patientFulfillmentDetails.emailAddress = UserDefaults.standard.string(forKey: "email")
-    patientFulfillmentDetails.fullName = UserDefaults.standard.string(forKey: "shipFullName")
-    patientFulfillmentDetails.postalCode = UserDefaults.standard.string(forKey: "shipPostalCode")
-    patientFulfillmentDetails.province = UserDefaults.standard.string(forKey: "shipProvince")
-    patientFulfillmentDetails.phoneNumber = UserDefaults.standard.string(forKey: "shipPhoneNumber")
+    patientFulfillmentDetails.address = UserDefaults.standard.string(forKey: "shipAddress")!
+    patientFulfillmentDetails.city = UserDefaults.standard.string(forKey: "shipCity")!
+    patientFulfillmentDetails.emailAddress = UserDefaults.standard.string(forKey: "email")!
+    patientFulfillmentDetails.fullName = UserDefaults.standard.string(forKey: "shipFullName")!
+    patientFulfillmentDetails.postalCode = UserDefaults.standard.string(forKey: "shipPostalCode")!
+    patientFulfillmentDetails.province = UserDefaults.standard.string(forKey: "shipProvince")!
+    patientFulfillmentDetails.phoneNumber = UserDefaults.standard.string(forKey: "shipPhoneNumber")!
     
     do {
         try context.save()
@@ -74,18 +74,18 @@ func OrdersObjectUpdate(context: NSManagedObjectContext, chosenPharmacy: Pharmac
     //Back to New Prescriptions
     if indicator == 2 {
         orders.orderType = "New Prescription"
-        orders.prescriptionSource = prescriptionSource
+        orders.prescriptionSource = prescriptionSource!
     //Back to Refill Prescriptions
     } else if indicator == 3 {
         orders.orderType = "Refill Prescription"
-        orders.prescriptionSource = prescriptionSource
-        orders.refill_prescription = UserDefaults.standard.string(forKey: "refill_prescription")
+        orders.prescriptionSource = prescriptionSource!
+        orders.refill_prescription = UserDefaults.standard.string(forKey: "refill_prescription")!
     //Back to Transfer Prescriptions
     } else if indicator == 4 {
         orders.orderType = "Tramsfer Prescription"
-        orders.prescriptionSource = prescriptionSource
-        orders.trans_priorPharmacyName = UserDefaults.standard.string(forKey: "transPriorPharmacyName")
-        orders.trans_priorPharmacyPhone = UserDefaults.standard.string(forKey: "transPriorPharmacyPhone")
+        orders.prescriptionSource = prescriptionSource!
+        orders.trans_priorPharmacyName = UserDefaults.standard.string(forKey: "transPriorPharmacyName")!
+        orders.trans_priorPharmacyPhone = UserDefaults.standard.string(forKey: "transPriorPharmacyPhone")!
         orders.trans_transferAll = UserDefaults.standard.bool(forKey: "transAllFlag")
         orders.trans_prescription = UserDefaults.standard.string(forKey: "transMedication1")! + UserDefaults.standard.string(forKey: "transMedication2")! + UserDefaults.standard.string(forKey: "transMedication3")! + UserDefaults.standard.string(forKey: "transMedication4")! + UserDefaults.standard.string(forKey: "transMedication5")! + UserDefaults.standard.string(forKey: "transMedication6")!
     }
@@ -123,19 +123,19 @@ func SendOrdersToFirestore(orders: Orders) {
         let db = Firestore.firestore()
         
         // Add a new document in collection "orders"
-        db.collection("orders").document((orders.orderUUID)!.uuidString).setData([
+        db.collection("orders").document((orders.orderUUID).uuidString).setData([
             "orderCompleted": orders.orderCompleted,
             "orderSubmissionTime": orders.orderSubmissionTime as Any,
-            "orderType": orders.orderType!,
-            "orderUUID": ((orders.orderUUID)?.uuidString)!,
+            "orderType": orders.orderType,
+            "orderUUID": ((orders.orderUUID).uuidString),
             "pharmacyAccreditationNumber": orders.pharmacyAccreditationNumber,
-            "pharmacyName": orders.pharmacyName!,
-            "pharmacyEmailAddress": orders.pharmacyEmailAddress!,
-            "prescriptionSource": orders.prescriptionSource ?? "",
-            "refill_prescription": orders.refill_prescription ?? "",
-            "trans_prescription": orders.trans_prescription ?? "",
-            "trans_priorPharmacyName": orders.trans_priorPharmacyName ?? "",
-            "trans_priorPharmacyPhone": orders.trans_priorPharmacyPhone ?? "",
+            "pharmacyName": orders.pharmacyName,
+            "pharmacyEmailAddress": orders.pharmacyEmailAddress,
+            "prescriptionSource": orders.prescriptionSource,
+            "refill_prescription": orders.refill_prescription,
+            "trans_prescription": orders.trans_prescription,
+            "trans_priorPharmacyName": orders.trans_priorPharmacyName,
+            "trans_priorPharmacyPhone": orders.trans_priorPharmacyPhone,
             "trans_transferAll": orders.trans_transferAll,
         ]) { err in
             if let err = err {

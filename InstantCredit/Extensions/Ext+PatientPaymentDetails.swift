@@ -12,12 +12,45 @@ import CoreData
 import Combine
 import UIKit
 
+//PatientPaymentDetails Core Data, Optional Value Check
 extension PatientPaymentDetails {
-
+    
+    //Attributes
+    var cardholderName: String {
+        get { cardholderName_! }
+        set { cardholderName_ = newValue }
+    }
+    var cvv: Int64 {
+        get { cvv_ }
+        set { cvv_ = newValue }
+    }
+    var emailAddress: String {
+        get { emailAddress_! }
+        set { emailAddress_ = newValue }
+    }
+    var expirationMM: Int64 {
+        get { expirationMM_ }
+        set { expirationMM_ = newValue }
+    }
+    var expirationYY: Int64 {
+        get { expirationYY_ }
+        set { expirationYY_ = newValue }
+    }
+    var paymentCardNumber: Int64 {
+        get { paymentCardNumber_ }
+        set { paymentCardNumber_ = newValue }
+    }
+    var paymentType: String {
+        get { paymentType_! }
+        set { paymentType_ = newValue }
+    }
+    
+    //One to One Relationships
     var patient: Patient {
         get { patient_! }
         set { patient_ = newValue }
     }
     
+    //One to Many Relationships
+
 }
-    
