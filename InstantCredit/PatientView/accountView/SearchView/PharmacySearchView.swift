@@ -106,19 +106,3 @@ struct PharmacySearchView: View {
 
 
 
-
-
-
-//    @ObservedObject var pharmacies: Pharmacy_User
-//        .onAppear(perform: {
-//            let request = NSFetchRequest<Pharmacy_User>(entityName: "Pharmacy")
-            //request.predicate = NSPredicate(format: "icao = %@", icao)
-            //request.sortDescriptors = [NSSortDescriptor(key: "location", ascending: true)]
-//            let pharmacies = try? self.context.fetch(request)
-            
-//    @FetchRequest var pharmacies: FetchedResults<Pharmacy>
-
-
-
-
-//

@@ -11,6 +11,7 @@
 import SwiftUI
 import CoreData
 import Firebase
+import FirebaseFirestore
 
 
 func OrderSubmissionToCoreDataAndFB(context: NSManagedObjectContext, chosenPharmacy: Pharmacy, prescriptionSource: String?, indicator: Int) {
@@ -26,6 +27,7 @@ func OrderSubmissionToCoreDataAndFB(context: NSManagedObjectContext, chosenPharm
     print("Core Data Order Submission Completed!")
 
     SendOrdersToFirestore(orders: orders)
+    UpdatePatientFulfillmentDetailsOnFirestore(context: context)
     
     ClearOrderRelatedUserDefaults()
 
@@ -120,7 +122,7 @@ func SendOrdersToFirestore(orders: Orders) {
         //Search firebase for documents = pharmacies
         let db = Firestore.firestore()
         
-        // Add a new document in collection "cities"
+        // Add a new document in collection "orders"
         db.collection("orders").document((orders.orderUUID)!.uuidString).setData([
             "orderCompleted": orders.orderCompleted,
             "orderSubmissionTime": orders.orderSubmissionTime as Any,
@@ -144,6 +146,42 @@ func SendOrdersToFirestore(orders: Orders) {
         }
     }
 }
+
+func UpdatePatientFulfillmentDetailsOnFirestore(context: NSManagedObjectContext) {
+    
+    //Standard query request to Core Data
+    let request = NSFetchRequest<Patient>(entityName: "Patient")
+    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
+    request.predicate = NSPredicate(format: "emailAddress == %@", String(UserDefaults.standard.integer(forKey: "email")))
+
+    let results = (try? context.fetch(request)) ?? []
+    let patient = results.first
+    
+    //Check if the Patient Fulfillment Details doc already exists for a Patient
+    // If the doc exists then update it
+    // If the doc does not exist, then create it
+    
+    //Populate Core Data asynchronously on secondary queue
+    DispatchQueue.global(qos: .userInitiated).async {
+        
+        //Search firebase for documents
+        let db = Firestore.firestore()
+    
+        db.collection("users").document((patient?.patientUUID)!.uuidString).collection("ShippingAddress").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                                
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                }
+            }
+        }
+    }
+}
+                
+                
+           
 
 func ClearOrderRelatedUserDefaults() {
     

@@ -88,14 +88,6 @@ struct HealthProfileView1: View {
                     UserDefaults.standard.set(self.substituteGeneric, forKey: "substituteGeneric")
                     UserDefaults.standard.set(self.selectedGender, forKey: "selectedGender")
                     
- 
-                    
-//                    print(UserDefaults.standard.integer(forKey: "birthDate"))
-                    
-//                    DateFormatter(UserDefaults.standard.object(forKey: "birthDate") as! Date).dateFormat = "dd/MM/yyyy HH:mm"
-                    
-
-                    
                 } ) { Text("Next >").font(.body).bold() }
                     .disabled(selectedGender.isEmpty)
                     .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)

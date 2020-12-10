@@ -64,7 +64,7 @@ struct AdminDetailsView: View {
                 .navigationBarTitle("")
                 .navigationBarHidden(true)
             
-            NavigationLink(destination: LogoView(priorLogin: true), tag: 6, selection: $selection) {
+            NavigationLink(destination: LandingView(), tag: 6, selection: $selection) {
                 Button(action: {
                     UserDefaults.standard.removeObject(forKey: "email")
                     UserDefaults.standard.removeObject(forKey: "password")

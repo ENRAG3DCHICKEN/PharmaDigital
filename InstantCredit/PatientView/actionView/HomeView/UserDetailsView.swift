@@ -138,7 +138,7 @@ struct UserDetailsView: View {
                 .padding().shadow(radius: 5, y: 5)
         }
             
-        NavigationLink(destination: LogoView(priorLogin: true), tag: 6, selection: $selection) {
+        NavigationLink(destination: LandingView(), tag: 6, selection: $selection) {
             Button(action: {
                 ClearPatientUserDefaults_Logout()
                 self.selection = 6
