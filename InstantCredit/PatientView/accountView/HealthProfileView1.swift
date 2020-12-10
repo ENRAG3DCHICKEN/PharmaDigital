@@ -85,7 +85,7 @@ struct HealthProfileView1: View {
                     self.selection = 1
                     
                     UserDefaults.standard.set(self.birthDate, forKey: "birthDate")
-                    UserDefaults.standard.set(self.substituteGeneric, forKey: "substituteGender")
+                    UserDefaults.standard.set(self.substituteGeneric, forKey: "substituteGeneric")
                     UserDefaults.standard.set(self.selectedGender, forKey: "selectedGender")
                     
  

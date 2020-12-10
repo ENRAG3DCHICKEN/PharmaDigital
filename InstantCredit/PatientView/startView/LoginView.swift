@@ -76,6 +76,11 @@ struct LoginView: View {
                             
                             UserDefaults.standard.set(patient?.signupCompletionFlag,forKey: "signupCompletionFlag")
                             
+                            CallTransferCoreDataToUserDefaults_Patient(context: context)
+                            CallTransferCoreDataToUserDefaults_PatientHealthDetails(context: context)
+                            CallTransferCoreDataToUserDefaults_PatientInsuranceDetails(context: context)
+                            CallTransferCoreDataToUserDefaults_PatientPaymentDetails(context: context)
+                            
                             //User authenticated - checking if user is admin account
                             let db = Firestore.firestore()
                             db.collection("admin").getDocuments() { (querySnapshot, err) in

@@ -93,16 +93,34 @@ func PatientHealthDetailsObjectUpdate(context: NSManagedObjectContext) -> Patien
             let birthDate = df.string(from: date)
     
     patientHealthDetails.birthDate = birthDate
-    patientHealthDetails.genericSubstitution = UserDefaults.standard.bool(forKey: "substituteGender")
+    patientHealthDetails.genericSubstitution = UserDefaults.standard.bool(forKey: "substituteGeneric")
     patientHealthDetails.gender = UserDefaults.standard.string(forKey: "selectedGender")
      
+    //PatientHealthDetails - Allergies
     patientHealthDetails.allergiesFlag = UserDefaults.standard.bool(forKey: "allergiesFlag")
-    //Missing a set of Allergies
-    patientHealthDetails.specificAllergies = UserDefaults.standard.string(forKey: "otherAllergies")
+    var tempListAllergies: String = ""
+    for allergy in allergiesListExOther {
+        for booleanValue in UserDefaults.standard.object(forKey: "allergiesListFlag") as! [Bool] {
+            if booleanValue {
+                tempListAllergies = tempListAllergies + allergy
+            }
+        }
+    }
+    patientHealthDetails.specificAllergies = tempListAllergies + UserDefaults.standard.string(forKey: "otherAllergies")!
+    //
     
+    //PatientHealthDetails - Medical Conditions
     patientHealthDetails.medicalConditionsFlag = UserDefaults.standard.bool(forKey: "medicalConditionsFlag")
-    //Missing a set of Medical Conditions
-    patientHealthDetails.specificMedicalConditions = UserDefaults.standard.string(forKey: "otherMedicalConditions")
+    var tempListConditions: String = ""
+    for conditions in conditionsListExOther {
+        for booleanValue in UserDefaults.standard.object(forKey: "conditionsListFlag") as! [Bool] {
+            if booleanValue {
+                tempListConditions = tempListConditions + conditions
+            }
+        }
+    }
+    patientHealthDetails.specificMedicalConditions = tempListConditions + UserDefaults.standard.string(forKey: "otherMedicalConditions")!
+    //
 
     do {
         try context.save()
@@ -265,7 +283,7 @@ func SendFormToFirebase(context: NSManagedObjectContext, patient: Patient, patie
             }
         }
         
-        // Add a new document in collection "users", 
+        // Add a new document in collection "users",
         db.collection("users").document((patient.patientUUID)!.uuidString).collection("HealthProfile").addDocument(data: [
             "allergiesFlag": patientHealthDetails.allergiesFlag,
             "birthDate": patientHealthDetails.birthDate ?? "",
