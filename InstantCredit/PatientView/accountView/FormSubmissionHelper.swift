@@ -32,7 +32,7 @@ func PatientObjectUpdate(context: NSManagedObjectContext) -> Patient {
     
     //Standard query request to Core Data
     let request = NSFetchRequest<Patient>(entityName: "Patient")
-    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
+    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress_", ascending: true)]
     request.predicate = NSPredicate(format: "emailAddress_ = %@", UserDefaults.standard.string(forKey: "email")!)
 
     let results = (try? context.fetch(request)) ?? []
@@ -125,7 +125,7 @@ func PatientInsuranceDetailsObjectUpdate(context: NSManagedObjectContext, patien
     
     //Standard query request to Core Data
     let request = NSFetchRequest<PatientInsuranceDetails>(entityName: "PatientInsuranceDetails")
-    request.sortDescriptors = [NSSortDescriptor(key: "ohip_", ascending: true)]
+    request.sortDescriptors = [NSSortDescriptor(key: "ohip", ascending: true)]
     request.predicate = NSPredicate(format: "patient_ = %@", patient)
 
     let results = (try? context.fetch(request)) ?? []
@@ -261,7 +261,6 @@ func SendFormToFirebase(context: NSManagedObjectContext, patient: Patient, patie
             "postalCode": patient.postalCode ,
             "privacyCompletionFlag": patient.privacyCompletionFlag,
             "province": patient.province ,
-            "selectedPharmacy": patient.selectedPharmacy ,
             "signupCompletionFlag": patient.signupCompletionFlag,
         ]) { err in
             if let err = err {

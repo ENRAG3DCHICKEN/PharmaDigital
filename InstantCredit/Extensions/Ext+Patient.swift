@@ -55,10 +55,6 @@ extension Patient {
         get { province_! }
         set { province_ = newValue }
     }
-    var selectedPharmacy: String {
-        get { selectedPharmacy_! }
-        set { selectedPharmacy_ = newValue }
-    }
     var signupCompletionFlag: Bool {
         get { signupCompletionFlag_ }
         set { signupCompletionFlag_ = newValue }
