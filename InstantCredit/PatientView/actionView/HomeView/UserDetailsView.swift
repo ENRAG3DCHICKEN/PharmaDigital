@@ -169,8 +169,8 @@ struct UserDetailsView: View {
                 DispatchQueue.global(qos: .userInitiated).async {
                     //Standard query request to Core Data
                     let request = NSFetchRequest<Pharmacy>(entityName: "Pharmacy")
-                    request.sortDescriptors = [NSSortDescriptor(key: "accreditationNumber", ascending: true)]
-                    request.predicate = NSPredicate(format: "accreditationNumber == %@", String(UserDefaults.standard.integer(forKey: "chosenPharmacy")))
+                    request.sortDescriptors = [NSSortDescriptor(key: "accreditationNumber_", ascending: true)]
+                    request.predicate = NSPredicate(format: "accreditationNumber_ == %@", String(UserDefaults.standard.integer(forKey: "chosenPharmacy")))
     
                     let results = (try? context.fetch(request)) ?? []
                     self.chosenPharmacy = results.first

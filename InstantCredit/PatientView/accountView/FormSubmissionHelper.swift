@@ -7,10 +7,6 @@
 //
 //
 
-
-
-
-
 import SwiftUI
 import CoreData
 import Firebase
@@ -20,9 +16,9 @@ func FormSubmissionToCoreData(context: NSManagedObjectContext) {
     //Store User Defaults data into Core Data
 
     let patient: Patient = PatientObjectUpdate(context: context)
-    let patientHealthDetails: PatientHealthDetails = PatientHealthDetailsObjectUpdate(context: context)
-    let patientInsuranceDetails: PatientInsuranceDetails = PatientInsuranceDetailsObjectUpdate(context: context)
-    let patientPaymentDetails: PatientPaymentDetails = PatientPaymentDetailsObjectUpdate(context: context)
+    let patientHealthDetails: PatientHealthDetails = PatientHealthDetailsObjectUpdate(context: context, patient: patient)
+    let patientInsuranceDetails: PatientInsuranceDetails = PatientInsuranceDetailsObjectUpdate(context: context, patient: patient)
+    let patientPaymentDetails: PatientPaymentDetails = PatientPaymentDetailsObjectUpdate(context: context, patient: patient)
     
     groupedObjectsWillChange(context: context, patient: patient, patientHealthDetails: patientHealthDetails, patientInsuranceDetails: patientInsuranceDetails, patientPaymentDetails: patientPaymentDetails)
     
@@ -37,7 +33,7 @@ func PatientObjectUpdate(context: NSManagedObjectContext) -> Patient {
     //Standard query request to Core Data
     let request = NSFetchRequest<Patient>(entityName: "Patient")
     request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
-    request.predicate = NSPredicate(format: "emailAddress = %@", UserDefaults.standard.string(forKey: "email")!)
+    request.predicate = NSPredicate(format: "emailAddress_ = %@", UserDefaults.standard.string(forKey: "email")!)
 
     let results = (try? context.fetch(request)) ?? []
     let patient = results.first ?? Patient(context: context)
@@ -57,12 +53,9 @@ func PatientObjectUpdate(context: NSManagedObjectContext) -> Patient {
     patient.privacyCompletionFlag = UserDefaults.standard.bool(forKey: "privacyCompletionFlag")
     patient.signupCompletionFlag = UserDefaults.standard.bool(forKey: "signupCompletionFlag")
     
-    patient.healthInfo = PatientHealthDetailsObjectUpdate(context: context)
-    patient.insuranceInfo = PatientInsuranceDetailsObjectUpdate(context: context)
-    patient.paymentInfo = PatientPaymentDetailsObjectUpdate(context: context)
-    
-
-    
+    patient.healthInfo = PatientHealthDetailsObjectUpdate(context: context, patient: patient)
+    patient.insuranceInfo = PatientInsuranceDetailsObjectUpdate(context: context, patient: patient)
+    patient.paymentInfo = PatientPaymentDetailsObjectUpdate(context: context, patient: patient)
     
     do {
         try context.save()
@@ -74,22 +67,19 @@ func PatientObjectUpdate(context: NSManagedObjectContext) -> Patient {
     
 }
 
-func PatientHealthDetailsObjectUpdate(context: NSManagedObjectContext) -> PatientHealthDetails {
+func PatientHealthDetailsObjectUpdate(context: NSManagedObjectContext, patient: Patient) -> PatientHealthDetails {
     
     //Standard query request to Core Data
     let request = NSFetchRequest<PatientHealthDetails>(entityName: "PatientHealthDetails")
-    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
-    request.predicate = NSPredicate(format: "emailAddress = %@", UserDefaults.standard.string(forKey: "email")!)
+    request.sortDescriptors = [NSSortDescriptor(key: "gender_", ascending: true)]
+    request.predicate = NSPredicate(format: "patient_ = %@", patient)
 
     let results = (try? context.fetch(request)) ?? []
     let patientHealthDetails = results.first ?? PatientHealthDetails(context: context)
-
-    patientHealthDetails.emailAddress = UserDefaults.standard.string(forKey: "email")!
     
             let date = UserDefaults.standard.object(forKey: "birthDate") as! Date
             let df = DateFormatter()
             df.dateFormat = "dd/MM/yyyy"
-        //    print(df.string(from: date))
             let birthDate = df.string(from: date)
     
     patientHealthDetails.birthDate = birthDate
@@ -131,12 +121,12 @@ func PatientHealthDetailsObjectUpdate(context: NSManagedObjectContext) -> Patien
     return patientHealthDetails
 }
  
-func PatientInsuranceDetailsObjectUpdate(context: NSManagedObjectContext) -> PatientInsuranceDetails {
+func PatientInsuranceDetailsObjectUpdate(context: NSManagedObjectContext, patient: Patient) -> PatientInsuranceDetails {
     
     //Standard query request to Core Data
     let request = NSFetchRequest<PatientInsuranceDetails>(entityName: "PatientInsuranceDetails")
-    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
-    request.predicate = NSPredicate(format: "emailAddress = %@", UserDefaults.standard.string(forKey: "email")!)
+    request.sortDescriptors = [NSSortDescriptor(key: "ohip_", ascending: true)]
+    request.predicate = NSPredicate(format: "patient_ = %@", patient)
 
     let results = (try? context.fetch(request)) ?? []
     let patientInsuranceDetails = results.first ?? PatientInsuranceDetails(context: context)
@@ -182,18 +172,16 @@ func PatientInsuranceDetailsObjectUpdate(context: NSManagedObjectContext) -> Pat
     return patientInsuranceDetails
 }
 
-func PatientPaymentDetailsObjectUpdate(context: NSManagedObjectContext) -> PatientPaymentDetails {
+func PatientPaymentDetailsObjectUpdate(context: NSManagedObjectContext, patient: Patient) -> PatientPaymentDetails {
     
     //Standard query request to Core Data
     let request = NSFetchRequest<PatientPaymentDetails>(entityName: "PatientPaymentDetails")
-    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
-    request.predicate = NSPredicate(format: "emailAddress = %@", UserDefaults.standard.string(forKey: "email")!)
+    request.sortDescriptors = [NSSortDescriptor(key: "cardholderName_", ascending: true)]
+    request.predicate = NSPredicate(format: "patient_ = %@", patient)
 
     let results = (try? context.fetch(request)) ?? []
     let patientPaymentDetails = results.first ?? PatientPaymentDetails(context: context)
     
-    patientPaymentDetails.emailAddress = UserDefaults.standard.string(forKey: "email")!
-
     patientPaymentDetails.paymentType = UserDefaults.standard.string(forKey: "paymentType")!
     patientPaymentDetails.cardholderName = UserDefaults.standard.string(forKey: "cardholderName")!
     patientPaymentDetails.paymentCardNumber = Int64(UserDefaults.standard.integer(forKey: "paymentCardNumber"))
@@ -287,7 +275,6 @@ func SendFormToFirebase(context: NSManagedObjectContext, patient: Patient, patie
         db.collection("users").document((patient.patientUUID).uuidString).collection("HealthProfile").addDocument(data: [
             "allergiesFlag": patientHealthDetails.allergiesFlag,
             "birthDate": patientHealthDetails.birthDate ,
-            "emailAddress": patientHealthDetails.emailAddress ,
             "gender": patientHealthDetails.gender ,
             "genericSubstitution": patientHealthDetails.genericSubstitution,
             "medicalConditionsFlag": patientHealthDetails.medicalConditionsFlag,
@@ -344,7 +331,6 @@ func SendFormToFirebase(context: NSManagedObjectContext, patient: Patient, patie
         db.collection("users").document((patient.patientUUID).uuidString).collection("PaymentDetails").addDocument(data: [
             "cardholderName": patientPaymentDetails.cardholderName,
             "cvv": patientPaymentDetails.cvv,
-            "emailAddress": patientPaymentDetails.emailAddress,
             "expirationMM": patientPaymentDetails.expirationMM,
             "expirationYY": patientPaymentDetails.expirationYY,
             "paymentCardNumber": patientPaymentDetails.paymentCardNumber,

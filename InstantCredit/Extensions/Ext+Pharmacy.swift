@@ -35,7 +35,7 @@ extension Pharmacy: Comparable {
             print(fbPharmacyData["AccreditationNumber"] as! CVarArg)
             
             //Setup NSFetchRequest variable using the same Pharmacy UUID as Firebase
-            let request = fetchRequest(NSPredicate(format: "accreditationNumber = %@", fbPharmacyData["AccreditationNumber"] as! CVarArg))
+            let request = fetchRequest(NSPredicate(format: "accreditationNumber_ = %@", fbPharmacyData["AccreditationNumber"] as! CVarArg))
                                        
         print("A")
         print(request)
@@ -91,7 +91,7 @@ extension Pharmacy: Comparable {
     static func fetchRequest(_ predicate: NSPredicate) -> NSFetchRequest<Pharmacy> {
         let request = NSFetchRequest<Pharmacy>(entityName: "Pharmacy")
         // need to sort by distance
-        request.sortDescriptors = [NSSortDescriptor(key: "latitude", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "latitude_", ascending: true)]
         request.predicate = predicate
         return request
     }

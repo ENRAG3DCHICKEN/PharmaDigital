@@ -23,10 +23,6 @@ extension PatientFulfillmentDetails {
         get { city_! }
         set { city_ = newValue }
     }
-    var emailAddress: String {
-        get { emailAddress_! }
-        set { emailAddress_ = newValue }
-    }
     var fullName: String {
         get { fullName_! }
         set { fullName_ = newValue }

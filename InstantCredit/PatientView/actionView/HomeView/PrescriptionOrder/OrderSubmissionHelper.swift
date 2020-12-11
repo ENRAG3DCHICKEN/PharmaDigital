@@ -45,7 +45,6 @@ func PatientFulfillmentDetailsObjectUpdate(context: NSManagedObjectContext) -> P
     
     patientFulfillmentDetails.address = UserDefaults.standard.string(forKey: "shipAddress")!
     patientFulfillmentDetails.city = UserDefaults.standard.string(forKey: "shipCity")!
-    patientFulfillmentDetails.emailAddress = UserDefaults.standard.string(forKey: "email")!
     patientFulfillmentDetails.fullName = UserDefaults.standard.string(forKey: "shipFullName")!
     patientFulfillmentDetails.postalCode = UserDefaults.standard.string(forKey: "shipPostalCode")!
     patientFulfillmentDetails.province = UserDefaults.standard.string(forKey: "shipProvince")!

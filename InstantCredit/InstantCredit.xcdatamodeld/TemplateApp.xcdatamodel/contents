@@ -39,7 +39,6 @@
     <entity name="PatientFulfillmentDetails" representedClassName="PatientFulfillmentDetails" syncable="YES" codeGenerationType="class">
         <attribute name="address_" optional="YES" attributeType="String"/>
         <attribute name="city_" optional="YES" attributeType="String"/>
-        <attribute name="emailAddress_" optional="YES" attributeType="String"/>
         <attribute name="fullName_" optional="YES" attributeType="String"/>
         <attribute name="phoneNumber_" optional="YES" attributeType="String"/>
         <attribute name="postalCode_" optional="YES" attributeType="String"/>
@@ -49,7 +48,6 @@
     <entity name="PatientHealthDetails" representedClassName="PatientHealthDetails" syncable="YES" codeGenerationType="class">
         <attribute name="allergiesFlag_" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="birthDate_" optional="YES" attributeType="String"/>
-        <attribute name="emailAddress_" optional="YES" attributeType="String"/>
         <attribute name="gender_" optional="YES" attributeType="String"/>
         <attribute name="genericSubstitution_" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="medicalConditionsFlag_" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -92,7 +90,6 @@
     <entity name="PatientPaymentDetails" representedClassName="PatientPaymentDetails" syncable="YES" codeGenerationType="class">
         <attribute name="cardholderName_" optional="YES" attributeType="String"/>
         <attribute name="cvv_" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="emailAddress_" optional="YES" attributeType="String"/>
         <attribute name="expirationMM_" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="expirationYY_" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="paymentCardNumber_" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>

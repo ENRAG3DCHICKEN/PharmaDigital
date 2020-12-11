@@ -24,10 +24,6 @@ extension PatientHealthDetails {
         get { birthDate_! }
         set { birthDate_ = newValue }
     }
-    var emailAddress: String {
-        get { emailAddress_! }
-        set { emailAddress_ = newValue }
-    }
     var gender: String {
         get { gender_! }
         set { gender_ = newValue }

@@ -24,10 +24,6 @@ extension PatientPaymentDetails {
         get { cvv_ }
         set { cvv_ = newValue }
     }
-    var emailAddress: String {
-        get { emailAddress_! }
-        set { emailAddress_ = newValue }
-    }
     var expirationMM: Int64 {
         get { expirationMM_ }
         set { expirationMM_ = newValue }

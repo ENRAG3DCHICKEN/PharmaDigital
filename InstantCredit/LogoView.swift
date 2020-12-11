@@ -50,6 +50,7 @@ struct LogoView: View {
                     if err != nil {
                         //
                         print("Saved Credentials via UserDefaults were not able to allow the user to sign-in")
+                        print("check1")
                         self.selection = 1
                     } else {
                         let db = Firestore.firestore()
@@ -65,6 +66,7 @@ struct LogoView: View {
                                     
                                     // Applies when user is logged in and identified as an admin account
                                     if UserDefaults.standard.string(forKey: "email")! == (document.data()["email"] as! String) {
+                                        print("check3")
                                         self.selection = 3
 
                                     }
@@ -75,10 +77,12 @@ struct LogoView: View {
                                     //Sign-up Process Completed - UserHomeView
                                     print(UserDefaults.standard.bool(forKey: "signupCompletionFlag"))
                                     if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
+                                        print("check2")
                                         self.selection = 2
                                     } else {
                                         //Sign-up Process Incomplete - PatientInfoView
                                         print("leaving")
+                                        print("check4")
                                         self.selection = 4
                                     }
                                     
