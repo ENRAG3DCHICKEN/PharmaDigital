@@ -14,6 +14,7 @@ struct PatientInfoView: View {
 
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
+    @State var chosenPharmacy: Pharmacy?
     @State var selection: Int?
     
     @State var fullName: String
@@ -90,7 +91,7 @@ struct PatientInfoView: View {
                 .padding()
             
             Spacer()
-            
+        
             if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
                 Button(action: {
                     self.selection = 9
@@ -112,6 +113,14 @@ struct PatientInfoView: View {
             } else {
                 
                 Button(action: {
+                    self.selection = 0
+                } ) { Text("< Back").font(.body).bold() }
+                    .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                    .foregroundColor(Color(.white))
+                    .background(Color(UIColor.gradiant1))
+                    .padding(.horizontal)   
+                
+                Button(action: {
                     self.selection = 1
                     
                     UserDefaults.standard.set(self.fullName, forKey: "fullName")
@@ -129,9 +138,23 @@ struct PatientInfoView: View {
                     .padding()
             
             }
+                NavigationLink(destination: PharmacySearchView(chosenPharmacy: chosenPharmacy), tag: 0, selection: $selection) { EmptyView() }
                 NavigationLink(destination: HealthProfileView1(), tag: 1, selection: $selection) { EmptyView() }
+            
                 NavigationLink(destination: HomeView(selectionValue: 1), tag: 9, selection: $selection) { EmptyView() }
             
+        }
+        .onAppear {
+            DispatchQueue.global(qos: .userInitiated).async {
+                //Standard query request to Core Data
+                let request = NSFetchRequest<Pharmacy>(entityName: "Pharmacy")
+                request.sortDescriptors = [NSSortDescriptor(key: "accreditationNumber_", ascending: true)]
+                request.predicate = NSPredicate(format: "accreditationNumber_ == %@", String(UserDefaults.standard.integer(forKey: "chosenPharmacy")))
+
+                let results = (try? context.fetch(request)) ?? []
+                self.chosenPharmacy = results.first
+                print(UserDefaults.standard.integer(forKey: "chosenPharmacy"))
+            }
         }
     }
 }

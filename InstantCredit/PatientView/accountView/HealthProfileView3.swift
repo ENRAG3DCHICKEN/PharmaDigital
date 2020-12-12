@@ -86,7 +86,7 @@ struct HealthProfileView3: View {
                 .padding()
                 
                 Spacer()
-                
+                                
                 if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
                     Button(action: {
                         self.selection = 9
@@ -100,6 +100,15 @@ struct HealthProfileView3: View {
                         .background(Color(UIColor.mainColor))
                         .padding()
                 } else {
+                    
+                    Button(action: {
+                        self.selection = 0
+                    } ) { Text("< Back").font(.body).bold() }
+                        .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                        .foregroundColor(Color(.white))
+                        .background(Color(UIColor.gradiant1))
+                        .padding(.horizontal)
+                    
                     Button(action: {
                         self.selection = 1
                         UserDefaults.standard.set(self.medicalConditionsFlag, forKey: "medicalConditionsFlag")
@@ -111,7 +120,10 @@ struct HealthProfileView3: View {
                     .background(Color(UIColor.mainColor))
                     .padding()
                 }
+                
+                NavigationLink(destination: HealthProfileView2(), tag: 0, selection: $selection) { EmptyView() }
                 NavigationLink(destination: InsuranceView(), tag: 1, selection: $selection) { EmptyView() }
+                
                 NavigationLink(destination: HomeView(selectionValue: 1), tag: 9, selection: $selection) { EmptyView() }
             }
         }

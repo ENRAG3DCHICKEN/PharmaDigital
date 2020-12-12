@@ -35,11 +35,12 @@ func PatientFulfillmentDetailsObjectUpdate(context: NSManagedObjectContext) -> P
     requestPatient.sortDescriptors = [NSSortDescriptor(key: "emailAddress_", ascending: true)]
     requestPatient.predicate = NSPredicate(format: "emailAddress_ = %@", UserDefaults.standard.string(forKey: "email")!)
     let resultsPatient = (try? context.fetch(requestPatient)) ?? []
+    let patientObject = resultsPatient.first
     
     //Standard query request to Core Data (Patient Fulfillment Details)
     let request = NSFetchRequest<PatientFulfillmentDetails>(entityName: "PatientFulfillmentDetails")
     request.sortDescriptors = [NSSortDescriptor(key: "fullName_", ascending: true)]
-    request.predicate = NSPredicate(format: "patient_ = %@", resultsPatient)
+    request.predicate = NSPredicate(format: "patient_ = %@", patientObject!)
 
     let results = (try? context.fetch(request)) ?? []
     let patientFulfillmentDetails = results.first ?? PatientFulfillmentDetails(context: context)
@@ -132,10 +133,10 @@ func SendOrdersToFirestore(orders: Orders) {
             "pharmacyName": orders.pharmacyName,
             "pharmacyEmailAddress": orders.pharmacyEmailAddress,
             "prescriptionSource": orders.prescriptionSource,
-            "refill_prescription": orders.refill_prescription,
-            "trans_prescription": orders.trans_prescription,
-            "trans_priorPharmacyName": orders.trans_priorPharmacyName,
-            "trans_priorPharmacyPhone": orders.trans_priorPharmacyPhone,
+            "refill_prescription": orders.refill_prescription ?? "",
+            "trans_prescription": orders.trans_prescription ?? "",
+            "trans_priorPharmacyName": orders.trans_priorPharmacyName ?? "",
+            "trans_priorPharmacyPhone": orders.trans_priorPharmacyPhone ?? "",
             "trans_transferAll": orders.trans_transferAll,
         ]) { err in
             if let err = err {
@@ -152,10 +153,11 @@ func UpdatePatientFulfillmentDetailsOnFirestore(context: NSManagedObjectContext)
     //Standard query request to Core Data
     let request = NSFetchRequest<Patient>(entityName: "Patient")
     request.sortDescriptors = [NSSortDescriptor(key: "emailAddress_", ascending: true)]
-    request.predicate = NSPredicate(format: "emailAddress_ == %@", String(UserDefaults.standard.integer(forKey: "email")))
+    request.predicate = NSPredicate(format: "emailAddress_ == %@", String(UserDefaults.standard.string(forKey: "email")!))
 
     let results = (try? context.fetch(request)) ?? []
     let patient = results.first
+
     
     //Check if the Patient Fulfillment Details doc already exists for a Patient
     // If the doc exists then update it

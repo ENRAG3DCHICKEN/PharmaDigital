@@ -55,6 +55,19 @@ struct HomeView: View {
 
 struct PastPrescriptions: View {
     
+//    @FetchRequest(fetchRequest: Orders.fetchRequest(
+//        NSCompoundPredicate(andPredicateWithSubpredicates: [
+//            NSPredicate(format: "patient_.emailAddress_ == %@", UserDefaults.standard.string(forKey: "email")!), NSPredicate(format: "orderCompleted_ = %d", false)
+//        ])
+//    )) var orders_InProcess: FetchedResults<Orders>
+//
+//    @FetchRequest(fetchRequest: Orders.fetchRequest(
+//        NSCompoundPredicate(andPredicateWithSubpredicates: [
+//            NSPredicate(format: "patient_.emailAddress_ == %@", UserDefaults.standard.string(forKey: "email")!), NSPredicate(format: "orderCompleted_ = %d", true)
+//        ])
+//    )) var orders_Completed: FetchedResults<Orders>
+    
+    
     var body: some View {
         VStack {
             Section {
@@ -72,11 +85,29 @@ struct PastPrescriptions: View {
                     //If BLANK
                     Text("You have no orders to be processed").font(.body)
                     
+//                    List {
+//                        ForEach(orders_InProcess, id: \.self) { (order: Orders) in
+//                            NavigationLink(destination: AdminOrderView(chosenOrder: order))
+//                            { Text((order.orderUUID).uuidString) }
+//                        }
+//                    }
+//                        .padding()
+//
                     Text("Prescription History for: \(UserDefaults.standard.string(forKey: "fullName")!)").font(.headline)
                     //Pull Past Order History
                     
                     // If BLANK
-                    Text("There are no orders in your order history").font(.body)
+                    Text("There are no past completed orders in your order history").font(.body)
+                    
+//                    List {
+//                        ForEach(orders_Completed, id: \.self) { (order: Orders) in
+//                            NavigationLink(destination: AdminOrderView(chosenOrder: order))
+//                            { Text((order.orderUUID).uuidString) }
+//                        }
+//                    }
+//                        .padding()
+                    
+                    
                 }
             }
         }

@@ -136,6 +136,15 @@ struct InsuranceView1: View {
                             .background(memberID1.isEmpty || groupNumber1.isEmpty || policyholderName1.isEmpty || carrierCode1.isEmpty || insurancePhone1.isEmpty || relationshipToCardholder1.isEmpty ? .gray : Color(UIColor.mainColor))
                             .padding()
                     } else {
+                        
+                        Button(action: {
+                            self.selection = 0
+                        } ) { Text("< Back").font(.body).bold() }
+                            .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                            .foregroundColor(Color(.white))
+                            .background(Color(UIColor.gradiant1))
+                            .padding(.horizontal)
+                        
                         Button(action: {
                             if selectedPlanName2 != "" {
                                 self.selection = 1
@@ -156,9 +165,10 @@ struct InsuranceView1: View {
                             .background(memberID1.isEmpty || groupNumber1.isEmpty || policyholderName1.isEmpty || carrierCode1.isEmpty || insurancePhone1.isEmpty || relationshipToCardholder1.isEmpty ? .gray : Color(UIColor.mainColor))
                             .padding()
                     }
-                    
+                    NavigationLink(destination: InsuranceView(), tag: 0, selection: $selection) { EmptyView() }
                     NavigationLink(destination: InsuranceView2(billToInsuranceFlag1: $billToInsuranceFlag1, billToInsuranceFlag2: $billToInsuranceFlag2, billToInsuranceFlag3: $billToInsuranceFlag3, selectedPlanName1: $selectedPlanName1, selectedPlanName2: $selectedPlanName2, selectedPlanName3: $selectedPlanName3), tag: 1, selection: $selection) { EmptyView() }
                     NavigationLink(destination: PaymentView(), tag: 2, selection: $selection) { EmptyView() }
+                    
                     NavigationLink(destination: HomeView(selectionValue: 1), tag: 9, selection: $selection) { EmptyView() }
 
                     

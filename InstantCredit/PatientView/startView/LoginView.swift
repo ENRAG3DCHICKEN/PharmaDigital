@@ -89,14 +89,7 @@ struct LoginView: View {
                                 
                                 
                             }
-                            
-                            
-
-                            
-                            
-                            
-                            
-                            
+          
                             //Fetch Patient from Core Data and find the SignupCompletionFlag Property
                             let request = NSFetchRequest<Patient>(entityName: "Patient")
                             request.sortDescriptors = [NSSortDescriptor(key: "emailAddress_", ascending: true)]
@@ -104,7 +97,6 @@ struct LoginView: View {
 
                             let results = (try? context.fetch(request)) ?? []
                             let patient = results.first
-                            print(patient)
                             
                             UserDefaults.standard.set(patient?.signupCompletionFlag,forKey: "signupCompletionFlag")
 
@@ -146,14 +138,7 @@ struct LoginView: View {
                                             //Sign-up Process Incomplete - PatientInfoView
                                             self.selection = 4
                                         }
-                                        
-                                        
                                     }
-                                    
-                                    
-                                    
-                                    
-                                    
                                 }
                             }
                         }

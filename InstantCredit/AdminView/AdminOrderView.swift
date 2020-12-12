@@ -33,15 +33,15 @@ struct AdminOrderView: View {
                         Text("Prescription Source: \(chosenOrder.prescriptionSource)")
                     }
                     if chosenOrder.orderType == "Refill Prescription" {
-                        Text("Refill Prescription: \(chosenOrder.refill_prescription)")
+                        Text("Refill Prescription: \(chosenOrder.refill_prescription!)")
                     }
                     if chosenOrder.orderType == "Transfer Prescription" {
-                        Text("Transfer from Pharmacy (Name): \(chosenOrder.trans_priorPharmacyName)")
-                        Text("Transfer from Pharmacy (Phone): \(chosenOrder.trans_priorPharmacyPhone)")
+                        Text("Transfer from Pharmacy (Name): \(chosenOrder.trans_priorPharmacyName!)")
+                        Text("Transfer from Pharmacy (Phone): \(chosenOrder.trans_priorPharmacyPhone!)")
                         Text("Transfer All Medication: \(chosenOrder.trans_transferAll ? "Yes" : "No")")
                         
                         if chosenOrder.trans_transferAll == false {
-                            Text("Transfer the Following Medications: \(chosenOrder.trans_prescription)")
+                            Text("Transfer the Following Medications: \(chosenOrder.trans_prescription!)")
                         }
                     }
                 }

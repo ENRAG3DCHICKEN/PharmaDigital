@@ -110,6 +110,15 @@ struct PaymentView: View {
                             .background(paymentType.isEmpty || cardholderName.isEmpty || paymentCardNumber.isEmpty || expirationMonth.isEmpty || expirationYear.isEmpty || cvv.isEmpty ? .gray : Color(UIColor.mainColor))
                             .padding()
                     } else {
+                        
+                        Button(action: {
+                            self.selection = 0
+                        } ) { Text("< Back").font(.body).bold() }
+                            .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                            .foregroundColor(Color(.white))
+                            .background(Color(UIColor.gradiant1))
+                            .padding(.horizontal)
+                        
                         Button(action: {
                             self.selection = 1
                             UserDefaults.standard.set(self.paymentType, forKey: "paymentType")
@@ -125,8 +134,11 @@ struct PaymentView: View {
                             .background(paymentType.isEmpty || cardholderName.isEmpty || paymentCardNumber.isEmpty || expirationMonth.isEmpty || expirationYear.isEmpty || cvv.isEmpty ? .gray : Color(UIColor.mainColor))
                             .padding()
                     }
-                    NavigationLink(destination: PrivacyView(), tag: 1, selection: $selection) { EmptyView() }
-                    NavigationLink(destination: HomeView(selectionValue: 1), tag: 9, selection: $selection) { EmptyView() }
-                }
+                    Group {
+                        NavigationLink(destination: InsuranceView(), tag: 0, selection: $selection) { EmptyView() }
+                        NavigationLink(destination: PrivacyView(), tag: 1, selection: $selection) { EmptyView() }
+                        NavigationLink(destination: HomeView(selectionValue: 1), tag: 9, selection: $selection) { EmptyView() }
+                    }
+            }
         }
     }

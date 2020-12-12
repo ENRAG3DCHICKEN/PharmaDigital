@@ -39,7 +39,7 @@ extension Orders {
     }
     var orderUUID: UUID {
         get { orderUUID_! }
-        set { orderUUID_! = newValue }
+        set { orderUUID_ = newValue }
     }
     var pharmacyAccreditationNumber: Int64 {
         get { pharmacyAccreditationNumber_ }
@@ -57,26 +57,26 @@ extension Orders {
         get { prescriptionSource_! }
         set { prescriptionSource_ = newValue }
     }
-    var refill_prescription: String {
-        get { refill_prescription_! }
-        set { refill_prescription_ = newValue }
-    }
-    var trans_prescription: String {
-        get { trans_prescription_! }
-        set { trans_prescription_ = newValue }
-    }
-    var trans_priorPharmacyName: String {
-        get { trans_priorPharmacyName_! }
-        set { trans_priorPharmacyName_ = newValue }
-    }
-    var trans_priorPharmacyPhone: String {
-        get { trans_priorPharmacyPhone_! }
-        set { trans_priorPharmacyPhone_ = newValue }
-    }
-    var trans_transferAll: Bool {
-        get { trans_transferAll_ }
-        set { trans_transferAll_ = newValue }
-    }
+//    var refill_prescription: String {
+//        get { refill_prescription_! }
+//        set { refill_prescription_ = newValue }
+//    }
+//    var trans_prescription: String {
+//        get { trans_prescription_! }
+//        set { trans_prescription_ = newValue }
+//    }
+//    var trans_priorPharmacyName: String {
+//        get { trans_priorPharmacyName_! }
+//        set { trans_priorPharmacyName_ = newValue }
+//    }
+//    var trans_priorPharmacyPhone: String {
+//        get { trans_priorPharmacyPhone_! }
+//        set { trans_priorPharmacyPhone_ = newValue }
+//    }
+//    var trans_transferAll: Bool {
+//        get { trans_transferAll_ }
+//        set { trans_transferAll_ = newValue }
+//    }
     
     //One to One Relationships
     var fulfillmentPharmacy: Pharmacy {

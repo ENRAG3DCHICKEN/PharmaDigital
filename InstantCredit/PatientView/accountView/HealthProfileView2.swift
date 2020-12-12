@@ -86,6 +86,15 @@ struct HealthProfileView2: View {
                     .padding()
                 
                 Spacer()
+                
+                Button(action: {
+                    self.selection = 0
+                } ) { Text("< Back").font(.body).bold() }
+                    .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                    .foregroundColor(Color(.white))
+                    .background(Color(UIColor.gradiant1))
+                    .padding(.horizontal)
+                
                 Button(action: {
                     self.selection = 1
                     
@@ -99,6 +108,7 @@ struct HealthProfileView2: View {
                     .background(Color(UIColor.mainColor))
                     .padding()
                 
+                NavigationLink(destination: HealthProfileView1(), tag: 0, selection: $selection) { EmptyView() }
                 
                 NavigationLink(destination: HealthProfileView3(), tag: 1, selection: $selection) { EmptyView() }
             }
