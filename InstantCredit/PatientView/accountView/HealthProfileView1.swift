@@ -21,6 +21,7 @@ struct HealthProfileView1: View {
     
     init() {
         if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
+            
             _birthDate = State(wrappedValue: UserDefaults.standard.object(forKey: "birthDate") as! Date)
             _substituteGeneric = State(wrappedValue: UserDefaults.standard.bool(forKey: "substituteGeneric"))
             _selectedGender = State(wrappedValue: UserDefaults.standard.string(forKey: "selectedGender")!)

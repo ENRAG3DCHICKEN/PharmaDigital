@@ -15,11 +15,6 @@ import FirebaseFirestore
 
 
 func OrderSubmissionToCoreDataAndFB(context: NSManagedObjectContext, chosenPharmacy: Pharmacy, prescriptionSource: String?, indicator: Int) {
-
-    //Standard query request to Core Data
-    let request = NSFetchRequest<PatientFulfillmentDetails>(entityName: "PatientFulfillmentDetails")
-    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
-    request.predicate = NSPredicate(format: "emailAddress = %@", UserDefaults.standard.string(forKey: "email")!)
     
     let patientFulfillmentDetails: PatientFulfillmentDetails = PatientFulfillmentDetailsObjectUpdate(context: context)
     let orders: Orders = OrdersObjectUpdate(context: context, chosenPharmacy: chosenPharmacy, prescriptionSource: prescriptionSource, indicator: indicator)
@@ -35,10 +30,16 @@ func OrderSubmissionToCoreDataAndFB(context: NSManagedObjectContext, chosenPharm
 
 func PatientFulfillmentDetailsObjectUpdate(context: NSManagedObjectContext) -> PatientFulfillmentDetails {
     
-    //Standard query request to Core Data
+    //Standard query request to Core Data (Patient Details)
+    let requestPatient = NSFetchRequest<Patient>(entityName: "Patient")
+    requestPatient.sortDescriptors = [NSSortDescriptor(key: "emailAddress_", ascending: true)]
+    requestPatient.predicate = NSPredicate(format: "emailAddress_ = %@", UserDefaults.standard.string(forKey: "email")!)
+    let resultsPatient = (try? context.fetch(requestPatient)) ?? []
+    
+    //Standard query request to Core Data (Patient Fulfillment Details)
     let request = NSFetchRequest<PatientFulfillmentDetails>(entityName: "PatientFulfillmentDetails")
-    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
-    request.predicate = NSPredicate(format: "emailAddress = %@", UserDefaults.standard.string(forKey: "email")!)
+    request.sortDescriptors = [NSSortDescriptor(key: "fullName_", ascending: true)]
+    request.predicate = NSPredicate(format: "patient_ = %@", resultsPatient)
 
     let results = (try? context.fetch(request)) ?? []
     let patientFulfillmentDetails = results.first ?? PatientFulfillmentDetails(context: context)
@@ -150,8 +151,8 @@ func UpdatePatientFulfillmentDetailsOnFirestore(context: NSManagedObjectContext)
     
     //Standard query request to Core Data
     let request = NSFetchRequest<Patient>(entityName: "Patient")
-    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
-    request.predicate = NSPredicate(format: "emailAddress == %@", String(UserDefaults.standard.integer(forKey: "email")))
+    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress_", ascending: true)]
+    request.predicate = NSPredicate(format: "emailAddress_ == %@", String(UserDefaults.standard.integer(forKey: "email")))
 
     let results = (try? context.fetch(request)) ?? []
     let patient = results.first
@@ -166,7 +167,7 @@ func UpdatePatientFulfillmentDetailsOnFirestore(context: NSManagedObjectContext)
         //Search firebase for documents
         let db = Firestore.firestore()
     
-        db.collection("users").document((patient?.patientUUID)!.uuidString).collection("ShippingAddress").getDocuments() { (querySnapshot, err) in
+        db.collection("users").document((patient?.patientUUID)!).collection("ShippingAddress").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {

@@ -22,7 +22,7 @@
         <attribute name="city_" optional="YES" attributeType="String"/>
         <attribute name="emailAddress_" optional="YES" attributeType="String"/>
         <attribute name="fullName_" optional="YES" attributeType="String"/>
-        <attribute name="patientUUID_" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="patientUUID_" optional="YES" attributeType="String"/>
         <attribute name="phoneNumber_" optional="YES" attributeType="String"/>
         <attribute name="postalCode_" optional="YES" attributeType="String"/>
         <attribute name="privacyCompletionFlag_" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

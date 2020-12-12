@@ -66,20 +66,53 @@ struct LoginView: View {
                             UserDefaults.standard.set(self.email, forKey: "email")
                             UserDefaults.standard.set(self.password, forKey: "password")
                             
+                            //Pull UID from FirebaseAuth
+                            let user = Auth.auth().currentUser
+                            if let user = user {
+                                let uid = user.uid
+                                print(uid)
+                                    
+                                    
+                                    //Firebase to Core Data (Patient Related Data)
+                                     let db = Firestore.firestore()
+                                    let docRef = db.collection("users").document(uid)
+
+                                      docRef.getDocument { (document, error) in
+                                        if let document = document, document.exists {
+                                            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                                            print("Document data: \(dataDescription)")
+                                             
+                                        } else {
+                                            print("Document does not exist")
+                                        }
+                                    }
+                                
+                                
+                            }
+                            
+                            
+
+                            
+                            
+                            
+                            
+                            
                             //Fetch Patient from Core Data and find the SignupCompletionFlag Property
                             let request = NSFetchRequest<Patient>(entityName: "Patient")
-                            request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
-                            request.predicate = NSPredicate(format: "emailAddress = %@", UserDefaults.standard.string(forKey: "email")!)
+                            request.sortDescriptors = [NSSortDescriptor(key: "emailAddress_", ascending: true)]
+                            request.predicate = NSPredicate(format: "emailAddress_ = %@", UserDefaults.standard.string(forKey: "email")!)
 
                             let results = (try? context.fetch(request)) ?? []
                             let patient = results.first
+                            print(patient)
                             
                             UserDefaults.standard.set(patient?.signupCompletionFlag,forKey: "signupCompletionFlag")
-                            
+
+                            //Core Data to User Defaults
                             CallTransferCoreDataToUserDefaults_Patient(context: context)
-                            CallTransferCoreDataToUserDefaults_PatientHealthDetails(context: context)
-                            CallTransferCoreDataToUserDefaults_PatientInsuranceDetails(context: context)
-                            CallTransferCoreDataToUserDefaults_PatientPaymentDetails(context: context)
+                            CallTransferCoreDataToUserDefaults_PatientHealthDetails(context: context, patient: patient!)
+                            CallTransferCoreDataToUserDefaults_PatientInsuranceDetails(context: context, patient: patient!)
+                            CallTransferCoreDataToUserDefaults_PatientPaymentDetails(context: context, patient: patient!)
                             
                             //User authenticated - checking if user is admin account
                             let db = Firestore.firestore()
@@ -106,8 +139,8 @@ struct LoginView: View {
                                     if self.selection == nil {
                                         
                                         //Sign-up Process Completed - UserHomeView
-                                        print(UserDefaults.standard.string(forKey: "completed") as Any)
-                                        if UserDefaults.standard.string(forKey: "completed") == "true" {
+                                        print(UserDefaults.standard.string(forKey: "signupCompletionFlag") as Any)
+                                        if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
                                             self.selection = 1
                                         } else {
                                             //Sign-up Process Incomplete - PatientInfoView

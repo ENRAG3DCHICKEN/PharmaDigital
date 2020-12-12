@@ -35,7 +35,7 @@ extension Patient {
         get { fullName_! }
         set { fullName_ = newValue }
     }
-    var patientUUID: UUID {
+    var patientUUID: String {
         get { patientUUID_! }
         set { patientUUID_ = newValue }
     }

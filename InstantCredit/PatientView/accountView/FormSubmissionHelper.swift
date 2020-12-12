@@ -10,6 +10,7 @@
 import SwiftUI
 import CoreData
 import Firebase
+import FirebaseAuth
 
 func FormSubmissionToCoreData(context: NSManagedObjectContext) {
 
@@ -46,7 +47,14 @@ func PatientObjectUpdate(context: NSManagedObjectContext) -> Patient {
     patient.province = UserDefaults.standard.string(forKey: "province")!
     patient.postalCode = UserDefaults.standard.string(forKey: "postalCode")!
     patient.phoneNumber = UserDefaults.standard.string(forKey: "phoneNumber")!
-    patient.patientUUID = UUID()
+    
+    let user = Auth.auth().currentUser
+    if let user = user {
+        let uid = user.uid
+        patient.patientUUID = uid
+    }
+            
+
     
 //    patient.orderPharmacy =
 
@@ -89,27 +97,25 @@ func PatientHealthDetailsObjectUpdate(context: NSManagedObjectContext, patient: 
     //PatientHealthDetails - Allergies
     patientHealthDetails.allergiesFlag = UserDefaults.standard.bool(forKey: "allergiesFlag")
     var tempListAllergies: String = ""
-    for allergy in allergiesListExOther {
-        for booleanValue in UserDefaults.standard.object(forKey: "allergiesListFlag") as! [Bool] {
-            if booleanValue {
-                tempListAllergies = tempListAllergies + allergy
-            }
+    
+    for index in 0..<(UserDefaults.standard.object(forKey: "allergiesListFlag") as! [Bool]).count {
+        if (UserDefaults.standard.object(forKey: "allergiesListFlag") as! [Bool])[index] {
+            tempListAllergies = tempListAllergies + "," + allergiesListExOther[index]
         }
     }
-    patientHealthDetails.specificAllergies = tempListAllergies + UserDefaults.standard.string(forKey: "otherAllergies")!
+    patientHealthDetails.specificAllergies = tempListAllergies + "," + UserDefaults.standard.string(forKey: "otherAllergies")!
     //
-    
+
     //PatientHealthDetails - Medical Conditions
     patientHealthDetails.medicalConditionsFlag = UserDefaults.standard.bool(forKey: "medicalConditionsFlag")
     var tempListConditions: String = ""
-    for conditions in conditionsListExOther {
-        for booleanValue in UserDefaults.standard.object(forKey: "conditionsListFlag") as! [Bool] {
-            if booleanValue {
-                tempListConditions = tempListConditions + conditions
-            }
+    
+    for index in 0..<(UserDefaults.standard.object(forKey: "conditionsListFlag") as! [Bool]).count {
+        if (UserDefaults.standard.object(forKey: "conditionsListFlag") as! [Bool])[index] {
+            tempListConditions = tempListConditions + "," + conditionsListExOther[index]
         }
     }
-    patientHealthDetails.specificMedicalConditions = tempListConditions + UserDefaults.standard.string(forKey: "otherMedicalConditions")!
+    patientHealthDetails.specificMedicalConditions = tempListConditions + "," + UserDefaults.standard.string(forKey: "otherMedicalConditions")!
     //
 
     do {
@@ -251,16 +257,16 @@ func SendFormToFirebase(context: NSManagedObjectContext, patient: Patient, patie
         let db = Firestore.firestore()
         
         // Add a new document in collection "users"
-        db.collection("users").document((patient.patientUUID).uuidString).setData([
-            "address": patient.address ,
+        db.collection("users").document(patient.patientUUID).setData([
+            "address": patient.address,
             "city": patient.city,
-            "emailAddress": patient.emailAddress ,
-            "fullName": patient.fullName ,
-            "patientUUID": ((patient.patientUUID).uuidString),
-            "phoneNumber": patient.phoneNumber ,
-            "postalCode": patient.postalCode ,
+            "emailAddress": patient.emailAddress,
+            "fullName": patient.fullName,
+            "patientUUID": patient.patientUUID,
+            "phoneNumber": patient.phoneNumber,
+            "postalCode": patient.postalCode,
             "privacyCompletionFlag": patient.privacyCompletionFlag,
-            "province": patient.province ,
+            "province": patient.province,
             "signupCompletionFlag": patient.signupCompletionFlag,
         ]) { err in
             if let err = err {
@@ -271,7 +277,7 @@ func SendFormToFirebase(context: NSManagedObjectContext, patient: Patient, patie
         }
         
         // Add a new document in collection "users",
-        db.collection("users").document((patient.patientUUID).uuidString).collection("HealthProfile").addDocument(data: [
+        db.collection("users").document(patient.patientUUID).collection("HealthProfile").addDocument(data: [
             "allergiesFlag": patientHealthDetails.allergiesFlag,
             "birthDate": patientHealthDetails.birthDate ,
             "gender": patientHealthDetails.gender ,
@@ -288,7 +294,7 @@ func SendFormToFirebase(context: NSManagedObjectContext, patient: Patient, patie
         }
         
         // Add a new document in collection "users",
-        db.collection("users").document((patient.patientUUID).uuidString).collection("InsuranceDetails").addDocument(data: [
+        db.collection("users").document(patient.patientUUID).collection("InsuranceDetails").addDocument(data: [
             "billToInsuranceFlag1": patientInsuranceDetails.billToInsuranceFlag1,
             "billToInsuranceFlag2": patientInsuranceDetails.billToInsuranceFlag2,
             "billToInsuranceFlag3": patientInsuranceDetails.billToInsuranceFlag3,
@@ -327,7 +333,7 @@ func SendFormToFirebase(context: NSManagedObjectContext, patient: Patient, patie
         }
         
         // Add a new document in collection "users",
-        db.collection("users").document((patient.patientUUID).uuidString).collection("PaymentDetails").addDocument(data: [
+        db.collection("users").document(patient.patientUUID).collection("PaymentDetails").addDocument(data: [
             "cardholderName": patientPaymentDetails.cardholderName,
             "cvv": patientPaymentDetails.cvv,
             "expirationMM": patientPaymentDetails.expirationMM,

@@ -23,7 +23,6 @@ struct HealthProfileView2: View {
         if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
             _allergiesFlag = State(wrappedValue: UserDefaults.standard.bool(forKey: "allergiesFlag"))
             _allergiesListFlag = State(wrappedValue: UserDefaults.standard.object(forKey: "allergiesListFlag") as! [Bool])
-//            _allergiesListFlag = State(wrappedValue: Array(repeating: false, count: allergiesListExOther.count))
             _otherAllergies = State(wrappedValue: UserDefaults.standard.string(forKey: "otherAllergies")!)
         } else {
             _allergiesFlag = State(wrappedValue: false)
