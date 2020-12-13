@@ -41,6 +41,10 @@ extension Orders {
         get { orderUUID_! }
         set { orderUUID_ = newValue }
     }
+    var patientEmailAddress: String {
+        get { patientEmailAddress_! }
+        set { patientEmailAddress_ = newValue }
+    }
     var pharmacyAccreditationNumber: Int64 {
         get { pharmacyAccreditationNumber_ }
         set { pharmacyAccreditationNumber_ = newValue }

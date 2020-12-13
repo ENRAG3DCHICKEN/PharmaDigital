@@ -67,6 +67,7 @@ func OrdersObjectUpdate(context: NSManagedObjectContext, chosenPharmacy: Pharmac
     
     orders.orderCompleted = false
     orders.orderUUID = UUID()
+    orders.patientEmailAddress = UserDefaults.standard.string(forKey: "email")!
     orders.pharmacyName = chosenPharmacy.pharmacyName
     orders.pharmacyAccreditationNumber = chosenPharmacy.accreditationNumber
     orders.pharmacyEmailAddress = chosenPharmacy.emailAddress
@@ -129,6 +130,7 @@ func SendOrdersToFirestore(orders: Orders) {
             "orderSubmissionTime": orders.orderSubmissionTime as Any,
             "orderType": orders.orderType,
             "orderUUID": ((orders.orderUUID).uuidString),
+            "patientEmailAddress": orders.patientEmailAddress,
             "pharmacyAccreditationNumber": orders.pharmacyAccreditationNumber,
             "pharmacyName": orders.pharmacyName,
             "pharmacyEmailAddress": orders.pharmacyEmailAddress,

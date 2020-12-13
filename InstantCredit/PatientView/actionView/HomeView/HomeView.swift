@@ -10,8 +10,10 @@ import SwiftUI
 import CoreData
 
 struct HomeView: View {
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
     @State private var selection: Int
+    @State private var patient: Patient?
 
     init(selectionValue: Int) {
         _selection = State(wrappedValue: selectionValue)
@@ -48,6 +50,7 @@ struct HomeView: View {
                             .tag(3)
             }
         }
+
     }
 }
 
@@ -55,17 +58,19 @@ struct HomeView: View {
 
 struct PastPrescriptions: View {
     
-//    @FetchRequest(fetchRequest: Orders.fetchRequest(
-//        NSCompoundPredicate(andPredicateWithSubpredicates: [
-//            NSPredicate(format: "patient_.emailAddress_ == %@", UserDefaults.standard.string(forKey: "email")!), NSPredicate(format: "orderCompleted_ = %d", false)
-//        ])
-//    )) var orders_InProcess: FetchedResults<Orders>
-//
-//    @FetchRequest(fetchRequest: Orders.fetchRequest(
-//        NSCompoundPredicate(andPredicateWithSubpredicates: [
-//            NSPredicate(format: "patient_.emailAddress_ == %@", UserDefaults.standard.string(forKey: "email")!), NSPredicate(format: "orderCompleted_ = %d", true)
-//        ])
-//    )) var orders_Completed: FetchedResults<Orders>
+
+    @FetchRequest(fetchRequest: Orders.fetchRequest(
+        NSCompoundPredicate(andPredicateWithSubpredicates: [
+            NSPredicate(format: "patientEmailAddress_ == %@", UserDefaults.standard.string(forKey: "email")!), NSPredicate(format: "orderCompleted_ = %d", false)
+        ])
+    )) var orders_InProcess: FetchedResults<Orders>
+
+    @FetchRequest(fetchRequest: Orders.fetchRequest(
+        NSCompoundPredicate(andPredicateWithSubpredicates: [
+            NSPredicate(format: "patientEmailAddress_ == %@", UserDefaults.standard.string(forKey: "email")!), NSPredicate(format: "orderCompleted_ = %d", true)
+        ])
+    )) var orders_Completed: FetchedResults<Orders>
+
     
     
     var body: some View {
@@ -85,27 +90,27 @@ struct PastPrescriptions: View {
                     //If BLANK
                     Text("You have no orders to be processed").font(.body)
                     
-//                    List {
-//                        ForEach(orders_InProcess, id: \.self) { (order: Orders) in
-//                            NavigationLink(destination: AdminOrderView(chosenOrder: order))
-//                            { Text((order.orderUUID).uuidString) }
-//                        }
-//                    }
-//                        .padding()
-//
+                    List {
+                        ForEach(orders_InProcess, id: \.self) { (order: Orders) in
+                            NavigationLink(destination: AdminOrderView(chosenOrder: order))
+                            { Text((order.orderUUID).uuidString) }
+                        }
+                    }
+                        .padding()
+
                     Text("Prescription History for: \(UserDefaults.standard.string(forKey: "fullName")!)").font(.headline)
                     //Pull Past Order History
                     
                     // If BLANK
                     Text("There are no past completed orders in your order history").font(.body)
                     
-//                    List {
-//                        ForEach(orders_Completed, id: \.self) { (order: Orders) in
-//                            NavigationLink(destination: AdminOrderView(chosenOrder: order))
-//                            { Text((order.orderUUID).uuidString) }
-//                        }
-//                    }
-//                        .padding()
+                    List {
+                        ForEach(orders_Completed, id: \.self) { (order: Orders) in
+                            NavigationLink(destination: AdminOrderView(chosenOrder: order))
+                            { Text((order.orderUUID).uuidString) }
+                        }
+                    }
+                        .padding()
                     
                     
                 }
