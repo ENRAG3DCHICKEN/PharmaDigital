@@ -14,7 +14,7 @@ extension Orders {
     //Standard query request to Core Data
     static func fetchRequest(_ predicate: NSPredicate) -> NSFetchRequest<Orders> {
         let request = NSFetchRequest<Orders>(entityName: "Orders")
-        request.sortDescriptors = [NSSortDescriptor(key: "orderSubmissionTime_", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "orderSubmissionTime_", ascending: false)]
         request.predicate = predicate
         return request
     }

@@ -1,17 +1,14 @@
 //
-//  AdminOrderView.swift
+//  PatientOrderView.swift
 //  InstantCredit
 //
-//  Created by ENRAG3DCHICKEN on 2020-12-08.
+//  Created by ENRAG3DCHICKEN on 2020-12-13.
 //  Copyright © 2020 ENRAG3DCHICKEN. All rights reserved.
 //
 
 import SwiftUI
-import CoreData
 
-struct AdminOrderView: View {
-    
-
+struct PatientOrderView: View {
     
     @State private var chosenOrder: Orders
     
@@ -20,9 +17,7 @@ struct AdminOrderView: View {
     }
     
     
-    
     var body: some View {
-        
         VStack {
             
             EmptyView()
@@ -52,17 +47,19 @@ struct AdminOrderView: View {
                     }
                 }
                 
-                //Patient Details
-                Section(header: Text("Patient Details: ")) {
-                    Text("Full Name: \(chosenOrder.patient.fullName)")
-                    Text("Home Address: \(chosenOrder.patient.address)")
-                    Text("City: \(chosenOrder.patient.city)")
-                    Text("Email Address: \(chosenOrder.patient.emailAddress)")
-                    Text("Postal Code: \(chosenOrder.patient.postalCode)")
-                    Text("Phone Number: \(chosenOrder.patient.phoneNumber)")
-                    Text("Province: \(chosenOrder.patient.province)")
+                //Pharmacy Details
+                Section(header: Text("Pharmacy Details: ")) {
+                    Text("Pharmacy Name: \(chosenOrder.fulfillmentPharmacy.pharmacyName)")
+                    Text("Accreditation Number: \(chosenOrder.fulfillmentPharmacy.accreditationNumber)")
+                    Text("Address: \(chosenOrder.fulfillmentPharmacy.address)")
+                    Text("Province: \(chosenOrder.fulfillmentPharmacy.province)")
+                    Text("City: \(chosenOrder.fulfillmentPharmacy.city)")
+                    Text("Postal Code: \(chosenOrder.fulfillmentPharmacy.postalCode)")
+                    Text("Fax Number: \(chosenOrder.fulfillmentPharmacy.faxNumber)")
+                    Text("Phone Number: \(chosenOrder.fulfillmentPharmacy.phoneNumber)")
                 }
                 
+                                
                 //Patient Health Details
                 Section(header: Text("Patient Health Details: ")) {
                     Text("Birth Date: \(chosenOrder.patient.healthInfo.birthDate)")
@@ -70,16 +67,6 @@ struct AdminOrderView: View {
                     Text("Generic Substitution: \(String(chosenOrder.patient.healthInfo.genericSubstitution))")
                     Text("Allergies: \(chosenOrder.patient.healthInfo.specificAllergies)")
                     Text("Medical Conditions: \(chosenOrder.patient.healthInfo.specificMedicalConditions)")
-                }
-                
-                //Patient Payment Details
-                Section(header: Text("Patient Payment Details: ")) {
-                    Text("Cardholder Name: \(chosenOrder.patient.paymentInfo.cardholderName)")
-                    Text("Payment Type: \(chosenOrder.patient.paymentInfo.paymentType)")
-                    Text("Payment Card Number: \(chosenOrder.patient.paymentInfo.paymentCardNumber)")
-                    Text("Expiration MM: \(chosenOrder.patient.paymentInfo.expirationMM)")
-                    Text("Expiration YY: \(String(chosenOrder.patient.paymentInfo.expirationYY))")
-                    Text("CVV: \(chosenOrder.patient.paymentInfo.cvv)")
                 }
                 
                 //Patient Fulfillment Details
@@ -143,27 +130,5 @@ struct AdminOrderView: View {
         EmptyView()
         
 
-        
-        
     }
-//
-//    @State private var showAction = false
-//
-//    var action: some View {
-//        Button("Action") {
-//            self.showAction = true
-//        }
-//            .sheet(isPresented: $showAction) {
-//
-//            }
-//    }
-    
 }
-    
-    
-    
-    
-    
-    
-    
-

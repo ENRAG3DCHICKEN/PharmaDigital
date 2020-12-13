@@ -84,34 +84,42 @@ struct PastPrescriptions: View {
                                   
                     
                     
-                    Text("In Process Prescriptions for: \(UserDefaults.standard.string(forKey: "fullName")!)").font(.headline)
+                    Text("In Process Prescriptions for: \(UserDefaults.standard.string(forKey: "fullName")!)").font(.headline).padding(.horizontal)
                     //Pull Current Order History
                     
                     //If BLANK
-                    Text("You have no orders to be processed").font(.body)
-                    
-                    List {
-                        ForEach(orders_InProcess, id: \.self) { (order: Orders) in
-                            NavigationLink(destination: AdminOrderView(chosenOrder: order))
-                            { Text((order.orderUUID).uuidString) }
+                    if orders_InProcess.count == 0 {
+                        Text("You have no orders to be processed").font(.body).padding()
+                    } else {
+                        List {
+                            ForEach(orders_InProcess, id: \.self) { (order: Orders) in
+                                NavigationLink(destination: PatientOrderView(chosenOrder: order))
+                                { Text((order.orderUUID).uuidString) }
+                            }
                         }
+                            .padding()
+                            .frame(height: UIScreen.main.bounds.height * 0.4)
                     }
-                        .padding()
-
-                    Text("Prescription History for: \(UserDefaults.standard.string(forKey: "fullName")!)").font(.headline)
+                    
+                    
+                    Text("Prescription History for: \(UserDefaults.standard.string(forKey: "fullName")!)").font(.headline).padding(.horizontal)
                     //Pull Past Order History
                     
                     // If BLANK
-                    Text("There are no past completed orders in your order history").font(.body)
-                    
-                    List {
-                        ForEach(orders_Completed, id: \.self) { (order: Orders) in
-                            NavigationLink(destination: AdminOrderView(chosenOrder: order))
-                            { Text((order.orderUUID).uuidString) }
+                    if orders_Completed.count == 0 {
+                        Text("There are no past completed orders in your order history").font(.body).padding()
+                    } else {
+                        List {
+                            ForEach(orders_Completed, id: \.self) { (order: Orders) in
+                                NavigationLink(destination: PatientOrderView(chosenOrder: order))
+                                { Text((order.orderUUID).uuidString) }
+                            }
                         }
+                            .padding()
+                            .frame(height: UIScreen.main.bounds.height * 0.4)
                     }
-                        .padding()
                     
+                    Spacer()
                     
                 }
             }

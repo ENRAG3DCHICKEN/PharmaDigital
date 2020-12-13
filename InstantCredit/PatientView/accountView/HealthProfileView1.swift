@@ -21,7 +21,6 @@ struct HealthProfileView1: View {
     
     init() {
         if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
-            
             _birthDate = State(wrappedValue: UserDefaults.standard.object(forKey: "birthDate") as! Date)
             _substituteGeneric = State(wrappedValue: UserDefaults.standard.bool(forKey: "substituteGeneric"))
             _selectedGender = State(wrappedValue: UserDefaults.standard.string(forKey: "selectedGender")!)
@@ -79,13 +78,15 @@ struct HealthProfileView1: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    self.selection = 0
-                } ) { Text("< Back").font(.body).bold() }
-                    .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
-                    .foregroundColor(Color(.white))
-                    .background(Color(UIColor.gradiant1))
-                    .padding(.horizontal)
+                if UserDefaults.standard.bool(forKey: "signupCompletionFlag") != true {
+                    Button(action: {
+                        self.selection = 0
+                    } ) { Text("< Back").font(.body).bold() }
+                        .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                        .foregroundColor(Color(.white))
+                        .background(Color(UIColor.gradiant1))
+                        .padding(.horizontal)
+                }
                 
                 Button(action: {
                     

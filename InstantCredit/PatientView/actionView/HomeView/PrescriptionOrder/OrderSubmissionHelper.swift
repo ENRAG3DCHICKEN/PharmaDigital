@@ -16,8 +16,15 @@ import FirebaseFirestore
 
 func OrderSubmissionToCoreDataAndFB(context: NSManagedObjectContext, chosenPharmacy: Pharmacy, prescriptionSource: String?, indicator: Int) {
     
-    let patientFulfillmentDetails: PatientFulfillmentDetails = PatientFulfillmentDetailsObjectUpdate(context: context)
-    let orders: Orders = OrdersObjectUpdate(context: context, chosenPharmacy: chosenPharmacy, prescriptionSource: prescriptionSource, indicator: indicator)
+    //Standard query request to Core Data (Patient Details)
+    let request = NSFetchRequest<Patient>(entityName: "Patient")
+    request.sortDescriptors = [NSSortDescriptor(key: "emailAddress_", ascending: true)]
+    request.predicate = NSPredicate(format: "emailAddress_ = %@", UserDefaults.standard.string(forKey: "email")!)
+    let results = (try? context.fetch(request)) ?? []
+    let patient = results.first
+    
+    let patientFulfillmentDetails: PatientFulfillmentDetails = PatientFulfillmentDetailsObjectUpdate(context: context, patient: patient!)
+    let orders: Orders = OrdersObjectUpdate(context: context, patient: patient!, chosenPharmacy: chosenPharmacy, prescriptionSource: prescriptionSource, indicator: indicator)
     groupedObjectsWillChange_Orders(context: context, patientFulfillmentDetails: patientFulfillmentDetails, orders: orders)
     print("Core Data Order Submission Completed!")
 
@@ -28,19 +35,14 @@ func OrderSubmissionToCoreDataAndFB(context: NSManagedObjectContext, chosenPharm
 
 }
 
-func PatientFulfillmentDetailsObjectUpdate(context: NSManagedObjectContext) -> PatientFulfillmentDetails {
+func PatientFulfillmentDetailsObjectUpdate(context: NSManagedObjectContext, patient: Patient) -> PatientFulfillmentDetails {
     
-    //Standard query request to Core Data (Patient Details)
-    let requestPatient = NSFetchRequest<Patient>(entityName: "Patient")
-    requestPatient.sortDescriptors = [NSSortDescriptor(key: "emailAddress_", ascending: true)]
-    requestPatient.predicate = NSPredicate(format: "emailAddress_ = %@", UserDefaults.standard.string(forKey: "email")!)
-    let resultsPatient = (try? context.fetch(requestPatient)) ?? []
-    let patientObject = resultsPatient.first
+
     
     //Standard query request to Core Data (Patient Fulfillment Details)
     let request = NSFetchRequest<PatientFulfillmentDetails>(entityName: "PatientFulfillmentDetails")
     request.sortDescriptors = [NSSortDescriptor(key: "fullName_", ascending: true)]
-    request.predicate = NSPredicate(format: "patient_ = %@", patientObject!)
+    request.predicate = NSPredicate(format: "patient_ = %@", patient)
 
     let results = (try? context.fetch(request)) ?? []
     let patientFulfillmentDetails = results.first ?? PatientFulfillmentDetails(context: context)
@@ -51,6 +53,7 @@ func PatientFulfillmentDetailsObjectUpdate(context: NSManagedObjectContext) -> P
     patientFulfillmentDetails.postalCode = UserDefaults.standard.string(forKey: "shipPostalCode")!
     patientFulfillmentDetails.province = UserDefaults.standard.string(forKey: "shipProvince")!
     patientFulfillmentDetails.phoneNumber = UserDefaults.standard.string(forKey: "shipPhoneNumber")!
+    patientFulfillmentDetails.patient = patient
     
     do {
         try context.save()
@@ -61,7 +64,7 @@ func PatientFulfillmentDetailsObjectUpdate(context: NSManagedObjectContext) -> P
     return patientFulfillmentDetails
 }
 
-func OrdersObjectUpdate(context: NSManagedObjectContext, chosenPharmacy: Pharmacy, prescriptionSource: String?, indicator: Int) -> Orders {
+func OrdersObjectUpdate(context: NSManagedObjectContext, patient: Patient, chosenPharmacy: Pharmacy, prescriptionSource: String?, indicator: Int) -> Orders {
     
     let orders = Orders(context: context)
     
@@ -72,6 +75,9 @@ func OrdersObjectUpdate(context: NSManagedObjectContext, chosenPharmacy: Pharmac
     orders.pharmacyAccreditationNumber = chosenPharmacy.accreditationNumber
     orders.pharmacyEmailAddress = chosenPharmacy.emailAddress
     orders.orderSubmissionTime = Date()
+    
+    orders.fulfillmentPharmacy = chosenPharmacy
+    orders.patient = patient
     
     //Back to New Prescriptions
     if indicator == 2 {

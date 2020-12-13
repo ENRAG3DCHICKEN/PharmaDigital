@@ -87,6 +87,14 @@ struct HealthProfileView3: View {
                 
                 Spacer()
                                 
+                Button(action: {
+                    self.selection = 0
+                } ) { Text("< Back").font(.body).bold() }
+                    .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
+                    .foregroundColor(Color(.white))
+                    .background(Color(UIColor.gradiant1))
+                    .padding(.horizontal)
+                
                 if UserDefaults.standard.bool(forKey: "signupCompletionFlag") == true {
                     Button(action: {
                         self.selection = 9
@@ -100,15 +108,7 @@ struct HealthProfileView3: View {
                         .background(Color(UIColor.mainColor))
                         .padding()
                 } else {
-                    
-                    Button(action: {
-                        self.selection = 0
-                    } ) { Text("< Back").font(.body).bold() }
-                        .frame(width: UIScreen.main.bounds.width * 0.92, height: 35)
-                        .foregroundColor(Color(.white))
-                        .background(Color(UIColor.gradiant1))
-                        .padding(.horizontal)
-                    
+                                        
                     Button(action: {
                         self.selection = 1
                         UserDefaults.standard.set(self.medicalConditionsFlag, forKey: "medicalConditionsFlag")
