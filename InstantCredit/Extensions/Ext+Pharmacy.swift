@@ -95,10 +95,6 @@ extension Pharmacy: Comparable {
         request.predicate = predicate
         return request
     }
-
-
-
-    
 }
 
 

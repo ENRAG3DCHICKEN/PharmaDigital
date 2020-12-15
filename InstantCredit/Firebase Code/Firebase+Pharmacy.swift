@@ -13,21 +13,6 @@ import SwiftUI
 
 
 
-//struct firebasePharmacy {
-//    private var accreditationNumber: Int64
-//    private var address1: String
-//    private var address2: String
-//    private var city: String
-//    private var longitude: Float
-//    private var latitude: Float
-//    private var pharmacyName: String
-//    private var pharmacyUUID: UUID
-//    private var phoneNumber: Int64
-//    private var postalCode: String
-//    private var province: String
-//}
-//
-
 func populateCoreData_Pharmacy(context: NSManagedObjectContext) {
 
     //Populate Core Data asynchronously on secondary queue

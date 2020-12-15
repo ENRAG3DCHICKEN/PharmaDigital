@@ -8,6 +8,10 @@
 
 import SwiftUI
 import CoreData
+import Firebase
+import FirebaseAuth
+
+
 
 func CallTransferCoreDataToUserDefaults_Patient(context: NSManagedObjectContext) {
     //Standard query request to Core Data
@@ -25,6 +29,7 @@ func CallTransferCoreDataToUserDefaults_Patient(context: NSManagedObjectContext)
     UserDefaults.standard.set(patient?.postalCode, forKey: "postalCode")
     UserDefaults.standard.set(patient?.phoneNumber, forKey: "phoneNumber")
     UserDefaults.standard.set(patient?.privacyCompletionFlag, forKey: "privacyCompletionFlag")
+    UserDefaults.standard.set(patient?.signupCompletionFlag,forKey: "signupCompletionFlag")
 }
 
 func CallTransferCoreDataToUserDefaults_PatientHealthDetails(context: NSManagedObjectContext, patient: Patient) {
@@ -161,6 +166,85 @@ func CallTransferCoreDataToUserDefaults_PatientPaymentDetails(context: NSManaged
     UserDefaults.standard.set(patientPaymentDetails?.cvv, forKey: "cvv")
 
 }
+
+
+
+
+
+
+
+
+//func CallTransferFirebaseToCoreData_PatientHealthDetails(context: NSManagedObjectContext, uid: String) -> PatientHealthDetails {
+//
+//    let db = Firestore.firestore()
+//    db.collection("users").document(uid).collection("HealthProfile").getDocuments() { (querySnapshot, err) in
+//        if let err = err {
+//            print("Error getting documents: \(err)")
+//        } else {
+//
+//            for document in querySnapshot!.documents {
+//
+//                //this below line is for debugging
+//                print("\(document.documentID) => \(document.data())")
+//
+//            }
+//        }
+//    }
+//
+////    var patientHealthDetails: PatientHealthDetails
+////
+////    return patientHealthDetails
+//}
+
+//func CallTransferFirebaseToCoreData_PatientInsuranceDetails(context: NSManagedObjectContext, uid: String) -> PatientInsuranceDetails {
+//
+//    let db = Firestore.firestore()
+//
+//    db.collection("users").document(uid).collection("InsuranceDetails").getDocuments() { (querySnapshot, err) in
+//        if let err = err {
+//            print("Error getting documents: \(err)")
+//        } else {
+//
+//            for document in querySnapshot!.documents {
+//
+//                //this below line is for debugging
+//                print("\(document.documentID) => \(document.data())")
+//
+//            }
+//        }
+//    }
+//}
+
+//func CallTransferFirebaseToCoreData_PatientPaymentDetails(context: NSManagedObjectContext, uid: String) -> PatientPaymentDetails {
+//
+//    let db = Firestore.firestore()
+//
+//    db.collection("users").document(uid).collection("PaymentDetails").getDocuments() { (querySnapshot, err) in
+//        if let err = err {
+//            print("Error getting documents: \(err)")
+//        } else {
+//
+//            for document in querySnapshot!.documents {
+//
+//                //this below line is for debugging
+//                print("\(document.documentID) => \(document.data())")
+//
+//            }
+//        }
+//    }
+//
+////    var patientPaymentDetails: PatientPaymentDetails
+////
+////    return patientPaymentDetails
+//}
+//
+
+
+
+            
+
+
+
 
 
 

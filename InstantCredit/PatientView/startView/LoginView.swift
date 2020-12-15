@@ -65,55 +65,13 @@ struct LoginView: View {
                             
                             UserDefaults.standard.set(self.email, forKey: "email")
                             UserDefaults.standard.set(self.password, forKey: "password")
-                            
-                            //Pull UID from FirebaseAuth
-                            let user = Auth.auth().currentUser
-                            if let user = user {
-                                let uid = user.uid
-                                print(uid)
-                                    
-                                    
-                                    //Firebase to Core Data (Patient Related Data)
-                                     let db = Firestore.firestore()
-                                    let docRef = db.collection("users").document(uid)
-
-                                      docRef.getDocument { (document, error) in
-                                        if let document = document, document.exists {
-                                            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                                            print("Document data: \(dataDescription)")
-                                             
-                                        } else {
-                                            print("Document does not exist")
-                                        }
-                                    }
-                                
-                                
-                            }
-          
-                            //Fetch Patient from Core Data and find the SignupCompletionFlag Property
-                            let request = NSFetchRequest<Patient>(entityName: "Patient")
-                            request.sortDescriptors = [NSSortDescriptor(key: "emailAddress_", ascending: true)]
-                            request.predicate = NSPredicate(format: "emailAddress_ = %@", UserDefaults.standard.string(forKey: "email")!)
-
-                            let results = (try? context.fetch(request)) ?? []
-                            let patient = results.first
-                            
-                            UserDefaults.standard.set(patient?.signupCompletionFlag,forKey: "signupCompletionFlag")
-
-                            //Core Data to User Defaults
-                            CallTransferCoreDataToUserDefaults_Patient(context: context)
-                            CallTransferCoreDataToUserDefaults_PatientHealthDetails(context: context, patient: patient!)
-                            CallTransferCoreDataToUserDefaults_PatientInsuranceDetails(context: context, patient: patient!)
-                            CallTransferCoreDataToUserDefaults_PatientPaymentDetails(context: context, patient: patient!)
-                            
+                                                                  
                             //User authenticated - checking if user is admin account
                             let db = Firestore.firestore()
                             db.collection("admin").getDocuments() { (querySnapshot, err) in
                                 if let err = err {
                                     print("Error getting documents: \(err)")
                                 } else {
-                                    
-
                                     
                                     for document in querySnapshot!.documents {
                                         
@@ -123,12 +81,32 @@ struct LoginView: View {
                                         // Applies when user is logged in and identified as an admin account
                                         if UserDefaults.standard.string(forKey: "email") == (document.data()["email"] as! String) {
                                             self.selection = 2
-
                                         }
                                     }
-                                    
+                                
+                            
                                     // Applies when user is logged in and not identified as an admin account
                                     if self.selection == nil {
+
+//                                      Pull Firebase Data into Core Data
+                                        populateCoreData_PatientRelationships(context: context)
+                                         
+                                        //Standard query request to Core Data (Patient Object)
+                                        let request = NSFetchRequest<Patient>(entityName: "Patient")
+                                        request.sortDescriptors = [NSSortDescriptor(key: "emailAddress_", ascending: true)]
+                                        request.predicate = NSPredicate(format: "emailAddress_ = %@", UserDefaults.standard.string(forKey: "email")!)
+
+                                        let results = (try? context.fetch(request)) ?? []
+                                        let patient = results.first
+
+                                            
+                                        //Core Data to User Defaults
+                                        if patient != nil {
+                                            CallTransferCoreDataToUserDefaults_Patient(context: context)
+                                            CallTransferCoreDataToUserDefaults_PatientHealthDetails(context: context, patient: patient!)
+                                            CallTransferCoreDataToUserDefaults_PatientInsuranceDetails(context: context, patient: patient!)
+                                            CallTransferCoreDataToUserDefaults_PatientPaymentDetails(context: context, patient: patient!)
+                                        }
                                         
                                         //Sign-up Process Completed - UserHomeView
                                         print(UserDefaults.standard.string(forKey: "signupCompletionFlag") as Any)
@@ -157,7 +135,6 @@ struct LoginView: View {
                     Text(errorMessage)
                     Spacer()
                 }
-                
             }
         }
     }
